@@ -10,7 +10,7 @@
 // NOTES: I took the main systick timer code from https://www.keil.com/pack/doc/cmsis/Core/html/group__SysTick__gr.html
 
 int recordedTimeArray[10]={999,999,999,999,999,999,999,999,999,999};
-uint8_t morseNumber[200] ={3};
+uint8_t morseNumber[800] ={3};
 uint32_t counterTMS = 0;                                                        /* Variable to store millisecond ticks */
 int letterCounter=0;
 bool btnOPressedFlag=false;
@@ -54,7 +54,7 @@ void DecimalToArrayFunction(int recordedTimeArray[], uint32_t timeBuffer)
         intracounter=0;
 
 }
-void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
+void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
     bool encodingFlag = false;
     int counterIndex=0;
     int outputCounterIndex=0;
@@ -120,47 +120,371 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  counterIndex++;
                 break;
             case 2:
-                
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                  counterIndex++;
-                break
+                break;
             case 3: 
-                
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 
                 counterIndex++;
                 break;
             case 4:
-                
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 
                 counterIndex++;
                 break;
             case 5:
-                
+                ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
                 counterIndex++;
                 break;
             case 6:
-                
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                 counterIndex++;
                 break;
             case 7:
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
                 counterIndex++;
-                break
+                break;
             case 8:
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                 counterIndex++;
                 break;
             case 9:
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                 counterIndex++;
                 break;
-            case 10:
                 
-                counterIndex++;
-                break;
             case 999:
+                ArrayOutput[outputCounterIndex]=3;
                 encodingFlag=true;
-                break
+                break;
         }
         
         
@@ -179,11 +503,7 @@ void SysTick_Handler(void)  {
         } 
     }
 }
-  
-int main (void)  {
-  uint32_t returnCode;
-  //7 0,0,0,0,0,0,0,
-  //3 0,0,0,
+
   uint8_t signalArray[95]={ 0, //INITIAL CONDITION
                             1,0,1, // I
                             0,0,0,0,0,0,0,
@@ -203,6 +523,13 @@ int main (void)  {
                             0,0,0,
                             1,
                             3};
+                            
+                            
+int main (void)  {
+  uint32_t returnCode;
+  //7 0,0,0,0,0,0,0,
+  //3 0,0,0,
+
 // GPIO CONFIG
   XMC_GPIO_CONFIG_t config;
   config.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
@@ -225,7 +552,7 @@ int main (void)  {
   if (returnCode != 0)  {                                   /* Check return code for errors */
     // Error Handling 
   }
-  
+  XMC_GPIO_SetOutputLow(LED1);
   
   for(;;){
       
@@ -240,16 +567,31 @@ int main (void)  {
                                              if(!btnOPressedFlag){
                                                  btnTPressedFlag=true;
                                                  DecimalToArrayFunction(recordedTimeArray,timeBuffer);
+                                                 ArrayToMorse(recordedTimeArray,morseNumber);
                                                                 }
                                             }  
    
    // Btn 1 Functionality
    //
    if (btnTPressedFlag){
-    letterCounter=0;
-    
-       
-    }
+
+    switch (morseNumber[letterCounter])
+        {
+            case 1:
+            XMC_GPIO_SetOutputHigh(LED1);
+            break;
+            case 0:
+            XMC_GPIO_SetOutputLow(LED1);
+            break;
+            case 3:  
+            letterCounter=0;            
+            counterTMS=0;
+            btnTPressedFlag=false;
+            timeBufferFlag=true;
+            XMC_GPIO_SetOutputLow(LED1);
+            break;
+        }
+   }
    
    if (btnOPressedFlag){
        if (timeBufferFlag){
@@ -271,8 +613,9 @@ int main (void)  {
             counterTMS=0;
             btnOPressedFlag=false;
             timeBufferFlag=true;
+            XMC_GPIO_SetOutputLow(LED1);
             break;
         }
-   }else {XMC_GPIO_SetOutputLow(LED1);}
+   }//else {XMC_GPIO_SetOutputLow(LED1);}
   }
 }

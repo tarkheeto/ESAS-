@@ -2687,39 +2687,48 @@
  345 001c E7030000 		.word	999
  346 0020 E7030000 		.word	999
  347 0024 E7030000 		.word	999
- 348              		.global	counterTMS
- 349              		.bss
- 350              		.align	2
- 353              	counterTMS:
- 354 0000 00000000 		.space	4
- 355              		.global	letterCounter
- 356              		.align	2
- 359              	letterCounter:
- 360 0004 00000000 		.space	4
- 361              		.global	btnOPressedFlag
- 364              	btnOPressedFlag:
- 365 0008 00       		.space	1
- 366              		.global	btnTPressedFlag
- 369              	btnTPressedFlag:
- 370 0009 00       		.space	1
- 371              		.global	timeBufferFlag
- 372              		.data
- 375              	timeBufferFlag:
- 376 0028 01       		.byte	1
- 377              		.global	timeBuffer
- 378              		.bss
- 379 000a 0000     		.align	2
- 382              	timeBuffer:
- 383 000c 00000000 		.space	4
- 384              		.section	.text.DecimalToArrayFunction,"ax",%progbits
- 385              		.align	1
- 386              		.global	DecimalToArrayFunction
- 387              		.syntax unified
- 388              		.thumb
- 389              		.thumb_func
- 391              	DecimalToArrayFunction:
- 392              	.LFB138:
- 393              		.file 3 "example_project.c"
+ 348              		.global	morseNumber
+ 349              		.align	2
+ 352              	morseNumber:
+ 353 0028 0300     		.ascii	"\003\000"
+ 354 002a 00000000 		.space	798
+ 354      00000000 
+ 354      00000000 
+ 354      00000000 
+ 354      00000000 
+ 355              		.global	counterTMS
+ 356              		.bss
+ 357              		.align	2
+ 360              	counterTMS:
+ 361 0000 00000000 		.space	4
+ 362              		.global	letterCounter
+ 363              		.align	2
+ 366              	letterCounter:
+ 367 0004 00000000 		.space	4
+ 368              		.global	btnOPressedFlag
+ 371              	btnOPressedFlag:
+ 372 0008 00       		.space	1
+ 373              		.global	btnTPressedFlag
+ 376              	btnTPressedFlag:
+ 377 0009 00       		.space	1
+ 378              		.global	timeBufferFlag
+ 379              		.data
+ 382              	timeBufferFlag:
+ 383 0348 01       		.byte	1
+ 384              		.global	timeBuffer
+ 385              		.bss
+ 386 000a 0000     		.align	2
+ 389              	timeBuffer:
+ 390 000c 00000000 		.space	4
+ 391              		.section	.text.DecimalToArrayFunction,"ax",%progbits
+ 392              		.align	1
+ 393              		.global	DecimalToArrayFunction
+ 394              		.syntax unified
+ 395              		.thumb
+ 396              		.thumb_func
+ 398              	DecimalToArrayFunction:
+ 399              	.LFB138:
+ 400              		.file 3 "example_project.c"
    1:example_project.c **** #include <xmc_gpio.h>
    2:example_project.c **** #define TICKS_WAIT 1
    3:example_project.c **** 
@@ -2732,734 +2741,3054 @@
   10:example_project.c **** // NOTES: I took the main systick timer code from https://www.keil.com/pack/doc/cmsis/Core/html/gro
   11:example_project.c **** 
   12:example_project.c **** int recordedTimeArray[10]={999,999,999,999,999,999,999,999,999,999};
-  13:example_project.c **** uint32_t counterTMS = 0;                                                        /* Variable to stor
-  14:example_project.c **** int letterCounter=0;
-  15:example_project.c **** bool btnOPressedFlag=false;
-  16:example_project.c **** bool btnTPressedFlag=false;
-  17:example_project.c **** bool timeBufferFlag=true; //originally set to true
-  18:example_project.c **** uint32_t timeBuffer=0; //Initialised to 0 so that if Button 1 is not yet pressed 0 is transmitted p
-  19:example_project.c **** 
-  20:example_project.c **** //Interrupt handler
-  21:example_project.c **** 
+  13:example_project.c **** uint8_t morseNumber[800] ={3};
+  14:example_project.c **** uint32_t counterTMS = 0;                                                        /* Variable to stor
+  15:example_project.c **** int letterCounter=0;
+  16:example_project.c **** bool btnOPressedFlag=false;
+  17:example_project.c **** bool btnTPressedFlag=false;
+  18:example_project.c **** bool timeBufferFlag=true; //originally set to true
+  19:example_project.c **** uint32_t timeBuffer=0; //Initialised to 0 so that if Button 1 is not yet pressed 0 is transmitted p
+  20:example_project.c **** 
+  21:example_project.c **** //Interrupt handler
   22:example_project.c **** 
-  23:example_project.c **** // DECIMAL TO ARRAY CODE TAKEN FROM STACK OVERFLOW https://stackoverflow.com/questions/515612/conve
-  24:example_project.c **** void DecimalToArrayFunction(int recordedTimeArray[], uint32_t timeBuffer)
-  25:example_project.c **** {  
- 394              		.loc 3 25 1
- 395              		.cfi_startproc
- 396              		@ args = 0, pretend = 0, frame = 32
- 397              		@ frame_needed = 1, uses_anonymous_args = 0
- 398              		@ link register save eliminated.
- 399 0000 2DE9B003 		push	{r4, r5, r7, r8, r9}
- 400              	.LCFI29:
- 401              		.cfi_def_cfa_offset 20
- 402              		.cfi_offset 4, -20
- 403              		.cfi_offset 5, -16
- 404              		.cfi_offset 7, -12
- 405              		.cfi_offset 8, -8
- 406              		.cfi_offset 9, -4
- 407 0004 89B0     		sub	sp, sp, #36
- 408              	.LCFI30:
- 409              		.cfi_def_cfa_offset 56
- 410 0006 00AF     		add	r7, sp, #0
- 411              	.LCFI31:
- 412              		.cfi_def_cfa_register 7
- 413 0008 7860     		str	r0, [r7, #4]
- 414 000a 3960     		str	r1, [r7]
-  26:example_project.c ****         int c = 0; /* digit position */
- 415              		.loc 3 26 13
- 416 000c 0023     		movs	r3, #0
- 417 000e 7B61     		str	r3, [r7, #20]
-  27:example_project.c ****         int n = timeBuffer;
- 418              		.loc 3 27 13
- 419 0010 3B68     		ldr	r3, [r7]
- 420 0012 BB61     		str	r3, [r7, #24]
-  28:example_project.c ****         //recordedTimeArray[]={999,999,999,999,999,999,999,999,999,999};              
-  29:example_project.c ****         while (n != 0)
- 421              		.loc 3 29 15
- 422 0014 0AE0     		b	.L17
- 423              	.L18:
+  23:example_project.c **** 
+  24:example_project.c **** // DECIMAL TO ARRAY CODE TAKEN FROM STACK OVERFLOW https://stackoverflow.com/questions/515612/conve
+  25:example_project.c **** void DecimalToArrayFunction(int recordedTimeArray[], uint32_t timeBuffer)
+  26:example_project.c **** {  
+ 401              		.loc 3 26 1
+ 402              		.cfi_startproc
+ 403              		@ args = 0, pretend = 0, frame = 32
+ 404              		@ frame_needed = 1, uses_anonymous_args = 0
+ 405              		@ link register save eliminated.
+ 406 0000 2DE9B003 		push	{r4, r5, r7, r8, r9}
+ 407              	.LCFI29:
+ 408              		.cfi_def_cfa_offset 20
+ 409              		.cfi_offset 4, -20
+ 410              		.cfi_offset 5, -16
+ 411              		.cfi_offset 7, -12
+ 412              		.cfi_offset 8, -8
+ 413              		.cfi_offset 9, -4
+ 414 0004 89B0     		sub	sp, sp, #36
+ 415              	.LCFI30:
+ 416              		.cfi_def_cfa_offset 56
+ 417 0006 00AF     		add	r7, sp, #0
+ 418              	.LCFI31:
+ 419              		.cfi_def_cfa_register 7
+ 420 0008 7860     		str	r0, [r7, #4]
+ 421 000a 3960     		str	r1, [r7]
+  27:example_project.c ****         int c = 0; /* digit position */
+ 422              		.loc 3 27 13
+ 423 000c 0023     		movs	r3, #0
+ 424 000e 7B61     		str	r3, [r7, #20]
+  28:example_project.c ****         int n = timeBuffer;
+ 425              		.loc 3 28 13
+ 426 0010 3B68     		ldr	r3, [r7]
+ 427 0012 BB61     		str	r3, [r7, #24]
+  29:example_project.c ****         //recordedTimeArray[]={999,999,999,999,999,999,999,999,999,999};              
+  30:example_project.c ****         while (n != 0)
+ 428              		.loc 3 30 15
+ 429 0014 0AE0     		b	.L17
+ 430              	.L18:
+  31:example_project.c ****         {
+  32:example_project.c ****             n /= 10;
+ 431              		.loc 3 32 15
+ 432 0016 BB69     		ldr	r3, [r7, #24]
+ 433 0018 3D4A     		ldr	r2, .L23
+ 434 001a 82FB0312 		smull	r1, r2, r2, r3
+ 435 001e 9210     		asrs	r2, r2, #2
+ 436 0020 DB17     		asrs	r3, r3, #31
+ 437 0022 D31A     		subs	r3, r2, r3
+ 438 0024 BB61     		str	r3, [r7, #24]
+  33:example_project.c ****             c++;
+ 439              		.loc 3 33 14
+ 440 0026 7B69     		ldr	r3, [r7, #20]
+ 441 0028 0133     		adds	r3, r3, #1
+ 442 002a 7B61     		str	r3, [r7, #20]
+ 443              	.L17:
   30:example_project.c ****         {
-  31:example_project.c ****             n /= 10;
- 424              		.loc 3 31 15
- 425 0016 BB69     		ldr	r3, [r7, #24]
- 426 0018 3D4A     		ldr	r2, .L23
- 427 001a 82FB0312 		smull	r1, r2, r2, r3
- 428 001e 9210     		asrs	r2, r2, #2
- 429 0020 DB17     		asrs	r3, r3, #31
- 430 0022 D31A     		subs	r3, r2, r3
- 431 0024 BB61     		str	r3, [r7, #24]
-  32:example_project.c ****             c++;
- 432              		.loc 3 32 14
- 433 0026 7B69     		ldr	r3, [r7, #20]
- 434 0028 0133     		adds	r3, r3, #1
- 435 002a 7B61     		str	r3, [r7, #20]
- 436              	.L17:
-  29:example_project.c ****         {
- 437              		.loc 3 29 15
- 438 002c BB69     		ldr	r3, [r7, #24]
- 439 002e 002B     		cmp	r3, #0
- 440 0030 F1D1     		bne	.L18
-  33:example_project.c ****         }
-  34:example_project.c ****         
-  35:example_project.c ****         int numberArray[c];
- 441              		.loc 3 35 9
- 442 0032 7969     		ldr	r1, [r7, #20]
- 443 0034 6B46     		mov	r3, sp
- 444 0036 1846     		mov	r0, r3
- 445              		.loc 3 35 13
- 446 0038 4B1E     		subs	r3, r1, #1
- 447 003a FB60     		str	r3, [r7, #12]
- 448 003c 0A46     		mov	r2, r1
- 449 003e 0023     		movs	r3, #0
- 450 0040 9046     		mov	r8, r2
- 451 0042 9946     		mov	r9, r3
- 452 0044 4FF00002 		mov	r2, #0
- 453 0048 4FF00003 		mov	r3, #0
- 454 004c 4FEA4913 		lsl	r3, r9, #5
- 455 0050 43EAD863 		orr	r3, r3, r8, lsr #27
- 456 0054 4FEA4812 		lsl	r2, r8, #5
- 457 0058 0A46     		mov	r2, r1
- 458 005a 0023     		movs	r3, #0
- 459 005c 1446     		mov	r4, r2
- 460 005e 1D46     		mov	r5, r3
- 461 0060 4FF00002 		mov	r2, #0
- 462 0064 4FF00003 		mov	r3, #0
- 463 0068 6B01     		lsls	r3, r5, #5
- 464 006a 43EAD463 		orr	r3, r3, r4, lsr #27
- 465 006e 6201     		lsls	r2, r4, #5
- 466 0070 0B46     		mov	r3, r1
- 467 0072 9B00     		lsls	r3, r3, #2
- 468 0074 0733     		adds	r3, r3, #7
- 469 0076 DB08     		lsrs	r3, r3, #3
- 470 0078 DB00     		lsls	r3, r3, #3
- 471 007a ADEB030D 		sub	sp, sp, r3
- 472 007e 6B46     		mov	r3, sp
- 473 0080 0333     		adds	r3, r3, #3
- 474 0082 9B08     		lsrs	r3, r3, #2
- 475 0084 9B00     		lsls	r3, r3, #2
- 476 0086 BB60     		str	r3, [r7, #8]
-  36:example_project.c ****         
-  37:example_project.c ****         c = 0;    
- 477              		.loc 3 37 11
- 478 0088 0023     		movs	r3, #0
- 479 008a 7B61     		str	r3, [r7, #20]
-  38:example_project.c ****         n = timeBuffer;
- 480              		.loc 3 38 11
- 481 008c 3B68     		ldr	r3, [r7]
- 482 008e BB61     		str	r3, [r7, #24]
-  39:example_project.c ****         
-  40:example_project.c ****         /* extract each digit */
-  41:example_project.c ****         while (n != 0)
- 483              		.loc 3 41 15
- 484 0090 1AE0     		b	.L19
- 485              	.L20:
+ 444              		.loc 3 30 15
+ 445 002c BB69     		ldr	r3, [r7, #24]
+ 446 002e 002B     		cmp	r3, #0
+ 447 0030 F1D1     		bne	.L18
+  34:example_project.c ****         }
+  35:example_project.c ****         
+  36:example_project.c ****         int numberArray[c];
+ 448              		.loc 3 36 9
+ 449 0032 7969     		ldr	r1, [r7, #20]
+ 450 0034 6B46     		mov	r3, sp
+ 451 0036 1846     		mov	r0, r3
+ 452              		.loc 3 36 13
+ 453 0038 4B1E     		subs	r3, r1, #1
+ 454 003a FB60     		str	r3, [r7, #12]
+ 455 003c 0A46     		mov	r2, r1
+ 456 003e 0023     		movs	r3, #0
+ 457 0040 9046     		mov	r8, r2
+ 458 0042 9946     		mov	r9, r3
+ 459 0044 4FF00002 		mov	r2, #0
+ 460 0048 4FF00003 		mov	r3, #0
+ 461 004c 4FEA4913 		lsl	r3, r9, #5
+ 462 0050 43EAD863 		orr	r3, r3, r8, lsr #27
+ 463 0054 4FEA4812 		lsl	r2, r8, #5
+ 464 0058 0A46     		mov	r2, r1
+ 465 005a 0023     		movs	r3, #0
+ 466 005c 1446     		mov	r4, r2
+ 467 005e 1D46     		mov	r5, r3
+ 468 0060 4FF00002 		mov	r2, #0
+ 469 0064 4FF00003 		mov	r3, #0
+ 470 0068 6B01     		lsls	r3, r5, #5
+ 471 006a 43EAD463 		orr	r3, r3, r4, lsr #27
+ 472 006e 6201     		lsls	r2, r4, #5
+ 473 0070 0B46     		mov	r3, r1
+ 474 0072 9B00     		lsls	r3, r3, #2
+ 475 0074 0733     		adds	r3, r3, #7
+ 476 0076 DB08     		lsrs	r3, r3, #3
+ 477 0078 DB00     		lsls	r3, r3, #3
+ 478 007a ADEB030D 		sub	sp, sp, r3
+ 479 007e 6B46     		mov	r3, sp
+ 480 0080 0333     		adds	r3, r3, #3
+ 481 0082 9B08     		lsrs	r3, r3, #2
+ 482 0084 9B00     		lsls	r3, r3, #2
+ 483 0086 BB60     		str	r3, [r7, #8]
+  37:example_project.c ****         
+  38:example_project.c ****         c = 0;    
+ 484              		.loc 3 38 11
+ 485 0088 0023     		movs	r3, #0
+ 486 008a 7B61     		str	r3, [r7, #20]
+  39:example_project.c ****         n = timeBuffer;
+ 487              		.loc 3 39 11
+ 488 008c 3B68     		ldr	r3, [r7]
+ 489 008e BB61     		str	r3, [r7, #24]
+  40:example_project.c ****         
+  41:example_project.c ****         /* extract each digit */
+  42:example_project.c ****         while (n != 0)
+ 490              		.loc 3 42 15
+ 491 0090 1AE0     		b	.L19
+ 492              	.L20:
+  43:example_project.c ****         {
+  44:example_project.c ****             numberArray[c] = n % 10;
+ 493              		.loc 3 44 32
+ 494 0092 B969     		ldr	r1, [r7, #24]
+ 495 0094 1E4B     		ldr	r3, .L23
+ 496 0096 83FB0123 		smull	r2, r3, r3, r1
+ 497 009a 9A10     		asrs	r2, r3, #2
+ 498 009c CB17     		asrs	r3, r1, #31
+ 499 009e D21A     		subs	r2, r2, r3
+ 500 00a0 1346     		mov	r3, r2
+ 501 00a2 9B00     		lsls	r3, r3, #2
+ 502 00a4 1344     		add	r3, r3, r2
+ 503 00a6 5B00     		lsls	r3, r3, #1
+ 504 00a8 CA1A     		subs	r2, r1, r3
+ 505              		.loc 3 44 28
+ 506 00aa BB68     		ldr	r3, [r7, #8]
+ 507 00ac 7969     		ldr	r1, [r7, #20]
+ 508 00ae 43F82120 		str	r2, [r3, r1, lsl #2]
+  45:example_project.c ****             n /= 10;
+ 509              		.loc 3 45 15
+ 510 00b2 BB69     		ldr	r3, [r7, #24]
+ 511 00b4 164A     		ldr	r2, .L23
+ 512 00b6 82FB0312 		smull	r1, r2, r2, r3
+ 513 00ba 9210     		asrs	r2, r2, #2
+ 514 00bc DB17     		asrs	r3, r3, #31
+ 515 00be D31A     		subs	r3, r2, r3
+ 516 00c0 BB61     		str	r3, [r7, #24]
+  46:example_project.c ****             c++;
+ 517              		.loc 3 46 14
+ 518 00c2 7B69     		ldr	r3, [r7, #20]
+ 519 00c4 0133     		adds	r3, r3, #1
+ 520 00c6 7B61     		str	r3, [r7, #20]
+ 521              	.L19:
   42:example_project.c ****         {
-  43:example_project.c ****             numberArray[c] = n % 10;
- 486              		.loc 3 43 32
- 487 0092 B969     		ldr	r1, [r7, #24]
- 488 0094 1E4B     		ldr	r3, .L23
- 489 0096 83FB0123 		smull	r2, r3, r3, r1
- 490 009a 9A10     		asrs	r2, r3, #2
- 491 009c CB17     		asrs	r3, r1, #31
- 492 009e D21A     		subs	r2, r2, r3
- 493 00a0 1346     		mov	r3, r2
- 494 00a2 9B00     		lsls	r3, r3, #2
- 495 00a4 1344     		add	r3, r3, r2
- 496 00a6 5B00     		lsls	r3, r3, #1
- 497 00a8 CA1A     		subs	r2, r1, r3
- 498              		.loc 3 43 28
- 499 00aa BB68     		ldr	r3, [r7, #8]
- 500 00ac 7969     		ldr	r1, [r7, #20]
- 501 00ae 43F82120 		str	r2, [r3, r1, lsl #2]
-  44:example_project.c ****             n /= 10;
- 502              		.loc 3 44 15
- 503 00b2 BB69     		ldr	r3, [r7, #24]
- 504 00b4 164A     		ldr	r2, .L23
- 505 00b6 82FB0312 		smull	r1, r2, r2, r3
- 506 00ba 9210     		asrs	r2, r2, #2
- 507 00bc DB17     		asrs	r3, r3, #31
- 508 00be D31A     		subs	r3, r2, r3
- 509 00c0 BB61     		str	r3, [r7, #24]
-  45:example_project.c ****             c++;
- 510              		.loc 3 45 14
- 511 00c2 7B69     		ldr	r3, [r7, #20]
- 512 00c4 0133     		adds	r3, r3, #1
- 513 00c6 7B61     		str	r3, [r7, #20]
- 514              	.L19:
-  41:example_project.c ****         {
- 515              		.loc 3 41 15
- 516 00c8 BB69     		ldr	r3, [r7, #24]
- 517 00ca 002B     		cmp	r3, #0
- 518 00cc E1D1     		bne	.L20
-  46:example_project.c ****         }
-  47:example_project.c ****         int intracounter=0;
- 519              		.loc 3 47 13
- 520 00ce 0023     		movs	r3, #0
- 521 00d0 FB61     		str	r3, [r7, #28]
- 522              	.LBB2:
-  48:example_project.c ****         for (int i=c-1;i>=0;i--){            
- 523              		.loc 3 48 18
- 524 00d2 7B69     		ldr	r3, [r7, #20]
- 525 00d4 013B     		subs	r3, r3, #1
- 526 00d6 3B61     		str	r3, [r7, #16]
- 527              		.loc 3 48 9
- 528 00d8 0EE0     		b	.L21
- 529              	.L22:
-  49:example_project.c ****             //printf("%d \n",numberArray[i]);
-  50:example_project.c ****                 recordedTimeArray[intracounter]=numberArray[i];
- 530              		.loc 3 50 34 discriminator 3
- 531 00da FB69     		ldr	r3, [r7, #28]
- 532 00dc 9B00     		lsls	r3, r3, #2
- 533 00de 7A68     		ldr	r2, [r7, #4]
- 534 00e0 1344     		add	r3, r3, r2
- 535              		.loc 3 50 60 discriminator 3
- 536 00e2 BA68     		ldr	r2, [r7, #8]
- 537 00e4 3969     		ldr	r1, [r7, #16]
- 538 00e6 52F82120 		ldr	r2, [r2, r1, lsl #2]
- 539              		.loc 3 50 48 discriminator 3
- 540 00ea 1A60     		str	r2, [r3]
-  51:example_project.c ****                 intracounter++;
- 541              		.loc 3 51 29 discriminator 3
- 542 00ec FB69     		ldr	r3, [r7, #28]
- 543 00ee 0133     		adds	r3, r3, #1
- 544 00f0 FB61     		str	r3, [r7, #28]
-  48:example_project.c ****         for (int i=c-1;i>=0;i--){            
- 545              		.loc 3 48 30 discriminator 3
- 546 00f2 3B69     		ldr	r3, [r7, #16]
- 547 00f4 013B     		subs	r3, r3, #1
- 548 00f6 3B61     		str	r3, [r7, #16]
- 549              	.L21:
-  48:example_project.c ****         for (int i=c-1;i>=0;i--){            
- 550              		.loc 3 48 9 discriminator 1
- 551 00f8 3B69     		ldr	r3, [r7, #16]
- 552 00fa 002B     		cmp	r3, #0
- 553 00fc EDDA     		bge	.L22
- 554              	.LBE2:
-  52:example_project.c ****         }
-  53:example_project.c ****         intracounter=0;
- 555              		.loc 3 53 21
- 556 00fe 0023     		movs	r3, #0
- 557 0100 FB61     		str	r3, [r7, #28]
- 558 0102 8546     		mov	sp, r0
-  54:example_project.c **** 
-  55:example_project.c **** }
- 559              		.loc 3 55 1
- 560 0104 00BF     		nop
- 561 0106 2437     		adds	r7, r7, #36
- 562              	.LCFI32:
- 563              		.cfi_def_cfa_offset 20
- 564 0108 BD46     		mov	sp, r7
- 565              	.LCFI33:
- 566              		.cfi_def_cfa_register 13
- 567              		@ sp needed
- 568 010a BDE8B003 		pop	{r4, r5, r7, r8, r9}
- 569              	.LCFI34:
- 570              		.cfi_restore 9
- 571              		.cfi_restore 8
- 572              		.cfi_restore 7
- 573              		.cfi_restore 5
- 574              		.cfi_restore 4
- 575              		.cfi_def_cfa_offset 0
- 576 010e 7047     		bx	lr
- 577              	.L24:
- 578              		.align	2
- 579              	.L23:
- 580 0110 67666666 		.word	1717986919
- 581              		.cfi_endproc
- 582              	.LFE138:
- 584              		.section	.text.SysTick_Handler,"ax",%progbits
- 585              		.align	1
- 586              		.global	SysTick_Handler
- 587              		.syntax unified
- 588              		.thumb
- 589              		.thumb_func
- 591              	SysTick_Handler:
- 592              	.LFB139:
-  56:example_project.c **** 
-  57:example_project.c **** void SysTick_Handler(void)  {     
- 593              		.loc 3 57 29
- 594              		.cfi_startproc
- 595              		@ args = 0, pretend = 0, frame = 0
- 596              		@ frame_needed = 1, uses_anonymous_args = 0
- 597              		@ link register save eliminated.
- 598 0000 80B4     		push	{r7}
- 599              	.LCFI35:
- 600              		.cfi_def_cfa_offset 4
- 601              		.cfi_offset 7, -4
- 602 0002 00AF     		add	r7, sp, #0
- 603              	.LCFI36:
- 604              		.cfi_def_cfa_register 7
-  58:example_project.c ****   //XMC_GPIO_ToggleOutput(LED1);                           
-  59:example_project.c ****   counterTMS++;       
- 605              		.loc 3 59 13
- 606 0004 134B     		ldr	r3, .L29
- 607 0006 1B68     		ldr	r3, [r3]
- 608 0008 0133     		adds	r3, r3, #1
- 609 000a 124A     		ldr	r2, .L29
- 610 000c 1360     		str	r3, [r2]
-  60:example_project.c ****     if(counterTMS%100==0){
- 611              		.loc 3 60 18
- 612 000e 114B     		ldr	r3, .L29
- 613 0010 1A68     		ldr	r2, [r3]
- 614 0012 114B     		ldr	r3, .L29+4
- 615 0014 A3FB0213 		umull	r1, r3, r3, r2
- 616 0018 5B09     		lsrs	r3, r3, #5
- 617 001a 6421     		movs	r1, #100
- 618 001c 01FB03F3 		mul	r3, r1, r3
- 619 0020 D31A     		subs	r3, r2, r3
- 620              		.loc 3 60 7
- 621 0022 002B     		cmp	r3, #0
- 622 0024 10D1     		bne	.L28
-  61:example_project.c ****         if (btnOPressedFlag){
- 623              		.loc 3 61 13
- 624 0026 0D4B     		ldr	r3, .L29+8
- 625 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 626              		.loc 3 61 12
- 627 002a 002B     		cmp	r3, #0
- 628 002c 0CD0     		beq	.L28
-  62:example_project.c ****             if (letterCounter==0){
- 629              		.loc 3 62 30
- 630 002e 0C4B     		ldr	r3, .L29+12
- 631 0030 1B68     		ldr	r3, [r3]
- 632              		.loc 3 62 16
- 633 0032 002B     		cmp	r3, #0
- 634 0034 03D1     		bne	.L27
-  63:example_project.c ****                 letterCounter=1;}
- 635              		.loc 3 63 30
- 636 0036 0A4B     		ldr	r3, .L29+12
- 637 0038 0122     		movs	r2, #1
- 638 003a 1A60     		str	r2, [r3]
-  64:example_project.c ****             else {    
-  65:example_project.c ****             letterCounter++;}
-  66:example_project.c ****         } 
-  67:example_project.c ****     }
-  68:example_project.c **** }
- 639              		.loc 3 68 1
- 640 003c 04E0     		b	.L28
- 641              	.L27:
-  65:example_project.c ****         } 
- 642              		.loc 3 65 26
- 643 003e 084B     		ldr	r3, .L29+12
- 644 0040 1B68     		ldr	r3, [r3]
- 645 0042 0133     		adds	r3, r3, #1
- 646 0044 064A     		ldr	r2, .L29+12
- 647 0046 1360     		str	r3, [r2]
- 648              	.L28:
- 649              		.loc 3 68 1
- 650 0048 00BF     		nop
- 651 004a BD46     		mov	sp, r7
- 652              	.LCFI37:
- 653              		.cfi_def_cfa_register 13
- 654              		@ sp needed
- 655 004c 5DF8047B 		ldr	r7, [sp], #4
- 656              	.LCFI38:
- 657              		.cfi_restore 7
- 658              		.cfi_def_cfa_offset 0
- 659 0050 7047     		bx	lr
- 660              	.L30:
- 661 0052 00BF     		.align	2
- 662              	.L29:
- 663 0054 00000000 		.word	counterTMS
- 664 0058 1F85EB51 		.word	1374389535
- 665 005c 00000000 		.word	btnOPressedFlag
- 666 0060 00000000 		.word	letterCounter
- 667              		.cfi_endproc
- 668              	.LFE139:
- 670              		.section	.rodata
- 671              		.align	2
- 672              	.LC0:
- 673 0000 00010001 		.ascii	"\000\001\000\001\000\000\000\000\000\000\000\001\001"
- 673      00000000 
- 673      00000001 
- 673      01
- 674 000d 01000100 		.ascii	"\001\000\001\000\001\001\001\000\001\000\000\000\001"
- 674      01010100 
- 674      01000000 
- 674      01
- 675 001a 00010101 		.ascii	"\000\001\001\001\000\000\000\001\001\001\000\001\000"
- 675      00000001 
- 675      01010001 
- 675      00
- 676 0027 00000000 		.ascii	"\000\000\000\000\000\000\001\001\001\000\001\001\001"
- 676      00000101 
- 676      01000101 
- 676      01
- 677 0034 00000001 		.ascii	"\000\000\000\001\001\001\000\001\001\001\000\001\001"
- 677      01010001 
- 677      01010001 
- 677      01
- 678 0041 01000000 		.ascii	"\001\000\000\000\001\000\001\001\001\000\001\000\000"
- 678      01000101 
- 678      01000100 
- 678      00
- 679 004e 00010001 		.ascii	"\000\001\000\001\000\001\000\000\000\001\003\000"
- 679      00010000 
- 679      00010300 
- 680 005a 00000000 		.space	5
- 680      00
- 681              		.section	.text.main,"ax",%progbits
- 682              		.align	1
- 683              		.global	main
- 684              		.syntax unified
- 685              		.thumb
- 686              		.thumb_func
- 688              	main:
- 689              	.LFB140:
-  69:example_project.c ****   
-  70:example_project.c **** int main (void)  {
- 690              		.loc 3 70 18
- 691              		.cfi_startproc
- 692              		@ args = 0, pretend = 0, frame = 128
- 693              		@ frame_needed = 1, uses_anonymous_args = 0
- 694 0000 80B5     		push	{r7, lr}
- 695              	.LCFI39:
- 696              		.cfi_def_cfa_offset 8
- 697              		.cfi_offset 7, -8
- 698              		.cfi_offset 14, -4
- 699 0002 A0B0     		sub	sp, sp, #128
- 700              	.LCFI40:
- 701              		.cfi_def_cfa_offset 136
- 702 0004 00AF     		add	r7, sp, #0
- 703              	.LCFI41:
- 704              		.cfi_def_cfa_register 7
-  71:example_project.c ****   uint32_t returnCode;
-  72:example_project.c ****   //7 0,0,0,0,0,0,0,
-  73:example_project.c ****   //3 0,0,0,
-  74:example_project.c ****   uint8_t signalArray[95]={ 0, //INITIAL CONDITION
- 705              		.loc 3 74 11
- 706 0006 524A     		ldr	r2, .L41
- 707 0008 07F11C03 		add	r3, r7, #28
- 708 000c 1146     		mov	r1, r2
- 709 000e 5A22     		movs	r2, #90
- 710 0010 1846     		mov	r0, r3
- 711 0012 FFF7FEFF 		bl	memcpy
- 712 0016 07F17603 		add	r3, r7, #118
- 713 001a 0022     		movs	r2, #0
- 714 001c 1A60     		str	r2, [r3]	@ unaligned
- 715 001e 1A71     		strb	r2, [r3, #4]
-  75:example_project.c ****                             1,0,1, // I
-  76:example_project.c ****                             0,0,0,0,0,0,0,
-  77:example_project.c ****                             1,1,1,0,1,0,1,1,1,0,1,
-  78:example_project.c ****                             0,0,0,
-  79:example_project.c ****                             1,0,1,1,1,
-  80:example_project.c ****                             0,0,0,
-  81:example_project.c ****                             1,1,1,0,1,
-  82:example_project.c ****                             0,0,0,0,0,0,0,
-  83:example_project.c ****                             1,1,1,0,1,1,1,
-  84:example_project.c ****                             0,0,0,
-  85:example_project.c ****                             1,1,1,0,1,1,1,0,1,1,1,
-  86:example_project.c ****                             0,0,0,
-  87:example_project.c ****                             1,0,1,1,1,0,1,
-  88:example_project.c ****                             0,0,0,
-  89:example_project.c ****                             1,0,1,0,1,
-  90:example_project.c ****                             0,0,0,
-  91:example_project.c ****                             1,
-  92:example_project.c ****                             3};
-  93:example_project.c **** // GPIO CONFIG
-  94:example_project.c ****   XMC_GPIO_CONFIG_t config;
-  95:example_project.c ****   config.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
- 716              		.loc 3 95 15
- 717 0020 8023     		movs	r3, #128
- 718 0022 3B74     		strb	r3, [r7, #16]
-  96:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH;
- 719              		.loc 3 96 23
- 720 0024 0123     		movs	r3, #1
- 721 0026 7B61     		str	r3, [r7, #20]
-  97:example_project.c ****   config.output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM;
- 722              		.loc 3 97 26
- 723 0028 0423     		movs	r3, #4
- 724 002a 3B76     		strb	r3, [r7, #24]
-  98:example_project.c ****   XMC_GPIO_Init(LED1, &config);
- 725              		.loc 3 98 3
- 726 002c 07F11003 		add	r3, r7, #16
- 727 0030 1A46     		mov	r2, r3
- 728 0032 0121     		movs	r1, #1
- 729 0034 4748     		ldr	r0, .L41+4
- 730 0036 FFF7FEFF 		bl	XMC_GPIO_Init
-  99:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_LOW;
- 731              		.loc 3 99 23
- 732 003a 4FF48033 		mov	r3, #65536
- 733 003e 7B61     		str	r3, [r7, #20]
- 100:example_project.c ****   XMC_GPIO_Init(LED2, &config);
- 734              		.loc 3 100 3
- 735 0040 07F11003 		add	r3, r7, #16
- 736 0044 1A46     		mov	r2, r3
- 737 0046 0021     		movs	r1, #0
- 738 0048 4248     		ldr	r0, .L41+4
- 739 004a FFF7FEFF 		bl	XMC_GPIO_Init
- 101:example_project.c ****   
- 102:example_project.c ****     const XMC_GPIO_CONFIG_t in_config = \
- 740              		.loc 3 102 29
- 741 004e 0023     		movs	r3, #0
- 742 0050 3B71     		strb	r3, [r7, #4]
- 743 0052 4FF48033 		mov	r3, #65536
- 744 0056 BB60     		str	r3, [r7, #8]
- 745 0058 0023     		movs	r3, #0
- 746 005a 3B73     		strb	r3, [r7, #12]
- 103:example_project.c ****       {.mode=XMC_GPIO_MODE_INPUT_TRISTATE,\
- 104:example_project.c ****        .output_level=XMC_GPIO_OUTPUT_LEVEL_LOW,\
- 105:example_project.c ****        .output_strength=XMC_GPIO_OUTPUT_STRENGTH_STRONG_SHARP_EDGE};
- 106:example_project.c ****   XMC_GPIO_Init(GPIO_BUTTON1,  &in_config);
- 747              		.loc 3 106 3
- 748 005c 3B1D     		adds	r3, r7, #4
- 749 005e 1A46     		mov	r2, r3
- 750 0060 0E21     		movs	r1, #14
- 751 0062 3C48     		ldr	r0, .L41+4
- 752 0064 FFF7FEFF 		bl	XMC_GPIO_Init
- 107:example_project.c ****   XMC_GPIO_Init(GPIO_BUTTON2,  &in_config);
- 753              		.loc 3 107 3
- 754 0068 3B1D     		adds	r3, r7, #4
- 755 006a 1A46     		mov	r2, r3
- 756 006c 0F21     		movs	r1, #15
- 757 006e 3948     		ldr	r0, .L41+4
- 758 0070 FFF7FEFF 		bl	XMC_GPIO_Init
- 108:example_project.c **** 
- 109:example_project.c **** 
- 110:example_project.c ****   returnCode = SysTick_Config(SystemCoreClock / 1000);      /* Configure SysTick to generate an int
- 759              		.loc 3 110 16
- 760 0074 384B     		ldr	r3, .L41+8
- 761 0076 1B68     		ldr	r3, [r3]
- 762 0078 384A     		ldr	r2, .L41+12
- 763 007a A2FB0323 		umull	r2, r3, r2, r3
- 764 007e 9B09     		lsrs	r3, r3, #6
- 765 0080 1846     		mov	r0, r3
- 766 0082 FFF7FEFF 		bl	SysTick_Config
- 767 0086 F867     		str	r0, [r7, #124]
- 768              	.L40:
- 111:example_project.c ****   
- 112:example_project.c ****   if (returnCode != 0)  {                                   /* Check return code for errors */
- 113:example_project.c ****     // Error Handling 
- 114:example_project.c ****   }
- 115:example_project.c ****   
- 116:example_project.c ****   
- 117:example_project.c ****   for(;;){
- 118:example_project.c ****       
- 119:example_project.c ****    // The mechanism for the button locking is utilized through the flags btnTPressedFlag and btnOPr
- 120:example_project.c ****       
- 121:example_project.c ****     if(XMC_GPIO_GetInput(GPIO_BUTTON1) == 0) { 
- 769              		.loc 3 121 8
- 770 0088 0E21     		movs	r1, #14
- 771 008a 3248     		ldr	r0, .L41+4
- 772 008c FFF7FEFF 		bl	XMC_GPIO_GetInput
- 773 0090 0346     		mov	r3, r0
- 774              		.loc 3 121 7
- 775 0092 002B     		cmp	r3, #0
- 776 0094 09D1     		bne	.L32
- 122:example_project.c ****             if (!btnTPressedFlag){
- 777              		.loc 3 122 17
- 778 0096 324B     		ldr	r3, .L41+16
- 779 0098 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 780 009a 83F00103 		eor	r3, r3, #1
- 781 009e DBB2     		uxtb	r3, r3
- 782              		.loc 3 122 16
- 783 00a0 002B     		cmp	r3, #0
- 784 00a2 02D0     		beq	.L32
- 123:example_project.c ****                     btnOPressedFlag=true;
- 785              		.loc 3 123 36
- 786 00a4 2F4B     		ldr	r3, .L41+20
- 787 00a6 0122     		movs	r2, #1
- 788 00a8 1A70     		strb	r2, [r3]
- 789              	.L32:
- 124:example_project.c ****                                 }
- 125:example_project.c ****                                                 }
- 126:example_project.c ****     if(XMC_GPIO_GetInput(GPIO_BUTTON2) == 0) { 
- 790              		.loc 3 126 8
- 791 00aa 0F21     		movs	r1, #15
- 792 00ac 2948     		ldr	r0, .L41+4
- 793 00ae FFF7FEFF 		bl	XMC_GPIO_GetInput
- 794 00b2 0346     		mov	r3, r0
- 795              		.loc 3 126 7
- 796 00b4 002B     		cmp	r3, #0
- 797 00b6 0FD1     		bne	.L33
- 127:example_project.c ****                                              if(!btnOPressedFlag){
- 798              		.loc 3 127 49
- 799 00b8 2A4B     		ldr	r3, .L41+20
- 800 00ba 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 801 00bc 83F00103 		eor	r3, r3, #1
- 802 00c0 DBB2     		uxtb	r3, r3
- 803              		.loc 3 127 48
- 804 00c2 002B     		cmp	r3, #0
- 805 00c4 08D0     		beq	.L33
- 128:example_project.c ****                                                  btnTPressedFlag=true;
- 806              		.loc 3 128 65
- 807 00c6 264B     		ldr	r3, .L41+16
- 808 00c8 0122     		movs	r2, #1
- 809 00ca 1A70     		strb	r2, [r3]
- 129:example_project.c ****                                                  DecimalToArrayFunction(recordedTimeArray,timeBuffe
- 810              		.loc 3 129 50
- 811 00cc 264B     		ldr	r3, .L41+24
- 812 00ce 1B68     		ldr	r3, [r3]
- 813 00d0 1946     		mov	r1, r3
- 814 00d2 2648     		ldr	r0, .L41+28
- 815 00d4 FFF7FEFF 		bl	DecimalToArrayFunction
- 816              	.L33:
- 130:example_project.c ****                                                                 }
- 131:example_project.c ****                                             }  
- 132:example_project.c ****    
- 133:example_project.c ****    // Btn 1 Functionality
- 134:example_project.c ****    //
- 135:example_project.c ****    if (btnOPressedFlag){
- 817              		.loc 3 135 8
- 818 00d8 224B     		ldr	r3, .L41+20
- 819 00da 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 820              		.loc 3 135 7
- 821 00dc 002B     		cmp	r3, #0
- 822 00de 32D0     		beq	.L34
- 136:example_project.c ****        if (timeBufferFlag){
- 823              		.loc 3 136 12
- 824 00e0 234B     		ldr	r3, .L41+32
- 825 00e2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 826              		.loc 3 136 11
- 827 00e4 002B     		cmp	r3, #0
- 828 00e6 09D0     		beq	.L35
- 137:example_project.c ****        timeBuffer = counterTMS;
- 829              		.loc 3 137 19
- 830 00e8 224B     		ldr	r3, .L41+36
- 831 00ea 1B68     		ldr	r3, [r3]
- 832 00ec 1E4A     		ldr	r2, .L41+24
- 833 00ee 1360     		str	r3, [r2]
- 138:example_project.c ****        counterTMS=0;
- 834              		.loc 3 138 18
- 835 00f0 204B     		ldr	r3, .L41+36
- 836 00f2 0022     		movs	r2, #0
- 837 00f4 1A60     		str	r2, [r3]
- 139:example_project.c ****        timeBufferFlag=false;    
- 838              		.loc 3 139 22
- 839 00f6 1E4B     		ldr	r3, .L41+32
- 840 00f8 0022     		movs	r2, #0
- 841 00fa 1A70     		strb	r2, [r3]
- 842              	.L35:
- 140:example_project.c ****                             }
- 141:example_project.c ****         switch (signalArray[letterCounter])
- 843              		.loc 3 141 28
- 844 00fc 1E4B     		ldr	r3, .L41+40
- 845 00fe 1B68     		ldr	r3, [r3]
- 846 0100 8033     		adds	r3, r3, #128
- 847 0102 3B44     		add	r3, r3, r7
- 848 0104 13F8643C 		ldrb	r3, [r3, #-100]	@ zero_extendqisi2
- 849              		.loc 3 141 9
- 850 0108 032B     		cmp	r3, #3
- 851 010a 0FD0     		beq	.L36
- 852 010c 032B     		cmp	r3, #3
- 853 010e BBDC     		bgt	.L40
- 854 0110 002B     		cmp	r3, #0
- 855 0112 06D0     		beq	.L38
- 856 0114 012B     		cmp	r3, #1
- 857 0116 B7D1     		bne	.L40
- 142:example_project.c ****         {
- 143:example_project.c ****             case 1:
- 144:example_project.c ****             XMC_GPIO_SetOutputHigh(LED1);
- 858              		.loc 3 144 13
- 859 0118 0121     		movs	r1, #1
- 860 011a 0E48     		ldr	r0, .L41+4
- 861 011c FFF7FEFF 		bl	XMC_GPIO_SetOutputHigh
- 145:example_project.c ****             break;
- 862              		.loc 3 145 13
- 863 0120 15E0     		b	.L39
- 864              	.L38:
- 146:example_project.c ****             case 0:
- 147:example_project.c ****             XMC_GPIO_SetOutputLow(LED1);
- 865              		.loc 3 147 13
- 866 0122 0121     		movs	r1, #1
- 867 0124 0B48     		ldr	r0, .L41+4
- 868 0126 FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
- 148:example_project.c ****             break;
- 869              		.loc 3 148 13
- 870 012a 10E0     		b	.L39
- 871              	.L36:
- 149:example_project.c ****             case 3:
- 150:example_project.c ****         //         
- 151:example_project.c ****             letterCounter=0;            
- 872              		.loc 3 151 26
- 873 012c 124B     		ldr	r3, .L41+40
- 874 012e 0022     		movs	r2, #0
- 875 0130 1A60     		str	r2, [r3]
- 152:example_project.c ****             counterTMS=0;
- 876              		.loc 3 152 23
- 877 0132 104B     		ldr	r3, .L41+36
- 878 0134 0022     		movs	r2, #0
- 879 0136 1A60     		str	r2, [r3]
- 153:example_project.c ****             btnOPressedFlag=false;
- 880              		.loc 3 153 28
- 881 0138 0A4B     		ldr	r3, .L41+20
- 882 013a 0022     		movs	r2, #0
- 883 013c 1A70     		strb	r2, [r3]
- 154:example_project.c ****             timeBufferFlag=true;
- 884              		.loc 3 154 27
- 885 013e 0C4B     		ldr	r3, .L41+32
- 886 0140 0122     		movs	r2, #1
- 887 0142 1A70     		strb	r2, [r3]
- 155:example_project.c ****             break;
- 888              		.loc 3 155 13
- 889 0144 03E0     		b	.L39
- 890              	.L34:
- 156:example_project.c ****         }
- 157:example_project.c ****    }else {XMC_GPIO_SetOutputLow(LED1);}
- 891              		.loc 3 157 11
- 892 0146 0121     		movs	r1, #1
- 893 0148 0248     		ldr	r0, .L41+4
- 894 014a FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
- 895              	.L39:
- 121:example_project.c ****             if (!btnTPressedFlag){
- 896              		.loc 3 121 7
- 897 014e 9BE7     		b	.L40
- 898              	.L42:
- 899              		.align	2
- 900              	.L41:
- 901 0150 00000000 		.word	.LC0
- 902 0154 00810248 		.word	1208123648
- 903 0158 00000000 		.word	SystemCoreClock
- 904 015c D34D6210 		.word	274877907
- 905 0160 00000000 		.word	btnTPressedFlag
- 906 0164 00000000 		.word	btnOPressedFlag
- 907 0168 00000000 		.word	timeBuffer
- 908 016c 00000000 		.word	recordedTimeArray
- 909 0170 00000000 		.word	timeBufferFlag
- 910 0174 00000000 		.word	counterTMS
- 911 0178 00000000 		.word	letterCounter
- 912              		.cfi_endproc
- 913              	.LFE140:
- 915              		.text
- 916              	.Letext0:
- 917              		.file 4 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/mach
- 918              		.file 5 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
- 919              		.file 6 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500.
- 920              		.file 7 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
- 921              		.file 8 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_X
+ 522              		.loc 3 42 15
+ 523 00c8 BB69     		ldr	r3, [r7, #24]
+ 524 00ca 002B     		cmp	r3, #0
+ 525 00cc E1D1     		bne	.L20
+  47:example_project.c ****         }
+  48:example_project.c ****         int intracounter=0;
+ 526              		.loc 3 48 13
+ 527 00ce 0023     		movs	r3, #0
+ 528 00d0 FB61     		str	r3, [r7, #28]
+ 529              	.LBB2:
+  49:example_project.c ****         for (int i=c-1;i>=0;i--){            
+ 530              		.loc 3 49 18
+ 531 00d2 7B69     		ldr	r3, [r7, #20]
+ 532 00d4 013B     		subs	r3, r3, #1
+ 533 00d6 3B61     		str	r3, [r7, #16]
+ 534              		.loc 3 49 9
+ 535 00d8 0EE0     		b	.L21
+ 536              	.L22:
+  50:example_project.c ****             //printf("%d \n",numberArray[i]);
+  51:example_project.c ****                 recordedTimeArray[intracounter]=numberArray[i];
+ 537              		.loc 3 51 34 discriminator 3
+ 538 00da FB69     		ldr	r3, [r7, #28]
+ 539 00dc 9B00     		lsls	r3, r3, #2
+ 540 00de 7A68     		ldr	r2, [r7, #4]
+ 541 00e0 1344     		add	r3, r3, r2
+ 542              		.loc 3 51 60 discriminator 3
+ 543 00e2 BA68     		ldr	r2, [r7, #8]
+ 544 00e4 3969     		ldr	r1, [r7, #16]
+ 545 00e6 52F82120 		ldr	r2, [r2, r1, lsl #2]
+ 546              		.loc 3 51 48 discriminator 3
+ 547 00ea 1A60     		str	r2, [r3]
+  52:example_project.c ****                 intracounter++;
+ 548              		.loc 3 52 29 discriminator 3
+ 549 00ec FB69     		ldr	r3, [r7, #28]
+ 550 00ee 0133     		adds	r3, r3, #1
+ 551 00f0 FB61     		str	r3, [r7, #28]
+  49:example_project.c ****         for (int i=c-1;i>=0;i--){            
+ 552              		.loc 3 49 30 discriminator 3
+ 553 00f2 3B69     		ldr	r3, [r7, #16]
+ 554 00f4 013B     		subs	r3, r3, #1
+ 555 00f6 3B61     		str	r3, [r7, #16]
+ 556              	.L21:
+  49:example_project.c ****         for (int i=c-1;i>=0;i--){            
+ 557              		.loc 3 49 9 discriminator 1
+ 558 00f8 3B69     		ldr	r3, [r7, #16]
+ 559 00fa 002B     		cmp	r3, #0
+ 560 00fc EDDA     		bge	.L22
+ 561              	.LBE2:
+  53:example_project.c ****         }
+  54:example_project.c ****         intracounter=0;
+ 562              		.loc 3 54 21
+ 563 00fe 0023     		movs	r3, #0
+ 564 0100 FB61     		str	r3, [r7, #28]
+ 565 0102 8546     		mov	sp, r0
+  55:example_project.c **** 
+  56:example_project.c **** }
+ 566              		.loc 3 56 1
+ 567 0104 00BF     		nop
+ 568 0106 2437     		adds	r7, r7, #36
+ 569              	.LCFI32:
+ 570              		.cfi_def_cfa_offset 20
+ 571 0108 BD46     		mov	sp, r7
+ 572              	.LCFI33:
+ 573              		.cfi_def_cfa_register 13
+ 574              		@ sp needed
+ 575 010a BDE8B003 		pop	{r4, r5, r7, r8, r9}
+ 576              	.LCFI34:
+ 577              		.cfi_restore 9
+ 578              		.cfi_restore 8
+ 579              		.cfi_restore 7
+ 580              		.cfi_restore 5
+ 581              		.cfi_restore 4
+ 582              		.cfi_def_cfa_offset 0
+ 583 010e 7047     		bx	lr
+ 584              	.L24:
+ 585              		.align	2
+ 586              	.L23:
+ 587 0110 67666666 		.word	1717986919
+ 588              		.cfi_endproc
+ 589              	.LFE138:
+ 591              		.section	.text.ArrayToMorse,"ax",%progbits
+ 592              		.align	1
+ 593              		.global	ArrayToMorse
+ 594              		.syntax unified
+ 595              		.thumb
+ 596              		.thumb_func
+ 598              	ArrayToMorse:
+ 599              	.LFB139:
+  57:example_project.c **** void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
+ 600              		.loc 3 57 59
+ 601              		.cfi_startproc
+ 602              		@ args = 0, pretend = 0, frame = 24
+ 603              		@ frame_needed = 1, uses_anonymous_args = 0
+ 604              		@ link register save eliminated.
+ 605 0000 80B4     		push	{r7}
+ 606              	.LCFI35:
+ 607              		.cfi_def_cfa_offset 4
+ 608              		.cfi_offset 7, -4
+ 609 0002 87B0     		sub	sp, sp, #28
+ 610              	.LCFI36:
+ 611              		.cfi_def_cfa_offset 32
+ 612 0004 00AF     		add	r7, sp, #0
+ 613              	.LCFI37:
+ 614              		.cfi_def_cfa_register 7
+ 615 0006 7860     		str	r0, [r7, #4]
+ 616 0008 3960     		str	r1, [r7]
+  58:example_project.c ****     bool encodingFlag = false;
+ 617              		.loc 3 58 10
+ 618 000a 0023     		movs	r3, #0
+ 619 000c FB75     		strb	r3, [r7, #23]
+  59:example_project.c ****     int counterIndex=0;
+ 620              		.loc 3 59 9
+ 621 000e 0023     		movs	r3, #0
+ 622 0010 3B61     		str	r3, [r7, #16]
+  60:example_project.c ****     int outputCounterIndex=0;
+ 623              		.loc 3 60 9
+ 624 0012 0023     		movs	r3, #0
+ 625 0014 FB60     		str	r3, [r7, #12]
+  61:example_project.c ****     while (!encodingFlag){
+ 626              		.loc 3 61 11
+ 627 0016 00F0ECBC 		b	.L26
+ 628              	.L40:
+  62:example_project.c ****         
+  63:example_project.c ****         switch (ArrayInput[counterIndex])
+ 629              		.loc 3 63 27
+ 630 001a 3B69     		ldr	r3, [r7, #16]
+ 631 001c 9B00     		lsls	r3, r3, #2
+ 632 001e 7A68     		ldr	r2, [r7, #4]
+ 633 0020 1344     		add	r3, r3, r2
+ 634 0022 1B68     		ldr	r3, [r3]
+ 635              		.loc 3 63 9
+ 636 0024 092B     		cmp	r3, #9
+ 637 0026 1DDC     		bgt	.L27
+ 638 0028 002B     		cmp	r3, #0
+ 639 002a C0F2E284 		blt	.L26
+ 640 002e 092B     		cmp	r3, #9
+ 641 0030 00F2DF84 		bhi	.L26
+ 642 0034 01A2     		adr	r2, .L29
+ 643 0036 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 644 003a 00BF     		.p2align 2
+ 645              	.L29:
+ 646 003c 73000000 		.word	.L38+1
+ 647 0040 BD010000 		.word	.L37+1
+ 648 0044 E5020000 		.word	.L36+1
+ 649 0048 ED030000 		.word	.L35+1
+ 650 004c CF040000 		.word	.L34+1
+ 651 0050 8B050000 		.word	.L33+1
+ 652 0054 21060000 		.word	.L32+1
+ 653 0058 E3060000 		.word	.L31+1
+ 654 005c BF070000 		.word	.L30+1
+ 655 0060 C1080000 		.word	.L28+1
+ 656              		.p2align 1
+ 657              	.L27:
+ 658 0064 40F2E732 		movw	r2, #999
+ 659 0068 9342     		cmp	r3, r2
+ 660 006a 00F0BA84 		beq	.L39
+ 661 006e 00F0C0BC 		b	.L26
+ 662              	.L38:
+  64:example_project.c ****         {
+  65:example_project.c ****             case 0:
+  66:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 663              		.loc 3 66 29
+ 664 0072 FB68     		ldr	r3, [r7, #12]
+ 665 0074 3A68     		ldr	r2, [r7]
+ 666 0076 1344     		add	r3, r3, r2
+ 667              		.loc 3 66 49
+ 668 0078 0122     		movs	r2, #1
+ 669 007a 1A70     		strb	r2, [r3]
+  67:example_project.c ****                  outputCounterIndex++;
+ 670              		.loc 3 67 36
+ 671 007c FB68     		ldr	r3, [r7, #12]
+ 672 007e 0133     		adds	r3, r3, #1
+ 673 0080 FB60     		str	r3, [r7, #12]
+  68:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 674              		.loc 3 68 29
+ 675 0082 FB68     		ldr	r3, [r7, #12]
+ 676 0084 3A68     		ldr	r2, [r7]
+ 677 0086 1344     		add	r3, r3, r2
+ 678              		.loc 3 68 49
+ 679 0088 0122     		movs	r2, #1
+ 680 008a 1A70     		strb	r2, [r3]
+  69:example_project.c ****                  outputCounterIndex++;
+ 681              		.loc 3 69 36
+ 682 008c FB68     		ldr	r3, [r7, #12]
+ 683 008e 0133     		adds	r3, r3, #1
+ 684 0090 FB60     		str	r3, [r7, #12]
+  70:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 685              		.loc 3 70 29
+ 686 0092 FB68     		ldr	r3, [r7, #12]
+ 687 0094 3A68     		ldr	r2, [r7]
+ 688 0096 1344     		add	r3, r3, r2
+ 689              		.loc 3 70 49
+ 690 0098 0122     		movs	r2, #1
+ 691 009a 1A70     		strb	r2, [r3]
+  71:example_project.c ****                  outputCounterIndex++;
+ 692              		.loc 3 71 36
+ 693 009c FB68     		ldr	r3, [r7, #12]
+ 694 009e 0133     		adds	r3, r3, #1
+ 695 00a0 FB60     		str	r3, [r7, #12]
+  72:example_project.c ****                  
+  73:example_project.c ****                  
+  74:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 696              		.loc 3 74 29
+ 697 00a2 FB68     		ldr	r3, [r7, #12]
+ 698 00a4 3A68     		ldr	r2, [r7]
+ 699 00a6 1344     		add	r3, r3, r2
+ 700              		.loc 3 74 49
+ 701 00a8 0022     		movs	r2, #0
+ 702 00aa 1A70     		strb	r2, [r3]
+  75:example_project.c ****                  outputCounterIndex++;
+ 703              		.loc 3 75 36
+ 704 00ac FB68     		ldr	r3, [r7, #12]
+ 705 00ae 0133     		adds	r3, r3, #1
+ 706 00b0 FB60     		str	r3, [r7, #12]
+  76:example_project.c ****                  
+  77:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 707              		.loc 3 77 29
+ 708 00b2 FB68     		ldr	r3, [r7, #12]
+ 709 00b4 3A68     		ldr	r2, [r7]
+ 710 00b6 1344     		add	r3, r3, r2
+ 711              		.loc 3 77 49
+ 712 00b8 0122     		movs	r2, #1
+ 713 00ba 1A70     		strb	r2, [r3]
+  78:example_project.c ****                  outputCounterIndex++;
+ 714              		.loc 3 78 36
+ 715 00bc FB68     		ldr	r3, [r7, #12]
+ 716 00be 0133     		adds	r3, r3, #1
+ 717 00c0 FB60     		str	r3, [r7, #12]
+  79:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 718              		.loc 3 79 29
+ 719 00c2 FB68     		ldr	r3, [r7, #12]
+ 720 00c4 3A68     		ldr	r2, [r7]
+ 721 00c6 1344     		add	r3, r3, r2
+ 722              		.loc 3 79 49
+ 723 00c8 0122     		movs	r2, #1
+ 724 00ca 1A70     		strb	r2, [r3]
+  80:example_project.c ****                  outputCounterIndex++;
+ 725              		.loc 3 80 36
+ 726 00cc FB68     		ldr	r3, [r7, #12]
+ 727 00ce 0133     		adds	r3, r3, #1
+ 728 00d0 FB60     		str	r3, [r7, #12]
+  81:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 729              		.loc 3 81 29
+ 730 00d2 FB68     		ldr	r3, [r7, #12]
+ 731 00d4 3A68     		ldr	r2, [r7]
+ 732 00d6 1344     		add	r3, r3, r2
+ 733              		.loc 3 81 49
+ 734 00d8 0122     		movs	r2, #1
+ 735 00da 1A70     		strb	r2, [r3]
+  82:example_project.c ****                  outputCounterIndex++;
+ 736              		.loc 3 82 36
+ 737 00dc FB68     		ldr	r3, [r7, #12]
+ 738 00de 0133     		adds	r3, r3, #1
+ 739 00e0 FB60     		str	r3, [r7, #12]
+  83:example_project.c ****                  
+  84:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 740              		.loc 3 84 29
+ 741 00e2 FB68     		ldr	r3, [r7, #12]
+ 742 00e4 3A68     		ldr	r2, [r7]
+ 743 00e6 1344     		add	r3, r3, r2
+ 744              		.loc 3 84 49
+ 745 00e8 0022     		movs	r2, #0
+ 746 00ea 1A70     		strb	r2, [r3]
+  85:example_project.c ****                  outputCounterIndex++;
+ 747              		.loc 3 85 36
+ 748 00ec FB68     		ldr	r3, [r7, #12]
+ 749 00ee 0133     		adds	r3, r3, #1
+ 750 00f0 FB60     		str	r3, [r7, #12]
+  86:example_project.c ****                  
+  87:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 751              		.loc 3 87 29
+ 752 00f2 FB68     		ldr	r3, [r7, #12]
+ 753 00f4 3A68     		ldr	r2, [r7]
+ 754 00f6 1344     		add	r3, r3, r2
+ 755              		.loc 3 87 49
+ 756 00f8 0122     		movs	r2, #1
+ 757 00fa 1A70     		strb	r2, [r3]
+  88:example_project.c ****                  outputCounterIndex++;
+ 758              		.loc 3 88 36
+ 759 00fc FB68     		ldr	r3, [r7, #12]
+ 760 00fe 0133     		adds	r3, r3, #1
+ 761 0100 FB60     		str	r3, [r7, #12]
+  89:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 762              		.loc 3 89 29
+ 763 0102 FB68     		ldr	r3, [r7, #12]
+ 764 0104 3A68     		ldr	r2, [r7]
+ 765 0106 1344     		add	r3, r3, r2
+ 766              		.loc 3 89 49
+ 767 0108 0122     		movs	r2, #1
+ 768 010a 1A70     		strb	r2, [r3]
+  90:example_project.c ****                  outputCounterIndex++;
+ 769              		.loc 3 90 36
+ 770 010c FB68     		ldr	r3, [r7, #12]
+ 771 010e 0133     		adds	r3, r3, #1
+ 772 0110 FB60     		str	r3, [r7, #12]
+  91:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 773              		.loc 3 91 29
+ 774 0112 FB68     		ldr	r3, [r7, #12]
+ 775 0114 3A68     		ldr	r2, [r7]
+ 776 0116 1344     		add	r3, r3, r2
+ 777              		.loc 3 91 49
+ 778 0118 0122     		movs	r2, #1
+ 779 011a 1A70     		strb	r2, [r3]
+  92:example_project.c ****                  outputCounterIndex++;
+ 780              		.loc 3 92 36
+ 781 011c FB68     		ldr	r3, [r7, #12]
+ 782 011e 0133     		adds	r3, r3, #1
+ 783 0120 FB60     		str	r3, [r7, #12]
+  93:example_project.c ****                  
+  94:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 784              		.loc 3 94 29
+ 785 0122 FB68     		ldr	r3, [r7, #12]
+ 786 0124 3A68     		ldr	r2, [r7]
+ 787 0126 1344     		add	r3, r3, r2
+ 788              		.loc 3 94 49
+ 789 0128 0022     		movs	r2, #0
+ 790 012a 1A70     		strb	r2, [r3]
+  95:example_project.c ****                  outputCounterIndex++;
+ 791              		.loc 3 95 36
+ 792 012c FB68     		ldr	r3, [r7, #12]
+ 793 012e 0133     		adds	r3, r3, #1
+ 794 0130 FB60     		str	r3, [r7, #12]
+  96:example_project.c ****                  
+  97:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 795              		.loc 3 97 29
+ 796 0132 FB68     		ldr	r3, [r7, #12]
+ 797 0134 3A68     		ldr	r2, [r7]
+ 798 0136 1344     		add	r3, r3, r2
+ 799              		.loc 3 97 49
+ 800 0138 0122     		movs	r2, #1
+ 801 013a 1A70     		strb	r2, [r3]
+  98:example_project.c ****                  outputCounterIndex++;
+ 802              		.loc 3 98 36
+ 803 013c FB68     		ldr	r3, [r7, #12]
+ 804 013e 0133     		adds	r3, r3, #1
+ 805 0140 FB60     		str	r3, [r7, #12]
+  99:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 806              		.loc 3 99 29
+ 807 0142 FB68     		ldr	r3, [r7, #12]
+ 808 0144 3A68     		ldr	r2, [r7]
+ 809 0146 1344     		add	r3, r3, r2
+ 810              		.loc 3 99 49
+ 811 0148 0122     		movs	r2, #1
+ 812 014a 1A70     		strb	r2, [r3]
+ 100:example_project.c ****                  outputCounterIndex++;
+ 813              		.loc 3 100 36
+ 814 014c FB68     		ldr	r3, [r7, #12]
+ 815 014e 0133     		adds	r3, r3, #1
+ 816 0150 FB60     		str	r3, [r7, #12]
+ 101:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 817              		.loc 3 101 29
+ 818 0152 FB68     		ldr	r3, [r7, #12]
+ 819 0154 3A68     		ldr	r2, [r7]
+ 820 0156 1344     		add	r3, r3, r2
+ 821              		.loc 3 101 49
+ 822 0158 0122     		movs	r2, #1
+ 823 015a 1A70     		strb	r2, [r3]
+ 102:example_project.c ****                  outputCounterIndex++;
+ 824              		.loc 3 102 36
+ 825 015c FB68     		ldr	r3, [r7, #12]
+ 826 015e 0133     		adds	r3, r3, #1
+ 827 0160 FB60     		str	r3, [r7, #12]
+ 103:example_project.c ****                  
+ 104:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 828              		.loc 3 104 29
+ 829 0162 FB68     		ldr	r3, [r7, #12]
+ 830 0164 3A68     		ldr	r2, [r7]
+ 831 0166 1344     		add	r3, r3, r2
+ 832              		.loc 3 104 49
+ 833 0168 0022     		movs	r2, #0
+ 834 016a 1A70     		strb	r2, [r3]
+ 105:example_project.c ****                  outputCounterIndex++;
+ 835              		.loc 3 105 36
+ 836 016c FB68     		ldr	r3, [r7, #12]
+ 837 016e 0133     		adds	r3, r3, #1
+ 838 0170 FB60     		str	r3, [r7, #12]
+ 106:example_project.c ****                  
+ 107:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 839              		.loc 3 107 29
+ 840 0172 FB68     		ldr	r3, [r7, #12]
+ 841 0174 3A68     		ldr	r2, [r7]
+ 842 0176 1344     		add	r3, r3, r2
+ 843              		.loc 3 107 49
+ 844 0178 0122     		movs	r2, #1
+ 845 017a 1A70     		strb	r2, [r3]
+ 108:example_project.c ****                  outputCounterIndex++;
+ 846              		.loc 3 108 36
+ 847 017c FB68     		ldr	r3, [r7, #12]
+ 848 017e 0133     		adds	r3, r3, #1
+ 849 0180 FB60     		str	r3, [r7, #12]
+ 109:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 850              		.loc 3 109 29
+ 851 0182 FB68     		ldr	r3, [r7, #12]
+ 852 0184 3A68     		ldr	r2, [r7]
+ 853 0186 1344     		add	r3, r3, r2
+ 854              		.loc 3 109 49
+ 855 0188 0122     		movs	r2, #1
+ 856 018a 1A70     		strb	r2, [r3]
+ 110:example_project.c ****                  outputCounterIndex++;
+ 857              		.loc 3 110 36
+ 858 018c FB68     		ldr	r3, [r7, #12]
+ 859 018e 0133     		adds	r3, r3, #1
+ 860 0190 FB60     		str	r3, [r7, #12]
+ 111:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 861              		.loc 3 111 29
+ 862 0192 FB68     		ldr	r3, [r7, #12]
+ 863 0194 3A68     		ldr	r2, [r7]
+ 864 0196 1344     		add	r3, r3, r2
+ 865              		.loc 3 111 49
+ 866 0198 0122     		movs	r2, #1
+ 867 019a 1A70     		strb	r2, [r3]
+ 112:example_project.c ****                  outputCounterIndex++;
+ 868              		.loc 3 112 36
+ 869 019c FB68     		ldr	r3, [r7, #12]
+ 870 019e 0133     		adds	r3, r3, #1
+ 871 01a0 FB60     		str	r3, [r7, #12]
+ 113:example_project.c ****                  
+ 114:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 872              		.loc 3 114 29
+ 873 01a2 FB68     		ldr	r3, [r7, #12]
+ 874 01a4 3A68     		ldr	r2, [r7]
+ 875 01a6 1344     		add	r3, r3, r2
+ 876              		.loc 3 114 49
+ 877 01a8 0022     		movs	r2, #0
+ 878 01aa 1A70     		strb	r2, [r3]
+ 115:example_project.c ****                  outputCounterIndex++;
+ 879              		.loc 3 115 36
+ 880 01ac FB68     		ldr	r3, [r7, #12]
+ 881 01ae 0133     		adds	r3, r3, #1
+ 882 01b0 FB60     		str	r3, [r7, #12]
+ 116:example_project.c ****                  
+ 117:example_project.c ****                  counterIndex++;
+ 883              		.loc 3 117 30
+ 884 01b2 3B69     		ldr	r3, [r7, #16]
+ 885 01b4 0133     		adds	r3, r3, #1
+ 886 01b6 3B61     		str	r3, [r7, #16]
+ 118:example_project.c ****                 break;
+ 887              		.loc 3 118 17
+ 888 01b8 00F01BBC 		b	.L26
+ 889              	.L37:
+ 119:example_project.c ****             case 1:
+ 120:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 890              		.loc 3 120 29
+ 891 01bc FB68     		ldr	r3, [r7, #12]
+ 892 01be 3A68     		ldr	r2, [r7]
+ 893 01c0 1344     		add	r3, r3, r2
+ 894              		.loc 3 120 49
+ 895 01c2 0122     		movs	r2, #1
+ 896 01c4 1A70     		strb	r2, [r3]
+ 121:example_project.c ****                  outputCounterIndex++;
+ 897              		.loc 3 121 36
+ 898 01c6 FB68     		ldr	r3, [r7, #12]
+ 899 01c8 0133     		adds	r3, r3, #1
+ 900 01ca FB60     		str	r3, [r7, #12]
+ 122:example_project.c ****                  
+ 123:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 901              		.loc 3 123 29
+ 902 01cc FB68     		ldr	r3, [r7, #12]
+ 903 01ce 3A68     		ldr	r2, [r7]
+ 904 01d0 1344     		add	r3, r3, r2
+ 905              		.loc 3 123 49
+ 906 01d2 0022     		movs	r2, #0
+ 907 01d4 1A70     		strb	r2, [r3]
+ 124:example_project.c ****                  outputCounterIndex++;
+ 908              		.loc 3 124 36
+ 909 01d6 FB68     		ldr	r3, [r7, #12]
+ 910 01d8 0133     		adds	r3, r3, #1
+ 911 01da FB60     		str	r3, [r7, #12]
+ 125:example_project.c ****                  
+ 126:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 912              		.loc 3 126 29
+ 913 01dc FB68     		ldr	r3, [r7, #12]
+ 914 01de 3A68     		ldr	r2, [r7]
+ 915 01e0 1344     		add	r3, r3, r2
+ 916              		.loc 3 126 49
+ 917 01e2 0122     		movs	r2, #1
+ 918 01e4 1A70     		strb	r2, [r3]
+ 127:example_project.c ****                  outputCounterIndex++;
+ 919              		.loc 3 127 36
+ 920 01e6 FB68     		ldr	r3, [r7, #12]
+ 921 01e8 0133     		adds	r3, r3, #1
+ 922 01ea FB60     		str	r3, [r7, #12]
+ 128:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 923              		.loc 3 128 29
+ 924 01ec FB68     		ldr	r3, [r7, #12]
+ 925 01ee 3A68     		ldr	r2, [r7]
+ 926 01f0 1344     		add	r3, r3, r2
+ 927              		.loc 3 128 49
+ 928 01f2 0122     		movs	r2, #1
+ 929 01f4 1A70     		strb	r2, [r3]
+ 129:example_project.c ****                  outputCounterIndex++;
+ 930              		.loc 3 129 36
+ 931 01f6 FB68     		ldr	r3, [r7, #12]
+ 932 01f8 0133     		adds	r3, r3, #1
+ 933 01fa FB60     		str	r3, [r7, #12]
+ 130:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 934              		.loc 3 130 29
+ 935 01fc FB68     		ldr	r3, [r7, #12]
+ 936 01fe 3A68     		ldr	r2, [r7]
+ 937 0200 1344     		add	r3, r3, r2
+ 938              		.loc 3 130 49
+ 939 0202 0122     		movs	r2, #1
+ 940 0204 1A70     		strb	r2, [r3]
+ 131:example_project.c ****                  outputCounterIndex++;
+ 941              		.loc 3 131 36
+ 942 0206 FB68     		ldr	r3, [r7, #12]
+ 943 0208 0133     		adds	r3, r3, #1
+ 944 020a FB60     		str	r3, [r7, #12]
+ 132:example_project.c ****                  
+ 133:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 945              		.loc 3 133 29
+ 946 020c FB68     		ldr	r3, [r7, #12]
+ 947 020e 3A68     		ldr	r2, [r7]
+ 948 0210 1344     		add	r3, r3, r2
+ 949              		.loc 3 133 49
+ 950 0212 0022     		movs	r2, #0
+ 951 0214 1A70     		strb	r2, [r3]
+ 134:example_project.c ****                  outputCounterIndex++;
+ 952              		.loc 3 134 36
+ 953 0216 FB68     		ldr	r3, [r7, #12]
+ 954 0218 0133     		adds	r3, r3, #1
+ 955 021a FB60     		str	r3, [r7, #12]
+ 135:example_project.c ****                  
+ 136:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 956              		.loc 3 136 29
+ 957 021c FB68     		ldr	r3, [r7, #12]
+ 958 021e 3A68     		ldr	r2, [r7]
+ 959 0220 1344     		add	r3, r3, r2
+ 960              		.loc 3 136 49
+ 961 0222 0122     		movs	r2, #1
+ 962 0224 1A70     		strb	r2, [r3]
+ 137:example_project.c ****                  outputCounterIndex++;
+ 963              		.loc 3 137 36
+ 964 0226 FB68     		ldr	r3, [r7, #12]
+ 965 0228 0133     		adds	r3, r3, #1
+ 966 022a FB60     		str	r3, [r7, #12]
+ 138:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 967              		.loc 3 138 29
+ 968 022c FB68     		ldr	r3, [r7, #12]
+ 969 022e 3A68     		ldr	r2, [r7]
+ 970 0230 1344     		add	r3, r3, r2
+ 971              		.loc 3 138 49
+ 972 0232 0122     		movs	r2, #1
+ 973 0234 1A70     		strb	r2, [r3]
+ 139:example_project.c ****                  outputCounterIndex++;
+ 974              		.loc 3 139 36
+ 975 0236 FB68     		ldr	r3, [r7, #12]
+ 976 0238 0133     		adds	r3, r3, #1
+ 977 023a FB60     		str	r3, [r7, #12]
+ 140:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 978              		.loc 3 140 29
+ 979 023c FB68     		ldr	r3, [r7, #12]
+ 980 023e 3A68     		ldr	r2, [r7]
+ 981 0240 1344     		add	r3, r3, r2
+ 982              		.loc 3 140 49
+ 983 0242 0122     		movs	r2, #1
+ 984 0244 1A70     		strb	r2, [r3]
+ 141:example_project.c ****                  outputCounterIndex++;
+ 985              		.loc 3 141 36
+ 986 0246 FB68     		ldr	r3, [r7, #12]
+ 987 0248 0133     		adds	r3, r3, #1
+ 988 024a FB60     		str	r3, [r7, #12]
+ 142:example_project.c ****                  
+ 143:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 989              		.loc 3 143 29
+ 990 024c FB68     		ldr	r3, [r7, #12]
+ 991 024e 3A68     		ldr	r2, [r7]
+ 992 0250 1344     		add	r3, r3, r2
+ 993              		.loc 3 143 49
+ 994 0252 0022     		movs	r2, #0
+ 995 0254 1A70     		strb	r2, [r3]
+ 144:example_project.c ****                  outputCounterIndex++;
+ 996              		.loc 3 144 36
+ 997 0256 FB68     		ldr	r3, [r7, #12]
+ 998 0258 0133     		adds	r3, r3, #1
+ 999 025a FB60     		str	r3, [r7, #12]
+ 145:example_project.c ****                  
+ 146:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1000              		.loc 3 146 29
+ 1001 025c FB68     		ldr	r3, [r7, #12]
+ 1002 025e 3A68     		ldr	r2, [r7]
+ 1003 0260 1344     		add	r3, r3, r2
+ 1004              		.loc 3 146 49
+ 1005 0262 0122     		movs	r2, #1
+ 1006 0264 1A70     		strb	r2, [r3]
+ 147:example_project.c ****                  outputCounterIndex++;
+ 1007              		.loc 3 147 36
+ 1008 0266 FB68     		ldr	r3, [r7, #12]
+ 1009 0268 0133     		adds	r3, r3, #1
+ 1010 026a FB60     		str	r3, [r7, #12]
+ 148:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1011              		.loc 3 148 29
+ 1012 026c FB68     		ldr	r3, [r7, #12]
+ 1013 026e 3A68     		ldr	r2, [r7]
+ 1014 0270 1344     		add	r3, r3, r2
+ 1015              		.loc 3 148 49
+ 1016 0272 0122     		movs	r2, #1
+ 1017 0274 1A70     		strb	r2, [r3]
+ 149:example_project.c ****                  outputCounterIndex++;
+ 1018              		.loc 3 149 36
+ 1019 0276 FB68     		ldr	r3, [r7, #12]
+ 1020 0278 0133     		adds	r3, r3, #1
+ 1021 027a FB60     		str	r3, [r7, #12]
+ 150:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1022              		.loc 3 150 29
+ 1023 027c FB68     		ldr	r3, [r7, #12]
+ 1024 027e 3A68     		ldr	r2, [r7]
+ 1025 0280 1344     		add	r3, r3, r2
+ 1026              		.loc 3 150 49
+ 1027 0282 0122     		movs	r2, #1
+ 1028 0284 1A70     		strb	r2, [r3]
+ 151:example_project.c ****                  outputCounterIndex++;
+ 1029              		.loc 3 151 36
+ 1030 0286 FB68     		ldr	r3, [r7, #12]
+ 1031 0288 0133     		adds	r3, r3, #1
+ 1032 028a FB60     		str	r3, [r7, #12]
+ 152:example_project.c ****                  
+ 153:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1033              		.loc 3 153 29
+ 1034 028c FB68     		ldr	r3, [r7, #12]
+ 1035 028e 3A68     		ldr	r2, [r7]
+ 1036 0290 1344     		add	r3, r3, r2
+ 1037              		.loc 3 153 49
+ 1038 0292 0022     		movs	r2, #0
+ 1039 0294 1A70     		strb	r2, [r3]
+ 154:example_project.c ****                  outputCounterIndex++;
+ 1040              		.loc 3 154 36
+ 1041 0296 FB68     		ldr	r3, [r7, #12]
+ 1042 0298 0133     		adds	r3, r3, #1
+ 1043 029a FB60     		str	r3, [r7, #12]
+ 155:example_project.c ****                  
+ 156:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1044              		.loc 3 156 29
+ 1045 029c FB68     		ldr	r3, [r7, #12]
+ 1046 029e 3A68     		ldr	r2, [r7]
+ 1047 02a0 1344     		add	r3, r3, r2
+ 1048              		.loc 3 156 49
+ 1049 02a2 0122     		movs	r2, #1
+ 1050 02a4 1A70     		strb	r2, [r3]
+ 157:example_project.c ****                  outputCounterIndex++;
+ 1051              		.loc 3 157 36
+ 1052 02a6 FB68     		ldr	r3, [r7, #12]
+ 1053 02a8 0133     		adds	r3, r3, #1
+ 1054 02aa FB60     		str	r3, [r7, #12]
+ 158:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1055              		.loc 3 158 29
+ 1056 02ac FB68     		ldr	r3, [r7, #12]
+ 1057 02ae 3A68     		ldr	r2, [r7]
+ 1058 02b0 1344     		add	r3, r3, r2
+ 1059              		.loc 3 158 49
+ 1060 02b2 0122     		movs	r2, #1
+ 1061 02b4 1A70     		strb	r2, [r3]
+ 159:example_project.c ****                  outputCounterIndex++;
+ 1062              		.loc 3 159 36
+ 1063 02b6 FB68     		ldr	r3, [r7, #12]
+ 1064 02b8 0133     		adds	r3, r3, #1
+ 1065 02ba FB60     		str	r3, [r7, #12]
+ 160:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1066              		.loc 3 160 29
+ 1067 02bc FB68     		ldr	r3, [r7, #12]
+ 1068 02be 3A68     		ldr	r2, [r7]
+ 1069 02c0 1344     		add	r3, r3, r2
+ 1070              		.loc 3 160 49
+ 1071 02c2 0122     		movs	r2, #1
+ 1072 02c4 1A70     		strb	r2, [r3]
+ 161:example_project.c ****                  outputCounterIndex++;
+ 1073              		.loc 3 161 36
+ 1074 02c6 FB68     		ldr	r3, [r7, #12]
+ 1075 02c8 0133     		adds	r3, r3, #1
+ 1076 02ca FB60     		str	r3, [r7, #12]
+ 162:example_project.c ****                  
+ 163:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1077              		.loc 3 163 29
+ 1078 02cc FB68     		ldr	r3, [r7, #12]
+ 1079 02ce 3A68     		ldr	r2, [r7]
+ 1080 02d0 1344     		add	r3, r3, r2
+ 1081              		.loc 3 163 49
+ 1082 02d2 0022     		movs	r2, #0
+ 1083 02d4 1A70     		strb	r2, [r3]
+ 164:example_project.c ****                  outputCounterIndex++;
+ 1084              		.loc 3 164 36
+ 1085 02d6 FB68     		ldr	r3, [r7, #12]
+ 1086 02d8 0133     		adds	r3, r3, #1
+ 1087 02da FB60     		str	r3, [r7, #12]
+ 165:example_project.c ****                  counterIndex++;
+ 1088              		.loc 3 165 30
+ 1089 02dc 3B69     		ldr	r3, [r7, #16]
+ 1090 02de 0133     		adds	r3, r3, #1
+ 1091 02e0 3B61     		str	r3, [r7, #16]
+ 166:example_project.c ****                 break;
+ 1092              		.loc 3 166 17
+ 1093 02e2 86E3     		b	.L26
+ 1094              	.L36:
+ 167:example_project.c ****             case 2:
+ 168:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1095              		.loc 3 168 29
+ 1096 02e4 FB68     		ldr	r3, [r7, #12]
+ 1097 02e6 3A68     		ldr	r2, [r7]
+ 1098 02e8 1344     		add	r3, r3, r2
+ 1099              		.loc 3 168 49
+ 1100 02ea 0122     		movs	r2, #1
+ 1101 02ec 1A70     		strb	r2, [r3]
+ 169:example_project.c ****                  outputCounterIndex++;
+ 1102              		.loc 3 169 36
+ 1103 02ee FB68     		ldr	r3, [r7, #12]
+ 1104 02f0 0133     		adds	r3, r3, #1
+ 1105 02f2 FB60     		str	r3, [r7, #12]
+ 170:example_project.c ****                  
+ 171:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1106              		.loc 3 171 29
+ 1107 02f4 FB68     		ldr	r3, [r7, #12]
+ 1108 02f6 3A68     		ldr	r2, [r7]
+ 1109 02f8 1344     		add	r3, r3, r2
+ 1110              		.loc 3 171 49
+ 1111 02fa 0022     		movs	r2, #0
+ 1112 02fc 1A70     		strb	r2, [r3]
+ 172:example_project.c ****                  outputCounterIndex++;
+ 1113              		.loc 3 172 36
+ 1114 02fe FB68     		ldr	r3, [r7, #12]
+ 1115 0300 0133     		adds	r3, r3, #1
+ 1116 0302 FB60     		str	r3, [r7, #12]
+ 173:example_project.c ****                  
+ 174:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1117              		.loc 3 174 29
+ 1118 0304 FB68     		ldr	r3, [r7, #12]
+ 1119 0306 3A68     		ldr	r2, [r7]
+ 1120 0308 1344     		add	r3, r3, r2
+ 1121              		.loc 3 174 49
+ 1122 030a 0122     		movs	r2, #1
+ 1123 030c 1A70     		strb	r2, [r3]
+ 175:example_project.c ****                  outputCounterIndex++;
+ 1124              		.loc 3 175 36
+ 1125 030e FB68     		ldr	r3, [r7, #12]
+ 1126 0310 0133     		adds	r3, r3, #1
+ 1127 0312 FB60     		str	r3, [r7, #12]
+ 176:example_project.c ****                  
+ 177:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1128              		.loc 3 177 29
+ 1129 0314 FB68     		ldr	r3, [r7, #12]
+ 1130 0316 3A68     		ldr	r2, [r7]
+ 1131 0318 1344     		add	r3, r3, r2
+ 1132              		.loc 3 177 49
+ 1133 031a 0022     		movs	r2, #0
+ 1134 031c 1A70     		strb	r2, [r3]
+ 178:example_project.c ****                  outputCounterIndex++;
+ 1135              		.loc 3 178 36
+ 1136 031e FB68     		ldr	r3, [r7, #12]
+ 1137 0320 0133     		adds	r3, r3, #1
+ 1138 0322 FB60     		str	r3, [r7, #12]
+ 179:example_project.c ****                  
+ 180:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1139              		.loc 3 180 29
+ 1140 0324 FB68     		ldr	r3, [r7, #12]
+ 1141 0326 3A68     		ldr	r2, [r7]
+ 1142 0328 1344     		add	r3, r3, r2
+ 1143              		.loc 3 180 49
+ 1144 032a 0122     		movs	r2, #1
+ 1145 032c 1A70     		strb	r2, [r3]
+ 181:example_project.c ****                  outputCounterIndex++;
+ 1146              		.loc 3 181 36
+ 1147 032e FB68     		ldr	r3, [r7, #12]
+ 1148 0330 0133     		adds	r3, r3, #1
+ 1149 0332 FB60     		str	r3, [r7, #12]
+ 182:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1150              		.loc 3 182 29
+ 1151 0334 FB68     		ldr	r3, [r7, #12]
+ 1152 0336 3A68     		ldr	r2, [r7]
+ 1153 0338 1344     		add	r3, r3, r2
+ 1154              		.loc 3 182 49
+ 1155 033a 0122     		movs	r2, #1
+ 1156 033c 1A70     		strb	r2, [r3]
+ 183:example_project.c ****                  outputCounterIndex++;
+ 1157              		.loc 3 183 36
+ 1158 033e FB68     		ldr	r3, [r7, #12]
+ 1159 0340 0133     		adds	r3, r3, #1
+ 1160 0342 FB60     		str	r3, [r7, #12]
+ 184:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1161              		.loc 3 184 29
+ 1162 0344 FB68     		ldr	r3, [r7, #12]
+ 1163 0346 3A68     		ldr	r2, [r7]
+ 1164 0348 1344     		add	r3, r3, r2
+ 1165              		.loc 3 184 49
+ 1166 034a 0122     		movs	r2, #1
+ 1167 034c 1A70     		strb	r2, [r3]
+ 185:example_project.c ****                  outputCounterIndex++;
+ 1168              		.loc 3 185 36
+ 1169 034e FB68     		ldr	r3, [r7, #12]
+ 1170 0350 0133     		adds	r3, r3, #1
+ 1171 0352 FB60     		str	r3, [r7, #12]
+ 186:example_project.c ****                  
+ 187:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1172              		.loc 3 187 29
+ 1173 0354 FB68     		ldr	r3, [r7, #12]
+ 1174 0356 3A68     		ldr	r2, [r7]
+ 1175 0358 1344     		add	r3, r3, r2
+ 1176              		.loc 3 187 49
+ 1177 035a 0022     		movs	r2, #0
+ 1178 035c 1A70     		strb	r2, [r3]
+ 188:example_project.c ****                  outputCounterIndex++;
+ 1179              		.loc 3 188 36
+ 1180 035e FB68     		ldr	r3, [r7, #12]
+ 1181 0360 0133     		adds	r3, r3, #1
+ 1182 0362 FB60     		str	r3, [r7, #12]
+ 189:example_project.c ****                  
+ 190:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1183              		.loc 3 190 29
+ 1184 0364 FB68     		ldr	r3, [r7, #12]
+ 1185 0366 3A68     		ldr	r2, [r7]
+ 1186 0368 1344     		add	r3, r3, r2
+ 1187              		.loc 3 190 49
+ 1188 036a 0122     		movs	r2, #1
+ 1189 036c 1A70     		strb	r2, [r3]
+ 191:example_project.c ****                  outputCounterIndex++;
+ 1190              		.loc 3 191 36
+ 1191 036e FB68     		ldr	r3, [r7, #12]
+ 1192 0370 0133     		adds	r3, r3, #1
+ 1193 0372 FB60     		str	r3, [r7, #12]
+ 192:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1194              		.loc 3 192 29
+ 1195 0374 FB68     		ldr	r3, [r7, #12]
+ 1196 0376 3A68     		ldr	r2, [r7]
+ 1197 0378 1344     		add	r3, r3, r2
+ 1198              		.loc 3 192 49
+ 1199 037a 0122     		movs	r2, #1
+ 1200 037c 1A70     		strb	r2, [r3]
+ 193:example_project.c ****                  outputCounterIndex++;
+ 1201              		.loc 3 193 36
+ 1202 037e FB68     		ldr	r3, [r7, #12]
+ 1203 0380 0133     		adds	r3, r3, #1
+ 1204 0382 FB60     		str	r3, [r7, #12]
+ 194:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1205              		.loc 3 194 29
+ 1206 0384 FB68     		ldr	r3, [r7, #12]
+ 1207 0386 3A68     		ldr	r2, [r7]
+ 1208 0388 1344     		add	r3, r3, r2
+ 1209              		.loc 3 194 49
+ 1210 038a 0122     		movs	r2, #1
+ 1211 038c 1A70     		strb	r2, [r3]
+ 195:example_project.c ****                  outputCounterIndex++;
+ 1212              		.loc 3 195 36
+ 1213 038e FB68     		ldr	r3, [r7, #12]
+ 1214 0390 0133     		adds	r3, r3, #1
+ 1215 0392 FB60     		str	r3, [r7, #12]
+ 196:example_project.c ****                  
+ 197:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1216              		.loc 3 197 29
+ 1217 0394 FB68     		ldr	r3, [r7, #12]
+ 1218 0396 3A68     		ldr	r2, [r7]
+ 1219 0398 1344     		add	r3, r3, r2
+ 1220              		.loc 3 197 49
+ 1221 039a 0022     		movs	r2, #0
+ 1222 039c 1A70     		strb	r2, [r3]
+ 198:example_project.c ****                  outputCounterIndex++;
+ 1223              		.loc 3 198 36
+ 1224 039e FB68     		ldr	r3, [r7, #12]
+ 1225 03a0 0133     		adds	r3, r3, #1
+ 1226 03a2 FB60     		str	r3, [r7, #12]
+ 199:example_project.c ****                  
+ 200:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1227              		.loc 3 200 29
+ 1228 03a4 FB68     		ldr	r3, [r7, #12]
+ 1229 03a6 3A68     		ldr	r2, [r7]
+ 1230 03a8 1344     		add	r3, r3, r2
+ 1231              		.loc 3 200 49
+ 1232 03aa 0122     		movs	r2, #1
+ 1233 03ac 1A70     		strb	r2, [r3]
+ 201:example_project.c ****                  outputCounterIndex++;
+ 1234              		.loc 3 201 36
+ 1235 03ae FB68     		ldr	r3, [r7, #12]
+ 1236 03b0 0133     		adds	r3, r3, #1
+ 1237 03b2 FB60     		str	r3, [r7, #12]
+ 202:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1238              		.loc 3 202 29
+ 1239 03b4 FB68     		ldr	r3, [r7, #12]
+ 1240 03b6 3A68     		ldr	r2, [r7]
+ 1241 03b8 1344     		add	r3, r3, r2
+ 1242              		.loc 3 202 49
+ 1243 03ba 0122     		movs	r2, #1
+ 1244 03bc 1A70     		strb	r2, [r3]
+ 203:example_project.c ****                  outputCounterIndex++;
+ 1245              		.loc 3 203 36
+ 1246 03be FB68     		ldr	r3, [r7, #12]
+ 1247 03c0 0133     		adds	r3, r3, #1
+ 1248 03c2 FB60     		str	r3, [r7, #12]
+ 204:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1249              		.loc 3 204 29
+ 1250 03c4 FB68     		ldr	r3, [r7, #12]
+ 1251 03c6 3A68     		ldr	r2, [r7]
+ 1252 03c8 1344     		add	r3, r3, r2
+ 1253              		.loc 3 204 49
+ 1254 03ca 0122     		movs	r2, #1
+ 1255 03cc 1A70     		strb	r2, [r3]
+ 205:example_project.c ****                  outputCounterIndex++;
+ 1256              		.loc 3 205 36
+ 1257 03ce FB68     		ldr	r3, [r7, #12]
+ 1258 03d0 0133     		adds	r3, r3, #1
+ 1259 03d2 FB60     		str	r3, [r7, #12]
+ 206:example_project.c ****                  
+ 207:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1260              		.loc 3 207 29
+ 1261 03d4 FB68     		ldr	r3, [r7, #12]
+ 1262 03d6 3A68     		ldr	r2, [r7]
+ 1263 03d8 1344     		add	r3, r3, r2
+ 1264              		.loc 3 207 49
+ 1265 03da 0022     		movs	r2, #0
+ 1266 03dc 1A70     		strb	r2, [r3]
+ 208:example_project.c ****                  outputCounterIndex++;
+ 1267              		.loc 3 208 36
+ 1268 03de FB68     		ldr	r3, [r7, #12]
+ 1269 03e0 0133     		adds	r3, r3, #1
+ 1270 03e2 FB60     		str	r3, [r7, #12]
+ 209:example_project.c ****                  
+ 210:example_project.c ****                  counterIndex++;
+ 1271              		.loc 3 210 30
+ 1272 03e4 3B69     		ldr	r3, [r7, #16]
+ 1273 03e6 0133     		adds	r3, r3, #1
+ 1274 03e8 3B61     		str	r3, [r7, #16]
+ 211:example_project.c ****                 break;
+ 1275              		.loc 3 211 17
+ 1276 03ea 02E3     		b	.L26
+ 1277              	.L35:
+ 212:example_project.c ****             case 3: 
+ 213:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1278              		.loc 3 213 29
+ 1279 03ec FB68     		ldr	r3, [r7, #12]
+ 1280 03ee 3A68     		ldr	r2, [r7]
+ 1281 03f0 1344     		add	r3, r3, r2
+ 1282              		.loc 3 213 49
+ 1283 03f2 0122     		movs	r2, #1
+ 1284 03f4 1A70     		strb	r2, [r3]
+ 214:example_project.c ****                  outputCounterIndex++;
+ 1285              		.loc 3 214 36
+ 1286 03f6 FB68     		ldr	r3, [r7, #12]
+ 1287 03f8 0133     		adds	r3, r3, #1
+ 1288 03fa FB60     		str	r3, [r7, #12]
+ 215:example_project.c ****                  
+ 216:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1289              		.loc 3 216 29
+ 1290 03fc FB68     		ldr	r3, [r7, #12]
+ 1291 03fe 3A68     		ldr	r2, [r7]
+ 1292 0400 1344     		add	r3, r3, r2
+ 1293              		.loc 3 216 49
+ 1294 0402 0022     		movs	r2, #0
+ 1295 0404 1A70     		strb	r2, [r3]
+ 217:example_project.c ****                  outputCounterIndex++;
+ 1296              		.loc 3 217 36
+ 1297 0406 FB68     		ldr	r3, [r7, #12]
+ 1298 0408 0133     		adds	r3, r3, #1
+ 1299 040a FB60     		str	r3, [r7, #12]
+ 218:example_project.c ****                  
+ 219:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1300              		.loc 3 219 29
+ 1301 040c FB68     		ldr	r3, [r7, #12]
+ 1302 040e 3A68     		ldr	r2, [r7]
+ 1303 0410 1344     		add	r3, r3, r2
+ 1304              		.loc 3 219 49
+ 1305 0412 0122     		movs	r2, #1
+ 1306 0414 1A70     		strb	r2, [r3]
+ 220:example_project.c ****                  outputCounterIndex++;
+ 1307              		.loc 3 220 36
+ 1308 0416 FB68     		ldr	r3, [r7, #12]
+ 1309 0418 0133     		adds	r3, r3, #1
+ 1310 041a FB60     		str	r3, [r7, #12]
+ 221:example_project.c ****                  
+ 222:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1311              		.loc 3 222 29
+ 1312 041c FB68     		ldr	r3, [r7, #12]
+ 1313 041e 3A68     		ldr	r2, [r7]
+ 1314 0420 1344     		add	r3, r3, r2
+ 1315              		.loc 3 222 49
+ 1316 0422 0022     		movs	r2, #0
+ 1317 0424 1A70     		strb	r2, [r3]
+ 223:example_project.c ****                  outputCounterIndex++;
+ 1318              		.loc 3 223 36
+ 1319 0426 FB68     		ldr	r3, [r7, #12]
+ 1320 0428 0133     		adds	r3, r3, #1
+ 1321 042a FB60     		str	r3, [r7, #12]
+ 224:example_project.c ****                  
+ 225:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1322              		.loc 3 225 29
+ 1323 042c FB68     		ldr	r3, [r7, #12]
+ 1324 042e 3A68     		ldr	r2, [r7]
+ 1325 0430 1344     		add	r3, r3, r2
+ 1326              		.loc 3 225 49
+ 1327 0432 0122     		movs	r2, #1
+ 1328 0434 1A70     		strb	r2, [r3]
+ 226:example_project.c ****                  outputCounterIndex++;
+ 1329              		.loc 3 226 36
+ 1330 0436 FB68     		ldr	r3, [r7, #12]
+ 1331 0438 0133     		adds	r3, r3, #1
+ 1332 043a FB60     		str	r3, [r7, #12]
+ 227:example_project.c ****                  
+ 228:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1333              		.loc 3 228 29
+ 1334 043c FB68     		ldr	r3, [r7, #12]
+ 1335 043e 3A68     		ldr	r2, [r7]
+ 1336 0440 1344     		add	r3, r3, r2
+ 1337              		.loc 3 228 49
+ 1338 0442 0022     		movs	r2, #0
+ 1339 0444 1A70     		strb	r2, [r3]
+ 229:example_project.c ****                  outputCounterIndex++;
+ 1340              		.loc 3 229 36
+ 1341 0446 FB68     		ldr	r3, [r7, #12]
+ 1342 0448 0133     		adds	r3, r3, #1
+ 1343 044a FB60     		str	r3, [r7, #12]
+ 230:example_project.c ****                  
+ 231:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1344              		.loc 3 231 29
+ 1345 044c FB68     		ldr	r3, [r7, #12]
+ 1346 044e 3A68     		ldr	r2, [r7]
+ 1347 0450 1344     		add	r3, r3, r2
+ 1348              		.loc 3 231 49
+ 1349 0452 0122     		movs	r2, #1
+ 1350 0454 1A70     		strb	r2, [r3]
+ 232:example_project.c ****                  outputCounterIndex++;
+ 1351              		.loc 3 232 36
+ 1352 0456 FB68     		ldr	r3, [r7, #12]
+ 1353 0458 0133     		adds	r3, r3, #1
+ 1354 045a FB60     		str	r3, [r7, #12]
+ 233:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1355              		.loc 3 233 29
+ 1356 045c FB68     		ldr	r3, [r7, #12]
+ 1357 045e 3A68     		ldr	r2, [r7]
+ 1358 0460 1344     		add	r3, r3, r2
+ 1359              		.loc 3 233 49
+ 1360 0462 0122     		movs	r2, #1
+ 1361 0464 1A70     		strb	r2, [r3]
+ 234:example_project.c ****                  outputCounterIndex++;
+ 1362              		.loc 3 234 36
+ 1363 0466 FB68     		ldr	r3, [r7, #12]
+ 1364 0468 0133     		adds	r3, r3, #1
+ 1365 046a FB60     		str	r3, [r7, #12]
+ 235:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1366              		.loc 3 235 29
+ 1367 046c FB68     		ldr	r3, [r7, #12]
+ 1368 046e 3A68     		ldr	r2, [r7]
+ 1369 0470 1344     		add	r3, r3, r2
+ 1370              		.loc 3 235 49
+ 1371 0472 0122     		movs	r2, #1
+ 1372 0474 1A70     		strb	r2, [r3]
+ 236:example_project.c ****                  outputCounterIndex++;
+ 1373              		.loc 3 236 36
+ 1374 0476 FB68     		ldr	r3, [r7, #12]
+ 1375 0478 0133     		adds	r3, r3, #1
+ 1376 047a FB60     		str	r3, [r7, #12]
+ 237:example_project.c ****                  
+ 238:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1377              		.loc 3 238 29
+ 1378 047c FB68     		ldr	r3, [r7, #12]
+ 1379 047e 3A68     		ldr	r2, [r7]
+ 1380 0480 1344     		add	r3, r3, r2
+ 1381              		.loc 3 238 49
+ 1382 0482 0022     		movs	r2, #0
+ 1383 0484 1A70     		strb	r2, [r3]
+ 239:example_project.c ****                  outputCounterIndex++;
+ 1384              		.loc 3 239 36
+ 1385 0486 FB68     		ldr	r3, [r7, #12]
+ 1386 0488 0133     		adds	r3, r3, #1
+ 1387 048a FB60     		str	r3, [r7, #12]
+ 240:example_project.c ****                  
+ 241:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1388              		.loc 3 241 29
+ 1389 048c FB68     		ldr	r3, [r7, #12]
+ 1390 048e 3A68     		ldr	r2, [r7]
+ 1391 0490 1344     		add	r3, r3, r2
+ 1392              		.loc 3 241 49
+ 1393 0492 0122     		movs	r2, #1
+ 1394 0494 1A70     		strb	r2, [r3]
+ 242:example_project.c ****                  outputCounterIndex++;
+ 1395              		.loc 3 242 36
+ 1396 0496 FB68     		ldr	r3, [r7, #12]
+ 1397 0498 0133     		adds	r3, r3, #1
+ 1398 049a FB60     		str	r3, [r7, #12]
+ 243:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1399              		.loc 3 243 29
+ 1400 049c FB68     		ldr	r3, [r7, #12]
+ 1401 049e 3A68     		ldr	r2, [r7]
+ 1402 04a0 1344     		add	r3, r3, r2
+ 1403              		.loc 3 243 49
+ 1404 04a2 0122     		movs	r2, #1
+ 1405 04a4 1A70     		strb	r2, [r3]
+ 244:example_project.c ****                  outputCounterIndex++;
+ 1406              		.loc 3 244 36
+ 1407 04a6 FB68     		ldr	r3, [r7, #12]
+ 1408 04a8 0133     		adds	r3, r3, #1
+ 1409 04aa FB60     		str	r3, [r7, #12]
+ 245:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1410              		.loc 3 245 29
+ 1411 04ac FB68     		ldr	r3, [r7, #12]
+ 1412 04ae 3A68     		ldr	r2, [r7]
+ 1413 04b0 1344     		add	r3, r3, r2
+ 1414              		.loc 3 245 49
+ 1415 04b2 0122     		movs	r2, #1
+ 1416 04b4 1A70     		strb	r2, [r3]
+ 246:example_project.c ****                  outputCounterIndex++;
+ 1417              		.loc 3 246 36
+ 1418 04b6 FB68     		ldr	r3, [r7, #12]
+ 1419 04b8 0133     		adds	r3, r3, #1
+ 1420 04ba FB60     		str	r3, [r7, #12]
+ 247:example_project.c ****                  
+ 248:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1421              		.loc 3 248 29
+ 1422 04bc FB68     		ldr	r3, [r7, #12]
+ 1423 04be 3A68     		ldr	r2, [r7]
+ 1424 04c0 1344     		add	r3, r3, r2
+ 1425              		.loc 3 248 49
+ 1426 04c2 0022     		movs	r2, #0
+ 1427 04c4 1A70     		strb	r2, [r3]
+ 249:example_project.c ****                  
+ 250:example_project.c ****                  
+ 251:example_project.c ****                 counterIndex++;
+ 1428              		.loc 3 251 29
+ 1429 04c6 3B69     		ldr	r3, [r7, #16]
+ 1430 04c8 0133     		adds	r3, r3, #1
+ 1431 04ca 3B61     		str	r3, [r7, #16]
+ 252:example_project.c ****                 break;
+ 1432              		.loc 3 252 17
+ 1433 04cc 91E2     		b	.L26
+ 1434              	.L34:
+ 253:example_project.c ****             case 4:
+ 254:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1435              		.loc 3 254 29
+ 1436 04ce FB68     		ldr	r3, [r7, #12]
+ 1437 04d0 3A68     		ldr	r2, [r7]
+ 1438 04d2 1344     		add	r3, r3, r2
+ 1439              		.loc 3 254 49
+ 1440 04d4 0122     		movs	r2, #1
+ 1441 04d6 1A70     		strb	r2, [r3]
+ 255:example_project.c ****                  outputCounterIndex++;
+ 1442              		.loc 3 255 36
+ 1443 04d8 FB68     		ldr	r3, [r7, #12]
+ 1444 04da 0133     		adds	r3, r3, #1
+ 1445 04dc FB60     		str	r3, [r7, #12]
+ 256:example_project.c ****                  
+ 257:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1446              		.loc 3 257 29
+ 1447 04de FB68     		ldr	r3, [r7, #12]
+ 1448 04e0 3A68     		ldr	r2, [r7]
+ 1449 04e2 1344     		add	r3, r3, r2
+ 1450              		.loc 3 257 49
+ 1451 04e4 0022     		movs	r2, #0
+ 1452 04e6 1A70     		strb	r2, [r3]
+ 258:example_project.c ****                  outputCounterIndex++;
+ 1453              		.loc 3 258 36
+ 1454 04e8 FB68     		ldr	r3, [r7, #12]
+ 1455 04ea 0133     		adds	r3, r3, #1
+ 1456 04ec FB60     		str	r3, [r7, #12]
+ 259:example_project.c ****                  
+ 260:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1457              		.loc 3 260 29
+ 1458 04ee FB68     		ldr	r3, [r7, #12]
+ 1459 04f0 3A68     		ldr	r2, [r7]
+ 1460 04f2 1344     		add	r3, r3, r2
+ 1461              		.loc 3 260 49
+ 1462 04f4 0122     		movs	r2, #1
+ 1463 04f6 1A70     		strb	r2, [r3]
+ 261:example_project.c ****                  outputCounterIndex++;
+ 1464              		.loc 3 261 36
+ 1465 04f8 FB68     		ldr	r3, [r7, #12]
+ 1466 04fa 0133     		adds	r3, r3, #1
+ 1467 04fc FB60     		str	r3, [r7, #12]
+ 262:example_project.c ****                  
+ 263:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1468              		.loc 3 263 29
+ 1469 04fe FB68     		ldr	r3, [r7, #12]
+ 1470 0500 3A68     		ldr	r2, [r7]
+ 1471 0502 1344     		add	r3, r3, r2
+ 1472              		.loc 3 263 49
+ 1473 0504 0022     		movs	r2, #0
+ 1474 0506 1A70     		strb	r2, [r3]
+ 264:example_project.c ****                  outputCounterIndex++;
+ 1475              		.loc 3 264 36
+ 1476 0508 FB68     		ldr	r3, [r7, #12]
+ 1477 050a 0133     		adds	r3, r3, #1
+ 1478 050c FB60     		str	r3, [r7, #12]
+ 265:example_project.c ****                  
+ 266:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1479              		.loc 3 266 29
+ 1480 050e FB68     		ldr	r3, [r7, #12]
+ 1481 0510 3A68     		ldr	r2, [r7]
+ 1482 0512 1344     		add	r3, r3, r2
+ 1483              		.loc 3 266 49
+ 1484 0514 0122     		movs	r2, #1
+ 1485 0516 1A70     		strb	r2, [r3]
+ 267:example_project.c ****                  outputCounterIndex++;
+ 1486              		.loc 3 267 36
+ 1487 0518 FB68     		ldr	r3, [r7, #12]
+ 1488 051a 0133     		adds	r3, r3, #1
+ 1489 051c FB60     		str	r3, [r7, #12]
+ 268:example_project.c ****                  
+ 269:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1490              		.loc 3 269 29
+ 1491 051e FB68     		ldr	r3, [r7, #12]
+ 1492 0520 3A68     		ldr	r2, [r7]
+ 1493 0522 1344     		add	r3, r3, r2
+ 1494              		.loc 3 269 49
+ 1495 0524 0022     		movs	r2, #0
+ 1496 0526 1A70     		strb	r2, [r3]
+ 270:example_project.c ****                  
+ 271:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1497              		.loc 3 271 29
+ 1498 0528 FB68     		ldr	r3, [r7, #12]
+ 1499 052a 3A68     		ldr	r2, [r7]
+ 1500 052c 1344     		add	r3, r3, r2
+ 1501              		.loc 3 271 49
+ 1502 052e 0122     		movs	r2, #1
+ 1503 0530 1A70     		strb	r2, [r3]
+ 272:example_project.c ****                  outputCounterIndex++;
+ 1504              		.loc 3 272 36
+ 1505 0532 FB68     		ldr	r3, [r7, #12]
+ 1506 0534 0133     		adds	r3, r3, #1
+ 1507 0536 FB60     		str	r3, [r7, #12]
+ 273:example_project.c ****                  
+ 274:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1508              		.loc 3 274 29
+ 1509 0538 FB68     		ldr	r3, [r7, #12]
+ 1510 053a 3A68     		ldr	r2, [r7]
+ 1511 053c 1344     		add	r3, r3, r2
+ 1512              		.loc 3 274 49
+ 1513 053e 0022     		movs	r2, #0
+ 1514 0540 1A70     		strb	r2, [r3]
+ 275:example_project.c ****                  outputCounterIndex++;
+ 1515              		.loc 3 275 36
+ 1516 0542 FB68     		ldr	r3, [r7, #12]
+ 1517 0544 0133     		adds	r3, r3, #1
+ 1518 0546 FB60     		str	r3, [r7, #12]
+ 276:example_project.c ****                  
+ 277:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1519              		.loc 3 277 29
+ 1520 0548 FB68     		ldr	r3, [r7, #12]
+ 1521 054a 3A68     		ldr	r2, [r7]
+ 1522 054c 1344     		add	r3, r3, r2
+ 1523              		.loc 3 277 49
+ 1524 054e 0122     		movs	r2, #1
+ 1525 0550 1A70     		strb	r2, [r3]
+ 278:example_project.c ****                  outputCounterIndex++;
+ 1526              		.loc 3 278 36
+ 1527 0552 FB68     		ldr	r3, [r7, #12]
+ 1528 0554 0133     		adds	r3, r3, #1
+ 1529 0556 FB60     		str	r3, [r7, #12]
+ 279:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1530              		.loc 3 279 29
+ 1531 0558 FB68     		ldr	r3, [r7, #12]
+ 1532 055a 3A68     		ldr	r2, [r7]
+ 1533 055c 1344     		add	r3, r3, r2
+ 1534              		.loc 3 279 49
+ 1535 055e 0122     		movs	r2, #1
+ 1536 0560 1A70     		strb	r2, [r3]
+ 280:example_project.c ****                  outputCounterIndex++;
+ 1537              		.loc 3 280 36
+ 1538 0562 FB68     		ldr	r3, [r7, #12]
+ 1539 0564 0133     		adds	r3, r3, #1
+ 1540 0566 FB60     		str	r3, [r7, #12]
+ 281:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1541              		.loc 3 281 29
+ 1542 0568 FB68     		ldr	r3, [r7, #12]
+ 1543 056a 3A68     		ldr	r2, [r7]
+ 1544 056c 1344     		add	r3, r3, r2
+ 1545              		.loc 3 281 49
+ 1546 056e 0122     		movs	r2, #1
+ 1547 0570 1A70     		strb	r2, [r3]
+ 282:example_project.c ****                  outputCounterIndex++;
+ 1548              		.loc 3 282 36
+ 1549 0572 FB68     		ldr	r3, [r7, #12]
+ 1550 0574 0133     		adds	r3, r3, #1
+ 1551 0576 FB60     		str	r3, [r7, #12]
+ 283:example_project.c ****                  
+ 284:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1552              		.loc 3 284 29
+ 1553 0578 FB68     		ldr	r3, [r7, #12]
+ 1554 057a 3A68     		ldr	r2, [r7]
+ 1555 057c 1344     		add	r3, r3, r2
+ 1556              		.loc 3 284 49
+ 1557 057e 0022     		movs	r2, #0
+ 1558 0580 1A70     		strb	r2, [r3]
+ 285:example_project.c ****                  
+ 286:example_project.c ****                  
+ 287:example_project.c ****                 counterIndex++;
+ 1559              		.loc 3 287 29
+ 1560 0582 3B69     		ldr	r3, [r7, #16]
+ 1561 0584 0133     		adds	r3, r3, #1
+ 1562 0586 3B61     		str	r3, [r7, #16]
+ 288:example_project.c ****                 break;
+ 1563              		.loc 3 288 17
+ 1564 0588 33E2     		b	.L26
+ 1565              	.L33:
+ 289:example_project.c ****             case 5:
+ 290:example_project.c ****                 ArrayOutput[outputCounterIndex]=1;
+ 1566              		.loc 3 290 28
+ 1567 058a FB68     		ldr	r3, [r7, #12]
+ 1568 058c 3A68     		ldr	r2, [r7]
+ 1569 058e 1344     		add	r3, r3, r2
+ 1570              		.loc 3 290 48
+ 1571 0590 0122     		movs	r2, #1
+ 1572 0592 1A70     		strb	r2, [r3]
+ 291:example_project.c ****                  outputCounterIndex++;
+ 1573              		.loc 3 291 36
+ 1574 0594 FB68     		ldr	r3, [r7, #12]
+ 1575 0596 0133     		adds	r3, r3, #1
+ 1576 0598 FB60     		str	r3, [r7, #12]
+ 292:example_project.c ****                  
+ 293:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1577              		.loc 3 293 29
+ 1578 059a FB68     		ldr	r3, [r7, #12]
+ 1579 059c 3A68     		ldr	r2, [r7]
+ 1580 059e 1344     		add	r3, r3, r2
+ 1581              		.loc 3 293 49
+ 1582 05a0 0022     		movs	r2, #0
+ 1583 05a2 1A70     		strb	r2, [r3]
+ 294:example_project.c ****                  outputCounterIndex++;
+ 1584              		.loc 3 294 36
+ 1585 05a4 FB68     		ldr	r3, [r7, #12]
+ 1586 05a6 0133     		adds	r3, r3, #1
+ 1587 05a8 FB60     		str	r3, [r7, #12]
+ 295:example_project.c ****                  
+ 296:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1588              		.loc 3 296 29
+ 1589 05aa FB68     		ldr	r3, [r7, #12]
+ 1590 05ac 3A68     		ldr	r2, [r7]
+ 1591 05ae 1344     		add	r3, r3, r2
+ 1592              		.loc 3 296 49
+ 1593 05b0 0122     		movs	r2, #1
+ 1594 05b2 1A70     		strb	r2, [r3]
+ 297:example_project.c ****                  outputCounterIndex++;
+ 1595              		.loc 3 297 36
+ 1596 05b4 FB68     		ldr	r3, [r7, #12]
+ 1597 05b6 0133     		adds	r3, r3, #1
+ 1598 05b8 FB60     		str	r3, [r7, #12]
+ 298:example_project.c ****                  
+ 299:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1599              		.loc 3 299 29
+ 1600 05ba FB68     		ldr	r3, [r7, #12]
+ 1601 05bc 3A68     		ldr	r2, [r7]
+ 1602 05be 1344     		add	r3, r3, r2
+ 1603              		.loc 3 299 49
+ 1604 05c0 0022     		movs	r2, #0
+ 1605 05c2 1A70     		strb	r2, [r3]
+ 300:example_project.c ****                  outputCounterIndex++;
+ 1606              		.loc 3 300 36
+ 1607 05c4 FB68     		ldr	r3, [r7, #12]
+ 1608 05c6 0133     		adds	r3, r3, #1
+ 1609 05c8 FB60     		str	r3, [r7, #12]
+ 301:example_project.c ****                  
+ 302:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1610              		.loc 3 302 29
+ 1611 05ca FB68     		ldr	r3, [r7, #12]
+ 1612 05cc 3A68     		ldr	r2, [r7]
+ 1613 05ce 1344     		add	r3, r3, r2
+ 1614              		.loc 3 302 49
+ 1615 05d0 0122     		movs	r2, #1
+ 1616 05d2 1A70     		strb	r2, [r3]
+ 303:example_project.c ****                  outputCounterIndex++;
+ 1617              		.loc 3 303 36
+ 1618 05d4 FB68     		ldr	r3, [r7, #12]
+ 1619 05d6 0133     		adds	r3, r3, #1
+ 1620 05d8 FB60     		str	r3, [r7, #12]
+ 304:example_project.c ****                  
+ 305:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1621              		.loc 3 305 29
+ 1622 05da FB68     		ldr	r3, [r7, #12]
+ 1623 05dc 3A68     		ldr	r2, [r7]
+ 1624 05de 1344     		add	r3, r3, r2
+ 1625              		.loc 3 305 49
+ 1626 05e0 0022     		movs	r2, #0
+ 1627 05e2 1A70     		strb	r2, [r3]
+ 306:example_project.c ****                  
+ 307:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1628              		.loc 3 307 29
+ 1629 05e4 FB68     		ldr	r3, [r7, #12]
+ 1630 05e6 3A68     		ldr	r2, [r7]
+ 1631 05e8 1344     		add	r3, r3, r2
+ 1632              		.loc 3 307 49
+ 1633 05ea 0122     		movs	r2, #1
+ 1634 05ec 1A70     		strb	r2, [r3]
+ 308:example_project.c ****                  outputCounterIndex++;
+ 1635              		.loc 3 308 36
+ 1636 05ee FB68     		ldr	r3, [r7, #12]
+ 1637 05f0 0133     		adds	r3, r3, #1
+ 1638 05f2 FB60     		str	r3, [r7, #12]
+ 309:example_project.c ****                  
+ 310:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1639              		.loc 3 310 29
+ 1640 05f4 FB68     		ldr	r3, [r7, #12]
+ 1641 05f6 3A68     		ldr	r2, [r7]
+ 1642 05f8 1344     		add	r3, r3, r2
+ 1643              		.loc 3 310 49
+ 1644 05fa 0022     		movs	r2, #0
+ 1645 05fc 1A70     		strb	r2, [r3]
+ 311:example_project.c ****                  
+ 312:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1646              		.loc 3 312 29
+ 1647 05fe FB68     		ldr	r3, [r7, #12]
+ 1648 0600 3A68     		ldr	r2, [r7]
+ 1649 0602 1344     		add	r3, r3, r2
+ 1650              		.loc 3 312 49
+ 1651 0604 0122     		movs	r2, #1
+ 1652 0606 1A70     		strb	r2, [r3]
+ 313:example_project.c ****                  outputCounterIndex++;
+ 1653              		.loc 3 313 36
+ 1654 0608 FB68     		ldr	r3, [r7, #12]
+ 1655 060a 0133     		adds	r3, r3, #1
+ 1656 060c FB60     		str	r3, [r7, #12]
+ 314:example_project.c ****                  
+ 315:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1657              		.loc 3 315 29
+ 1658 060e FB68     		ldr	r3, [r7, #12]
+ 1659 0610 3A68     		ldr	r2, [r7]
+ 1660 0612 1344     		add	r3, r3, r2
+ 1661              		.loc 3 315 49
+ 1662 0614 0022     		movs	r2, #0
+ 1663 0616 1A70     		strb	r2, [r3]
+ 316:example_project.c ****                 counterIndex++;
+ 1664              		.loc 3 316 29
+ 1665 0618 3B69     		ldr	r3, [r7, #16]
+ 1666 061a 0133     		adds	r3, r3, #1
+ 1667 061c 3B61     		str	r3, [r7, #16]
+ 317:example_project.c ****                 break;
+ 1668              		.loc 3 317 17
+ 1669 061e E8E1     		b	.L26
+ 1670              	.L32:
+ 318:example_project.c ****             case 6:
+ 319:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1671              		.loc 3 319 29
+ 1672 0620 FB68     		ldr	r3, [r7, #12]
+ 1673 0622 3A68     		ldr	r2, [r7]
+ 1674 0624 1344     		add	r3, r3, r2
+ 1675              		.loc 3 319 49
+ 1676 0626 0122     		movs	r2, #1
+ 1677 0628 1A70     		strb	r2, [r3]
+ 320:example_project.c ****                  outputCounterIndex++;
+ 1678              		.loc 3 320 36
+ 1679 062a FB68     		ldr	r3, [r7, #12]
+ 1680 062c 0133     		adds	r3, r3, #1
+ 1681 062e FB60     		str	r3, [r7, #12]
+ 321:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1682              		.loc 3 321 29
+ 1683 0630 FB68     		ldr	r3, [r7, #12]
+ 1684 0632 3A68     		ldr	r2, [r7]
+ 1685 0634 1344     		add	r3, r3, r2
+ 1686              		.loc 3 321 49
+ 1687 0636 0122     		movs	r2, #1
+ 1688 0638 1A70     		strb	r2, [r3]
+ 322:example_project.c ****                  outputCounterIndex++;
+ 1689              		.loc 3 322 36
+ 1690 063a FB68     		ldr	r3, [r7, #12]
+ 1691 063c 0133     		adds	r3, r3, #1
+ 1692 063e FB60     		str	r3, [r7, #12]
+ 323:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1693              		.loc 3 323 29
+ 1694 0640 FB68     		ldr	r3, [r7, #12]
+ 1695 0642 3A68     		ldr	r2, [r7]
+ 1696 0644 1344     		add	r3, r3, r2
+ 1697              		.loc 3 323 49
+ 1698 0646 0122     		movs	r2, #1
+ 1699 0648 1A70     		strb	r2, [r3]
+ 324:example_project.c ****                  outputCounterIndex++;
+ 1700              		.loc 3 324 36
+ 1701 064a FB68     		ldr	r3, [r7, #12]
+ 1702 064c 0133     		adds	r3, r3, #1
+ 1703 064e FB60     		str	r3, [r7, #12]
+ 325:example_project.c ****                  
+ 326:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1704              		.loc 3 326 29
+ 1705 0650 FB68     		ldr	r3, [r7, #12]
+ 1706 0652 3A68     		ldr	r2, [r7]
+ 1707 0654 1344     		add	r3, r3, r2
+ 1708              		.loc 3 326 49
+ 1709 0656 0022     		movs	r2, #0
+ 1710 0658 1A70     		strb	r2, [r3]
+ 327:example_project.c ****                  outputCounterIndex++;
+ 1711              		.loc 3 327 36
+ 1712 065a FB68     		ldr	r3, [r7, #12]
+ 1713 065c 0133     		adds	r3, r3, #1
+ 1714 065e FB60     		str	r3, [r7, #12]
+ 328:example_project.c ****                  
+ 329:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1715              		.loc 3 329 29
+ 1716 0660 FB68     		ldr	r3, [r7, #12]
+ 1717 0662 3A68     		ldr	r2, [r7]
+ 1718 0664 1344     		add	r3, r3, r2
+ 1719              		.loc 3 329 49
+ 1720 0666 0122     		movs	r2, #1
+ 1721 0668 1A70     		strb	r2, [r3]
+ 330:example_project.c ****                  outputCounterIndex++;
+ 1722              		.loc 3 330 36
+ 1723 066a FB68     		ldr	r3, [r7, #12]
+ 1724 066c 0133     		adds	r3, r3, #1
+ 1725 066e FB60     		str	r3, [r7, #12]
+ 331:example_project.c ****                  
+ 332:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1726              		.loc 3 332 29
+ 1727 0670 FB68     		ldr	r3, [r7, #12]
+ 1728 0672 3A68     		ldr	r2, [r7]
+ 1729 0674 1344     		add	r3, r3, r2
+ 1730              		.loc 3 332 49
+ 1731 0676 0022     		movs	r2, #0
+ 1732 0678 1A70     		strb	r2, [r3]
+ 333:example_project.c ****                  outputCounterIndex++;
+ 1733              		.loc 3 333 36
+ 1734 067a FB68     		ldr	r3, [r7, #12]
+ 1735 067c 0133     		adds	r3, r3, #1
+ 1736 067e FB60     		str	r3, [r7, #12]
+ 334:example_project.c ****                  
+ 335:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1737              		.loc 3 335 29
+ 1738 0680 FB68     		ldr	r3, [r7, #12]
+ 1739 0682 3A68     		ldr	r2, [r7]
+ 1740 0684 1344     		add	r3, r3, r2
+ 1741              		.loc 3 335 49
+ 1742 0686 0122     		movs	r2, #1
+ 1743 0688 1A70     		strb	r2, [r3]
+ 336:example_project.c ****                  outputCounterIndex++;
+ 1744              		.loc 3 336 36
+ 1745 068a FB68     		ldr	r3, [r7, #12]
+ 1746 068c 0133     		adds	r3, r3, #1
+ 1747 068e FB60     		str	r3, [r7, #12]
+ 337:example_project.c ****                  
+ 338:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1748              		.loc 3 338 29
+ 1749 0690 FB68     		ldr	r3, [r7, #12]
+ 1750 0692 3A68     		ldr	r2, [r7]
+ 1751 0694 1344     		add	r3, r3, r2
+ 1752              		.loc 3 338 49
+ 1753 0696 0022     		movs	r2, #0
+ 1754 0698 1A70     		strb	r2, [r3]
+ 339:example_project.c ****                  outputCounterIndex++;
+ 1755              		.loc 3 339 36
+ 1756 069a FB68     		ldr	r3, [r7, #12]
+ 1757 069c 0133     		adds	r3, r3, #1
+ 1758 069e FB60     		str	r3, [r7, #12]
+ 340:example_project.c ****                  
+ 341:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1759              		.loc 3 341 29
+ 1760 06a0 FB68     		ldr	r3, [r7, #12]
+ 1761 06a2 3A68     		ldr	r2, [r7]
+ 1762 06a4 1344     		add	r3, r3, r2
+ 1763              		.loc 3 341 49
+ 1764 06a6 0122     		movs	r2, #1
+ 1765 06a8 1A70     		strb	r2, [r3]
+ 342:example_project.c ****                  outputCounterIndex++;
+ 1766              		.loc 3 342 36
+ 1767 06aa FB68     		ldr	r3, [r7, #12]
+ 1768 06ac 0133     		adds	r3, r3, #1
+ 1769 06ae FB60     		str	r3, [r7, #12]
+ 343:example_project.c ****                  
+ 344:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1770              		.loc 3 344 29
+ 1771 06b0 FB68     		ldr	r3, [r7, #12]
+ 1772 06b2 3A68     		ldr	r2, [r7]
+ 1773 06b4 1344     		add	r3, r3, r2
+ 1774              		.loc 3 344 49
+ 1775 06b6 0022     		movs	r2, #0
+ 1776 06b8 1A70     		strb	r2, [r3]
+ 345:example_project.c ****                  
+ 346:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1777              		.loc 3 346 29
+ 1778 06ba FB68     		ldr	r3, [r7, #12]
+ 1779 06bc 3A68     		ldr	r2, [r7]
+ 1780 06be 1344     		add	r3, r3, r2
+ 1781              		.loc 3 346 49
+ 1782 06c0 0122     		movs	r2, #1
+ 1783 06c2 1A70     		strb	r2, [r3]
+ 347:example_project.c ****                  outputCounterIndex++;
+ 1784              		.loc 3 347 36
+ 1785 06c4 FB68     		ldr	r3, [r7, #12]
+ 1786 06c6 0133     		adds	r3, r3, #1
+ 1787 06c8 FB60     		str	r3, [r7, #12]
+ 348:example_project.c ****                  
+ 349:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1788              		.loc 3 349 29
+ 1789 06ca FB68     		ldr	r3, [r7, #12]
+ 1790 06cc 3A68     		ldr	r2, [r7]
+ 1791 06ce 1344     		add	r3, r3, r2
+ 1792              		.loc 3 349 49
+ 1793 06d0 0022     		movs	r2, #0
+ 1794 06d2 1A70     		strb	r2, [r3]
+ 350:example_project.c ****                  outputCounterIndex++;
+ 1795              		.loc 3 350 36
+ 1796 06d4 FB68     		ldr	r3, [r7, #12]
+ 1797 06d6 0133     		adds	r3, r3, #1
+ 1798 06d8 FB60     		str	r3, [r7, #12]
+ 351:example_project.c ****                 counterIndex++;
+ 1799              		.loc 3 351 29
+ 1800 06da 3B69     		ldr	r3, [r7, #16]
+ 1801 06dc 0133     		adds	r3, r3, #1
+ 1802 06de 3B61     		str	r3, [r7, #16]
+ 352:example_project.c ****                 break;
+ 1803              		.loc 3 352 17
+ 1804 06e0 87E1     		b	.L26
+ 1805              	.L31:
+ 353:example_project.c ****             case 7:
+ 354:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1806              		.loc 3 354 29
+ 1807 06e2 FB68     		ldr	r3, [r7, #12]
+ 1808 06e4 3A68     		ldr	r2, [r7]
+ 1809 06e6 1344     		add	r3, r3, r2
+ 1810              		.loc 3 354 49
+ 1811 06e8 0122     		movs	r2, #1
+ 1812 06ea 1A70     		strb	r2, [r3]
+ 355:example_project.c ****                  outputCounterIndex++;
+ 1813              		.loc 3 355 36
+ 1814 06ec FB68     		ldr	r3, [r7, #12]
+ 1815 06ee 0133     		adds	r3, r3, #1
+ 1816 06f0 FB60     		str	r3, [r7, #12]
+ 356:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1817              		.loc 3 356 29
+ 1818 06f2 FB68     		ldr	r3, [r7, #12]
+ 1819 06f4 3A68     		ldr	r2, [r7]
+ 1820 06f6 1344     		add	r3, r3, r2
+ 1821              		.loc 3 356 49
+ 1822 06f8 0122     		movs	r2, #1
+ 1823 06fa 1A70     		strb	r2, [r3]
+ 357:example_project.c ****                  outputCounterIndex++;
+ 1824              		.loc 3 357 36
+ 1825 06fc FB68     		ldr	r3, [r7, #12]
+ 1826 06fe 0133     		adds	r3, r3, #1
+ 1827 0700 FB60     		str	r3, [r7, #12]
+ 358:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1828              		.loc 3 358 29
+ 1829 0702 FB68     		ldr	r3, [r7, #12]
+ 1830 0704 3A68     		ldr	r2, [r7]
+ 1831 0706 1344     		add	r3, r3, r2
+ 1832              		.loc 3 358 49
+ 1833 0708 0122     		movs	r2, #1
+ 1834 070a 1A70     		strb	r2, [r3]
+ 359:example_project.c ****                  outputCounterIndex++;
+ 1835              		.loc 3 359 36
+ 1836 070c FB68     		ldr	r3, [r7, #12]
+ 1837 070e 0133     		adds	r3, r3, #1
+ 1838 0710 FB60     		str	r3, [r7, #12]
+ 360:example_project.c ****                 
+ 361:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1839              		.loc 3 361 29
+ 1840 0712 FB68     		ldr	r3, [r7, #12]
+ 1841 0714 3A68     		ldr	r2, [r7]
+ 1842 0716 1344     		add	r3, r3, r2
+ 1843              		.loc 3 361 49
+ 1844 0718 0022     		movs	r2, #0
+ 1845 071a 1A70     		strb	r2, [r3]
+ 362:example_project.c ****                  outputCounterIndex++;
+ 1846              		.loc 3 362 36
+ 1847 071c FB68     		ldr	r3, [r7, #12]
+ 1848 071e 0133     		adds	r3, r3, #1
+ 1849 0720 FB60     		str	r3, [r7, #12]
+ 363:example_project.c ****                 
+ 364:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1850              		.loc 3 364 29
+ 1851 0722 FB68     		ldr	r3, [r7, #12]
+ 1852 0724 3A68     		ldr	r2, [r7]
+ 1853 0726 1344     		add	r3, r3, r2
+ 1854              		.loc 3 364 49
+ 1855 0728 0122     		movs	r2, #1
+ 1856 072a 1A70     		strb	r2, [r3]
+ 365:example_project.c ****                  outputCounterIndex++;
+ 1857              		.loc 3 365 36
+ 1858 072c FB68     		ldr	r3, [r7, #12]
+ 1859 072e 0133     		adds	r3, r3, #1
+ 1860 0730 FB60     		str	r3, [r7, #12]
+ 366:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1861              		.loc 3 366 29
+ 1862 0732 FB68     		ldr	r3, [r7, #12]
+ 1863 0734 3A68     		ldr	r2, [r7]
+ 1864 0736 1344     		add	r3, r3, r2
+ 1865              		.loc 3 366 49
+ 1866 0738 0122     		movs	r2, #1
+ 1867 073a 1A70     		strb	r2, [r3]
+ 367:example_project.c ****                  outputCounterIndex++;
+ 1868              		.loc 3 367 36
+ 1869 073c FB68     		ldr	r3, [r7, #12]
+ 1870 073e 0133     		adds	r3, r3, #1
+ 1871 0740 FB60     		str	r3, [r7, #12]
+ 368:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1872              		.loc 3 368 29
+ 1873 0742 FB68     		ldr	r3, [r7, #12]
+ 1874 0744 3A68     		ldr	r2, [r7]
+ 1875 0746 1344     		add	r3, r3, r2
+ 1876              		.loc 3 368 49
+ 1877 0748 0122     		movs	r2, #1
+ 1878 074a 1A70     		strb	r2, [r3]
+ 369:example_project.c ****                  outputCounterIndex++;
+ 1879              		.loc 3 369 36
+ 1880 074c FB68     		ldr	r3, [r7, #12]
+ 1881 074e 0133     		adds	r3, r3, #1
+ 1882 0750 FB60     		str	r3, [r7, #12]
+ 370:example_project.c ****                  
+ 371:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1883              		.loc 3 371 29
+ 1884 0752 FB68     		ldr	r3, [r7, #12]
+ 1885 0754 3A68     		ldr	r2, [r7]
+ 1886 0756 1344     		add	r3, r3, r2
+ 1887              		.loc 3 371 49
+ 1888 0758 0022     		movs	r2, #0
+ 1889 075a 1A70     		strb	r2, [r3]
+ 372:example_project.c ****                  outputCounterIndex++;
+ 1890              		.loc 3 372 36
+ 1891 075c FB68     		ldr	r3, [r7, #12]
+ 1892 075e 0133     		adds	r3, r3, #1
+ 1893 0760 FB60     		str	r3, [r7, #12]
+ 373:example_project.c ****                  
+ 374:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1894              		.loc 3 374 29
+ 1895 0762 FB68     		ldr	r3, [r7, #12]
+ 1896 0764 3A68     		ldr	r2, [r7]
+ 1897 0766 1344     		add	r3, r3, r2
+ 1898              		.loc 3 374 49
+ 1899 0768 0122     		movs	r2, #1
+ 1900 076a 1A70     		strb	r2, [r3]
+ 375:example_project.c ****                  outputCounterIndex++;
+ 1901              		.loc 3 375 36
+ 1902 076c FB68     		ldr	r3, [r7, #12]
+ 1903 076e 0133     		adds	r3, r3, #1
+ 1904 0770 FB60     		str	r3, [r7, #12]
+ 376:example_project.c ****                  
+ 377:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1905              		.loc 3 377 29
+ 1906 0772 FB68     		ldr	r3, [r7, #12]
+ 1907 0774 3A68     		ldr	r2, [r7]
+ 1908 0776 1344     		add	r3, r3, r2
+ 1909              		.loc 3 377 49
+ 1910 0778 0022     		movs	r2, #0
+ 1911 077a 1A70     		strb	r2, [r3]
+ 378:example_project.c ****                  outputCounterIndex++;
+ 1912              		.loc 3 378 36
+ 1913 077c FB68     		ldr	r3, [r7, #12]
+ 1914 077e 0133     		adds	r3, r3, #1
+ 1915 0780 FB60     		str	r3, [r7, #12]
+ 379:example_project.c ****                  
+ 380:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1916              		.loc 3 380 29
+ 1917 0782 FB68     		ldr	r3, [r7, #12]
+ 1918 0784 3A68     		ldr	r2, [r7]
+ 1919 0786 1344     		add	r3, r3, r2
+ 1920              		.loc 3 380 49
+ 1921 0788 0122     		movs	r2, #1
+ 1922 078a 1A70     		strb	r2, [r3]
+ 381:example_project.c ****                  outputCounterIndex++;
+ 1923              		.loc 3 381 36
+ 1924 078c FB68     		ldr	r3, [r7, #12]
+ 1925 078e 0133     		adds	r3, r3, #1
+ 1926 0790 FB60     		str	r3, [r7, #12]
+ 382:example_project.c ****                  
+ 383:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1927              		.loc 3 383 29
+ 1928 0792 FB68     		ldr	r3, [r7, #12]
+ 1929 0794 3A68     		ldr	r2, [r7]
+ 1930 0796 1344     		add	r3, r3, r2
+ 1931              		.loc 3 383 49
+ 1932 0798 0022     		movs	r2, #0
+ 1933 079a 1A70     		strb	r2, [r3]
+ 384:example_project.c ****                  
+ 385:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1934              		.loc 3 385 29
+ 1935 079c FB68     		ldr	r3, [r7, #12]
+ 1936 079e 3A68     		ldr	r2, [r7]
+ 1937 07a0 1344     		add	r3, r3, r2
+ 1938              		.loc 3 385 49
+ 1939 07a2 0122     		movs	r2, #1
+ 1940 07a4 1A70     		strb	r2, [r3]
+ 386:example_project.c ****                  outputCounterIndex++;
+ 1941              		.loc 3 386 36
+ 1942 07a6 FB68     		ldr	r3, [r7, #12]
+ 1943 07a8 0133     		adds	r3, r3, #1
+ 1944 07aa FB60     		str	r3, [r7, #12]
+ 387:example_project.c ****                  
+ 388:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1945              		.loc 3 388 29
+ 1946 07ac FB68     		ldr	r3, [r7, #12]
+ 1947 07ae 3A68     		ldr	r2, [r7]
+ 1948 07b0 1344     		add	r3, r3, r2
+ 1949              		.loc 3 388 49
+ 1950 07b2 0022     		movs	r2, #0
+ 1951 07b4 1A70     		strb	r2, [r3]
+ 389:example_project.c ****                  
+ 390:example_project.c ****                 counterIndex++;
+ 1952              		.loc 3 390 29
+ 1953 07b6 3B69     		ldr	r3, [r7, #16]
+ 1954 07b8 0133     		adds	r3, r3, #1
+ 1955 07ba 3B61     		str	r3, [r7, #16]
+ 391:example_project.c ****                 break;
+ 1956              		.loc 3 391 17
+ 1957 07bc 19E1     		b	.L26
+ 1958              	.L30:
+ 392:example_project.c ****             case 8:
+ 393:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1959              		.loc 3 393 29
+ 1960 07be FB68     		ldr	r3, [r7, #12]
+ 1961 07c0 3A68     		ldr	r2, [r7]
+ 1962 07c2 1344     		add	r3, r3, r2
+ 1963              		.loc 3 393 49
+ 1964 07c4 0122     		movs	r2, #1
+ 1965 07c6 1A70     		strb	r2, [r3]
+ 394:example_project.c ****                  outputCounterIndex++;
+ 1966              		.loc 3 394 36
+ 1967 07c8 FB68     		ldr	r3, [r7, #12]
+ 1968 07ca 0133     		adds	r3, r3, #1
+ 1969 07cc FB60     		str	r3, [r7, #12]
+ 395:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1970              		.loc 3 395 29
+ 1971 07ce FB68     		ldr	r3, [r7, #12]
+ 1972 07d0 3A68     		ldr	r2, [r7]
+ 1973 07d2 1344     		add	r3, r3, r2
+ 1974              		.loc 3 395 49
+ 1975 07d4 0122     		movs	r2, #1
+ 1976 07d6 1A70     		strb	r2, [r3]
+ 396:example_project.c ****                  outputCounterIndex++;
+ 1977              		.loc 3 396 36
+ 1978 07d8 FB68     		ldr	r3, [r7, #12]
+ 1979 07da 0133     		adds	r3, r3, #1
+ 1980 07dc FB60     		str	r3, [r7, #12]
+ 397:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 1981              		.loc 3 397 29
+ 1982 07de FB68     		ldr	r3, [r7, #12]
+ 1983 07e0 3A68     		ldr	r2, [r7]
+ 1984 07e2 1344     		add	r3, r3, r2
+ 1985              		.loc 3 397 49
+ 1986 07e4 0122     		movs	r2, #1
+ 1987 07e6 1A70     		strb	r2, [r3]
+ 398:example_project.c ****                  outputCounterIndex++;
+ 1988              		.loc 3 398 36
+ 1989 07e8 FB68     		ldr	r3, [r7, #12]
+ 1990 07ea 0133     		adds	r3, r3, #1
+ 1991 07ec FB60     		str	r3, [r7, #12]
+ 399:example_project.c ****                 
+ 400:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 1992              		.loc 3 400 29
+ 1993 07ee FB68     		ldr	r3, [r7, #12]
+ 1994 07f0 3A68     		ldr	r2, [r7]
+ 1995 07f2 1344     		add	r3, r3, r2
+ 1996              		.loc 3 400 49
+ 1997 07f4 0022     		movs	r2, #0
+ 1998 07f6 1A70     		strb	r2, [r3]
+ 401:example_project.c ****                  outputCounterIndex++;
+ 1999              		.loc 3 401 36
+ 2000 07f8 FB68     		ldr	r3, [r7, #12]
+ 2001 07fa 0133     		adds	r3, r3, #1
+ 2002 07fc FB60     		str	r3, [r7, #12]
+ 402:example_project.c ****                 
+ 403:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2003              		.loc 3 403 29
+ 2004 07fe FB68     		ldr	r3, [r7, #12]
+ 2005 0800 3A68     		ldr	r2, [r7]
+ 2006 0802 1344     		add	r3, r3, r2
+ 2007              		.loc 3 403 49
+ 2008 0804 0122     		movs	r2, #1
+ 2009 0806 1A70     		strb	r2, [r3]
+ 404:example_project.c ****                  outputCounterIndex++;
+ 2010              		.loc 3 404 36
+ 2011 0808 FB68     		ldr	r3, [r7, #12]
+ 2012 080a 0133     		adds	r3, r3, #1
+ 2013 080c FB60     		str	r3, [r7, #12]
+ 405:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2014              		.loc 3 405 29
+ 2015 080e FB68     		ldr	r3, [r7, #12]
+ 2016 0810 3A68     		ldr	r2, [r7]
+ 2017 0812 1344     		add	r3, r3, r2
+ 2018              		.loc 3 405 49
+ 2019 0814 0122     		movs	r2, #1
+ 2020 0816 1A70     		strb	r2, [r3]
+ 406:example_project.c ****                  outputCounterIndex++;
+ 2021              		.loc 3 406 36
+ 2022 0818 FB68     		ldr	r3, [r7, #12]
+ 2023 081a 0133     		adds	r3, r3, #1
+ 2024 081c FB60     		str	r3, [r7, #12]
+ 407:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2025              		.loc 3 407 29
+ 2026 081e FB68     		ldr	r3, [r7, #12]
+ 2027 0820 3A68     		ldr	r2, [r7]
+ 2028 0822 1344     		add	r3, r3, r2
+ 2029              		.loc 3 407 49
+ 2030 0824 0122     		movs	r2, #1
+ 2031 0826 1A70     		strb	r2, [r3]
+ 408:example_project.c ****                  outputCounterIndex++;
+ 2032              		.loc 3 408 36
+ 2033 0828 FB68     		ldr	r3, [r7, #12]
+ 2034 082a 0133     		adds	r3, r3, #1
+ 2035 082c FB60     		str	r3, [r7, #12]
+ 409:example_project.c ****                  
+ 410:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2036              		.loc 3 410 29
+ 2037 082e FB68     		ldr	r3, [r7, #12]
+ 2038 0830 3A68     		ldr	r2, [r7]
+ 2039 0832 1344     		add	r3, r3, r2
+ 2040              		.loc 3 410 49
+ 2041 0834 0022     		movs	r2, #0
+ 2042 0836 1A70     		strb	r2, [r3]
+ 411:example_project.c ****                  
+ 412:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2043              		.loc 3 412 29
+ 2044 0838 FB68     		ldr	r3, [r7, #12]
+ 2045 083a 3A68     		ldr	r2, [r7]
+ 2046 083c 1344     		add	r3, r3, r2
+ 2047              		.loc 3 412 49
+ 2048 083e 0122     		movs	r2, #1
+ 2049 0840 1A70     		strb	r2, [r3]
+ 413:example_project.c ****                  outputCounterIndex++;
+ 2050              		.loc 3 413 36
+ 2051 0842 FB68     		ldr	r3, [r7, #12]
+ 2052 0844 0133     		adds	r3, r3, #1
+ 2053 0846 FB60     		str	r3, [r7, #12]
+ 414:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2054              		.loc 3 414 29
+ 2055 0848 FB68     		ldr	r3, [r7, #12]
+ 2056 084a 3A68     		ldr	r2, [r7]
+ 2057 084c 1344     		add	r3, r3, r2
+ 2058              		.loc 3 414 49
+ 2059 084e 0122     		movs	r2, #1
+ 2060 0850 1A70     		strb	r2, [r3]
+ 415:example_project.c ****                  outputCounterIndex++;
+ 2061              		.loc 3 415 36
+ 2062 0852 FB68     		ldr	r3, [r7, #12]
+ 2063 0854 0133     		adds	r3, r3, #1
+ 2064 0856 FB60     		str	r3, [r7, #12]
+ 416:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2065              		.loc 3 416 29
+ 2066 0858 FB68     		ldr	r3, [r7, #12]
+ 2067 085a 3A68     		ldr	r2, [r7]
+ 2068 085c 1344     		add	r3, r3, r2
+ 2069              		.loc 3 416 49
+ 2070 085e 0122     		movs	r2, #1
+ 2071 0860 1A70     		strb	r2, [r3]
+ 417:example_project.c ****                  outputCounterIndex++;
+ 2072              		.loc 3 417 36
+ 2073 0862 FB68     		ldr	r3, [r7, #12]
+ 2074 0864 0133     		adds	r3, r3, #1
+ 2075 0866 FB60     		str	r3, [r7, #12]
+ 418:example_project.c ****                  
+ 419:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2076              		.loc 3 419 29
+ 2077 0868 FB68     		ldr	r3, [r7, #12]
+ 2078 086a 3A68     		ldr	r2, [r7]
+ 2079 086c 1344     		add	r3, r3, r2
+ 2080              		.loc 3 419 49
+ 2081 086e 0022     		movs	r2, #0
+ 2082 0870 1A70     		strb	r2, [r3]
+ 420:example_project.c ****                  outputCounterIndex++;
+ 2083              		.loc 3 420 36
+ 2084 0872 FB68     		ldr	r3, [r7, #12]
+ 2085 0874 0133     		adds	r3, r3, #1
+ 2086 0876 FB60     		str	r3, [r7, #12]
+ 421:example_project.c ****                  
+ 422:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2087              		.loc 3 422 29
+ 2088 0878 FB68     		ldr	r3, [r7, #12]
+ 2089 087a 3A68     		ldr	r2, [r7]
+ 2090 087c 1344     		add	r3, r3, r2
+ 2091              		.loc 3 422 49
+ 2092 087e 0122     		movs	r2, #1
+ 2093 0880 1A70     		strb	r2, [r3]
+ 423:example_project.c ****                  outputCounterIndex++;
+ 2094              		.loc 3 423 36
+ 2095 0882 FB68     		ldr	r3, [r7, #12]
+ 2096 0884 0133     		adds	r3, r3, #1
+ 2097 0886 FB60     		str	r3, [r7, #12]
+ 424:example_project.c ****                  
+ 425:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2098              		.loc 3 425 29
+ 2099 0888 FB68     		ldr	r3, [r7, #12]
+ 2100 088a 3A68     		ldr	r2, [r7]
+ 2101 088c 1344     		add	r3, r3, r2
+ 2102              		.loc 3 425 49
+ 2103 088e 0022     		movs	r2, #0
+ 2104 0890 1A70     		strb	r2, [r3]
+ 426:example_project.c ****                  outputCounterIndex++;
+ 2105              		.loc 3 426 36
+ 2106 0892 FB68     		ldr	r3, [r7, #12]
+ 2107 0894 0133     		adds	r3, r3, #1
+ 2108 0896 FB60     		str	r3, [r7, #12]
+ 427:example_project.c ****                  
+ 428:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2109              		.loc 3 428 29
+ 2110 0898 FB68     		ldr	r3, [r7, #12]
+ 2111 089a 3A68     		ldr	r2, [r7]
+ 2112 089c 1344     		add	r3, r3, r2
+ 2113              		.loc 3 428 49
+ 2114 089e 0122     		movs	r2, #1
+ 2115 08a0 1A70     		strb	r2, [r3]
+ 429:example_project.c ****                  outputCounterIndex++;
+ 2116              		.loc 3 429 36
+ 2117 08a2 FB68     		ldr	r3, [r7, #12]
+ 2118 08a4 0133     		adds	r3, r3, #1
+ 2119 08a6 FB60     		str	r3, [r7, #12]
+ 430:example_project.c ****                  
+ 431:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2120              		.loc 3 431 29
+ 2121 08a8 FB68     		ldr	r3, [r7, #12]
+ 2122 08aa 3A68     		ldr	r2, [r7]
+ 2123 08ac 1344     		add	r3, r3, r2
+ 2124              		.loc 3 431 49
+ 2125 08ae 0022     		movs	r2, #0
+ 2126 08b0 1A70     		strb	r2, [r3]
+ 432:example_project.c ****                  outputCounterIndex++;
+ 2127              		.loc 3 432 36
+ 2128 08b2 FB68     		ldr	r3, [r7, #12]
+ 2129 08b4 0133     		adds	r3, r3, #1
+ 2130 08b6 FB60     		str	r3, [r7, #12]
+ 433:example_project.c ****                  
+ 434:example_project.c ****                 counterIndex++;
+ 2131              		.loc 3 434 29
+ 2132 08b8 3B69     		ldr	r3, [r7, #16]
+ 2133 08ba 0133     		adds	r3, r3, #1
+ 2134 08bc 3B61     		str	r3, [r7, #16]
+ 435:example_project.c ****                 break;
+ 2135              		.loc 3 435 17
+ 2136 08be 98E0     		b	.L26
+ 2137              	.L28:
+ 436:example_project.c ****             case 9:
+ 437:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2138              		.loc 3 437 29
+ 2139 08c0 FB68     		ldr	r3, [r7, #12]
+ 2140 08c2 3A68     		ldr	r2, [r7]
+ 2141 08c4 1344     		add	r3, r3, r2
+ 2142              		.loc 3 437 49
+ 2143 08c6 0122     		movs	r2, #1
+ 2144 08c8 1A70     		strb	r2, [r3]
+ 438:example_project.c ****                  outputCounterIndex++;
+ 2145              		.loc 3 438 36
+ 2146 08ca FB68     		ldr	r3, [r7, #12]
+ 2147 08cc 0133     		adds	r3, r3, #1
+ 2148 08ce FB60     		str	r3, [r7, #12]
+ 439:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2149              		.loc 3 439 29
+ 2150 08d0 FB68     		ldr	r3, [r7, #12]
+ 2151 08d2 3A68     		ldr	r2, [r7]
+ 2152 08d4 1344     		add	r3, r3, r2
+ 2153              		.loc 3 439 49
+ 2154 08d6 0122     		movs	r2, #1
+ 2155 08d8 1A70     		strb	r2, [r3]
+ 440:example_project.c ****                  outputCounterIndex++;
+ 2156              		.loc 3 440 36
+ 2157 08da FB68     		ldr	r3, [r7, #12]
+ 2158 08dc 0133     		adds	r3, r3, #1
+ 2159 08de FB60     		str	r3, [r7, #12]
+ 441:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2160              		.loc 3 441 29
+ 2161 08e0 FB68     		ldr	r3, [r7, #12]
+ 2162 08e2 3A68     		ldr	r2, [r7]
+ 2163 08e4 1344     		add	r3, r3, r2
+ 2164              		.loc 3 441 49
+ 2165 08e6 0122     		movs	r2, #1
+ 2166 08e8 1A70     		strb	r2, [r3]
+ 442:example_project.c ****                  outputCounterIndex++;
+ 2167              		.loc 3 442 36
+ 2168 08ea FB68     		ldr	r3, [r7, #12]
+ 2169 08ec 0133     		adds	r3, r3, #1
+ 2170 08ee FB60     		str	r3, [r7, #12]
+ 443:example_project.c ****                 
+ 444:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2171              		.loc 3 444 29
+ 2172 08f0 FB68     		ldr	r3, [r7, #12]
+ 2173 08f2 3A68     		ldr	r2, [r7]
+ 2174 08f4 1344     		add	r3, r3, r2
+ 2175              		.loc 3 444 49
+ 2176 08f6 0022     		movs	r2, #0
+ 2177 08f8 1A70     		strb	r2, [r3]
+ 445:example_project.c ****                  outputCounterIndex++;
+ 2178              		.loc 3 445 36
+ 2179 08fa FB68     		ldr	r3, [r7, #12]
+ 2180 08fc 0133     		adds	r3, r3, #1
+ 2181 08fe FB60     		str	r3, [r7, #12]
+ 446:example_project.c ****                 
+ 447:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2182              		.loc 3 447 29
+ 2183 0900 FB68     		ldr	r3, [r7, #12]
+ 2184 0902 3A68     		ldr	r2, [r7]
+ 2185 0904 1344     		add	r3, r3, r2
+ 2186              		.loc 3 447 49
+ 2187 0906 0122     		movs	r2, #1
+ 2188 0908 1A70     		strb	r2, [r3]
+ 448:example_project.c ****                  outputCounterIndex++;
+ 2189              		.loc 3 448 36
+ 2190 090a FB68     		ldr	r3, [r7, #12]
+ 2191 090c 0133     		adds	r3, r3, #1
+ 2192 090e FB60     		str	r3, [r7, #12]
+ 449:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2193              		.loc 3 449 29
+ 2194 0910 FB68     		ldr	r3, [r7, #12]
+ 2195 0912 3A68     		ldr	r2, [r7]
+ 2196 0914 1344     		add	r3, r3, r2
+ 2197              		.loc 3 449 49
+ 2198 0916 0122     		movs	r2, #1
+ 2199 0918 1A70     		strb	r2, [r3]
+ 450:example_project.c ****                  outputCounterIndex++;
+ 2200              		.loc 3 450 36
+ 2201 091a FB68     		ldr	r3, [r7, #12]
+ 2202 091c 0133     		adds	r3, r3, #1
+ 2203 091e FB60     		str	r3, [r7, #12]
+ 451:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2204              		.loc 3 451 29
+ 2205 0920 FB68     		ldr	r3, [r7, #12]
+ 2206 0922 3A68     		ldr	r2, [r7]
+ 2207 0924 1344     		add	r3, r3, r2
+ 2208              		.loc 3 451 49
+ 2209 0926 0122     		movs	r2, #1
+ 2210 0928 1A70     		strb	r2, [r3]
+ 452:example_project.c ****                  outputCounterIndex++;
+ 2211              		.loc 3 452 36
+ 2212 092a FB68     		ldr	r3, [r7, #12]
+ 2213 092c 0133     		adds	r3, r3, #1
+ 2214 092e FB60     		str	r3, [r7, #12]
+ 453:example_project.c ****                  
+ 454:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2215              		.loc 3 454 29
+ 2216 0930 FB68     		ldr	r3, [r7, #12]
+ 2217 0932 3A68     		ldr	r2, [r7]
+ 2218 0934 1344     		add	r3, r3, r2
+ 2219              		.loc 3 454 49
+ 2220 0936 0022     		movs	r2, #0
+ 2221 0938 1A70     		strb	r2, [r3]
+ 455:example_project.c ****                  
+ 456:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2222              		.loc 3 456 29
+ 2223 093a FB68     		ldr	r3, [r7, #12]
+ 2224 093c 3A68     		ldr	r2, [r7]
+ 2225 093e 1344     		add	r3, r3, r2
+ 2226              		.loc 3 456 49
+ 2227 0940 0122     		movs	r2, #1
+ 2228 0942 1A70     		strb	r2, [r3]
+ 457:example_project.c ****                  outputCounterIndex++;
+ 2229              		.loc 3 457 36
+ 2230 0944 FB68     		ldr	r3, [r7, #12]
+ 2231 0946 0133     		adds	r3, r3, #1
+ 2232 0948 FB60     		str	r3, [r7, #12]
+ 458:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2233              		.loc 3 458 29
+ 2234 094a FB68     		ldr	r3, [r7, #12]
+ 2235 094c 3A68     		ldr	r2, [r7]
+ 2236 094e 1344     		add	r3, r3, r2
+ 2237              		.loc 3 458 49
+ 2238 0950 0122     		movs	r2, #1
+ 2239 0952 1A70     		strb	r2, [r3]
+ 459:example_project.c ****                  outputCounterIndex++;
+ 2240              		.loc 3 459 36
+ 2241 0954 FB68     		ldr	r3, [r7, #12]
+ 2242 0956 0133     		adds	r3, r3, #1
+ 2243 0958 FB60     		str	r3, [r7, #12]
+ 460:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2244              		.loc 3 460 29
+ 2245 095a FB68     		ldr	r3, [r7, #12]
+ 2246 095c 3A68     		ldr	r2, [r7]
+ 2247 095e 1344     		add	r3, r3, r2
+ 2248              		.loc 3 460 49
+ 2249 0960 0122     		movs	r2, #1
+ 2250 0962 1A70     		strb	r2, [r3]
+ 461:example_project.c ****                  outputCounterIndex++;
+ 2251              		.loc 3 461 36
+ 2252 0964 FB68     		ldr	r3, [r7, #12]
+ 2253 0966 0133     		adds	r3, r3, #1
+ 2254 0968 FB60     		str	r3, [r7, #12]
+ 462:example_project.c ****                  
+ 463:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2255              		.loc 3 463 29
+ 2256 096a FB68     		ldr	r3, [r7, #12]
+ 2257 096c 3A68     		ldr	r2, [r7]
+ 2258 096e 1344     		add	r3, r3, r2
+ 2259              		.loc 3 463 49
+ 2260 0970 0022     		movs	r2, #0
+ 2261 0972 1A70     		strb	r2, [r3]
+ 464:example_project.c ****                  outputCounterIndex++;
+ 2262              		.loc 3 464 36
+ 2263 0974 FB68     		ldr	r3, [r7, #12]
+ 2264 0976 0133     		adds	r3, r3, #1
+ 2265 0978 FB60     		str	r3, [r7, #12]
+ 465:example_project.c ****                  
+ 466:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2266              		.loc 3 466 29
+ 2267 097a FB68     		ldr	r3, [r7, #12]
+ 2268 097c 3A68     		ldr	r2, [r7]
+ 2269 097e 1344     		add	r3, r3, r2
+ 2270              		.loc 3 466 49
+ 2271 0980 0122     		movs	r2, #1
+ 2272 0982 1A70     		strb	r2, [r3]
+ 467:example_project.c ****                  outputCounterIndex++;
+ 2273              		.loc 3 467 36
+ 2274 0984 FB68     		ldr	r3, [r7, #12]
+ 2275 0986 0133     		adds	r3, r3, #1
+ 2276 0988 FB60     		str	r3, [r7, #12]
+ 468:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2277              		.loc 3 468 29
+ 2278 098a FB68     		ldr	r3, [r7, #12]
+ 2279 098c 3A68     		ldr	r2, [r7]
+ 2280 098e 1344     		add	r3, r3, r2
+ 2281              		.loc 3 468 49
+ 2282 0990 0122     		movs	r2, #1
+ 2283 0992 1A70     		strb	r2, [r3]
+ 469:example_project.c ****                  outputCounterIndex++;
+ 2284              		.loc 3 469 36
+ 2285 0994 FB68     		ldr	r3, [r7, #12]
+ 2286 0996 0133     		adds	r3, r3, #1
+ 2287 0998 FB60     		str	r3, [r7, #12]
+ 470:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2288              		.loc 3 470 29
+ 2289 099a FB68     		ldr	r3, [r7, #12]
+ 2290 099c 3A68     		ldr	r2, [r7]
+ 2291 099e 1344     		add	r3, r3, r2
+ 2292              		.loc 3 470 49
+ 2293 09a0 0122     		movs	r2, #1
+ 2294 09a2 1A70     		strb	r2, [r3]
+ 471:example_project.c ****                  outputCounterIndex++;
+ 2295              		.loc 3 471 36
+ 2296 09a4 FB68     		ldr	r3, [r7, #12]
+ 2297 09a6 0133     		adds	r3, r3, #1
+ 2298 09a8 FB60     		str	r3, [r7, #12]
+ 472:example_project.c ****                  
+ 473:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2299              		.loc 3 473 29
+ 2300 09aa FB68     		ldr	r3, [r7, #12]
+ 2301 09ac 3A68     		ldr	r2, [r7]
+ 2302 09ae 1344     		add	r3, r3, r2
+ 2303              		.loc 3 473 49
+ 2304 09b0 0022     		movs	r2, #0
+ 2305 09b2 1A70     		strb	r2, [r3]
+ 474:example_project.c ****                  outputCounterIndex++;
+ 2306              		.loc 3 474 36
+ 2307 09b4 FB68     		ldr	r3, [r7, #12]
+ 2308 09b6 0133     		adds	r3, r3, #1
+ 2309 09b8 FB60     		str	r3, [r7, #12]
+ 475:example_project.c ****                  
+ 476:example_project.c ****                  ArrayOutput[outputCounterIndex]=1;
+ 2310              		.loc 3 476 29
+ 2311 09ba FB68     		ldr	r3, [r7, #12]
+ 2312 09bc 3A68     		ldr	r2, [r7]
+ 2313 09be 1344     		add	r3, r3, r2
+ 2314              		.loc 3 476 49
+ 2315 09c0 0122     		movs	r2, #1
+ 2316 09c2 1A70     		strb	r2, [r3]
+ 477:example_project.c ****                  outputCounterIndex++;
+ 2317              		.loc 3 477 36
+ 2318 09c4 FB68     		ldr	r3, [r7, #12]
+ 2319 09c6 0133     		adds	r3, r3, #1
+ 2320 09c8 FB60     		str	r3, [r7, #12]
+ 478:example_project.c ****                  
+ 479:example_project.c ****                  ArrayOutput[outputCounterIndex]=0;
+ 2321              		.loc 3 479 29
+ 2322 09ca FB68     		ldr	r3, [r7, #12]
+ 2323 09cc 3A68     		ldr	r2, [r7]
+ 2324 09ce 1344     		add	r3, r3, r2
+ 2325              		.loc 3 479 49
+ 2326 09d0 0022     		movs	r2, #0
+ 2327 09d2 1A70     		strb	r2, [r3]
+ 480:example_project.c ****                  outputCounterIndex++;
+ 2328              		.loc 3 480 36
+ 2329 09d4 FB68     		ldr	r3, [r7, #12]
+ 2330 09d6 0133     		adds	r3, r3, #1
+ 2331 09d8 FB60     		str	r3, [r7, #12]
+ 481:example_project.c ****                 counterIndex++;
+ 2332              		.loc 3 481 29
+ 2333 09da 3B69     		ldr	r3, [r7, #16]
+ 2334 09dc 0133     		adds	r3, r3, #1
+ 2335 09de 3B61     		str	r3, [r7, #16]
+ 482:example_project.c ****                 break;
+ 2336              		.loc 3 482 17
+ 2337 09e0 07E0     		b	.L26
+ 2338              	.L39:
+ 483:example_project.c ****                 
+ 484:example_project.c ****             case 999:
+ 485:example_project.c ****                 ArrayOutput[outputCounterIndex]=3;
+ 2339              		.loc 3 485 28
+ 2340 09e2 FB68     		ldr	r3, [r7, #12]
+ 2341 09e4 3A68     		ldr	r2, [r7]
+ 2342 09e6 1344     		add	r3, r3, r2
+ 2343              		.loc 3 485 48
+ 2344 09e8 0322     		movs	r2, #3
+ 2345 09ea 1A70     		strb	r2, [r3]
+ 486:example_project.c ****                 encodingFlag=true;
+ 2346              		.loc 3 486 29
+ 2347 09ec 0123     		movs	r3, #1
+ 2348 09ee FB75     		strb	r3, [r7, #23]
+ 487:example_project.c ****                 break;
+ 2349              		.loc 3 487 17
+ 2350 09f0 00BF     		nop
+ 2351              	.L26:
+  61:example_project.c ****         
+ 2352              		.loc 3 61 12
+ 2353 09f2 FB7D     		ldrb	r3, [r7, #23]
+ 2354 09f4 83F00103 		eor	r3, r3, #1
+ 2355 09f8 DBB2     		uxtb	r3, r3
+  61:example_project.c ****         
+ 2356              		.loc 3 61 11
+ 2357 09fa 002B     		cmp	r3, #0
+ 2358 09fc 7FF40DAB 		bne	.L40
+ 488:example_project.c ****         }
+ 489:example_project.c ****         
+ 490:example_project.c ****         
+ 491:example_project.c ****     }
+ 492:example_project.c ****     
+ 493:example_project.c **** }
+ 2359              		.loc 3 493 1
+ 2360 0a00 00BF     		nop
+ 2361 0a02 00BF     		nop
+ 2362 0a04 1C37     		adds	r7, r7, #28
+ 2363              	.LCFI38:
+ 2364              		.cfi_def_cfa_offset 4
+ 2365 0a06 BD46     		mov	sp, r7
+ 2366              	.LCFI39:
+ 2367              		.cfi_def_cfa_register 13
+ 2368              		@ sp needed
+ 2369 0a08 5DF8047B 		ldr	r7, [sp], #4
+ 2370              	.LCFI40:
+ 2371              		.cfi_restore 7
+ 2372              		.cfi_def_cfa_offset 0
+ 2373 0a0c 7047     		bx	lr
+ 2374              		.cfi_endproc
+ 2375              	.LFE139:
+ 2377 0a0e 00BF     		.section	.text.SysTick_Handler,"ax",%progbits
+ 2378              		.align	1
+ 2379              		.global	SysTick_Handler
+ 2380              		.syntax unified
+ 2381              		.thumb
+ 2382              		.thumb_func
+ 2384              	SysTick_Handler:
+ 2385              	.LFB140:
+ 494:example_project.c **** void SysTick_Handler(void)  {     
+ 2386              		.loc 3 494 29
+ 2387              		.cfi_startproc
+ 2388              		@ args = 0, pretend = 0, frame = 0
+ 2389              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2390              		@ link register save eliminated.
+ 2391 0000 80B4     		push	{r7}
+ 2392              	.LCFI41:
+ 2393              		.cfi_def_cfa_offset 4
+ 2394              		.cfi_offset 7, -4
+ 2395 0002 00AF     		add	r7, sp, #0
+ 2396              	.LCFI42:
+ 2397              		.cfi_def_cfa_register 7
+ 495:example_project.c ****   //XMC_GPIO_ToggleOutput(LED1);                           
+ 496:example_project.c ****   counterTMS++;       
+ 2398              		.loc 3 496 13
+ 2399 0004 154B     		ldr	r3, .L46
+ 2400 0006 1B68     		ldr	r3, [r3]
+ 2401 0008 0133     		adds	r3, r3, #1
+ 2402 000a 144A     		ldr	r2, .L46
+ 2403 000c 1360     		str	r3, [r2]
+ 497:example_project.c ****     if(counterTMS%100==0){
+ 2404              		.loc 3 497 18
+ 2405 000e 134B     		ldr	r3, .L46
+ 2406 0010 1A68     		ldr	r2, [r3]
+ 2407 0012 134B     		ldr	r3, .L46+4
+ 2408 0014 A3FB0213 		umull	r1, r3, r3, r2
+ 2409 0018 5B09     		lsrs	r3, r3, #5
+ 2410 001a 6421     		movs	r1, #100
+ 2411 001c 01FB03F3 		mul	r3, r1, r3
+ 2412 0020 D31A     		subs	r3, r2, r3
+ 2413              		.loc 3 497 7
+ 2414 0022 002B     		cmp	r3, #0
+ 2415 0024 14D1     		bne	.L45
+ 498:example_project.c ****         if (btnOPressedFlag || btnTPressedFlag){
+ 2416              		.loc 3 498 13
+ 2417 0026 0F4B     		ldr	r3, .L46+8
+ 2418 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2419              		.loc 3 498 12
+ 2420 002a 002B     		cmp	r3, #0
+ 2421 002c 03D1     		bne	.L43
+ 2422              		.loc 3 498 29 discriminator 1
+ 2423 002e 0E4B     		ldr	r3, .L46+12
+ 2424 0030 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2425 0032 002B     		cmp	r3, #0
+ 2426 0034 0CD0     		beq	.L45
+ 2427              	.L43:
+ 499:example_project.c ****             if (letterCounter==0){
+ 2428              		.loc 3 499 30
+ 2429 0036 0D4B     		ldr	r3, .L46+16
+ 2430 0038 1B68     		ldr	r3, [r3]
+ 2431              		.loc 3 499 16
+ 2432 003a 002B     		cmp	r3, #0
+ 2433 003c 03D1     		bne	.L44
+ 500:example_project.c ****                 letterCounter=1;}
+ 2434              		.loc 3 500 30
+ 2435 003e 0B4B     		ldr	r3, .L46+16
+ 2436 0040 0122     		movs	r2, #1
+ 2437 0042 1A60     		str	r2, [r3]
+ 501:example_project.c ****             else {    
+ 502:example_project.c ****             letterCounter++;}
+ 503:example_project.c ****         } 
+ 504:example_project.c ****     }
+ 505:example_project.c **** }
+ 2438              		.loc 3 505 1
+ 2439 0044 04E0     		b	.L45
+ 2440              	.L44:
+ 502:example_project.c ****         } 
+ 2441              		.loc 3 502 26
+ 2442 0046 094B     		ldr	r3, .L46+16
+ 2443 0048 1B68     		ldr	r3, [r3]
+ 2444 004a 0133     		adds	r3, r3, #1
+ 2445 004c 074A     		ldr	r2, .L46+16
+ 2446 004e 1360     		str	r3, [r2]
+ 2447              	.L45:
+ 2448              		.loc 3 505 1
+ 2449 0050 00BF     		nop
+ 2450 0052 BD46     		mov	sp, r7
+ 2451              	.LCFI43:
+ 2452              		.cfi_def_cfa_register 13
+ 2453              		@ sp needed
+ 2454 0054 5DF8047B 		ldr	r7, [sp], #4
+ 2455              	.LCFI44:
+ 2456              		.cfi_restore 7
+ 2457              		.cfi_def_cfa_offset 0
+ 2458 0058 7047     		bx	lr
+ 2459              	.L47:
+ 2460 005a 00BF     		.align	2
+ 2461              	.L46:
+ 2462 005c 00000000 		.word	counterTMS
+ 2463 0060 1F85EB51 		.word	1374389535
+ 2464 0064 00000000 		.word	btnOPressedFlag
+ 2465 0068 00000000 		.word	btnTPressedFlag
+ 2466 006c 00000000 		.word	letterCounter
+ 2467              		.cfi_endproc
+ 2468              	.LFE140:
+ 2470              		.global	signalArray
+ 2471              		.data
+ 2472 0349 000000   		.align	2
+ 2475              	signalArray:
+ 2476 034c 00010001 		.ascii	"\000\001\000\001\000\000\000\000\000\000\000\001\001"
+ 2476      00000000 
+ 2476      00000001 
+ 2476      01
+ 2477 0359 01000100 		.ascii	"\001\000\001\000\001\001\001\000\001\000\000\000\001"
+ 2477      01010100 
+ 2477      01000000 
+ 2477      01
+ 2478 0366 00010101 		.ascii	"\000\001\001\001\000\000\000\001\001\001\000\001\000"
+ 2478      00000001 
+ 2478      01010001 
+ 2478      00
+ 2479 0373 00000000 		.ascii	"\000\000\000\000\000\000\001\001\001\000\001\001\001"
+ 2479      00000101 
+ 2479      01000101 
+ 2479      01
+ 2480 0380 00000001 		.ascii	"\000\000\000\001\001\001\000\001\001\001\000\001\001"
+ 2480      01010001 
+ 2480      01010001 
+ 2480      01
+ 2481 038d 01000000 		.ascii	"\001\000\000\000\001\000\001\001\001\000\001\000\000"
+ 2481      01000101 
+ 2481      01000100 
+ 2481      00
+ 2482 039a 00010001 		.ascii	"\000\001\000\001\000\001\000\000\000\001\003\000"
+ 2482      00010000 
+ 2482      00010300 
+ 2483 03a6 00000000 		.space	5
+ 2483      00
+ 2484              		.section	.text.main,"ax",%progbits
+ 2485              		.align	1
+ 2486              		.global	main
+ 2487              		.syntax unified
+ 2488              		.thumb
+ 2489              		.thumb_func
+ 2491              	main:
+ 2492              	.LFB141:
+ 506:example_project.c **** 
+ 507:example_project.c ****   uint8_t signalArray[95]={ 0, //INITIAL CONDITION
+ 508:example_project.c ****                             1,0,1, // I
+ 509:example_project.c ****                             0,0,0,0,0,0,0,
+ 510:example_project.c ****                             1,1,1,0,1,0,1,1,1,0,1,
+ 511:example_project.c ****                             0,0,0,
+ 512:example_project.c ****                             1,0,1,1,1,
+ 513:example_project.c ****                             0,0,0,
+ 514:example_project.c ****                             1,1,1,0,1,
+ 515:example_project.c ****                             0,0,0,0,0,0,0,
+ 516:example_project.c ****                             1,1,1,0,1,1,1,
+ 517:example_project.c ****                             0,0,0,
+ 518:example_project.c ****                             1,1,1,0,1,1,1,0,1,1,1,
+ 519:example_project.c ****                             0,0,0,
+ 520:example_project.c ****                             1,0,1,1,1,0,1,
+ 521:example_project.c ****                             0,0,0,
+ 522:example_project.c ****                             1,0,1,0,1,
+ 523:example_project.c ****                             0,0,0,
+ 524:example_project.c ****                             1,
+ 525:example_project.c ****                             3};
+ 526:example_project.c ****                             
+ 527:example_project.c ****                             
+ 528:example_project.c **** int main (void)  {
+ 2493              		.loc 3 528 18
+ 2494              		.cfi_startproc
+ 2495              		@ args = 0, pretend = 0, frame = 32
+ 2496              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2497 0000 80B5     		push	{r7, lr}
+ 2498              	.LCFI45:
+ 2499              		.cfi_def_cfa_offset 8
+ 2500              		.cfi_offset 7, -8
+ 2501              		.cfi_offset 14, -4
+ 2502 0002 88B0     		sub	sp, sp, #32
+ 2503              	.LCFI46:
+ 2504              		.cfi_def_cfa_offset 40
+ 2505 0004 00AF     		add	r7, sp, #0
+ 2506              	.LCFI47:
+ 2507              		.cfi_def_cfa_register 7
+ 529:example_project.c ****   uint32_t returnCode;
+ 530:example_project.c ****   //7 0,0,0,0,0,0,0,
+ 531:example_project.c ****   //3 0,0,0,
+ 532:example_project.c **** 
+ 533:example_project.c **** // GPIO CONFIG
+ 534:example_project.c ****   XMC_GPIO_CONFIG_t config;
+ 535:example_project.c ****   config.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
+ 2508              		.loc 3 535 15
+ 2509 0006 8023     		movs	r3, #128
+ 2510 0008 3B74     		strb	r3, [r7, #16]
+ 536:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH;
+ 2511              		.loc 3 536 23
+ 2512 000a 0123     		movs	r3, #1
+ 2513 000c 7B61     		str	r3, [r7, #20]
+ 537:example_project.c ****   config.output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM;
+ 2514              		.loc 3 537 26
+ 2515 000e 0423     		movs	r3, #4
+ 2516 0010 3B76     		strb	r3, [r7, #24]
+ 538:example_project.c ****   XMC_GPIO_Init(LED1, &config);
+ 2517              		.loc 3 538 3
+ 2518 0012 07F11003 		add	r3, r7, #16
+ 2519 0016 1A46     		mov	r2, r3
+ 2520 0018 0121     		movs	r1, #1
+ 2521 001a 6048     		ldr	r0, .L61
+ 2522 001c FFF7FEFF 		bl	XMC_GPIO_Init
+ 539:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_LOW;
+ 2523              		.loc 3 539 23
+ 2524 0020 4FF48033 		mov	r3, #65536
+ 2525 0024 7B61     		str	r3, [r7, #20]
+ 540:example_project.c ****   XMC_GPIO_Init(LED2, &config);
+ 2526              		.loc 3 540 3
+ 2527 0026 07F11003 		add	r3, r7, #16
+ 2528 002a 1A46     		mov	r2, r3
+ 2529 002c 0021     		movs	r1, #0
+ 2530 002e 5B48     		ldr	r0, .L61
+ 2531 0030 FFF7FEFF 		bl	XMC_GPIO_Init
+ 541:example_project.c ****   
+ 542:example_project.c ****     const XMC_GPIO_CONFIG_t in_config = \
+ 2532              		.loc 3 542 29
+ 2533 0034 0023     		movs	r3, #0
+ 2534 0036 3B71     		strb	r3, [r7, #4]
+ 2535 0038 4FF48033 		mov	r3, #65536
+ 2536 003c BB60     		str	r3, [r7, #8]
+ 2537 003e 0023     		movs	r3, #0
+ 2538 0040 3B73     		strb	r3, [r7, #12]
+ 543:example_project.c ****       {.mode=XMC_GPIO_MODE_INPUT_TRISTATE,\
+ 544:example_project.c ****        .output_level=XMC_GPIO_OUTPUT_LEVEL_LOW,\
+ 545:example_project.c ****        .output_strength=XMC_GPIO_OUTPUT_STRENGTH_STRONG_SHARP_EDGE};
+ 546:example_project.c ****   XMC_GPIO_Init(GPIO_BUTTON1,  &in_config);
+ 2539              		.loc 3 546 3
+ 2540 0042 3B1D     		adds	r3, r7, #4
+ 2541 0044 1A46     		mov	r2, r3
+ 2542 0046 0E21     		movs	r1, #14
+ 2543 0048 5448     		ldr	r0, .L61
+ 2544 004a FFF7FEFF 		bl	XMC_GPIO_Init
+ 547:example_project.c ****   XMC_GPIO_Init(GPIO_BUTTON2,  &in_config);
+ 2545              		.loc 3 547 3
+ 2546 004e 3B1D     		adds	r3, r7, #4
+ 2547 0050 1A46     		mov	r2, r3
+ 2548 0052 0F21     		movs	r1, #15
+ 2549 0054 5148     		ldr	r0, .L61
+ 2550 0056 FFF7FEFF 		bl	XMC_GPIO_Init
+ 548:example_project.c **** 
+ 549:example_project.c **** 
+ 550:example_project.c ****   returnCode = SysTick_Config(SystemCoreClock / 1000);      /* Configure SysTick to generate an int
+ 2551              		.loc 3 550 16
+ 2552 005a 514B     		ldr	r3, .L61+4
+ 2553 005c 1B68     		ldr	r3, [r3]
+ 2554 005e 514A     		ldr	r2, .L61+8
+ 2555 0060 A2FB0323 		umull	r2, r3, r2, r3
+ 2556 0064 9B09     		lsrs	r3, r3, #6
+ 2557 0066 1846     		mov	r0, r3
+ 2558 0068 FFF7FEFF 		bl	SysTick_Config
+ 2559 006c F861     		str	r0, [r7, #28]
+ 551:example_project.c ****   
+ 552:example_project.c ****   if (returnCode != 0)  {                                   /* Check return code for errors */
+ 553:example_project.c ****     // Error Handling 
+ 554:example_project.c ****   }
+ 555:example_project.c ****   XMC_GPIO_SetOutputLow(LED1);
+ 2560              		.loc 3 555 3
+ 2561 006e 0121     		movs	r1, #1
+ 2562 0070 4A48     		ldr	r0, .L61
+ 2563 0072 FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
+ 2564              	.L58:
+ 556:example_project.c ****   
+ 557:example_project.c ****   for(;;){
+ 558:example_project.c ****       
+ 559:example_project.c ****    // The mechanism for the button locking is utilized through the flags btnTPressedFlag and btnOPr
+ 560:example_project.c ****       
+ 561:example_project.c ****     if(XMC_GPIO_GetInput(GPIO_BUTTON1) == 0) { 
+ 2565              		.loc 3 561 8
+ 2566 0076 0E21     		movs	r1, #14
+ 2567 0078 4848     		ldr	r0, .L61
+ 2568 007a FFF7FEFF 		bl	XMC_GPIO_GetInput
+ 2569 007e 0346     		mov	r3, r0
+ 2570              		.loc 3 561 7
+ 2571 0080 002B     		cmp	r3, #0
+ 2572 0082 09D1     		bne	.L49
+ 562:example_project.c ****             if (!btnTPressedFlag){
+ 2573              		.loc 3 562 17
+ 2574 0084 484B     		ldr	r3, .L61+12
+ 2575 0086 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2576 0088 83F00103 		eor	r3, r3, #1
+ 2577 008c DBB2     		uxtb	r3, r3
+ 2578              		.loc 3 562 16
+ 2579 008e 002B     		cmp	r3, #0
+ 2580 0090 02D0     		beq	.L49
+ 563:example_project.c ****                     btnOPressedFlag=true;
+ 2581              		.loc 3 563 36
+ 2582 0092 464B     		ldr	r3, .L61+16
+ 2583 0094 0122     		movs	r2, #1
+ 2584 0096 1A70     		strb	r2, [r3]
+ 2585              	.L49:
+ 564:example_project.c ****                                 }
+ 565:example_project.c ****                                                 }
+ 566:example_project.c ****     if(XMC_GPIO_GetInput(GPIO_BUTTON2) == 0) { 
+ 2586              		.loc 3 566 8
+ 2587 0098 0F21     		movs	r1, #15
+ 2588 009a 4048     		ldr	r0, .L61
+ 2589 009c FFF7FEFF 		bl	XMC_GPIO_GetInput
+ 2590 00a0 0346     		mov	r3, r0
+ 2591              		.loc 3 566 7
+ 2592 00a2 002B     		cmp	r3, #0
+ 2593 00a4 13D1     		bne	.L50
+ 567:example_project.c ****                                              if(!btnOPressedFlag){
+ 2594              		.loc 3 567 49
+ 2595 00a6 414B     		ldr	r3, .L61+16
+ 2596 00a8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2597 00aa 83F00103 		eor	r3, r3, #1
+ 2598 00ae DBB2     		uxtb	r3, r3
+ 2599              		.loc 3 567 48
+ 2600 00b0 002B     		cmp	r3, #0
+ 2601 00b2 0CD0     		beq	.L50
+ 568:example_project.c ****                                                  btnTPressedFlag=true;
+ 2602              		.loc 3 568 65
+ 2603 00b4 3C4B     		ldr	r3, .L61+12
+ 2604 00b6 0122     		movs	r2, #1
+ 2605 00b8 1A70     		strb	r2, [r3]
+ 569:example_project.c ****                                                  DecimalToArrayFunction(recordedTimeArray,timeBuffe
+ 2606              		.loc 3 569 50
+ 2607 00ba 3D4B     		ldr	r3, .L61+20
+ 2608 00bc 1B68     		ldr	r3, [r3]
+ 2609 00be 1946     		mov	r1, r3
+ 2610 00c0 3C48     		ldr	r0, .L61+24
+ 2611 00c2 FFF7FEFF 		bl	DecimalToArrayFunction
+ 570:example_project.c ****                                                  ArrayToMorse(recordedTimeArray,morseNumber);
+ 2612              		.loc 3 570 50
+ 2613 00c6 3C49     		ldr	r1, .L61+28
+ 2614 00c8 3A48     		ldr	r0, .L61+24
+ 2615 00ca FFF7FEFF 		bl	ArrayToMorse
+ 2616              	.L50:
+ 571:example_project.c ****                                                                 }
+ 572:example_project.c ****                                             }  
+ 573:example_project.c ****    
+ 574:example_project.c ****    // Btn 1 Functionality
+ 575:example_project.c ****    //
+ 576:example_project.c ****    if (btnTPressedFlag){
+ 2617              		.loc 3 576 8
+ 2618 00ce 364B     		ldr	r3, .L61+12
+ 2619 00d0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2620              		.loc 3 576 7
+ 2621 00d2 002B     		cmp	r3, #0
+ 2622 00d4 26D0     		beq	.L59
+ 577:example_project.c **** 
+ 578:example_project.c ****     switch (morseNumber[letterCounter])
+ 2623              		.loc 3 578 24
+ 2624 00d6 394B     		ldr	r3, .L61+32
+ 2625 00d8 1B68     		ldr	r3, [r3]
+ 2626 00da 374A     		ldr	r2, .L61+28
+ 2627 00dc D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 2628              		.loc 3 578 5
+ 2629 00de 032B     		cmp	r3, #3
+ 2630 00e0 0FD0     		beq	.L52
+ 2631 00e2 032B     		cmp	r3, #3
+ 2632 00e4 1FDC     		bgt	.L51
+ 2633 00e6 002B     		cmp	r3, #0
+ 2634 00e8 06D0     		beq	.L53
+ 2635 00ea 012B     		cmp	r3, #1
+ 2636 00ec 1BD1     		bne	.L51
+ 579:example_project.c ****         {
+ 580:example_project.c ****             case 1:
+ 581:example_project.c ****             XMC_GPIO_SetOutputHigh(LED1);
+ 2637              		.loc 3 581 13
+ 2638 00ee 0121     		movs	r1, #1
+ 2639 00f0 2A48     		ldr	r0, .L61
+ 2640 00f2 FFF7FEFF 		bl	XMC_GPIO_SetOutputHigh
+ 582:example_project.c ****             break;
+ 2641              		.loc 3 582 13
+ 2642 00f6 16E0     		b	.L51
+ 2643              	.L53:
+ 583:example_project.c ****             case 0:
+ 584:example_project.c ****             XMC_GPIO_SetOutputLow(LED1);
+ 2644              		.loc 3 584 13
+ 2645 00f8 0121     		movs	r1, #1
+ 2646 00fa 2848     		ldr	r0, .L61
+ 2647 00fc FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
+ 585:example_project.c ****             break;
+ 2648              		.loc 3 585 13
+ 2649 0100 11E0     		b	.L51
+ 2650              	.L52:
+ 586:example_project.c ****             case 3:  
+ 587:example_project.c ****             letterCounter=0;            
+ 2651              		.loc 3 587 26
+ 2652 0102 2E4B     		ldr	r3, .L61+32
+ 2653 0104 0022     		movs	r2, #0
+ 2654 0106 1A60     		str	r2, [r3]
+ 588:example_project.c ****             counterTMS=0;
+ 2655              		.loc 3 588 23
+ 2656 0108 2D4B     		ldr	r3, .L61+36
+ 2657 010a 0022     		movs	r2, #0
+ 2658 010c 1A60     		str	r2, [r3]
+ 589:example_project.c ****             btnTPressedFlag=false;
+ 2659              		.loc 3 589 28
+ 2660 010e 264B     		ldr	r3, .L61+12
+ 2661 0110 0022     		movs	r2, #0
+ 2662 0112 1A70     		strb	r2, [r3]
+ 590:example_project.c ****             timeBufferFlag=true;
+ 2663              		.loc 3 590 27
+ 2664 0114 2B4B     		ldr	r3, .L61+40
+ 2665 0116 0122     		movs	r2, #1
+ 2666 0118 1A70     		strb	r2, [r3]
+ 591:example_project.c ****             XMC_GPIO_SetOutputLow(LED1);
+ 2667              		.loc 3 591 13
+ 2668 011a 0121     		movs	r1, #1
+ 2669 011c 1F48     		ldr	r0, .L61
+ 2670 011e FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
+ 592:example_project.c ****             break;
+ 2671              		.loc 3 592 13
+ 2672 0122 00E0     		b	.L51
+ 2673              	.L59:
+ 593:example_project.c ****         }
+ 594:example_project.c ****    }
+ 2674              		.loc 3 594 4
+ 2675 0124 00BF     		nop
+ 2676              	.L51:
+ 595:example_project.c ****    
+ 596:example_project.c ****    if (btnOPressedFlag){
+ 2677              		.loc 3 596 8
+ 2678 0126 214B     		ldr	r3, .L61+16
+ 2679 0128 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2680              		.loc 3 596 7
+ 2681 012a 002B     		cmp	r3, #0
+ 2682 012c 34D0     		beq	.L60
+ 597:example_project.c ****        if (timeBufferFlag){
+ 2683              		.loc 3 597 12
+ 2684 012e 254B     		ldr	r3, .L61+40
+ 2685 0130 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2686              		.loc 3 597 11
+ 2687 0132 002B     		cmp	r3, #0
+ 2688 0134 09D0     		beq	.L55
+ 598:example_project.c ****        timeBuffer = counterTMS;
+ 2689              		.loc 3 598 19
+ 2690 0136 224B     		ldr	r3, .L61+36
+ 2691 0138 1B68     		ldr	r3, [r3]
+ 2692 013a 1D4A     		ldr	r2, .L61+20
+ 2693 013c 1360     		str	r3, [r2]
+ 599:example_project.c ****        counterTMS=0;
+ 2694              		.loc 3 599 18
+ 2695 013e 204B     		ldr	r3, .L61+36
+ 2696 0140 0022     		movs	r2, #0
+ 2697 0142 1A60     		str	r2, [r3]
+ 600:example_project.c ****        timeBufferFlag=false;    
+ 2698              		.loc 3 600 22
+ 2699 0144 1F4B     		ldr	r3, .L61+40
+ 2700 0146 0022     		movs	r2, #0
+ 2701 0148 1A70     		strb	r2, [r3]
+ 2702              	.L55:
+ 601:example_project.c ****                             }
+ 602:example_project.c ****         switch (signalArray[letterCounter])
+ 2703              		.loc 3 602 28
+ 2704 014a 1C4B     		ldr	r3, .L61+32
+ 2705 014c 1B68     		ldr	r3, [r3]
+ 2706 014e 1E4A     		ldr	r2, .L61+44
+ 2707 0150 D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 2708              		.loc 3 602 9
+ 2709 0152 032B     		cmp	r3, #3
+ 2710 0154 0FD0     		beq	.L56
+ 2711 0156 032B     		cmp	r3, #3
+ 2712 0158 8DDC     		bgt	.L58
+ 2713 015a 002B     		cmp	r3, #0
+ 2714 015c 06D0     		beq	.L57
+ 2715 015e 012B     		cmp	r3, #1
+ 2716 0160 89D1     		bne	.L58
+ 603:example_project.c ****         {
+ 604:example_project.c ****             case 1:
+ 605:example_project.c ****             XMC_GPIO_SetOutputHigh(LED1);
+ 2717              		.loc 3 605 13
+ 2718 0162 0121     		movs	r1, #1
+ 2719 0164 0D48     		ldr	r0, .L61
+ 2720 0166 FFF7FEFF 		bl	XMC_GPIO_SetOutputHigh
+ 606:example_project.c ****             break;
+ 2721              		.loc 3 606 13
+ 2722 016a 16E0     		b	.L54
+ 2723              	.L57:
+ 607:example_project.c ****             case 0:
+ 608:example_project.c ****             XMC_GPIO_SetOutputLow(LED1);
+ 2724              		.loc 3 608 13
+ 2725 016c 0121     		movs	r1, #1
+ 2726 016e 0B48     		ldr	r0, .L61
+ 2727 0170 FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
+ 609:example_project.c ****             break;
+ 2728              		.loc 3 609 13
+ 2729 0174 11E0     		b	.L54
+ 2730              	.L56:
+ 610:example_project.c ****             case 3:
+ 611:example_project.c ****         //         
+ 612:example_project.c ****             letterCounter=0;            
+ 2731              		.loc 3 612 26
+ 2732 0176 114B     		ldr	r3, .L61+32
+ 2733 0178 0022     		movs	r2, #0
+ 2734 017a 1A60     		str	r2, [r3]
+ 613:example_project.c ****             counterTMS=0;
+ 2735              		.loc 3 613 23
+ 2736 017c 104B     		ldr	r3, .L61+36
+ 2737 017e 0022     		movs	r2, #0
+ 2738 0180 1A60     		str	r2, [r3]
+ 614:example_project.c ****             btnOPressedFlag=false;
+ 2739              		.loc 3 614 28
+ 2740 0182 0A4B     		ldr	r3, .L61+16
+ 2741 0184 0022     		movs	r2, #0
+ 2742 0186 1A70     		strb	r2, [r3]
+ 615:example_project.c ****             timeBufferFlag=true;
+ 2743              		.loc 3 615 27
+ 2744 0188 0E4B     		ldr	r3, .L61+40
+ 2745 018a 0122     		movs	r2, #1
+ 2746 018c 1A70     		strb	r2, [r3]
+ 616:example_project.c ****             XMC_GPIO_SetOutputLow(LED1);
+ 2747              		.loc 3 616 13
+ 2748 018e 0121     		movs	r1, #1
+ 2749 0190 0248     		ldr	r0, .L61
+ 2750 0192 FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
+ 617:example_project.c ****             break;
+ 2751              		.loc 3 617 13
+ 2752 0196 00E0     		b	.L54
+ 2753              	.L60:
+ 618:example_project.c ****         }
+ 619:example_project.c ****    }//else {XMC_GPIO_SetOutputLow(LED1);}
+ 2754              		.loc 3 619 4
+ 2755 0198 00BF     		nop
+ 2756              	.L54:
+ 561:example_project.c ****             if (!btnTPressedFlag){
+ 2757              		.loc 3 561 7
+ 2758 019a 6CE7     		b	.L58
+ 2759              	.L62:
+ 2760              		.align	2
+ 2761              	.L61:
+ 2762 019c 00810248 		.word	1208123648
+ 2763 01a0 00000000 		.word	SystemCoreClock
+ 2764 01a4 D34D6210 		.word	274877907
+ 2765 01a8 00000000 		.word	btnTPressedFlag
+ 2766 01ac 00000000 		.word	btnOPressedFlag
+ 2767 01b0 00000000 		.word	timeBuffer
+ 2768 01b4 00000000 		.word	recordedTimeArray
+ 2769 01b8 00000000 		.word	morseNumber
+ 2770 01bc 00000000 		.word	letterCounter
+ 2771 01c0 00000000 		.word	counterTMS
+ 2772 01c4 00000000 		.word	timeBufferFlag
+ 2773 01c8 00000000 		.word	signalArray
+ 2774              		.cfi_endproc
+ 2775              	.LFE141:
+ 2777              		.text
+ 2778              	.Letext0:
+ 2779              		.file 4 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/mach
+ 2780              		.file 5 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
+ 2781              		.file 6 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500.
+ 2782              		.file 7 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
+ 2783              		.file 8 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_X
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 example_project.c
-     /tmp/ccsmd48L.s:19     .text.__NVIC_SetPriority:0000000000000000 $t
-     /tmp/ccsmd48L.s:24     .text.__NVIC_SetPriority:0000000000000000 __NVIC_SetPriority
-     /tmp/ccsmd48L.s:99     .text.__NVIC_SetPriority:000000000000004c $d
-     /tmp/ccsmd48L.s:105    .text.SysTick_Config:0000000000000000 $t
-     /tmp/ccsmd48L.s:110    .text.SysTick_Config:0000000000000000 SysTick_Config
-     /tmp/ccsmd48L.s:175    .text.SysTick_Config:0000000000000040 $d
-     /tmp/ccsmd48L.s:180    .text.XMC_GPIO_SetOutputHigh:0000000000000000 $t
-     /tmp/ccsmd48L.s:185    .text.XMC_GPIO_SetOutputHigh:0000000000000000 XMC_GPIO_SetOutputHigh
-     /tmp/ccsmd48L.s:231    .text.XMC_GPIO_SetOutputLow:0000000000000000 $t
-     /tmp/ccsmd48L.s:236    .text.XMC_GPIO_SetOutputLow:0000000000000000 XMC_GPIO_SetOutputLow
-     /tmp/ccsmd48L.s:281    .text.XMC_GPIO_GetInput:0000000000000000 $t
-     /tmp/ccsmd48L.s:286    .text.XMC_GPIO_GetInput:0000000000000000 XMC_GPIO_GetInput
-     /tmp/ccsmd48L.s:337    .data:0000000000000000 recordedTimeArray
-     /tmp/ccsmd48L.s:334    .data:0000000000000000 $d
-     /tmp/ccsmd48L.s:353    .bss:0000000000000000 counterTMS
-     /tmp/ccsmd48L.s:350    .bss:0000000000000000 $d
-     /tmp/ccsmd48L.s:359    .bss:0000000000000004 letterCounter
-     /tmp/ccsmd48L.s:364    .bss:0000000000000008 btnOPressedFlag
-     /tmp/ccsmd48L.s:369    .bss:0000000000000009 btnTPressedFlag
-     /tmp/ccsmd48L.s:375    .data:0000000000000028 timeBufferFlag
-     /tmp/ccsmd48L.s:382    .bss:000000000000000c timeBuffer
-     /tmp/ccsmd48L.s:385    .text.DecimalToArrayFunction:0000000000000000 $t
-     /tmp/ccsmd48L.s:391    .text.DecimalToArrayFunction:0000000000000000 DecimalToArrayFunction
-     /tmp/ccsmd48L.s:580    .text.DecimalToArrayFunction:0000000000000110 $d
-     /tmp/ccsmd48L.s:585    .text.SysTick_Handler:0000000000000000 $t
-     /tmp/ccsmd48L.s:591    .text.SysTick_Handler:0000000000000000 SysTick_Handler
-     /tmp/ccsmd48L.s:663    .text.SysTick_Handler:0000000000000054 $d
-     /tmp/ccsmd48L.s:671    .rodata:0000000000000000 $d
-     /tmp/ccsmd48L.s:682    .text.main:0000000000000000 $t
-     /tmp/ccsmd48L.s:688    .text.main:0000000000000000 main
-     /tmp/ccsmd48L.s:901    .text.main:0000000000000150 $d
+     /tmp/ccpPVugD.s:19     .text.__NVIC_SetPriority:0000000000000000 $t
+     /tmp/ccpPVugD.s:24     .text.__NVIC_SetPriority:0000000000000000 __NVIC_SetPriority
+     /tmp/ccpPVugD.s:99     .text.__NVIC_SetPriority:000000000000004c $d
+     /tmp/ccpPVugD.s:105    .text.SysTick_Config:0000000000000000 $t
+     /tmp/ccpPVugD.s:110    .text.SysTick_Config:0000000000000000 SysTick_Config
+     /tmp/ccpPVugD.s:175    .text.SysTick_Config:0000000000000040 $d
+     /tmp/ccpPVugD.s:180    .text.XMC_GPIO_SetOutputHigh:0000000000000000 $t
+     /tmp/ccpPVugD.s:185    .text.XMC_GPIO_SetOutputHigh:0000000000000000 XMC_GPIO_SetOutputHigh
+     /tmp/ccpPVugD.s:231    .text.XMC_GPIO_SetOutputLow:0000000000000000 $t
+     /tmp/ccpPVugD.s:236    .text.XMC_GPIO_SetOutputLow:0000000000000000 XMC_GPIO_SetOutputLow
+     /tmp/ccpPVugD.s:281    .text.XMC_GPIO_GetInput:0000000000000000 $t
+     /tmp/ccpPVugD.s:286    .text.XMC_GPIO_GetInput:0000000000000000 XMC_GPIO_GetInput
+     /tmp/ccpPVugD.s:337    .data:0000000000000000 recordedTimeArray
+     /tmp/ccpPVugD.s:334    .data:0000000000000000 $d
+     /tmp/ccpPVugD.s:352    .data:0000000000000028 morseNumber
+     /tmp/ccpPVugD.s:360    .bss:0000000000000000 counterTMS
+     /tmp/ccpPVugD.s:357    .bss:0000000000000000 $d
+     /tmp/ccpPVugD.s:366    .bss:0000000000000004 letterCounter
+     /tmp/ccpPVugD.s:371    .bss:0000000000000008 btnOPressedFlag
+     /tmp/ccpPVugD.s:376    .bss:0000000000000009 btnTPressedFlag
+     /tmp/ccpPVugD.s:382    .data:0000000000000348 timeBufferFlag
+     /tmp/ccpPVugD.s:389    .bss:000000000000000c timeBuffer
+     /tmp/ccpPVugD.s:392    .text.DecimalToArrayFunction:0000000000000000 $t
+     /tmp/ccpPVugD.s:398    .text.DecimalToArrayFunction:0000000000000000 DecimalToArrayFunction
+     /tmp/ccpPVugD.s:587    .text.DecimalToArrayFunction:0000000000000110 $d
+     /tmp/ccpPVugD.s:592    .text.ArrayToMorse:0000000000000000 $t
+     /tmp/ccpPVugD.s:598    .text.ArrayToMorse:0000000000000000 ArrayToMorse
+     /tmp/ccpPVugD.s:646    .text.ArrayToMorse:000000000000003c $d
+     /tmp/ccpPVugD.s:656    .text.ArrayToMorse:0000000000000064 $t
+     /tmp/ccpPVugD.s:2378   .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccpPVugD.s:2384   .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccpPVugD.s:2462   .text.SysTick_Handler:000000000000005c $d
+     /tmp/ccpPVugD.s:2475   .data:000000000000034c signalArray
+     /tmp/ccpPVugD.s:2485   .text.main:0000000000000000 $t
+     /tmp/ccpPVugD.s:2491   .text.main:0000000000000000 main
+     /tmp/ccpPVugD.s:2762   .text.main:000000000000019c $d
                            .group:0000000000000000 wm4.0.467689a90594456bf46c01d2d8793c7f
                            .group:0000000000000000 wm4.stddef.h.39.27677723d43e5b5a7afdf8d798429f1d
                            .group:0000000000000000 wm4._newlib_version.h.4.bfdf54b0af045d4a71376ae00f63a22c
@@ -3496,6 +5825,5 @@ DEFINED SYMBOLS
                            .group:0000000000000000 wm4.xmc4_gpio.h.79.ce6c49508b5a7769c66e7e3c21dcdfe4
 
 UNDEFINED SYMBOLS
-memcpy
 XMC_GPIO_Init
 SystemCoreClock
