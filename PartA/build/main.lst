@@ -33,15 +33,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_frame  00001750  00000000  00000000  0003104c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_str    00078c21  00000000  00000000  0003279c  2**0
+ 15 .debug_str    00078c22  00000000  00000000  0003279c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_loc    0000322c  00000000  00000000  000ab3bd  2**0
+ 16 .debug_loc    0000322c  00000000  00000000  000ab3be  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_ranges 00000540  00000000  00000000  000ae5e9  2**0
+ 17 .debug_ranges 00000540  00000000  00000000  000ae5ea  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .build_attributes 00000256  00000000  00000000  000aeb29  2**0
+ 18 .build_attributes 00000256  00000000  00000000  000aeb2a  2**0
                   CONTENTS, READONLY
- 19 .debug_macro  0001905f  00000000  00000000  000aed7f  2**0
+ 19 .debug_macro  0001905f  00000000  00000000  000aed80  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -317,30 +317,47 @@ __STATIC_INLINE void XMC_GPIO_SetOutputLow(XMC_GPIO_PORT_t *const port, const ui
 	...
 
 08000394 <SysTick_Handler>:
+uint32_t counterTMS = 40;                                                        /* Variable to store millisecond ticks */
+int letterCounter=0;
+
+//Interrupt handler
+
+void SysTick_Handler(void)  {     
  8000394:	b480      	push	{r7}
  8000396:	af00      	add	r7, sp, #0
+  //XMC_GPIO_ToggleOutput(LED1);                           
+  counterTMS++;                       
  8000398:	4b0d      	ldr	r3, [pc, #52]	; (80003d0 <SysTick_Handler+0x3c>)
  800039a:	681b      	ldr	r3, [r3, #0]
  800039c:	3301      	adds	r3, #1
  800039e:	4a0c      	ldr	r2, [pc, #48]	; (80003d0 <SysTick_Handler+0x3c>)
  80003a0:	6013      	str	r3, [r2, #0]
+  if (counterTMS>50){
  80003a2:	4b0b      	ldr	r3, [pc, #44]	; (80003d0 <SysTick_Handler+0x3c>)
  80003a4:	681b      	ldr	r3, [r3, #0]
- 80003a6:	2b3c      	cmp	r3, #60	; 0x3c
+ 80003a6:	2b32      	cmp	r3, #50	; 0x32
  80003a8:	d90c      	bls.n	80003c4 <SysTick_Handler+0x30>
+    if (letterCounter==0){
  80003aa:	4b0a      	ldr	r3, [pc, #40]	; (80003d4 <SysTick_Handler+0x40>)
  80003ac:	681b      	ldr	r3, [r3, #0]
  80003ae:	2b00      	cmp	r3, #0
  80003b0:	d103      	bne.n	80003ba <SysTick_Handler+0x26>
+        letterCounter=1;}
  80003b2:	4b08      	ldr	r3, [pc, #32]	; (80003d4 <SysTick_Handler+0x40>)
  80003b4:	2201      	movs	r2, #1
  80003b6:	601a      	str	r2, [r3, #0]
+    else {    
+    letterCounter++;}
+  }                         
+}
  80003b8:	e004      	b.n	80003c4 <SysTick_Handler+0x30>
+    letterCounter++;}
  80003ba:	4b06      	ldr	r3, [pc, #24]	; (80003d4 <SysTick_Handler+0x40>)
  80003bc:	681b      	ldr	r3, [r3, #0]
  80003be:	3301      	adds	r3, #1
  80003c0:	4a04      	ldr	r2, [pc, #16]	; (80003d4 <SysTick_Handler+0x40>)
  80003c2:	6013      	str	r3, [r2, #0]
+}
  80003c4:	bf00      	nop
  80003c6:	46bd      	mov	sp, r7
  80003c8:	f85d 7b04 	ldr.w	r7, [sp], #4
@@ -350,9 +367,15 @@ __STATIC_INLINE void XMC_GPIO_SetOutputLow(XMC_GPIO_PORT_t *const port, const ui
  80003d4:	20000438 	.word	0x20000438
 
 080003d8 <main>:
+  
+int main (void)  {
  80003d8:	b580      	push	{r7, lr}
  80003da:	b09c      	sub	sp, #112	; 0x70
  80003dc:	af00      	add	r7, sp, #0
+  uint32_t returnCode;
+  //7 0,0,0,0,0,0,0,
+  //3 0,0,0,
+  uint8_t signalArray[95]={ 0, //INITIAL CONDITION
  80003de:	4a26      	ldr	r2, [pc, #152]	; (8000478 <main+0xa0>)
  80003e0:	f107 030c 	add.w	r3, r7, #12
  80003e4:	4611      	mov	r1, r2
@@ -363,24 +386,38 @@ __STATIC_INLINE void XMC_GPIO_SetOutputLow(XMC_GPIO_PORT_t *const port, const ui
  80003f2:	2200      	movs	r2, #0
  80003f4:	601a      	str	r2, [r3, #0]
  80003f6:	711a      	strb	r2, [r3, #4]
+                            0,0,0,
+                            1,
+                            3};
+// GPIO CONFIG
+  XMC_GPIO_CONFIG_t config;
+  config.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
  80003f8:	2380      	movs	r3, #128	; 0x80
  80003fa:	703b      	strb	r3, [r7, #0]
+  config.output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH;
  80003fc:	2301      	movs	r3, #1
  80003fe:	607b      	str	r3, [r7, #4]
+  config.output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM;
  8000400:	2304      	movs	r3, #4
  8000402:	723b      	strb	r3, [r7, #8]
+  XMC_GPIO_Init(LED1, &config);
  8000404:	463b      	mov	r3, r7
  8000406:	461a      	mov	r2, r3
  8000408:	2101      	movs	r1, #1
  800040a:	481c      	ldr	r0, [pc, #112]	; (800047c <main+0xa4>)
  800040c:	f000 f8a4 	bl	8000558 <XMC_GPIO_Init>
+  config.output_level = XMC_GPIO_OUTPUT_LEVEL_LOW;
  8000410:	f44f 3380 	mov.w	r3, #65536	; 0x10000
  8000414:	607b      	str	r3, [r7, #4]
+  XMC_GPIO_Init(LED2, &config);
  8000416:	463b      	mov	r3, r7
  8000418:	461a      	mov	r2, r3
  800041a:	2100      	movs	r1, #0
  800041c:	4817      	ldr	r0, [pc, #92]	; (800047c <main+0xa4>)
  800041e:	f000 f89b 	bl	8000558 <XMC_GPIO_Init>
+  
+
+  returnCode = SysTick_Config(SystemCoreClock / 10);      /* Configure SysTick to generate an interrupt every 100 milliseconds */
  8000422:	4b17      	ldr	r3, [pc, #92]	; (8000480 <main+0xa8>)
  8000424:	681b      	ldr	r3, [r3, #0]
  8000426:	4a17      	ldr	r2, [pc, #92]	; (8000484 <main+0xac>)
@@ -389,6 +426,12 @@ __STATIC_INLINE void XMC_GPIO_SetOutputLow(XMC_GPIO_PORT_t *const port, const ui
  800042e:	4618      	mov	r0, r3
  8000430:	f7ff ff6a 	bl	8000308 <SysTick_Config>
  8000434:	66f8      	str	r0, [r7, #108]	; 0x6c
+  if (returnCode != 0)  {                                   /* Check return code for errors */
+    // Error Handling 
+  }
+  
+  for(;;){
+    switch (signalArray[letterCounter])
  8000436:	4b14      	ldr	r3, [pc, #80]	; (8000488 <main+0xb0>)
  8000438:	681b      	ldr	r3, [r3, #0]
  800043a:	f107 0270 	add.w	r2, r7, #112	; 0x70
@@ -402,21 +445,34 @@ __STATIC_INLINE void XMC_GPIO_SetOutputLow(XMC_GPIO_PORT_t *const port, const ui
  800044e:	d006      	beq.n	800045e <main+0x86>
  8000450:	2b01      	cmp	r3, #1
  8000452:	d1f0      	bne.n	8000436 <main+0x5e>
+    {
+    case 1:
+      XMC_GPIO_SetOutputHigh(LED1);
  8000454:	2101      	movs	r1, #1
  8000456:	4809      	ldr	r0, [pc, #36]	; (800047c <main+0xa4>)
  8000458:	f7ff ff78 	bl	800034c <XMC_GPIO_SetOutputHigh>
+      break;
  800045c:	e00b      	b.n	8000476 <main+0x9e>
+    case 0:
+      XMC_GPIO_SetOutputLow(LED1);
  800045e:	2101      	movs	r1, #1
  8000460:	4806      	ldr	r0, [pc, #24]	; (800047c <main+0xa4>)
  8000462:	f7ff ff84 	bl	800036e <XMC_GPIO_SetOutputLow>
+      break;
  8000466:	e006      	b.n	8000476 <main+0x9e>
+    case 3:
+//         
+      letterCounter=0;
  8000468:	4b07      	ldr	r3, [pc, #28]	; (8000488 <main+0xb0>)
  800046a:	2200      	movs	r2, #0
  800046c:	601a      	str	r2, [r3, #0]
+      counterTMS=0;
  800046e:	4b07      	ldr	r3, [pc, #28]	; (800048c <main+0xb4>)
  8000470:	2200      	movs	r2, #0
  8000472:	601a      	str	r2, [r3, #0]
+      break;
  8000474:	bf00      	nop
+    switch (signalArray[letterCounter])
  8000476:	e7de      	b.n	8000436 <main+0x5e>
  8000478:	08002b44 	.word	0x08002b44
  800047c:	48028100 	.word	0x48028100

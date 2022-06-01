@@ -1460,31 +1460,31 @@ DSRAM2_BSS      0x0000000030000000        0x0 load address 0x000000000c002fe0
  .debug_frame   0x0000000000001704       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
  .debug_frame   0x0000000000001724       0x2c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
 
-.debug_str      0x0000000000000000    0x78c21
+.debug_str      0x0000000000000000    0x78c22
  *(.debug_str)
- .debug_str     0x0000000000000000    0x73d5a build/example_project.o
-                                      0x7401f (size before relaxing)
- .debug_str     0x0000000000073d5a       0xd3 lib_build/xmc_gpio.o
-                                      0x737e5 (size before relaxing)
- .debug_str     0x0000000000073e2d       0x9e lib_build/xmc4_gpio.o
-                                      0x7396a (size before relaxing)
- .debug_str     0x0000000000073ecb     0x13bb lib_build/xmc_rtc.o
-                                      0x70c29 (size before relaxing)
- .debug_str     0x0000000000075286      0x18f lib_build/xmc4_rtc.o
-                                      0x70b3a (size before relaxing)
- .debug_str     0x0000000000075415     0x242d lib_build/xmc4_scu.o
-                                      0x721d5 (size before relaxing)
- .debug_str     0x0000000000077842      0xb70 lib_build/system_XMC4500.o
-                                      0x70056 (size before relaxing)
- .debug_str     0x00000000000783b2      0x520 lib_build/syscalls.o
-                                       0x7911 (size before relaxing)
- .debug_str     0x00000000000788d2      0x121 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
+ .debug_str     0x0000000000000000    0x73d5b build/example_project.o
+                                      0x74020 (size before relaxing)
+ .debug_str     0x0000000000073d5b       0xd3 lib_build/xmc_gpio.o
+                                      0x737e6 (size before relaxing)
+ .debug_str     0x0000000000073e2e       0x9e lib_build/xmc4_gpio.o
+                                      0x7396b (size before relaxing)
+ .debug_str     0x0000000000073ecc     0x13bb lib_build/xmc_rtc.o
+                                      0x70c2a (size before relaxing)
+ .debug_str     0x0000000000075287      0x18f lib_build/xmc4_rtc.o
+                                      0x70b3b (size before relaxing)
+ .debug_str     0x0000000000075416     0x242d lib_build/xmc4_scu.o
+                                      0x721d6 (size before relaxing)
+ .debug_str     0x0000000000077843      0xb70 lib_build/system_XMC4500.o
+                                      0x70057 (size before relaxing)
+ .debug_str     0x00000000000783b3      0x520 lib_build/syscalls.o
+                                       0x7912 (size before relaxing)
+ .debug_str     0x00000000000788d3      0x121 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
                                         0x5ac (size before relaxing)
- .debug_str     0x00000000000789f3       0x98 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
+ .debug_str     0x00000000000789f4       0x98 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
                                         0x59a (size before relaxing)
- .debug_str     0x0000000000078a8b       0xe8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
+ .debug_str     0x0000000000078a8c       0xe8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
                                         0x21e (size before relaxing)
- .debug_str     0x0000000000078b73       0xae /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-memcpy.o)
+ .debug_str     0x0000000000078b74       0xae /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-memcpy.o)
 
 .debug_loc      0x0000000000000000     0x322c
  *(.debug_loc)

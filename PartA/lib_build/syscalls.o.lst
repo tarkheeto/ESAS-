@@ -258,14 +258,14 @@
  167              		.file 7 "/usr/include/newlib/sys/types.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 syscalls.c
-     /tmp/ccwaLvR4.s:21     .bss:0000000000000000 __dso_handle
-     /tmp/ccwaLvR4.s:18     .bss:0000000000000000 $d
-     /tmp/ccwaLvR4.s:24     .bss:0000000000000004 heap_ptr.5853
-     /tmp/ccwaLvR4.s:28     .text._sbrk:0000000000000000 $t
-     /tmp/ccwaLvR4.s:36     .text._sbrk:0000000000000000 _sbrk
-     /tmp/ccwaLvR4.s:118    .text._sbrk:000000000000005c $d
-     /tmp/ccwaLvR4.s:125    .text._init:0000000000000000 $t
-     /tmp/ccwaLvR4.s:132    .text._init:0000000000000000 _init
+     /tmp/ccOQNx4C.s:21     .bss:0000000000000000 __dso_handle
+     /tmp/ccOQNx4C.s:18     .bss:0000000000000000 $d
+     /tmp/ccOQNx4C.s:24     .bss:0000000000000004 heap_ptr.5853
+     /tmp/ccOQNx4C.s:28     .text._sbrk:0000000000000000 $t
+     /tmp/ccOQNx4C.s:36     .text._sbrk:0000000000000000 _sbrk
+     /tmp/ccOQNx4C.s:118    .text._sbrk:000000000000005c $d
+     /tmp/ccOQNx4C.s:125    .text._init:0000000000000000 $t
+     /tmp/ccOQNx4C.s:132    .text._init:0000000000000000 _init
                            .group:0000000000000000 wm4.0.1ef749480d5223b912d851bdb3b2139f
                            .group:0000000000000000 wm4.stdint.h.29.6d480f4ba0f60596e88234283d42444f
                            .group:0000000000000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f

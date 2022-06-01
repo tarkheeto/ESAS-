@@ -8,7 +8,7 @@
 // NOTES: I took the main systick timer code from https://www.keil.com/pack/doc/cmsis/Core/html/group__SysTick__gr.html
 
 
-uint32_t counterTMS = 50;                                                        /* Variable to store millisecond ticks */
+uint32_t counterTMS = 40;                                                        /* Variable to store millisecond ticks */
 int letterCounter=0;
 
 //Interrupt handler
@@ -16,7 +16,7 @@ int letterCounter=0;
 void SysTick_Handler(void)  {     
   //XMC_GPIO_ToggleOutput(LED1);                           
   counterTMS++;                       
-  if (counterTMS>60){
+  if (counterTMS>50){
     if (letterCounter==0){
         letterCounter=1;}
     else {    

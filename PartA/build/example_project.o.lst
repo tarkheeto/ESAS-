@@ -2579,7 +2579,7 @@
  284              		.data
  285              		.align	2
  288              	counterTMS:
- 289 0000 32000000 		.word	50
+ 289 0000 28000000 		.word	40
  290              		.global	letterCounter
  291              		.bss
  292              		.align	2
@@ -2605,7 +2605,7 @@
    8:example_project.c **** // NOTES: I took the main systick timer code from https://www.keil.com/pack/doc/cmsis/Core/html/gro
    9:example_project.c **** 
   10:example_project.c **** 
-  11:example_project.c **** uint32_t counterTMS = 50;                                                        /* Variable to sto
+  11:example_project.c **** uint32_t counterTMS = 40;                                                        /* Variable to sto
   12:example_project.c **** int letterCounter=0;
   13:example_project.c **** 
   14:example_project.c **** //Interrupt handler
@@ -2631,12 +2631,12 @@
  323 0008 0133     		adds	r3, r3, #1
  324 000a 0C4A     		ldr	r2, .L18
  325 000c 1360     		str	r3, [r2]
-  19:example_project.c ****   if (counterTMS>60){
+  19:example_project.c ****   if (counterTMS>50){
  326              		.loc 3 19 17
  327 000e 0B4B     		ldr	r3, .L18
  328 0010 1B68     		ldr	r3, [r3]
  329              		.loc 3 19 6
- 330 0012 3C2B     		cmp	r3, #60
+ 330 0012 322B     		cmp	r3, #50
  331 0014 0CD9     		bls	.L17
   20:example_project.c ****     if (letterCounter==0){
  332              		.loc 3 20 22
@@ -2904,27 +2904,27 @@
  515              		.file 11 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 example_project.c
-     /tmp/ccoDhquo.s:17     .text.__NVIC_SetPriority:0000000000000000 $t
-     /tmp/ccoDhquo.s:24     .text.__NVIC_SetPriority:0000000000000000 __NVIC_SetPriority
-     /tmp/ccoDhquo.s:99     .text.__NVIC_SetPriority:000000000000004c $d
-     /tmp/ccoDhquo.s:105    .text.SysTick_Config:0000000000000000 $t
-     /tmp/ccoDhquo.s:111    .text.SysTick_Config:0000000000000000 SysTick_Config
-     /tmp/ccoDhquo.s:176    .text.SysTick_Config:0000000000000040 $d
-     /tmp/ccoDhquo.s:181    .text.XMC_GPIO_SetOutputHigh:0000000000000000 $t
-     /tmp/ccoDhquo.s:187    .text.XMC_GPIO_SetOutputHigh:0000000000000000 XMC_GPIO_SetOutputHigh
-     /tmp/ccoDhquo.s:233    .text.XMC_GPIO_SetOutputLow:0000000000000000 $t
-     /tmp/ccoDhquo.s:239    .text.XMC_GPIO_SetOutputLow:0000000000000000 XMC_GPIO_SetOutputLow
-     /tmp/ccoDhquo.s:288    .data:0000000000000000 counterTMS
-     /tmp/ccoDhquo.s:285    .data:0000000000000000 $d
-     /tmp/ccoDhquo.s:295    .bss:0000000000000000 letterCounter
-     /tmp/ccoDhquo.s:292    .bss:0000000000000000 $d
-     /tmp/ccoDhquo.s:298    .text.SysTick_Handler:0000000000000000 $t
-     /tmp/ccoDhquo.s:305    .text.SysTick_Handler:0000000000000000 SysTick_Handler
-     /tmp/ccoDhquo.s:366    .text.SysTick_Handler:000000000000003c $d
-     /tmp/ccoDhquo.s:372    .rodata:0000000000000000 $d
-     /tmp/ccoDhquo.s:383    .text.main:0000000000000000 $t
-     /tmp/ccoDhquo.s:390    .text.main:0000000000000000 main
-     /tmp/ccoDhquo.s:497    .text.main:00000000000000a0 $d
+     /tmp/ccF1tzjY.s:17     .text.__NVIC_SetPriority:0000000000000000 $t
+     /tmp/ccF1tzjY.s:24     .text.__NVIC_SetPriority:0000000000000000 __NVIC_SetPriority
+     /tmp/ccF1tzjY.s:99     .text.__NVIC_SetPriority:000000000000004c $d
+     /tmp/ccF1tzjY.s:105    .text.SysTick_Config:0000000000000000 $t
+     /tmp/ccF1tzjY.s:111    .text.SysTick_Config:0000000000000000 SysTick_Config
+     /tmp/ccF1tzjY.s:176    .text.SysTick_Config:0000000000000040 $d
+     /tmp/ccF1tzjY.s:181    .text.XMC_GPIO_SetOutputHigh:0000000000000000 $t
+     /tmp/ccF1tzjY.s:187    .text.XMC_GPIO_SetOutputHigh:0000000000000000 XMC_GPIO_SetOutputHigh
+     /tmp/ccF1tzjY.s:233    .text.XMC_GPIO_SetOutputLow:0000000000000000 $t
+     /tmp/ccF1tzjY.s:239    .text.XMC_GPIO_SetOutputLow:0000000000000000 XMC_GPIO_SetOutputLow
+     /tmp/ccF1tzjY.s:288    .data:0000000000000000 counterTMS
+     /tmp/ccF1tzjY.s:285    .data:0000000000000000 $d
+     /tmp/ccF1tzjY.s:295    .bss:0000000000000000 letterCounter
+     /tmp/ccF1tzjY.s:292    .bss:0000000000000000 $d
+     /tmp/ccF1tzjY.s:298    .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccF1tzjY.s:305    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccF1tzjY.s:366    .text.SysTick_Handler:000000000000003c $d
+     /tmp/ccF1tzjY.s:372    .rodata:0000000000000000 $d
+     /tmp/ccF1tzjY.s:383    .text.main:0000000000000000 $t
+     /tmp/ccF1tzjY.s:390    .text.main:0000000000000000 main
+     /tmp/ccF1tzjY.s:497    .text.main:00000000000000a0 $d
                            .group:0000000000000000 wm4.0.1ef749480d5223b912d851bdb3b2139f
                            .group:0000000000000000 wm4.stddef.h.39.27677723d43e5b5a7afdf8d798429f1d
                            .group:0000000000000000 wm4.stdint.h.29.6d480f4ba0f60596e88234283d42444f
