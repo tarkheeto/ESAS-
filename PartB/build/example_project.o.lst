@@ -2673,39 +2673,53 @@
  328 0024 7047     		bx	lr
  329              		.cfi_endproc
  330              	.LFE133:
- 332              		.global	counterTMS
- 333              		.bss
+ 332              		.global	recordedTimeArray
+ 333              		.data
  334              		.align	2
- 337              	counterTMS:
- 338 0000 00000000 		.space	4
- 339              		.global	letterCounter
- 340              		.align	2
- 343              	letterCounter:
- 344 0004 00000000 		.space	4
- 345              		.global	btnOPressedFlag
- 348              	btnOPressedFlag:
- 349 0008 00       		.space	1
- 350              		.global	btnTPressedFlag
- 353              	btnTPressedFlag:
- 354 0009 00       		.space	1
- 355              		.global	timeBufferFlag
- 356              		.data
- 359              	timeBufferFlag:
- 360 0000 01       		.byte	1
- 361              		.global	timeBuffer
- 362              		.bss
- 363 000a 0000     		.align	2
- 366              	timeBuffer:
- 367 000c 00000000 		.space	4
- 368              		.section	.text.SysTick_Handler,"ax",%progbits
- 369              		.align	1
- 370              		.global	SysTick_Handler
- 371              		.syntax unified
- 372              		.thumb
- 373              		.thumb_func
- 375              	SysTick_Handler:
- 376              	.LFB138:
- 377              		.file 3 "example_project.c"
+ 337              	recordedTimeArray:
+ 338 0000 E7030000 		.word	999
+ 339 0004 E7030000 		.word	999
+ 340 0008 E7030000 		.word	999
+ 341 000c E7030000 		.word	999
+ 342 0010 E7030000 		.word	999
+ 343 0014 E7030000 		.word	999
+ 344 0018 E7030000 		.word	999
+ 345 001c E7030000 		.word	999
+ 346 0020 E7030000 		.word	999
+ 347 0024 E7030000 		.word	999
+ 348              		.global	counterTMS
+ 349              		.bss
+ 350              		.align	2
+ 353              	counterTMS:
+ 354 0000 00000000 		.space	4
+ 355              		.global	letterCounter
+ 356              		.align	2
+ 359              	letterCounter:
+ 360 0004 00000000 		.space	4
+ 361              		.global	btnOPressedFlag
+ 364              	btnOPressedFlag:
+ 365 0008 00       		.space	1
+ 366              		.global	btnTPressedFlag
+ 369              	btnTPressedFlag:
+ 370 0009 00       		.space	1
+ 371              		.global	timeBufferFlag
+ 372              		.data
+ 375              	timeBufferFlag:
+ 376 0028 01       		.byte	1
+ 377              		.global	timeBuffer
+ 378              		.bss
+ 379 000a 0000     		.align	2
+ 382              	timeBuffer:
+ 383 000c 00000000 		.space	4
+ 384              		.section	.text.DecimalToArrayFunction,"ax",%progbits
+ 385              		.align	1
+ 386              		.global	DecimalToArrayFunction
+ 387              		.syntax unified
+ 388              		.thumb
+ 389              		.thumb_func
+ 391              	DecimalToArrayFunction:
+ 392              	.LFB138:
+ 393              		.file 3 "example_project.c"
    1:example_project.c **** #include <xmc_gpio.h>
    2:example_project.c **** #define TICKS_WAIT 1
    3:example_project.c **** 
@@ -2717,7 +2731,7 @@
    9:example_project.c **** 
   10:example_project.c **** // NOTES: I took the main systick timer code from https://www.keil.com/pack/doc/cmsis/Core/html/gro
   11:example_project.c **** 
-  12:example_project.c **** 
+  12:example_project.c **** int recordedTimeArray[10]={999,999,999,999,999,999,999,999,999,999};
   13:example_project.c **** uint32_t counterTMS = 0;                                                        /* Variable to stor
   14:example_project.c **** int letterCounter=0;
   15:example_project.c **** bool btnOPressedFlag=false;
@@ -2727,476 +2741,725 @@
   19:example_project.c **** 
   20:example_project.c **** //Interrupt handler
   21:example_project.c **** 
-  22:example_project.c **** void SysTick_Handler(void)  {     
- 378              		.loc 3 22 29
- 379              		.cfi_startproc
- 380              		@ args = 0, pretend = 0, frame = 0
- 381              		@ frame_needed = 1, uses_anonymous_args = 0
- 382              		@ link register save eliminated.
- 383 0000 80B4     		push	{r7}
- 384              	.LCFI29:
- 385              		.cfi_def_cfa_offset 4
- 386              		.cfi_offset 7, -4
- 387 0002 00AF     		add	r7, sp, #0
- 388              	.LCFI30:
- 389              		.cfi_def_cfa_register 7
-  23:example_project.c ****   //XMC_GPIO_ToggleOutput(LED1);                           
-  24:example_project.c ****   counterTMS++;       
- 390              		.loc 3 24 13
- 391 0004 134B     		ldr	r3, .L20
- 392 0006 1B68     		ldr	r3, [r3]
- 393 0008 0133     		adds	r3, r3, #1
- 394 000a 124A     		ldr	r2, .L20
- 395 000c 1360     		str	r3, [r2]
-  25:example_project.c ****     if(counterTMS%100==0){
- 396              		.loc 3 25 18
- 397 000e 114B     		ldr	r3, .L20
- 398 0010 1A68     		ldr	r2, [r3]
- 399 0012 114B     		ldr	r3, .L20+4
- 400 0014 A3FB0213 		umull	r1, r3, r3, r2
- 401 0018 5B09     		lsrs	r3, r3, #5
- 402 001a 6421     		movs	r1, #100
- 403 001c 01FB03F3 		mul	r3, r1, r3
- 404 0020 D31A     		subs	r3, r2, r3
- 405              		.loc 3 25 7
- 406 0022 002B     		cmp	r3, #0
- 407 0024 10D1     		bne	.L19
-  26:example_project.c ****         if (btnOPressedFlag){
- 408              		.loc 3 26 13
- 409 0026 0D4B     		ldr	r3, .L20+8
- 410 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 411              		.loc 3 26 12
- 412 002a 002B     		cmp	r3, #0
- 413 002c 0CD0     		beq	.L19
-  27:example_project.c ****             if (letterCounter==0){
- 414              		.loc 3 27 30
- 415 002e 0C4B     		ldr	r3, .L20+12
- 416 0030 1B68     		ldr	r3, [r3]
- 417              		.loc 3 27 16
- 418 0032 002B     		cmp	r3, #0
- 419 0034 03D1     		bne	.L18
-  28:example_project.c ****                 letterCounter=1;}
- 420              		.loc 3 28 30
- 421 0036 0A4B     		ldr	r3, .L20+12
- 422 0038 0122     		movs	r2, #1
- 423 003a 1A60     		str	r2, [r3]
-  29:example_project.c ****             else {    
-  30:example_project.c ****             letterCounter++;}
-  31:example_project.c ****         } 
-  32:example_project.c ****     }
-  33:example_project.c **** }
- 424              		.loc 3 33 1
- 425 003c 04E0     		b	.L19
- 426              	.L18:
-  30:example_project.c ****         } 
- 427              		.loc 3 30 26
- 428 003e 084B     		ldr	r3, .L20+12
- 429 0040 1B68     		ldr	r3, [r3]
- 430 0042 0133     		adds	r3, r3, #1
- 431 0044 064A     		ldr	r2, .L20+12
- 432 0046 1360     		str	r3, [r2]
- 433              	.L19:
- 434              		.loc 3 33 1
- 435 0048 00BF     		nop
- 436 004a BD46     		mov	sp, r7
- 437              	.LCFI31:
- 438              		.cfi_def_cfa_register 13
- 439              		@ sp needed
- 440 004c 5DF8047B 		ldr	r7, [sp], #4
- 441              	.LCFI32:
- 442              		.cfi_restore 7
- 443              		.cfi_def_cfa_offset 0
- 444 0050 7047     		bx	lr
- 445              	.L21:
- 446 0052 00BF     		.align	2
- 447              	.L20:
- 448 0054 00000000 		.word	counterTMS
- 449 0058 1F85EB51 		.word	1374389535
- 450 005c 00000000 		.word	btnOPressedFlag
- 451 0060 00000000 		.word	letterCounter
- 452              		.cfi_endproc
- 453              	.LFE138:
- 455              		.section	.rodata
- 456              		.align	2
- 457              	.LC0:
- 458 0000 00010001 		.ascii	"\000\001\000\001\000\000\000\000\000\000\000\001\001"
- 458      00000000 
- 458      00000001 
- 458      01
- 459 000d 01000100 		.ascii	"\001\000\001\000\001\001\001\000\001\000\000\000\001"
- 459      01010100 
- 459      01000000 
- 459      01
- 460 001a 00010101 		.ascii	"\000\001\001\001\000\000\000\001\001\001\000\001\000"
- 460      00000001 
- 460      01010001 
- 460      00
- 461 0027 00000000 		.ascii	"\000\000\000\000\000\000\001\001\001\000\001\001\001"
- 461      00000101 
- 461      01000101 
- 461      01
- 462 0034 00000001 		.ascii	"\000\000\000\001\001\001\000\001\001\001\000\001\001"
- 462      01010001 
- 462      01010001 
- 462      01
- 463 0041 01000000 		.ascii	"\001\000\000\000\001\000\001\001\001\000\001\000\000"
- 463      01000101 
- 463      01000100 
- 463      00
- 464 004e 00010001 		.ascii	"\000\001\000\001\000\001\000\000\000\001\003\000"
- 464      00010000 
- 464      00010300 
- 465 005a 00000000 		.space	5
- 465      00
- 466              		.section	.text.main,"ax",%progbits
- 467              		.align	1
- 468              		.global	main
- 469              		.syntax unified
- 470              		.thumb
- 471              		.thumb_func
- 473              	main:
- 474              	.LFB139:
-  34:example_project.c ****   
-  35:example_project.c **** int main (void)  {
- 475              		.loc 3 35 18
- 476              		.cfi_startproc
- 477              		@ args = 0, pretend = 0, frame = 128
- 478              		@ frame_needed = 1, uses_anonymous_args = 0
- 479 0000 80B5     		push	{r7, lr}
- 480              	.LCFI33:
- 481              		.cfi_def_cfa_offset 8
- 482              		.cfi_offset 7, -8
- 483              		.cfi_offset 14, -4
- 484 0002 A0B0     		sub	sp, sp, #128
- 485              	.LCFI34:
- 486              		.cfi_def_cfa_offset 136
- 487 0004 00AF     		add	r7, sp, #0
- 488              	.LCFI35:
- 489              		.cfi_def_cfa_register 7
-  36:example_project.c ****   uint32_t returnCode;
-  37:example_project.c ****   //7 0,0,0,0,0,0,0,
-  38:example_project.c ****   //3 0,0,0,
-  39:example_project.c ****   uint8_t signalArray[95]={ 0, //INITIAL CONDITION
- 490              		.loc 3 39 11
- 491 0006 4F4A     		ldr	r2, .L32
- 492 0008 07F11C03 		add	r3, r7, #28
- 493 000c 1146     		mov	r1, r2
- 494 000e 5A22     		movs	r2, #90
- 495 0010 1846     		mov	r0, r3
- 496 0012 FFF7FEFF 		bl	memcpy
- 497 0016 07F17603 		add	r3, r7, #118
- 498 001a 0022     		movs	r2, #0
- 499 001c 1A60     		str	r2, [r3]	@ unaligned
- 500 001e 1A71     		strb	r2, [r3, #4]
-  40:example_project.c ****                             1,0,1, // I
-  41:example_project.c ****                             0,0,0,0,0,0,0,
-  42:example_project.c ****                             1,1,1,0,1,0,1,1,1,0,1,
-  43:example_project.c ****                             0,0,0,
-  44:example_project.c ****                             1,0,1,1,1,
-  45:example_project.c ****                             0,0,0,
-  46:example_project.c ****                             1,1,1,0,1,
-  47:example_project.c ****                             0,0,0,0,0,0,0,
-  48:example_project.c ****                             1,1,1,0,1,1,1,
-  49:example_project.c ****                             0,0,0,
-  50:example_project.c ****                             1,1,1,0,1,1,1,0,1,1,1,
-  51:example_project.c ****                             0,0,0,
-  52:example_project.c ****                             1,0,1,1,1,0,1,
-  53:example_project.c ****                             0,0,0,
-  54:example_project.c ****                             1,0,1,0,1,
-  55:example_project.c ****                             0,0,0,
-  56:example_project.c ****                             1,
-  57:example_project.c ****                             3};
-  58:example_project.c **** // GPIO CONFIG
-  59:example_project.c ****   XMC_GPIO_CONFIG_t config;
-  60:example_project.c ****   config.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
- 501              		.loc 3 60 15
- 502 0020 8023     		movs	r3, #128
- 503 0022 3B74     		strb	r3, [r7, #16]
-  61:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH;
- 504              		.loc 3 61 23
- 505 0024 0123     		movs	r3, #1
- 506 0026 7B61     		str	r3, [r7, #20]
-  62:example_project.c ****   config.output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM;
- 507              		.loc 3 62 26
- 508 0028 0423     		movs	r3, #4
- 509 002a 3B76     		strb	r3, [r7, #24]
-  63:example_project.c ****   XMC_GPIO_Init(LED1, &config);
- 510              		.loc 3 63 3
- 511 002c 07F11003 		add	r3, r7, #16
- 512 0030 1A46     		mov	r2, r3
- 513 0032 0121     		movs	r1, #1
- 514 0034 4448     		ldr	r0, .L32+4
- 515 0036 FFF7FEFF 		bl	XMC_GPIO_Init
-  64:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_LOW;
- 516              		.loc 3 64 23
- 517 003a 4FF48033 		mov	r3, #65536
- 518 003e 7B61     		str	r3, [r7, #20]
-  65:example_project.c ****   XMC_GPIO_Init(LED2, &config);
- 519              		.loc 3 65 3
- 520 0040 07F11003 		add	r3, r7, #16
- 521 0044 1A46     		mov	r2, r3
- 522 0046 0021     		movs	r1, #0
- 523 0048 3F48     		ldr	r0, .L32+4
- 524 004a FFF7FEFF 		bl	XMC_GPIO_Init
-  66:example_project.c ****   
-  67:example_project.c ****     const XMC_GPIO_CONFIG_t in_config = \
- 525              		.loc 3 67 29
- 526 004e 0023     		movs	r3, #0
- 527 0050 3B71     		strb	r3, [r7, #4]
- 528 0052 4FF48033 		mov	r3, #65536
- 529 0056 BB60     		str	r3, [r7, #8]
- 530 0058 0023     		movs	r3, #0
- 531 005a 3B73     		strb	r3, [r7, #12]
-  68:example_project.c ****       {.mode=XMC_GPIO_MODE_INPUT_TRISTATE,\
-  69:example_project.c ****        .output_level=XMC_GPIO_OUTPUT_LEVEL_LOW,\
-  70:example_project.c ****        .output_strength=XMC_GPIO_OUTPUT_STRENGTH_STRONG_SHARP_EDGE};
-  71:example_project.c ****   XMC_GPIO_Init(GPIO_BUTTON1,  &in_config);
- 532              		.loc 3 71 3
- 533 005c 3B1D     		adds	r3, r7, #4
- 534 005e 1A46     		mov	r2, r3
- 535 0060 0E21     		movs	r1, #14
- 536 0062 3948     		ldr	r0, .L32+4
- 537 0064 FFF7FEFF 		bl	XMC_GPIO_Init
-  72:example_project.c ****   XMC_GPIO_Init(GPIO_BUTTON2,  &in_config);
- 538              		.loc 3 72 3
- 539 0068 3B1D     		adds	r3, r7, #4
- 540 006a 1A46     		mov	r2, r3
- 541 006c 0F21     		movs	r1, #15
- 542 006e 3648     		ldr	r0, .L32+4
- 543 0070 FFF7FEFF 		bl	XMC_GPIO_Init
-  73:example_project.c **** 
-  74:example_project.c **** 
-  75:example_project.c ****   returnCode = SysTick_Config(SystemCoreClock / 1000);      /* Configure SysTick to generate an int
- 544              		.loc 3 75 16
- 545 0074 354B     		ldr	r3, .L32+8
- 546 0076 1B68     		ldr	r3, [r3]
- 547 0078 354A     		ldr	r2, .L32+12
- 548 007a A2FB0323 		umull	r2, r3, r2, r3
- 549 007e 9B09     		lsrs	r3, r3, #6
- 550 0080 1846     		mov	r0, r3
- 551 0082 FFF7FEFF 		bl	SysTick_Config
- 552 0086 F867     		str	r0, [r7, #124]
- 553              	.L31:
-  76:example_project.c ****   
-  77:example_project.c ****   if (returnCode != 0)  {                                   /* Check return code for errors */
-  78:example_project.c ****     // Error Handling 
-  79:example_project.c ****   }
-  80:example_project.c ****   
-  81:example_project.c ****   
-  82:example_project.c ****   for(;;){
-  83:example_project.c ****       
-  84:example_project.c ****    // The mechanism for the button locking is utilized through the flags btnTPressedFlag and btnOPr
-  85:example_project.c ****       
-  86:example_project.c ****     if(XMC_GPIO_GetInput(GPIO_BUTTON1) == 0) { 
- 554              		.loc 3 86 8
- 555 0088 0E21     		movs	r1, #14
- 556 008a 2F48     		ldr	r0, .L32+4
- 557 008c FFF7FEFF 		bl	XMC_GPIO_GetInput
- 558 0090 0346     		mov	r3, r0
- 559              		.loc 3 86 7
- 560 0092 002B     		cmp	r3, #0
- 561 0094 09D1     		bne	.L23
-  87:example_project.c ****             if (!btnTPressedFlag){
- 562              		.loc 3 87 17
- 563 0096 2F4B     		ldr	r3, .L32+16
- 564 0098 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 565 009a 83F00103 		eor	r3, r3, #1
- 566 009e DBB2     		uxtb	r3, r3
- 567              		.loc 3 87 16
- 568 00a0 002B     		cmp	r3, #0
- 569 00a2 02D0     		beq	.L23
-  88:example_project.c ****                     btnOPressedFlag=true;
- 570              		.loc 3 88 36
- 571 00a4 2C4B     		ldr	r3, .L32+20
- 572 00a6 0122     		movs	r2, #1
- 573 00a8 1A70     		strb	r2, [r3]
- 574              	.L23:
-  89:example_project.c ****                                 }
-  90:example_project.c ****                                                 }
-  91:example_project.c ****     if(XMC_GPIO_GetInput(GPIO_BUTTON2) == 0) { 
- 575              		.loc 3 91 8
- 576 00aa 0F21     		movs	r1, #15
- 577 00ac 2648     		ldr	r0, .L32+4
- 578 00ae FFF7FEFF 		bl	XMC_GPIO_GetInput
- 579 00b2 0346     		mov	r3, r0
- 580              		.loc 3 91 7
- 581 00b4 002B     		cmp	r3, #0
- 582 00b6 09D1     		bne	.L24
-  92:example_project.c ****                                              if(!btnOPressedFlag){
- 583              		.loc 3 92 49
- 584 00b8 274B     		ldr	r3, .L32+20
- 585 00ba 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 586 00bc 83F00103 		eor	r3, r3, #1
- 587 00c0 DBB2     		uxtb	r3, r3
- 588              		.loc 3 92 48
- 589 00c2 002B     		cmp	r3, #0
- 590 00c4 02D0     		beq	.L24
-  93:example_project.c ****                                                  btnTPressedFlag=true;
- 591              		.loc 3 93 65
- 592 00c6 234B     		ldr	r3, .L32+16
- 593 00c8 0122     		movs	r2, #1
- 594 00ca 1A70     		strb	r2, [r3]
- 595              	.L24:
-  94:example_project.c ****                                                                 }
-  95:example_project.c ****                                             }  
-  96:example_project.c ****    
-  97:example_project.c ****    // Btn 1 Functionality
-  98:example_project.c ****    //
-  99:example_project.c ****    if (btnOPressedFlag){
- 596              		.loc 3 99 8
- 597 00cc 224B     		ldr	r3, .L32+20
- 598 00ce 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 599              		.loc 3 99 7
- 600 00d0 002B     		cmp	r3, #0
- 601 00d2 32D0     		beq	.L25
- 100:example_project.c ****        if (timeBufferFlag){
- 602              		.loc 3 100 12
- 603 00d4 214B     		ldr	r3, .L32+24
- 604 00d6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 605              		.loc 3 100 11
- 606 00d8 002B     		cmp	r3, #0
- 607 00da 09D0     		beq	.L26
- 101:example_project.c ****        timeBuffer = counterTMS;
- 608              		.loc 3 101 19
- 609 00dc 204B     		ldr	r3, .L32+28
- 610 00de 1B68     		ldr	r3, [r3]
- 611 00e0 204A     		ldr	r2, .L32+32
- 612 00e2 1360     		str	r3, [r2]
- 102:example_project.c ****        counterTMS=0;
- 613              		.loc 3 102 18
- 614 00e4 1E4B     		ldr	r3, .L32+28
- 615 00e6 0022     		movs	r2, #0
- 616 00e8 1A60     		str	r2, [r3]
- 103:example_project.c ****        timeBufferFlag=false;    
- 617              		.loc 3 103 22
- 618 00ea 1C4B     		ldr	r3, .L32+24
- 619 00ec 0022     		movs	r2, #0
- 620 00ee 1A70     		strb	r2, [r3]
- 621              	.L26:
- 104:example_project.c ****                             }
- 105:example_project.c ****         switch (signalArray[letterCounter])
- 622              		.loc 3 105 28
- 623 00f0 1D4B     		ldr	r3, .L32+36
- 624 00f2 1B68     		ldr	r3, [r3]
- 625 00f4 8033     		adds	r3, r3, #128
- 626 00f6 3B44     		add	r3, r3, r7
- 627 00f8 13F8643C 		ldrb	r3, [r3, #-100]	@ zero_extendqisi2
- 628              		.loc 3 105 9
- 629 00fc 032B     		cmp	r3, #3
- 630 00fe 0FD0     		beq	.L27
- 631 0100 032B     		cmp	r3, #3
- 632 0102 C1DC     		bgt	.L31
- 633 0104 002B     		cmp	r3, #0
- 634 0106 06D0     		beq	.L29
- 635 0108 012B     		cmp	r3, #1
- 636 010a BDD1     		bne	.L31
- 106:example_project.c ****         {
- 107:example_project.c ****             case 1:
- 108:example_project.c ****             XMC_GPIO_SetOutputHigh(LED1);
- 637              		.loc 3 108 13
- 638 010c 0121     		movs	r1, #1
- 639 010e 0E48     		ldr	r0, .L32+4
- 640 0110 FFF7FEFF 		bl	XMC_GPIO_SetOutputHigh
- 109:example_project.c ****             break;
- 641              		.loc 3 109 13
- 642 0114 15E0     		b	.L30
- 643              	.L29:
- 110:example_project.c ****             case 0:
- 111:example_project.c ****             XMC_GPIO_SetOutputLow(LED1);
- 644              		.loc 3 111 13
- 645 0116 0121     		movs	r1, #1
- 646 0118 0B48     		ldr	r0, .L32+4
- 647 011a FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
- 112:example_project.c ****             break;
- 648              		.loc 3 112 13
- 649 011e 10E0     		b	.L30
- 650              	.L27:
- 113:example_project.c ****             case 3:
- 114:example_project.c ****         //         
- 115:example_project.c ****             letterCounter=0;            
- 651              		.loc 3 115 26
- 652 0120 114B     		ldr	r3, .L32+36
- 653 0122 0022     		movs	r2, #0
- 654 0124 1A60     		str	r2, [r3]
- 116:example_project.c ****             counterTMS=0;
- 655              		.loc 3 116 23
- 656 0126 0E4B     		ldr	r3, .L32+28
- 657 0128 0022     		movs	r2, #0
- 658 012a 1A60     		str	r2, [r3]
- 117:example_project.c ****             btnOPressedFlag=false;
- 659              		.loc 3 117 28
- 660 012c 0A4B     		ldr	r3, .L32+20
- 661 012e 0022     		movs	r2, #0
- 662 0130 1A70     		strb	r2, [r3]
- 118:example_project.c ****             timeBufferFlag=true;
- 663              		.loc 3 118 27
- 664 0132 0A4B     		ldr	r3, .L32+24
- 665 0134 0122     		movs	r2, #1
- 666 0136 1A70     		strb	r2, [r3]
- 119:example_project.c ****             break;
- 667              		.loc 3 119 13
- 668 0138 03E0     		b	.L30
- 669              	.L25:
- 120:example_project.c ****         }
- 121:example_project.c ****    }else {XMC_GPIO_SetOutputLow(LED1);}
- 670              		.loc 3 121 11
- 671 013a 0121     		movs	r1, #1
- 672 013c 0248     		ldr	r0, .L32+4
- 673 013e FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
- 674              	.L30:
-  86:example_project.c ****             if (!btnTPressedFlag){
- 675              		.loc 3 86 7
- 676 0142 A1E7     		b	.L31
- 677              	.L33:
- 678              		.align	2
- 679              	.L32:
- 680 0144 00000000 		.word	.LC0
- 681 0148 00810248 		.word	1208123648
- 682 014c 00000000 		.word	SystemCoreClock
- 683 0150 D34D6210 		.word	274877907
- 684 0154 00000000 		.word	btnTPressedFlag
- 685 0158 00000000 		.word	btnOPressedFlag
- 686 015c 00000000 		.word	timeBufferFlag
- 687 0160 00000000 		.word	counterTMS
- 688 0164 00000000 		.word	timeBuffer
- 689 0168 00000000 		.word	letterCounter
- 690              		.cfi_endproc
- 691              	.LFE139:
- 693              		.text
- 694              	.Letext0:
- 695              		.file 4 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/mach
- 696              		.file 5 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
- 697              		.file 6 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500.
- 698              		.file 7 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
- 699              		.file 8 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_X
+  22:example_project.c **** 
+  23:example_project.c **** // DECIMAL TO ARRAY CODE TAKEN FROM STACK OVERFLOW https://stackoverflow.com/questions/515612/conve
+  24:example_project.c **** void DecimalToArrayFunction(int recordedTimeArray[], uint32_t timeBuffer)
+  25:example_project.c **** {  
+ 394              		.loc 3 25 1
+ 395              		.cfi_startproc
+ 396              		@ args = 0, pretend = 0, frame = 32
+ 397              		@ frame_needed = 1, uses_anonymous_args = 0
+ 398              		@ link register save eliminated.
+ 399 0000 2DE9B003 		push	{r4, r5, r7, r8, r9}
+ 400              	.LCFI29:
+ 401              		.cfi_def_cfa_offset 20
+ 402              		.cfi_offset 4, -20
+ 403              		.cfi_offset 5, -16
+ 404              		.cfi_offset 7, -12
+ 405              		.cfi_offset 8, -8
+ 406              		.cfi_offset 9, -4
+ 407 0004 89B0     		sub	sp, sp, #36
+ 408              	.LCFI30:
+ 409              		.cfi_def_cfa_offset 56
+ 410 0006 00AF     		add	r7, sp, #0
+ 411              	.LCFI31:
+ 412              		.cfi_def_cfa_register 7
+ 413 0008 7860     		str	r0, [r7, #4]
+ 414 000a 3960     		str	r1, [r7]
+  26:example_project.c ****         int c = 0; /* digit position */
+ 415              		.loc 3 26 13
+ 416 000c 0023     		movs	r3, #0
+ 417 000e 7B61     		str	r3, [r7, #20]
+  27:example_project.c ****         int n = timeBuffer;
+ 418              		.loc 3 27 13
+ 419 0010 3B68     		ldr	r3, [r7]
+ 420 0012 BB61     		str	r3, [r7, #24]
+  28:example_project.c ****         //recordedTimeArray[]={999,999,999,999,999,999,999,999,999,999};              
+  29:example_project.c ****         while (n != 0)
+ 421              		.loc 3 29 15
+ 422 0014 0AE0     		b	.L17
+ 423              	.L18:
+  30:example_project.c ****         {
+  31:example_project.c ****             n /= 10;
+ 424              		.loc 3 31 15
+ 425 0016 BB69     		ldr	r3, [r7, #24]
+ 426 0018 3D4A     		ldr	r2, .L23
+ 427 001a 82FB0312 		smull	r1, r2, r2, r3
+ 428 001e 9210     		asrs	r2, r2, #2
+ 429 0020 DB17     		asrs	r3, r3, #31
+ 430 0022 D31A     		subs	r3, r2, r3
+ 431 0024 BB61     		str	r3, [r7, #24]
+  32:example_project.c ****             c++;
+ 432              		.loc 3 32 14
+ 433 0026 7B69     		ldr	r3, [r7, #20]
+ 434 0028 0133     		adds	r3, r3, #1
+ 435 002a 7B61     		str	r3, [r7, #20]
+ 436              	.L17:
+  29:example_project.c ****         {
+ 437              		.loc 3 29 15
+ 438 002c BB69     		ldr	r3, [r7, #24]
+ 439 002e 002B     		cmp	r3, #0
+ 440 0030 F1D1     		bne	.L18
+  33:example_project.c ****         }
+  34:example_project.c ****         
+  35:example_project.c ****         int numberArray[c];
+ 441              		.loc 3 35 9
+ 442 0032 7969     		ldr	r1, [r7, #20]
+ 443 0034 6B46     		mov	r3, sp
+ 444 0036 1846     		mov	r0, r3
+ 445              		.loc 3 35 13
+ 446 0038 4B1E     		subs	r3, r1, #1
+ 447 003a FB60     		str	r3, [r7, #12]
+ 448 003c 0A46     		mov	r2, r1
+ 449 003e 0023     		movs	r3, #0
+ 450 0040 9046     		mov	r8, r2
+ 451 0042 9946     		mov	r9, r3
+ 452 0044 4FF00002 		mov	r2, #0
+ 453 0048 4FF00003 		mov	r3, #0
+ 454 004c 4FEA4913 		lsl	r3, r9, #5
+ 455 0050 43EAD863 		orr	r3, r3, r8, lsr #27
+ 456 0054 4FEA4812 		lsl	r2, r8, #5
+ 457 0058 0A46     		mov	r2, r1
+ 458 005a 0023     		movs	r3, #0
+ 459 005c 1446     		mov	r4, r2
+ 460 005e 1D46     		mov	r5, r3
+ 461 0060 4FF00002 		mov	r2, #0
+ 462 0064 4FF00003 		mov	r3, #0
+ 463 0068 6B01     		lsls	r3, r5, #5
+ 464 006a 43EAD463 		orr	r3, r3, r4, lsr #27
+ 465 006e 6201     		lsls	r2, r4, #5
+ 466 0070 0B46     		mov	r3, r1
+ 467 0072 9B00     		lsls	r3, r3, #2
+ 468 0074 0733     		adds	r3, r3, #7
+ 469 0076 DB08     		lsrs	r3, r3, #3
+ 470 0078 DB00     		lsls	r3, r3, #3
+ 471 007a ADEB030D 		sub	sp, sp, r3
+ 472 007e 6B46     		mov	r3, sp
+ 473 0080 0333     		adds	r3, r3, #3
+ 474 0082 9B08     		lsrs	r3, r3, #2
+ 475 0084 9B00     		lsls	r3, r3, #2
+ 476 0086 BB60     		str	r3, [r7, #8]
+  36:example_project.c ****         
+  37:example_project.c ****         c = 0;    
+ 477              		.loc 3 37 11
+ 478 0088 0023     		movs	r3, #0
+ 479 008a 7B61     		str	r3, [r7, #20]
+  38:example_project.c ****         n = timeBuffer;
+ 480              		.loc 3 38 11
+ 481 008c 3B68     		ldr	r3, [r7]
+ 482 008e BB61     		str	r3, [r7, #24]
+  39:example_project.c ****         
+  40:example_project.c ****         /* extract each digit */
+  41:example_project.c ****         while (n != 0)
+ 483              		.loc 3 41 15
+ 484 0090 1AE0     		b	.L19
+ 485              	.L20:
+  42:example_project.c ****         {
+  43:example_project.c ****             numberArray[c] = n % 10;
+ 486              		.loc 3 43 32
+ 487 0092 B969     		ldr	r1, [r7, #24]
+ 488 0094 1E4B     		ldr	r3, .L23
+ 489 0096 83FB0123 		smull	r2, r3, r3, r1
+ 490 009a 9A10     		asrs	r2, r3, #2
+ 491 009c CB17     		asrs	r3, r1, #31
+ 492 009e D21A     		subs	r2, r2, r3
+ 493 00a0 1346     		mov	r3, r2
+ 494 00a2 9B00     		lsls	r3, r3, #2
+ 495 00a4 1344     		add	r3, r3, r2
+ 496 00a6 5B00     		lsls	r3, r3, #1
+ 497 00a8 CA1A     		subs	r2, r1, r3
+ 498              		.loc 3 43 28
+ 499 00aa BB68     		ldr	r3, [r7, #8]
+ 500 00ac 7969     		ldr	r1, [r7, #20]
+ 501 00ae 43F82120 		str	r2, [r3, r1, lsl #2]
+  44:example_project.c ****             n /= 10;
+ 502              		.loc 3 44 15
+ 503 00b2 BB69     		ldr	r3, [r7, #24]
+ 504 00b4 164A     		ldr	r2, .L23
+ 505 00b6 82FB0312 		smull	r1, r2, r2, r3
+ 506 00ba 9210     		asrs	r2, r2, #2
+ 507 00bc DB17     		asrs	r3, r3, #31
+ 508 00be D31A     		subs	r3, r2, r3
+ 509 00c0 BB61     		str	r3, [r7, #24]
+  45:example_project.c ****             c++;
+ 510              		.loc 3 45 14
+ 511 00c2 7B69     		ldr	r3, [r7, #20]
+ 512 00c4 0133     		adds	r3, r3, #1
+ 513 00c6 7B61     		str	r3, [r7, #20]
+ 514              	.L19:
+  41:example_project.c ****         {
+ 515              		.loc 3 41 15
+ 516 00c8 BB69     		ldr	r3, [r7, #24]
+ 517 00ca 002B     		cmp	r3, #0
+ 518 00cc E1D1     		bne	.L20
+  46:example_project.c ****         }
+  47:example_project.c ****         int intracounter=0;
+ 519              		.loc 3 47 13
+ 520 00ce 0023     		movs	r3, #0
+ 521 00d0 FB61     		str	r3, [r7, #28]
+ 522              	.LBB2:
+  48:example_project.c ****         for (int i=c-1;i>=0;i--){            
+ 523              		.loc 3 48 18
+ 524 00d2 7B69     		ldr	r3, [r7, #20]
+ 525 00d4 013B     		subs	r3, r3, #1
+ 526 00d6 3B61     		str	r3, [r7, #16]
+ 527              		.loc 3 48 9
+ 528 00d8 0EE0     		b	.L21
+ 529              	.L22:
+  49:example_project.c ****             //printf("%d \n",numberArray[i]);
+  50:example_project.c ****                 recordedTimeArray[intracounter]=numberArray[i];
+ 530              		.loc 3 50 34 discriminator 3
+ 531 00da FB69     		ldr	r3, [r7, #28]
+ 532 00dc 9B00     		lsls	r3, r3, #2
+ 533 00de 7A68     		ldr	r2, [r7, #4]
+ 534 00e0 1344     		add	r3, r3, r2
+ 535              		.loc 3 50 60 discriminator 3
+ 536 00e2 BA68     		ldr	r2, [r7, #8]
+ 537 00e4 3969     		ldr	r1, [r7, #16]
+ 538 00e6 52F82120 		ldr	r2, [r2, r1, lsl #2]
+ 539              		.loc 3 50 48 discriminator 3
+ 540 00ea 1A60     		str	r2, [r3]
+  51:example_project.c ****                 intracounter++;
+ 541              		.loc 3 51 29 discriminator 3
+ 542 00ec FB69     		ldr	r3, [r7, #28]
+ 543 00ee 0133     		adds	r3, r3, #1
+ 544 00f0 FB61     		str	r3, [r7, #28]
+  48:example_project.c ****         for (int i=c-1;i>=0;i--){            
+ 545              		.loc 3 48 30 discriminator 3
+ 546 00f2 3B69     		ldr	r3, [r7, #16]
+ 547 00f4 013B     		subs	r3, r3, #1
+ 548 00f6 3B61     		str	r3, [r7, #16]
+ 549              	.L21:
+  48:example_project.c ****         for (int i=c-1;i>=0;i--){            
+ 550              		.loc 3 48 9 discriminator 1
+ 551 00f8 3B69     		ldr	r3, [r7, #16]
+ 552 00fa 002B     		cmp	r3, #0
+ 553 00fc EDDA     		bge	.L22
+ 554              	.LBE2:
+  52:example_project.c ****         }
+  53:example_project.c ****         intracounter=0;
+ 555              		.loc 3 53 21
+ 556 00fe 0023     		movs	r3, #0
+ 557 0100 FB61     		str	r3, [r7, #28]
+ 558 0102 8546     		mov	sp, r0
+  54:example_project.c **** 
+  55:example_project.c **** }
+ 559              		.loc 3 55 1
+ 560 0104 00BF     		nop
+ 561 0106 2437     		adds	r7, r7, #36
+ 562              	.LCFI32:
+ 563              		.cfi_def_cfa_offset 20
+ 564 0108 BD46     		mov	sp, r7
+ 565              	.LCFI33:
+ 566              		.cfi_def_cfa_register 13
+ 567              		@ sp needed
+ 568 010a BDE8B003 		pop	{r4, r5, r7, r8, r9}
+ 569              	.LCFI34:
+ 570              		.cfi_restore 9
+ 571              		.cfi_restore 8
+ 572              		.cfi_restore 7
+ 573              		.cfi_restore 5
+ 574              		.cfi_restore 4
+ 575              		.cfi_def_cfa_offset 0
+ 576 010e 7047     		bx	lr
+ 577              	.L24:
+ 578              		.align	2
+ 579              	.L23:
+ 580 0110 67666666 		.word	1717986919
+ 581              		.cfi_endproc
+ 582              	.LFE138:
+ 584              		.section	.text.SysTick_Handler,"ax",%progbits
+ 585              		.align	1
+ 586              		.global	SysTick_Handler
+ 587              		.syntax unified
+ 588              		.thumb
+ 589              		.thumb_func
+ 591              	SysTick_Handler:
+ 592              	.LFB139:
+  56:example_project.c **** 
+  57:example_project.c **** void SysTick_Handler(void)  {     
+ 593              		.loc 3 57 29
+ 594              		.cfi_startproc
+ 595              		@ args = 0, pretend = 0, frame = 0
+ 596              		@ frame_needed = 1, uses_anonymous_args = 0
+ 597              		@ link register save eliminated.
+ 598 0000 80B4     		push	{r7}
+ 599              	.LCFI35:
+ 600              		.cfi_def_cfa_offset 4
+ 601              		.cfi_offset 7, -4
+ 602 0002 00AF     		add	r7, sp, #0
+ 603              	.LCFI36:
+ 604              		.cfi_def_cfa_register 7
+  58:example_project.c ****   //XMC_GPIO_ToggleOutput(LED1);                           
+  59:example_project.c ****   counterTMS++;       
+ 605              		.loc 3 59 13
+ 606 0004 134B     		ldr	r3, .L29
+ 607 0006 1B68     		ldr	r3, [r3]
+ 608 0008 0133     		adds	r3, r3, #1
+ 609 000a 124A     		ldr	r2, .L29
+ 610 000c 1360     		str	r3, [r2]
+  60:example_project.c ****     if(counterTMS%100==0){
+ 611              		.loc 3 60 18
+ 612 000e 114B     		ldr	r3, .L29
+ 613 0010 1A68     		ldr	r2, [r3]
+ 614 0012 114B     		ldr	r3, .L29+4
+ 615 0014 A3FB0213 		umull	r1, r3, r3, r2
+ 616 0018 5B09     		lsrs	r3, r3, #5
+ 617 001a 6421     		movs	r1, #100
+ 618 001c 01FB03F3 		mul	r3, r1, r3
+ 619 0020 D31A     		subs	r3, r2, r3
+ 620              		.loc 3 60 7
+ 621 0022 002B     		cmp	r3, #0
+ 622 0024 10D1     		bne	.L28
+  61:example_project.c ****         if (btnOPressedFlag){
+ 623              		.loc 3 61 13
+ 624 0026 0D4B     		ldr	r3, .L29+8
+ 625 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 626              		.loc 3 61 12
+ 627 002a 002B     		cmp	r3, #0
+ 628 002c 0CD0     		beq	.L28
+  62:example_project.c ****             if (letterCounter==0){
+ 629              		.loc 3 62 30
+ 630 002e 0C4B     		ldr	r3, .L29+12
+ 631 0030 1B68     		ldr	r3, [r3]
+ 632              		.loc 3 62 16
+ 633 0032 002B     		cmp	r3, #0
+ 634 0034 03D1     		bne	.L27
+  63:example_project.c ****                 letterCounter=1;}
+ 635              		.loc 3 63 30
+ 636 0036 0A4B     		ldr	r3, .L29+12
+ 637 0038 0122     		movs	r2, #1
+ 638 003a 1A60     		str	r2, [r3]
+  64:example_project.c ****             else {    
+  65:example_project.c ****             letterCounter++;}
+  66:example_project.c ****         } 
+  67:example_project.c ****     }
+  68:example_project.c **** }
+ 639              		.loc 3 68 1
+ 640 003c 04E0     		b	.L28
+ 641              	.L27:
+  65:example_project.c ****         } 
+ 642              		.loc 3 65 26
+ 643 003e 084B     		ldr	r3, .L29+12
+ 644 0040 1B68     		ldr	r3, [r3]
+ 645 0042 0133     		adds	r3, r3, #1
+ 646 0044 064A     		ldr	r2, .L29+12
+ 647 0046 1360     		str	r3, [r2]
+ 648              	.L28:
+ 649              		.loc 3 68 1
+ 650 0048 00BF     		nop
+ 651 004a BD46     		mov	sp, r7
+ 652              	.LCFI37:
+ 653              		.cfi_def_cfa_register 13
+ 654              		@ sp needed
+ 655 004c 5DF8047B 		ldr	r7, [sp], #4
+ 656              	.LCFI38:
+ 657              		.cfi_restore 7
+ 658              		.cfi_def_cfa_offset 0
+ 659 0050 7047     		bx	lr
+ 660              	.L30:
+ 661 0052 00BF     		.align	2
+ 662              	.L29:
+ 663 0054 00000000 		.word	counterTMS
+ 664 0058 1F85EB51 		.word	1374389535
+ 665 005c 00000000 		.word	btnOPressedFlag
+ 666 0060 00000000 		.word	letterCounter
+ 667              		.cfi_endproc
+ 668              	.LFE139:
+ 670              		.section	.rodata
+ 671              		.align	2
+ 672              	.LC0:
+ 673 0000 00010001 		.ascii	"\000\001\000\001\000\000\000\000\000\000\000\001\001"
+ 673      00000000 
+ 673      00000001 
+ 673      01
+ 674 000d 01000100 		.ascii	"\001\000\001\000\001\001\001\000\001\000\000\000\001"
+ 674      01010100 
+ 674      01000000 
+ 674      01
+ 675 001a 00010101 		.ascii	"\000\001\001\001\000\000\000\001\001\001\000\001\000"
+ 675      00000001 
+ 675      01010001 
+ 675      00
+ 676 0027 00000000 		.ascii	"\000\000\000\000\000\000\001\001\001\000\001\001\001"
+ 676      00000101 
+ 676      01000101 
+ 676      01
+ 677 0034 00000001 		.ascii	"\000\000\000\001\001\001\000\001\001\001\000\001\001"
+ 677      01010001 
+ 677      01010001 
+ 677      01
+ 678 0041 01000000 		.ascii	"\001\000\000\000\001\000\001\001\001\000\001\000\000"
+ 678      01000101 
+ 678      01000100 
+ 678      00
+ 679 004e 00010001 		.ascii	"\000\001\000\001\000\001\000\000\000\001\003\000"
+ 679      00010000 
+ 679      00010300 
+ 680 005a 00000000 		.space	5
+ 680      00
+ 681              		.section	.text.main,"ax",%progbits
+ 682              		.align	1
+ 683              		.global	main
+ 684              		.syntax unified
+ 685              		.thumb
+ 686              		.thumb_func
+ 688              	main:
+ 689              	.LFB140:
+  69:example_project.c ****   
+  70:example_project.c **** int main (void)  {
+ 690              		.loc 3 70 18
+ 691              		.cfi_startproc
+ 692              		@ args = 0, pretend = 0, frame = 128
+ 693              		@ frame_needed = 1, uses_anonymous_args = 0
+ 694 0000 80B5     		push	{r7, lr}
+ 695              	.LCFI39:
+ 696              		.cfi_def_cfa_offset 8
+ 697              		.cfi_offset 7, -8
+ 698              		.cfi_offset 14, -4
+ 699 0002 A0B0     		sub	sp, sp, #128
+ 700              	.LCFI40:
+ 701              		.cfi_def_cfa_offset 136
+ 702 0004 00AF     		add	r7, sp, #0
+ 703              	.LCFI41:
+ 704              		.cfi_def_cfa_register 7
+  71:example_project.c ****   uint32_t returnCode;
+  72:example_project.c ****   //7 0,0,0,0,0,0,0,
+  73:example_project.c ****   //3 0,0,0,
+  74:example_project.c ****   uint8_t signalArray[95]={ 0, //INITIAL CONDITION
+ 705              		.loc 3 74 11
+ 706 0006 524A     		ldr	r2, .L41
+ 707 0008 07F11C03 		add	r3, r7, #28
+ 708 000c 1146     		mov	r1, r2
+ 709 000e 5A22     		movs	r2, #90
+ 710 0010 1846     		mov	r0, r3
+ 711 0012 FFF7FEFF 		bl	memcpy
+ 712 0016 07F17603 		add	r3, r7, #118
+ 713 001a 0022     		movs	r2, #0
+ 714 001c 1A60     		str	r2, [r3]	@ unaligned
+ 715 001e 1A71     		strb	r2, [r3, #4]
+  75:example_project.c ****                             1,0,1, // I
+  76:example_project.c ****                             0,0,0,0,0,0,0,
+  77:example_project.c ****                             1,1,1,0,1,0,1,1,1,0,1,
+  78:example_project.c ****                             0,0,0,
+  79:example_project.c ****                             1,0,1,1,1,
+  80:example_project.c ****                             0,0,0,
+  81:example_project.c ****                             1,1,1,0,1,
+  82:example_project.c ****                             0,0,0,0,0,0,0,
+  83:example_project.c ****                             1,1,1,0,1,1,1,
+  84:example_project.c ****                             0,0,0,
+  85:example_project.c ****                             1,1,1,0,1,1,1,0,1,1,1,
+  86:example_project.c ****                             0,0,0,
+  87:example_project.c ****                             1,0,1,1,1,0,1,
+  88:example_project.c ****                             0,0,0,
+  89:example_project.c ****                             1,0,1,0,1,
+  90:example_project.c ****                             0,0,0,
+  91:example_project.c ****                             1,
+  92:example_project.c ****                             3};
+  93:example_project.c **** // GPIO CONFIG
+  94:example_project.c ****   XMC_GPIO_CONFIG_t config;
+  95:example_project.c ****   config.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
+ 716              		.loc 3 95 15
+ 717 0020 8023     		movs	r3, #128
+ 718 0022 3B74     		strb	r3, [r7, #16]
+  96:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH;
+ 719              		.loc 3 96 23
+ 720 0024 0123     		movs	r3, #1
+ 721 0026 7B61     		str	r3, [r7, #20]
+  97:example_project.c ****   config.output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM;
+ 722              		.loc 3 97 26
+ 723 0028 0423     		movs	r3, #4
+ 724 002a 3B76     		strb	r3, [r7, #24]
+  98:example_project.c ****   XMC_GPIO_Init(LED1, &config);
+ 725              		.loc 3 98 3
+ 726 002c 07F11003 		add	r3, r7, #16
+ 727 0030 1A46     		mov	r2, r3
+ 728 0032 0121     		movs	r1, #1
+ 729 0034 4748     		ldr	r0, .L41+4
+ 730 0036 FFF7FEFF 		bl	XMC_GPIO_Init
+  99:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_LOW;
+ 731              		.loc 3 99 23
+ 732 003a 4FF48033 		mov	r3, #65536
+ 733 003e 7B61     		str	r3, [r7, #20]
+ 100:example_project.c ****   XMC_GPIO_Init(LED2, &config);
+ 734              		.loc 3 100 3
+ 735 0040 07F11003 		add	r3, r7, #16
+ 736 0044 1A46     		mov	r2, r3
+ 737 0046 0021     		movs	r1, #0
+ 738 0048 4248     		ldr	r0, .L41+4
+ 739 004a FFF7FEFF 		bl	XMC_GPIO_Init
+ 101:example_project.c ****   
+ 102:example_project.c ****     const XMC_GPIO_CONFIG_t in_config = \
+ 740              		.loc 3 102 29
+ 741 004e 0023     		movs	r3, #0
+ 742 0050 3B71     		strb	r3, [r7, #4]
+ 743 0052 4FF48033 		mov	r3, #65536
+ 744 0056 BB60     		str	r3, [r7, #8]
+ 745 0058 0023     		movs	r3, #0
+ 746 005a 3B73     		strb	r3, [r7, #12]
+ 103:example_project.c ****       {.mode=XMC_GPIO_MODE_INPUT_TRISTATE,\
+ 104:example_project.c ****        .output_level=XMC_GPIO_OUTPUT_LEVEL_LOW,\
+ 105:example_project.c ****        .output_strength=XMC_GPIO_OUTPUT_STRENGTH_STRONG_SHARP_EDGE};
+ 106:example_project.c ****   XMC_GPIO_Init(GPIO_BUTTON1,  &in_config);
+ 747              		.loc 3 106 3
+ 748 005c 3B1D     		adds	r3, r7, #4
+ 749 005e 1A46     		mov	r2, r3
+ 750 0060 0E21     		movs	r1, #14
+ 751 0062 3C48     		ldr	r0, .L41+4
+ 752 0064 FFF7FEFF 		bl	XMC_GPIO_Init
+ 107:example_project.c ****   XMC_GPIO_Init(GPIO_BUTTON2,  &in_config);
+ 753              		.loc 3 107 3
+ 754 0068 3B1D     		adds	r3, r7, #4
+ 755 006a 1A46     		mov	r2, r3
+ 756 006c 0F21     		movs	r1, #15
+ 757 006e 3948     		ldr	r0, .L41+4
+ 758 0070 FFF7FEFF 		bl	XMC_GPIO_Init
+ 108:example_project.c **** 
+ 109:example_project.c **** 
+ 110:example_project.c ****   returnCode = SysTick_Config(SystemCoreClock / 1000);      /* Configure SysTick to generate an int
+ 759              		.loc 3 110 16
+ 760 0074 384B     		ldr	r3, .L41+8
+ 761 0076 1B68     		ldr	r3, [r3]
+ 762 0078 384A     		ldr	r2, .L41+12
+ 763 007a A2FB0323 		umull	r2, r3, r2, r3
+ 764 007e 9B09     		lsrs	r3, r3, #6
+ 765 0080 1846     		mov	r0, r3
+ 766 0082 FFF7FEFF 		bl	SysTick_Config
+ 767 0086 F867     		str	r0, [r7, #124]
+ 768              	.L40:
+ 111:example_project.c ****   
+ 112:example_project.c ****   if (returnCode != 0)  {                                   /* Check return code for errors */
+ 113:example_project.c ****     // Error Handling 
+ 114:example_project.c ****   }
+ 115:example_project.c ****   
+ 116:example_project.c ****   
+ 117:example_project.c ****   for(;;){
+ 118:example_project.c ****       
+ 119:example_project.c ****    // The mechanism for the button locking is utilized through the flags btnTPressedFlag and btnOPr
+ 120:example_project.c ****       
+ 121:example_project.c ****     if(XMC_GPIO_GetInput(GPIO_BUTTON1) == 0) { 
+ 769              		.loc 3 121 8
+ 770 0088 0E21     		movs	r1, #14
+ 771 008a 3248     		ldr	r0, .L41+4
+ 772 008c FFF7FEFF 		bl	XMC_GPIO_GetInput
+ 773 0090 0346     		mov	r3, r0
+ 774              		.loc 3 121 7
+ 775 0092 002B     		cmp	r3, #0
+ 776 0094 09D1     		bne	.L32
+ 122:example_project.c ****             if (!btnTPressedFlag){
+ 777              		.loc 3 122 17
+ 778 0096 324B     		ldr	r3, .L41+16
+ 779 0098 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 780 009a 83F00103 		eor	r3, r3, #1
+ 781 009e DBB2     		uxtb	r3, r3
+ 782              		.loc 3 122 16
+ 783 00a0 002B     		cmp	r3, #0
+ 784 00a2 02D0     		beq	.L32
+ 123:example_project.c ****                     btnOPressedFlag=true;
+ 785              		.loc 3 123 36
+ 786 00a4 2F4B     		ldr	r3, .L41+20
+ 787 00a6 0122     		movs	r2, #1
+ 788 00a8 1A70     		strb	r2, [r3]
+ 789              	.L32:
+ 124:example_project.c ****                                 }
+ 125:example_project.c ****                                                 }
+ 126:example_project.c ****     if(XMC_GPIO_GetInput(GPIO_BUTTON2) == 0) { 
+ 790              		.loc 3 126 8
+ 791 00aa 0F21     		movs	r1, #15
+ 792 00ac 2948     		ldr	r0, .L41+4
+ 793 00ae FFF7FEFF 		bl	XMC_GPIO_GetInput
+ 794 00b2 0346     		mov	r3, r0
+ 795              		.loc 3 126 7
+ 796 00b4 002B     		cmp	r3, #0
+ 797 00b6 0FD1     		bne	.L33
+ 127:example_project.c ****                                              if(!btnOPressedFlag){
+ 798              		.loc 3 127 49
+ 799 00b8 2A4B     		ldr	r3, .L41+20
+ 800 00ba 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 801 00bc 83F00103 		eor	r3, r3, #1
+ 802 00c0 DBB2     		uxtb	r3, r3
+ 803              		.loc 3 127 48
+ 804 00c2 002B     		cmp	r3, #0
+ 805 00c4 08D0     		beq	.L33
+ 128:example_project.c ****                                                  btnTPressedFlag=true;
+ 806              		.loc 3 128 65
+ 807 00c6 264B     		ldr	r3, .L41+16
+ 808 00c8 0122     		movs	r2, #1
+ 809 00ca 1A70     		strb	r2, [r3]
+ 129:example_project.c ****                                                  DecimalToArrayFunction(recordedTimeArray,timeBuffe
+ 810              		.loc 3 129 50
+ 811 00cc 264B     		ldr	r3, .L41+24
+ 812 00ce 1B68     		ldr	r3, [r3]
+ 813 00d0 1946     		mov	r1, r3
+ 814 00d2 2648     		ldr	r0, .L41+28
+ 815 00d4 FFF7FEFF 		bl	DecimalToArrayFunction
+ 816              	.L33:
+ 130:example_project.c ****                                                                 }
+ 131:example_project.c ****                                             }  
+ 132:example_project.c ****    
+ 133:example_project.c ****    // Btn 1 Functionality
+ 134:example_project.c ****    //
+ 135:example_project.c ****    if (btnOPressedFlag){
+ 817              		.loc 3 135 8
+ 818 00d8 224B     		ldr	r3, .L41+20
+ 819 00da 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 820              		.loc 3 135 7
+ 821 00dc 002B     		cmp	r3, #0
+ 822 00de 32D0     		beq	.L34
+ 136:example_project.c ****        if (timeBufferFlag){
+ 823              		.loc 3 136 12
+ 824 00e0 234B     		ldr	r3, .L41+32
+ 825 00e2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 826              		.loc 3 136 11
+ 827 00e4 002B     		cmp	r3, #0
+ 828 00e6 09D0     		beq	.L35
+ 137:example_project.c ****        timeBuffer = counterTMS;
+ 829              		.loc 3 137 19
+ 830 00e8 224B     		ldr	r3, .L41+36
+ 831 00ea 1B68     		ldr	r3, [r3]
+ 832 00ec 1E4A     		ldr	r2, .L41+24
+ 833 00ee 1360     		str	r3, [r2]
+ 138:example_project.c ****        counterTMS=0;
+ 834              		.loc 3 138 18
+ 835 00f0 204B     		ldr	r3, .L41+36
+ 836 00f2 0022     		movs	r2, #0
+ 837 00f4 1A60     		str	r2, [r3]
+ 139:example_project.c ****        timeBufferFlag=false;    
+ 838              		.loc 3 139 22
+ 839 00f6 1E4B     		ldr	r3, .L41+32
+ 840 00f8 0022     		movs	r2, #0
+ 841 00fa 1A70     		strb	r2, [r3]
+ 842              	.L35:
+ 140:example_project.c ****                             }
+ 141:example_project.c ****         switch (signalArray[letterCounter])
+ 843              		.loc 3 141 28
+ 844 00fc 1E4B     		ldr	r3, .L41+40
+ 845 00fe 1B68     		ldr	r3, [r3]
+ 846 0100 8033     		adds	r3, r3, #128
+ 847 0102 3B44     		add	r3, r3, r7
+ 848 0104 13F8643C 		ldrb	r3, [r3, #-100]	@ zero_extendqisi2
+ 849              		.loc 3 141 9
+ 850 0108 032B     		cmp	r3, #3
+ 851 010a 0FD0     		beq	.L36
+ 852 010c 032B     		cmp	r3, #3
+ 853 010e BBDC     		bgt	.L40
+ 854 0110 002B     		cmp	r3, #0
+ 855 0112 06D0     		beq	.L38
+ 856 0114 012B     		cmp	r3, #1
+ 857 0116 B7D1     		bne	.L40
+ 142:example_project.c ****         {
+ 143:example_project.c ****             case 1:
+ 144:example_project.c ****             XMC_GPIO_SetOutputHigh(LED1);
+ 858              		.loc 3 144 13
+ 859 0118 0121     		movs	r1, #1
+ 860 011a 0E48     		ldr	r0, .L41+4
+ 861 011c FFF7FEFF 		bl	XMC_GPIO_SetOutputHigh
+ 145:example_project.c ****             break;
+ 862              		.loc 3 145 13
+ 863 0120 15E0     		b	.L39
+ 864              	.L38:
+ 146:example_project.c ****             case 0:
+ 147:example_project.c ****             XMC_GPIO_SetOutputLow(LED1);
+ 865              		.loc 3 147 13
+ 866 0122 0121     		movs	r1, #1
+ 867 0124 0B48     		ldr	r0, .L41+4
+ 868 0126 FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
+ 148:example_project.c ****             break;
+ 869              		.loc 3 148 13
+ 870 012a 10E0     		b	.L39
+ 871              	.L36:
+ 149:example_project.c ****             case 3:
+ 150:example_project.c ****         //         
+ 151:example_project.c ****             letterCounter=0;            
+ 872              		.loc 3 151 26
+ 873 012c 124B     		ldr	r3, .L41+40
+ 874 012e 0022     		movs	r2, #0
+ 875 0130 1A60     		str	r2, [r3]
+ 152:example_project.c ****             counterTMS=0;
+ 876              		.loc 3 152 23
+ 877 0132 104B     		ldr	r3, .L41+36
+ 878 0134 0022     		movs	r2, #0
+ 879 0136 1A60     		str	r2, [r3]
+ 153:example_project.c ****             btnOPressedFlag=false;
+ 880              		.loc 3 153 28
+ 881 0138 0A4B     		ldr	r3, .L41+20
+ 882 013a 0022     		movs	r2, #0
+ 883 013c 1A70     		strb	r2, [r3]
+ 154:example_project.c ****             timeBufferFlag=true;
+ 884              		.loc 3 154 27
+ 885 013e 0C4B     		ldr	r3, .L41+32
+ 886 0140 0122     		movs	r2, #1
+ 887 0142 1A70     		strb	r2, [r3]
+ 155:example_project.c ****             break;
+ 888              		.loc 3 155 13
+ 889 0144 03E0     		b	.L39
+ 890              	.L34:
+ 156:example_project.c ****         }
+ 157:example_project.c ****    }else {XMC_GPIO_SetOutputLow(LED1);}
+ 891              		.loc 3 157 11
+ 892 0146 0121     		movs	r1, #1
+ 893 0148 0248     		ldr	r0, .L41+4
+ 894 014a FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
+ 895              	.L39:
+ 121:example_project.c ****             if (!btnTPressedFlag){
+ 896              		.loc 3 121 7
+ 897 014e 9BE7     		b	.L40
+ 898              	.L42:
+ 899              		.align	2
+ 900              	.L41:
+ 901 0150 00000000 		.word	.LC0
+ 902 0154 00810248 		.word	1208123648
+ 903 0158 00000000 		.word	SystemCoreClock
+ 904 015c D34D6210 		.word	274877907
+ 905 0160 00000000 		.word	btnTPressedFlag
+ 906 0164 00000000 		.word	btnOPressedFlag
+ 907 0168 00000000 		.word	timeBuffer
+ 908 016c 00000000 		.word	recordedTimeArray
+ 909 0170 00000000 		.word	timeBufferFlag
+ 910 0174 00000000 		.word	counterTMS
+ 911 0178 00000000 		.word	letterCounter
+ 912              		.cfi_endproc
+ 913              	.LFE140:
+ 915              		.text
+ 916              	.Letext0:
+ 917              		.file 4 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/mach
+ 918              		.file 5 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
+ 919              		.file 6 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500.
+ 920              		.file 7 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
+ 921              		.file 8 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_X
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 example_project.c
-     /tmp/ccJJxN7o.s:19     .text.__NVIC_SetPriority:0000000000000000 $t
-     /tmp/ccJJxN7o.s:24     .text.__NVIC_SetPriority:0000000000000000 __NVIC_SetPriority
-     /tmp/ccJJxN7o.s:99     .text.__NVIC_SetPriority:000000000000004c $d
-     /tmp/ccJJxN7o.s:105    .text.SysTick_Config:0000000000000000 $t
-     /tmp/ccJJxN7o.s:110    .text.SysTick_Config:0000000000000000 SysTick_Config
-     /tmp/ccJJxN7o.s:175    .text.SysTick_Config:0000000000000040 $d
-     /tmp/ccJJxN7o.s:180    .text.XMC_GPIO_SetOutputHigh:0000000000000000 $t
-     /tmp/ccJJxN7o.s:185    .text.XMC_GPIO_SetOutputHigh:0000000000000000 XMC_GPIO_SetOutputHigh
-     /tmp/ccJJxN7o.s:231    .text.XMC_GPIO_SetOutputLow:0000000000000000 $t
-     /tmp/ccJJxN7o.s:236    .text.XMC_GPIO_SetOutputLow:0000000000000000 XMC_GPIO_SetOutputLow
-     /tmp/ccJJxN7o.s:281    .text.XMC_GPIO_GetInput:0000000000000000 $t
-     /tmp/ccJJxN7o.s:286    .text.XMC_GPIO_GetInput:0000000000000000 XMC_GPIO_GetInput
-     /tmp/ccJJxN7o.s:337    .bss:0000000000000000 counterTMS
-     /tmp/ccJJxN7o.s:334    .bss:0000000000000000 $d
-     /tmp/ccJJxN7o.s:343    .bss:0000000000000004 letterCounter
-     /tmp/ccJJxN7o.s:348    .bss:0000000000000008 btnOPressedFlag
-     /tmp/ccJJxN7o.s:353    .bss:0000000000000009 btnTPressedFlag
-     /tmp/ccJJxN7o.s:359    .data:0000000000000000 timeBufferFlag
-     /tmp/ccJJxN7o.s:366    .bss:000000000000000c timeBuffer
-     /tmp/ccJJxN7o.s:369    .text.SysTick_Handler:0000000000000000 $t
-     /tmp/ccJJxN7o.s:375    .text.SysTick_Handler:0000000000000000 SysTick_Handler
-     /tmp/ccJJxN7o.s:448    .text.SysTick_Handler:0000000000000054 $d
-     /tmp/ccJJxN7o.s:456    .rodata:0000000000000000 $d
-     /tmp/ccJJxN7o.s:467    .text.main:0000000000000000 $t
-     /tmp/ccJJxN7o.s:473    .text.main:0000000000000000 main
-     /tmp/ccJJxN7o.s:680    .text.main:0000000000000144 $d
+     /tmp/ccsmd48L.s:19     .text.__NVIC_SetPriority:0000000000000000 $t
+     /tmp/ccsmd48L.s:24     .text.__NVIC_SetPriority:0000000000000000 __NVIC_SetPriority
+     /tmp/ccsmd48L.s:99     .text.__NVIC_SetPriority:000000000000004c $d
+     /tmp/ccsmd48L.s:105    .text.SysTick_Config:0000000000000000 $t
+     /tmp/ccsmd48L.s:110    .text.SysTick_Config:0000000000000000 SysTick_Config
+     /tmp/ccsmd48L.s:175    .text.SysTick_Config:0000000000000040 $d
+     /tmp/ccsmd48L.s:180    .text.XMC_GPIO_SetOutputHigh:0000000000000000 $t
+     /tmp/ccsmd48L.s:185    .text.XMC_GPIO_SetOutputHigh:0000000000000000 XMC_GPIO_SetOutputHigh
+     /tmp/ccsmd48L.s:231    .text.XMC_GPIO_SetOutputLow:0000000000000000 $t
+     /tmp/ccsmd48L.s:236    .text.XMC_GPIO_SetOutputLow:0000000000000000 XMC_GPIO_SetOutputLow
+     /tmp/ccsmd48L.s:281    .text.XMC_GPIO_GetInput:0000000000000000 $t
+     /tmp/ccsmd48L.s:286    .text.XMC_GPIO_GetInput:0000000000000000 XMC_GPIO_GetInput
+     /tmp/ccsmd48L.s:337    .data:0000000000000000 recordedTimeArray
+     /tmp/ccsmd48L.s:334    .data:0000000000000000 $d
+     /tmp/ccsmd48L.s:353    .bss:0000000000000000 counterTMS
+     /tmp/ccsmd48L.s:350    .bss:0000000000000000 $d
+     /tmp/ccsmd48L.s:359    .bss:0000000000000004 letterCounter
+     /tmp/ccsmd48L.s:364    .bss:0000000000000008 btnOPressedFlag
+     /tmp/ccsmd48L.s:369    .bss:0000000000000009 btnTPressedFlag
+     /tmp/ccsmd48L.s:375    .data:0000000000000028 timeBufferFlag
+     /tmp/ccsmd48L.s:382    .bss:000000000000000c timeBuffer
+     /tmp/ccsmd48L.s:385    .text.DecimalToArrayFunction:0000000000000000 $t
+     /tmp/ccsmd48L.s:391    .text.DecimalToArrayFunction:0000000000000000 DecimalToArrayFunction
+     /tmp/ccsmd48L.s:580    .text.DecimalToArrayFunction:0000000000000110 $d
+     /tmp/ccsmd48L.s:585    .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccsmd48L.s:591    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccsmd48L.s:663    .text.SysTick_Handler:0000000000000054 $d
+     /tmp/ccsmd48L.s:671    .rodata:0000000000000000 $d
+     /tmp/ccsmd48L.s:682    .text.main:0000000000000000 $t
+     /tmp/ccsmd48L.s:688    .text.main:0000000000000000 main
+     /tmp/ccsmd48L.s:901    .text.main:0000000000000150 $d
                            .group:0000000000000000 wm4.0.467689a90594456bf46c01d2d8793c7f
                            .group:0000000000000000 wm4.stddef.h.39.27677723d43e5b5a7afdf8d798429f1d
                            .group:0000000000000000 wm4._newlib_version.h.4.bfdf54b0af045d4a71376ae00f63a22c

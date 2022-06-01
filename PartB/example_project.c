@@ -9,7 +9,8 @@
 
 // NOTES: I took the main systick timer code from https://www.keil.com/pack/doc/cmsis/Core/html/group__SysTick__gr.html
 
-
+int recordedTimeArray[10]={999,999,999,999,999,999,999,999,999,999};
+uint8_t morseNumber[200] ={3};
 uint32_t counterTMS = 0;                                                        /* Variable to store millisecond ticks */
 int letterCounter=0;
 bool btnOPressedFlag=false;
@@ -19,11 +20,158 @@ uint32_t timeBuffer=0; //Initialised to 0 so that if Button 1 is not yet pressed
 
 //Interrupt handler
 
+
+// DECIMAL TO ARRAY CODE TAKEN FROM STACK OVERFLOW https://stackoverflow.com/questions/515612/convert-an-integer-number-into-an-array
+void DecimalToArrayFunction(int recordedTimeArray[], uint32_t timeBuffer)
+{  
+        int c = 0; /* digit position */
+        int n = timeBuffer;
+        //recordedTimeArray[]={999,999,999,999,999,999,999,999,999,999};              
+        while (n != 0)
+        {
+            n /= 10;
+            c++;
+        }
+        
+        int numberArray[c];
+        
+        c = 0;    
+        n = timeBuffer;
+        
+        /* extract each digit */
+        while (n != 0)
+        {
+            numberArray[c] = n % 10;
+            n /= 10;
+            c++;
+        }
+        int intracounter=0;
+        for (int i=c-1;i>=0;i--){            
+            //printf("%d \n",numberArray[i]);
+                recordedTimeArray[intracounter]=numberArray[i];
+                intracounter++;
+        }
+        intracounter=0;
+
+}
+void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
+    bool encodingFlag = false;
+    int counterIndex=0;
+    int outputCounterIndex=0;
+    while (!encodingFlag){
+        
+        switch (ArrayInput[counterIndex])
+        {
+            case 0:
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 counterIndex++;
+                break;
+            case 1:
+                 ArrayOutput[outputCounterIndex]=1;
+                 outputCounterIndex++;
+                 
+                 counterIndex++;
+                break;
+            case 2:
+                
+                 counterIndex++;
+                break
+            case 3: 
+                
+                counterIndex++;
+                break;
+            case 4:
+                
+                counterIndex++;
+                break;
+            case 5:
+                
+                counterIndex++;
+                break;
+            case 6:
+                
+                counterIndex++;
+                break;
+            case 7:
+                
+                counterIndex++;
+                break
+            case 8:
+                
+                counterIndex++;
+                break;
+            case 9:
+                
+                counterIndex++;
+                break;
+            case 10:
+                
+                counterIndex++;
+                break;
+            case 999:
+                encodingFlag=true;
+                break
+        }
+        
+        
+    }
+    
+}
 void SysTick_Handler(void)  {     
   //XMC_GPIO_ToggleOutput(LED1);                           
   counterTMS++;       
     if(counterTMS%100==0){
-        if (btnOPressedFlag){
+        if (btnOPressedFlag || btnTPressedFlag){
             if (letterCounter==0){
                 letterCounter=1;}
             else {    
@@ -91,11 +239,18 @@ int main (void)  {
     if(XMC_GPIO_GetInput(GPIO_BUTTON2) == 0) { 
                                              if(!btnOPressedFlag){
                                                  btnTPressedFlag=true;
+                                                 DecimalToArrayFunction(recordedTimeArray,timeBuffer);
                                                                 }
                                             }  
    
    // Btn 1 Functionality
    //
+   if (btnTPressedFlag){
+    letterCounter=0;
+    
+       
+    }
+   
    if (btnOPressedFlag){
        if (timeBufferFlag){
        timeBuffer = counterTMS;
