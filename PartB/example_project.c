@@ -12,18 +12,24 @@
 
 uint32_t counterTMS = 0;                                                        /* Variable to store millisecond ticks */
 int letterCounter=0;
-bool btnPressedFlag=false;
+bool btnOPressedFlag=false;
+bool btnTPressedFlag=false;
+bool timeBufferFlag=true; //originally set to true
+uint32_t timeBuffer=0; //Initialised to 0 so that if Button 1 is not yet pressed 0 is transmitted per Morse
+
 //Interrupt handler
 
 void SysTick_Handler(void)  {     
   //XMC_GPIO_ToggleOutput(LED1);                           
-  counterTMS++;                       
-  if (btnPressedFlag){
-    if (letterCounter==0){
-        letterCounter=1;}
-    else {    
-    letterCounter++;}
-  }                         
+  counterTMS++;       
+    if(counterTMS%100==0){
+        if (btnOPressedFlag){
+            if (letterCounter==0){
+                letterCounter=1;}
+            else {    
+            letterCounter++;}
+        } 
+    }
 }
   
 int main (void)  {
@@ -66,7 +72,7 @@ int main (void)  {
   XMC_GPIO_Init(GPIO_BUTTON2,  &in_config);
 
 
-  returnCode = SysTick_Config(SystemCoreClock / 10);      /* Configure SysTick to generate an interrupt every 100 milliseconds */
+  returnCode = SysTick_Config(SystemCoreClock / 1000);      /* Configure SysTick to generate an interrupt every 100 milliseconds */
   
   if (returnCode != 0)  {                                   /* Check return code for errors */
     // Error Handling 
@@ -75,8 +81,27 @@ int main (void)  {
   
   for(;;){
       
-    if(XMC_GPIO_GetInput(GPIO_BUTTON1) == 0) { btnPressedFlag=true;}
-   if (btnPressedFlag){
+   // The mechanism for the button locking is utilized through the flags btnTPressedFlag and btnOPressedFlag   
+      
+    if(XMC_GPIO_GetInput(GPIO_BUTTON1) == 0) { 
+            if (!btnTPressedFlag){
+                    btnOPressedFlag=true;
+                                }
+                                                }
+    if(XMC_GPIO_GetInput(GPIO_BUTTON2) == 0) { 
+                                             if(!btnOPressedFlag){
+                                                 btnTPressedFlag=true;
+                                                                }
+                                            }  
+   
+   // Btn 1 Functionality
+   //
+   if (btnOPressedFlag){
+       if (timeBufferFlag){
+       timeBuffer = counterTMS;
+       counterTMS=0;
+       timeBufferFlag=false;    
+                            }
         switch (signalArray[letterCounter])
         {
             case 1:
@@ -89,7 +114,8 @@ int main (void)  {
         //         
             letterCounter=0;            
             counterTMS=0;
-            btnPressedFlag=false;
+            btnOPressedFlag=false;
+            timeBufferFlag=true;
             break;
         }
    }else {XMC_GPIO_SetOutputLow(LED1);}

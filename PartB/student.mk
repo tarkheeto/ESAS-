@@ -11,8 +11,6 @@ SRCS = example_project.c
 HDRS =
 # Library sources, e.g. xmc_gpio.c  xmc_rtc.c xmc_scu.c 
 LIBSRCS = xmc_gpio.c xmc4_gpio.c
-LIBSRCS += xmc_rtc.c xmc4_rtc.c
-LIBSRCS += xmc4_scu.c
 # Precompiled libraries, e.g. -lm for math functions
 LIBLNK =
 
