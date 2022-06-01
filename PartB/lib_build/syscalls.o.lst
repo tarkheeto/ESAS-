@@ -252,14 +252,14 @@
  161              		.file 2 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 syscalls.c
-     /tmp/cchjWxG2.s:23     .bss:0000000000000000 __dso_handle
-     /tmp/cchjWxG2.s:20     .bss:0000000000000000 $d
-     /tmp/cchjWxG2.s:26     .bss:0000000000000004 heap_ptr.0
-     /tmp/cchjWxG2.s:30     .text._sbrk:0000000000000000 $t
-     /tmp/cchjWxG2.s:36     .text._sbrk:0000000000000000 _sbrk
-     /tmp/cchjWxG2.s:118    .text._sbrk:000000000000005c $d
-     /tmp/cchjWxG2.s:125    .text._init:0000000000000000 $t
-     /tmp/cchjWxG2.s:131    .text._init:0000000000000000 _init
+     /tmp/cc4ht4AS.s:23     .bss:0000000000000000 __dso_handle
+     /tmp/cc4ht4AS.s:20     .bss:0000000000000000 $d
+     /tmp/cc4ht4AS.s:26     .bss:0000000000000004 heap_ptr.0
+     /tmp/cc4ht4AS.s:30     .text._sbrk:0000000000000000 $t
+     /tmp/cc4ht4AS.s:36     .text._sbrk:0000000000000000 _sbrk
+     /tmp/cc4ht4AS.s:118    .text._sbrk:000000000000005c $d
+     /tmp/cc4ht4AS.s:125    .text._init:0000000000000000 $t
+     /tmp/cc4ht4AS.s:131    .text._init:0000000000000000 _init
                            .group:0000000000000000 wm4.0.467689a90594456bf46c01d2d8793c7f
                            .group:0000000000000000 wm4._newlib_version.h.4.bfdf54b0af045d4a71376ae00f63a22c
                            .group:0000000000000000 wm4.features.h.33.5bd1eea2d80518b50f7af0b5ce6750e0
