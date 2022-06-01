@@ -9,7 +9,7 @@
 
 // NOTES: I took the main systick timer code from https://www.keil.com/pack/doc/cmsis/Core/html/group__SysTick__gr.html
 
-int recordedTimeArray[10]={999,999,999,999,999,999,999,999,999,999};
+int recordedTimeArray[10]={0,999,999,999,999,999,999,999,999,999};
 uint8_t morseNumber[800] ={3};
 uint32_t counterTMS = 0;                                                        /* Variable to store millisecond ticks */
 int letterCounter=0;
@@ -483,6 +483,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                 
             case 999:
                 ArrayOutput[outputCounterIndex]=3;
+                ArrayInput[1,2,3,4,5,6,7,8,9,10]=999,999,999,999,999,999,999,999,999,999;
                 encodingFlag=true;
                 break;
         }
