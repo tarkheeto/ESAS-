@@ -9,8 +9,8 @@
 
 // NOTES: I took the main systick timer code from https://www.keil.com/pack/doc/cmsis/Core/html/group__SysTick__gr.html
 
-int recordedTimeArray[10]={0,999,999,999,999,999,999,999,999,999};
-uint8_t morseNumber[800] ={3};
+int recordedTimeArray[10]={0,12,12,12,12,12,12,12,12,12};
+int morseNumber[800] ={3};
 uint32_t counterTMS = 0;                                                        /* Variable to store millisecond ticks */
 int letterCounter=0;
 bool btnOPressedFlag=false;
@@ -54,7 +54,7 @@ void DecimalToArrayFunction(int recordedTimeArray[], uint32_t timeBuffer)
         intracounter=0;
 
 }
-void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
+void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
     bool encodingFlag = false;
     int counterIndex=0;
     int outputCounterIndex=0;
@@ -246,6 +246,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  
                 counterIndex++;
@@ -267,6 +268,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
@@ -282,7 +284,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
-                 
+                 outputCounterIndex++;
                  
                 counterIndex++;
                 break;
@@ -303,17 +305,21 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
-                counterIndex++;
+                 outputCounterIndex++;
+                 
+                 counterIndex++;
                 break;
             case 6:
                  ArrayOutput[outputCounterIndex]=1;
@@ -342,12 +348,14 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 
                 counterIndex++;
                 break;
             case 7:
@@ -381,12 +389,13 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
-                 
+                 outputCounterIndex++;
                 counterIndex++;
                 break;
             case 8:
@@ -408,6 +417,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
@@ -452,6 +462,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
@@ -481,7 +492,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                 counterIndex++;
                 break;
                
-            case 999:
+            case 12:
                 ArrayOutput[outputCounterIndex]=3;
                 //ArrayInput[1,2,3,4,5,6,7,8,9,10]=999,999,999,999,999,999,999,999,999,999;
                 encodingFlag=true;
@@ -590,7 +601,10 @@ int main (void)  {
             btnTPressedFlag=false;
             timeBufferFlag=true;
             for (int i=0;i<=9;i++){
-            recordedTimeArray[i]=999;}
+                if(i==0){recordedTimeArray[i]=0;}else{
+            recordedTimeArray[i]=12;}
+                
+            }
             XMC_GPIO_SetOutputLow(LED1);
             break;
         }

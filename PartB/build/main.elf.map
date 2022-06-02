@@ -315,7 +315,7 @@ END GROUP
                 0x0000000000000800                stack_size = DEFINED (stack_size)?stack_size:0x800
                 0x0000000000000040                no_init_size = 0x40
 
-.text           0x0000000008000000     0x1854 load address 0x000000000c000000
+.text           0x0000000008000000     0x19cc load address 0x000000000c000000
                 0x0000000008000000                sText = .
  *(.reset)
  .reset         0x0000000008000000      0x2b2 lib_build/startup_XMC4500.o
@@ -448,60 +448,60 @@ END GROUP
                 0x00000000080003b8      0x114 build/example_project.o
                 0x00000000080003b8                DecimalToArrayFunction
  .text.ArrayToMorse
-                0x00000000080004cc      0xa10 build/example_project.o
+                0x00000000080004cc      0xb78 build/example_project.o
                 0x00000000080004cc                ArrayToMorse
  .text.SysTick_Handler
-                0x0000000008000edc       0x70 build/example_project.o
-                0x0000000008000edc                SysTick_Handler
- .text.main     0x0000000008000f4c      0x1f0 build/example_project.o
-                0x0000000008000f4c                main
- .text          0x000000000800113c        0x0 lib_build/xmc_gpio.o
+                0x0000000008001044       0x70 build/example_project.o
+                0x0000000008001044                SysTick_Handler
+ .text.main     0x00000000080010b4      0x200 build/example_project.o
+                0x00000000080010b4                main
+ .text          0x00000000080012b4        0x0 lib_build/xmc_gpio.o
  .text.XMC_GPIO_SetMode
-                0x000000000800113c       0x82 lib_build/xmc_gpio.o
-                0x000000000800113c                XMC_GPIO_SetMode
+                0x00000000080012b4       0x82 lib_build/xmc_gpio.o
+                0x00000000080012b4                XMC_GPIO_SetMode
  .text.XMC_GPIO_SetHardwareControl
-                0x00000000080011be       0x46 lib_build/xmc_gpio.o
-                0x00000000080011be                XMC_GPIO_SetHardwareControl
- .text          0x0000000008001204        0x0 lib_build/xmc4_gpio.o
+                0x0000000008001336       0x46 lib_build/xmc_gpio.o
+                0x0000000008001336                XMC_GPIO_SetHardwareControl
+ .text          0x000000000800137c        0x0 lib_build/xmc4_gpio.o
  .text.XMC_GPIO_Init
-                0x0000000008001204      0x144 lib_build/xmc4_gpio.o
-                0x0000000008001204                XMC_GPIO_Init
+                0x000000000800137c      0x144 lib_build/xmc4_gpio.o
+                0x000000000800137c                XMC_GPIO_Init
  .text.XMC_GPIO_SetOutputStrength
-                0x0000000008001348       0x86 lib_build/xmc4_gpio.o
-                0x0000000008001348                XMC_GPIO_SetOutputStrength
- .text          0x00000000080013ce        0x0 lib_build/startup_XMC4500.o
- .text          0x00000000080013ce        0x0 lib_build/system_XMC4500.o
- .text.delay    0x00000000080013ce       0x2c lib_build/system_XMC4500.o
- *fill*         0x00000000080013fa        0x2 
+                0x00000000080014c0       0x86 lib_build/xmc4_gpio.o
+                0x00000000080014c0                XMC_GPIO_SetOutputStrength
+ .text          0x0000000008001546        0x0 lib_build/startup_XMC4500.o
+ .text          0x0000000008001546        0x0 lib_build/system_XMC4500.o
+ .text.delay    0x0000000008001546       0x2c lib_build/system_XMC4500.o
+ *fill*         0x0000000008001572        0x2 
  .text.SystemInit
-                0x00000000080013fc       0x24 lib_build/system_XMC4500.o
-                0x00000000080013fc                SystemInit
+                0x0000000008001574       0x24 lib_build/system_XMC4500.o
+                0x0000000008001574                SystemInit
  .text.SystemCoreSetup
-                0x0000000008001420       0x74 lib_build/system_XMC4500.o
-                0x0000000008001420                SystemCoreSetup
+                0x0000000008001598       0x74 lib_build/system_XMC4500.o
+                0x0000000008001598                SystemCoreSetup
  .text.SystemCoreClockSetup
-                0x0000000008001494      0x208 lib_build/system_XMC4500.o
-                0x0000000008001494                SystemCoreClockSetup
+                0x000000000800160c      0x208 lib_build/system_XMC4500.o
+                0x000000000800160c                SystemCoreClockSetup
  .text.SystemCoreClockUpdate
-                0x000000000800169c       0xd4 lib_build/system_XMC4500.o
-                0x000000000800169c                SystemCoreClockUpdate
+                0x0000000008001814       0xd4 lib_build/system_XMC4500.o
+                0x0000000008001814                SystemCoreClockUpdate
  .text.OSCHP_GetFrequency
-                0x0000000008001770       0x14 lib_build/system_XMC4500.o
-                0x0000000008001770                OSCHP_GetFrequency
- .text          0x0000000008001784        0x0 lib_build/syscalls.o
- .text._sbrk    0x0000000008001784       0x68 lib_build/syscalls.o
-                0x0000000008001784                _sbrk
- .text._init    0x00000000080017ec        0xe lib_build/syscalls.o
-                0x00000000080017ec                _init
- .text          0x00000000080017fa        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
- *fill*         0x00000000080017fa        0x2 
- .text.__errno  0x00000000080017fc        0xc /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
-                0x00000000080017fc                __errno
- .text          0x0000000008001808        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
- .text          0x0000000008001808        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
+                0x00000000080018e8       0x14 lib_build/system_XMC4500.o
+                0x00000000080018e8                OSCHP_GetFrequency
+ .text          0x00000000080018fc        0x0 lib_build/syscalls.o
+ .text._sbrk    0x00000000080018fc       0x68 lib_build/syscalls.o
+                0x00000000080018fc                _sbrk
+ .text._init    0x0000000008001964        0xe lib_build/syscalls.o
+                0x0000000008001964                _init
+ .text          0x0000000008001972        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
+ *fill*         0x0000000008001972        0x2 
+ .text.__errno  0x0000000008001974        0xc /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
+                0x0000000008001974                __errno
+ .text          0x0000000008001980        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
+ .text          0x0000000008001980        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
  .text.__libc_init_array
-                0x0000000008001808       0x48 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
-                0x0000000008001808                __libc_init_array
+                0x0000000008001980       0x48 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
+                0x0000000008001980                __libc_init_array
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -516,29 +516,29 @@ END GROUP
  *(.dtors)
  *(.rodata .rodata.*)
  .rodata._global_impure_ptr
-                0x0000000008001850        0x4 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
-                0x0000000008001850                _global_impure_ptr
+                0x00000000080019c8        0x4 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
+                0x00000000080019c8                _global_impure_ptr
  *(.gnu.linkonce.r*)
  *(vtable)
-                0x0000000008001854                . = ALIGN (0x4)
+                0x00000000080019cc                . = ALIGN (0x4)
 
-.glue_7         0x0000000008001854        0x0 load address 0x000000000c001854
- .glue_7        0x0000000008001854        0x0 linker stubs
+.glue_7         0x00000000080019cc        0x0 load address 0x000000000c0019cc
+ .glue_7        0x00000000080019cc        0x0 linker stubs
 
-.glue_7t        0x0000000008001854        0x0 load address 0x000000000c001854
- .glue_7t       0x0000000008001854        0x0 linker stubs
+.glue_7t        0x00000000080019cc        0x0 load address 0x000000000c0019cc
+ .glue_7t       0x00000000080019cc        0x0 linker stubs
 
-.vfp11_veneer   0x0000000008001854        0x0 load address 0x000000000c001854
- .vfp11_veneer  0x0000000008001854        0x0 linker stubs
+.vfp11_veneer   0x00000000080019cc        0x0 load address 0x000000000c0019cc
+ .vfp11_veneer  0x00000000080019cc        0x0 linker stubs
 
-.v4_bx          0x0000000008001854        0x0 load address 0x000000000c001854
- .v4_bx         0x0000000008001854        0x0 linker stubs
+.v4_bx          0x00000000080019cc        0x0 load address 0x000000000c0019cc
+ .v4_bx         0x00000000080019cc        0x0 linker stubs
 
-.iplt           0x0000000008001854        0x0 load address 0x000000000c001854
- .iplt          0x0000000008001854        0x0 build/example_project.o
+.iplt           0x00000000080019cc        0x0 load address 0x000000000c0019cc
+ .iplt          0x00000000080019cc        0x0 build/example_project.o
 
-.rel.dyn        0x0000000008001854        0x0 load address 0x000000000c001854
- .rel.iplt      0x0000000008001854        0x0 build/example_project.o
+.rel.dyn        0x00000000080019cc        0x0 load address 0x000000000c0019cc
+ .rel.iplt      0x00000000080019cc        0x0 build/example_project.o
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
@@ -548,13 +548,13 @@ END GROUP
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000008001854                . = ALIGN (0x4)
-                0x0000000008001854                __exidx_start = .
+                0x00000000080019cc                . = ALIGN (0x4)
+                0x00000000080019cc                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000008001854                __exidx_end = .
-                0x0000000008001854                . = ALIGN (0x4)
+                0x00000000080019cc                __exidx_end = .
+                0x00000000080019cc                . = ALIGN (0x4)
 
 Stack           0x0000000010000000      0x800
                 0x0000000010000000                __stack_start = .
@@ -563,25 +563,25 @@ Stack           0x0000000010000000      0x800
                 0x0000000010000800                __stack_end = .
                 0x0000000010000800                __initial_sp = .
 
-.ram_code       0x0000000010000800        0x0 load address 0x000000000c001854
+.ram_code       0x0000000010000800        0x0 load address 0x000000000c0019cc
                 0x0000000010000800                . = ALIGN (0x4)
                 0x0000000010000800                __ram_code_start = .
  *(.ram_code)
                 0x0000000010000800                . = ALIGN (0x4)
                 0x0000000010000800                __ram_code_end = .
-                0x000000000c001854                __ram_code_load = LOADADDR (.ram_code)
+                0x000000000c0019cc                __ram_code_load = LOADADDR (.ram_code)
                 0x0000000000000000                __ram_code_size = (__ram_code_end - __ram_code_start)
 
-PSRAM_DATA      0x0000000010000800        0x0 load address 0x000000000c001854
+PSRAM_DATA      0x0000000010000800        0x0 load address 0x000000000c0019cc
                 0x0000000010000800                . = ALIGN (0x4)
                 0x0000000010000800                __data3_start = .
  *(PSRAM_DATA)
                 0x0000000010000800                . = ALIGN (0x4)
                 0x0000000010000800                __data3_end = .
-                0x000000000c001854                __data3_load = LOADADDR (PSRAM_DATA)
+                0x000000000c0019cc                __data3_load = LOADADDR (PSRAM_DATA)
                 0x0000000000000000                __data3_size = (__data3_end - __data3_start)
 
-PSRAM_BSS       0x0000000010000800        0x0 load address 0x000000000c001854
+PSRAM_BSS       0x0000000010000800        0x0 load address 0x000000000c0019cc
                 0x0000000010000800                . = ALIGN (0x4)
                 0x0000000010000800                __bss3_start = .
  *(PSRAM_BSS)
@@ -591,80 +591,80 @@ PSRAM_BSS       0x0000000010000800        0x0 load address 0x000000000c001854
                 0x0000000010000800                Heap_Bank3_Start = .
                 0x0000000000000000                __bss3_size = (__bss3_end - __bss3_start)
 
-.data           0x0000000020000000      0x7d8 load address 0x000000000c001854
+.data           0x0000000020000000     0x1138 load address 0x000000000c0019cc
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                __data_start = .
  *(.data)
- .data          0x0000000020000000      0x3ab build/example_project.o
+ .data          0x0000000020000000      0xd0b build/example_project.o
                 0x0000000020000000                recordedTimeArray
                 0x0000000020000028                morseNumber
-                0x0000000020000348                timeBufferFlag
-                0x000000002000034c                signalArray
- .data          0x00000000200003ab        0x0 lib_build/xmc_gpio.o
- .data          0x00000000200003ab        0x0 lib_build/xmc4_gpio.o
- .data          0x00000000200003ab        0x0 lib_build/startup_XMC4500.o
- .data          0x00000000200003ab        0x0 lib_build/system_XMC4500.o
- .data          0x00000000200003ab        0x0 lib_build/syscalls.o
- .data          0x00000000200003ab        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
- .data          0x00000000200003ab        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
- .data          0x00000000200003ab        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
+                0x0000000020000ca8                timeBufferFlag
+                0x0000000020000cac                signalArray
+ .data          0x0000000020000d0b        0x0 lib_build/xmc_gpio.o
+ .data          0x0000000020000d0b        0x0 lib_build/xmc4_gpio.o
+ .data          0x0000000020000d0b        0x0 lib_build/startup_XMC4500.o
+ .data          0x0000000020000d0b        0x0 lib_build/system_XMC4500.o
+ .data          0x0000000020000d0b        0x0 lib_build/syscalls.o
+ .data          0x0000000020000d0b        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
+ .data          0x0000000020000d0b        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
+ .data          0x0000000020000d0b        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
  *(.data*)
- *fill*         0x00000000200003ab        0x1 
+ *fill*         0x0000000020000d0b        0x1 
  .data._impure_ptr
-                0x00000000200003ac        0x4 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
-                0x00000000200003ac                _impure_ptr
+                0x0000000020000d0c        0x4 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
+                0x0000000020000d0c                _impure_ptr
  .data.impure_data
-                0x00000000200003b0      0x428 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
+                0x0000000020000d10      0x428 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
  *(*.data)
  *(.gnu.linkonce.d*)
-                0x00000000200007d8                . = ALIGN (0x4)
-                0x00000000200007d8                PROVIDE (__preinit_array_start = .)
+                0x0000000020001138                . = ALIGN (0x4)
+                0x0000000020001138                PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
-                0x00000000200007d8                PROVIDE (__preinit_array_end = .)
-                0x00000000200007d8                . = ALIGN (0x4)
-                0x00000000200007d8                PROVIDE (__init_array_start = .)
+                0x0000000020001138                PROVIDE (__preinit_array_end = .)
+                0x0000000020001138                . = ALIGN (0x4)
+                0x0000000020001138                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array)
-                0x00000000200007d8                PROVIDE (__init_array_end = .)
-                0x00000000200007d8                . = ALIGN (0x4)
+                0x0000000020001138                PROVIDE (__init_array_end = .)
+                0x0000000020001138                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array)
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x00000000200007d8                . = ALIGN (0x4)
-                0x00000000200007d8                __data_end = .
-                0x000000000c001854                __data_load = LOADADDR (.data)
-                0x00000000000007d8                __data_size = (__data_end - __data_start)
+                0x0000000020001138                . = ALIGN (0x4)
+                0x0000000020001138                __data_end = .
+                0x000000000c0019cc                __data_load = LOADADDR (.data)
+                0x0000000000001138                __data_size = (__data_end - __data_start)
 
-.igot.plt       0x00000000200007d8        0x0 load address 0x000000000c00202c
- .igot.plt      0x00000000200007d8        0x0 build/example_project.o
+.igot.plt       0x0000000020001138        0x0 load address 0x000000000c002b04
+ .igot.plt      0x0000000020001138        0x0 build/example_project.o
 
-.bss            0x00000000200007d8       0x18 load address 0x000000000c00202c
-                0x00000000200007d8                . = ALIGN (0x4)
-                0x00000000200007d8                __bss_start = .
+.bss            0x0000000020001138       0x18 load address 0x000000000c002b04
+                0x0000000020001138                . = ALIGN (0x4)
+                0x0000000020001138                __bss_start = .
  *(.bss)
- .bss           0x00000000200007d8       0x10 build/example_project.o
-                0x00000000200007d8                counterTMS
-                0x00000000200007dc                letterCounter
-                0x00000000200007e0                btnOPressedFlag
-                0x00000000200007e1                btnTPressedFlag
-                0x00000000200007e4                timeBuffer
- .bss           0x00000000200007e8        0x0 lib_build/xmc_gpio.o
- .bss           0x00000000200007e8        0x0 lib_build/xmc4_gpio.o
- .bss           0x00000000200007e8        0x0 lib_build/startup_XMC4500.o
- .bss           0x00000000200007e8        0x0 lib_build/system_XMC4500.o
- .bss           0x00000000200007e8        0x8 lib_build/syscalls.o
-                0x00000000200007e8                __dso_handle
- .bss           0x00000000200007f0        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
- .bss           0x00000000200007f0        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
- .bss           0x00000000200007f0        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
+ .bss           0x0000000020001138       0x10 build/example_project.o
+                0x0000000020001138                counterTMS
+                0x000000002000113c                letterCounter
+                0x0000000020001140                btnOPressedFlag
+                0x0000000020001141                btnTPressedFlag
+                0x0000000020001144                timeBuffer
+ .bss           0x0000000020001148        0x0 lib_build/xmc_gpio.o
+ .bss           0x0000000020001148        0x0 lib_build/xmc4_gpio.o
+ .bss           0x0000000020001148        0x0 lib_build/startup_XMC4500.o
+ .bss           0x0000000020001148        0x0 lib_build/system_XMC4500.o
+ .bss           0x0000000020001148        0x8 lib_build/syscalls.o
+                0x0000000020001148                __dso_handle
+ .bss           0x0000000020001150        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-errno.o)
+ .bss           0x0000000020001150        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-impure.o)
+ .bss           0x0000000020001150        0x0 /nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg.a(lib_a-init.o)
  *(.bss*)
  *(COMMON)
  *(.gnu.linkonce.b*)
-                0x00000000200007f0                . = ALIGN (0x4)
-                0x00000000200007f0                __bss_end = .
-                0x00000000200007f0                . = ALIGN (0x8)
-                0x00000000200007f0                Heap_Bank1_Start = .
+                0x0000000020001150                . = ALIGN (0x4)
+                0x0000000020001150                __bss_end = .
+                0x0000000020001150                . = ALIGN (0x8)
+                0x0000000020001150                Heap_Bank1_Start = .
                 0x0000000000000018                __bss_size = (__bss_end - __bss_start)
 
 .no_init        0x000000002000ffc0       0x14
@@ -674,18 +674,18 @@ PSRAM_BSS       0x0000000010000800        0x0 load address 0x000000000c001854
                 0x000000002000ffc0                SystemCoreClock
                 0x000000002000ffc4                g_chipid
 
-DSRAM2_DATA     0x0000000030000000        0x0 load address 0x000000000c00202c
+DSRAM2_DATA     0x0000000030000000        0x0 load address 0x000000000c002b04
                 0x0000000030000000                . = ALIGN (0x4)
                 0x0000000030000000                __data2_start = .
  *(DSRAM2_DATA)
                 0x0000000030000000                . = ALIGN (0x4)
                 0x0000000030000000                __data2_end = .
-                0x000000000c00202c                __data2_load = LOADADDR (DSRAM2_DATA)
+                0x000000000c002b04                __data2_load = LOADADDR (DSRAM2_DATA)
                 0x0000000000000000                __data2_size = (__data2_end - __data2_start)
-                0x000000000000202c                __text_size = (((((__exidx_end - sText) + __data_size) + __ram_code_size) + __data2_size) + __data3_size)
-                0x000000000800202c                eText = (sText + __text_size)
+                0x0000000000002b04                __text_size = (((((__exidx_end - sText) + __data_size) + __ram_code_size) + __data2_size) + __data3_size)
+                0x0000000008002b04                eText = (sText + __text_size)
 
-DSRAM2_BSS      0x0000000030000000        0x0 load address 0x000000000c00202c
+DSRAM2_BSS      0x0000000030000000        0x0 load address 0x000000000c002b04
                 0x0000000030000000                . = ALIGN (0x4)
                 0x0000000030000000                __bss2_start = .
  *(ETH_RAM)
@@ -696,7 +696,7 @@ DSRAM2_BSS      0x0000000030000000        0x0 load address 0x000000000c00202c
                 0x0000000030000000                . = ALIGN (0x8)
                 0x0000000030000000                Heap_Bank2_Start = .
                 0x0000000000000000                __bss2_size = (__bss2_end - __bss2_start)
-                0x000000000000f7d0                Heap_Bank1_Size = (Heap_Bank1_End - Heap_Bank1_Start)
+                0x000000000000ee70                Heap_Bank1_Size = (Heap_Bank1_End - Heap_Bank1_Start)
                 0x0000000000008000                Heap_Bank2_Size = (LENGTH (DSRAM_2_comm) - (Heap_Bank2_Start - ORIGIN (DSRAM_2_comm)))
                 0x000000000000f800                Heap_Bank3_Size = (LENGTH (PSRAM_1) - (Heap_Bank3_Start - ORIGIN (PSRAM_1)))
                 0x0000000000000001                ASSERT ((Heap_Bank1_Start <= Heap_Bank1_End), region SRAM_combined overflowed no_init section)
@@ -741,13 +741,13 @@ DSRAM2_BSS      0x0000000030000000        0x0 load address 0x000000000c00202c
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_info     0x0000000000000000     0x1f7e
+.debug_info     0x0000000000000000     0x1f78
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x0000000000000000      0xd72 build/example_project.o
- .debug_info    0x0000000000000d72      0x397 lib_build/xmc_gpio.o
- .debug_info    0x0000000000001109      0x42d lib_build/xmc4_gpio.o
- .debug_info    0x0000000000001536      0x927 lib_build/system_XMC4500.o
- .debug_info    0x0000000000001e5d      0x121 lib_build/syscalls.o
+ .debug_info    0x0000000000000000      0xd6c build/example_project.o
+ .debug_info    0x0000000000000d6c      0x397 lib_build/xmc_gpio.o
+ .debug_info    0x0000000000001103      0x42d lib_build/xmc4_gpio.o
+ .debug_info    0x0000000000001530      0x927 lib_build/system_XMC4500.o
+ .debug_info    0x0000000000001e57      0x121 lib_build/syscalls.o
 
 .debug_abbrev   0x0000000000000000      0x7ba
  *(.debug_abbrev)
@@ -757,13 +757,13 @@ DSRAM2_BSS      0x0000000030000000        0x0 load address 0x000000000c00202c
  .debug_abbrev  0x0000000000000515      0x1d9 lib_build/system_XMC4500.o
  .debug_abbrev  0x00000000000006ee       0xcc lib_build/syscalls.o
 
-.debug_line     0x0000000000000000     0x205d
+.debug_line     0x0000000000000000     0x2083
  *(.debug_line)
- .debug_line    0x0000000000000000      0xc11 build/example_project.o
- .debug_line    0x0000000000000c11      0x4c9 lib_build/xmc_gpio.o
- .debug_line    0x00000000000010da      0x53f lib_build/xmc4_gpio.o
- .debug_line    0x0000000000001619      0x690 lib_build/system_XMC4500.o
- .debug_line    0x0000000000001ca9      0x3b4 lib_build/syscalls.o
+ .debug_line    0x0000000000000000      0xc37 build/example_project.o
+ .debug_line    0x0000000000000c37      0x4c9 lib_build/xmc_gpio.o
+ .debug_line    0x0000000000001100      0x53f lib_build/xmc4_gpio.o
+ .debug_line    0x000000000000163f      0x690 lib_build/system_XMC4500.o
+ .debug_line    0x0000000000001ccf      0x3b4 lib_build/syscalls.o
 
 .debug_frame    0x0000000000000000      0x3b0
  *(.debug_frame)
