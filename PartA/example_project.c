@@ -16,11 +16,9 @@ int letterCounter=0;
 void SysTick_Handler(void)  {     
   //XMC_GPIO_ToggleOutput(LED1);                           
   counterTMS++;                       
-  if (counterTMS>50){
-    if (letterCounter==0){
-        letterCounter=1;}
-    else {    
-    letterCounter++;}
+  if (counterTMS>=50){
+    
+    letterCounter++;
   }                         
 }
   
@@ -28,7 +26,7 @@ int main (void)  {
   uint32_t returnCode;
   //7 0,0,0,0,0,0,0,
   //3 0,0,0,
-  uint8_t signalArray[95]={ 0, //INITIAL CONDITION
+  uint8_t signalArray[95]={ 0,
                             1,0,1, // I
                             0,0,0,0,0,0,0,
                             1,1,1,0,1,0,1,1,1,0,1,

@@ -12,7 +12,7 @@
 int recordedTimeArray[10]={0,12,12,12,12,12,12,12,12,12};
 int morseNumber[800] ={3};
 uint32_t counterTMS = 0;                                                        /* Variable to store millisecond ticks */
-int letterCounter=0;
+int letterCounter=-3;
 bool btnOPressedFlag=false;
 bool btnTPressedFlag=false;
 bool timeBufferFlag=true; //originally set to true
@@ -113,6 +113,10 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  
                  counterIndex++;
                 break;
@@ -162,6 +166,12 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
+                 
                  counterIndex++;
                 break;
             case 2:
@@ -206,6 +216,11 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                  
                  counterIndex++;
                 break;
@@ -247,6 +262,11 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                  
                  
                 counterIndex++;
@@ -285,6 +305,11 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                  
                 counterIndex++;
                 break;
@@ -316,6 +341,10 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
                  
@@ -355,6 +384,11 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                  
                 counterIndex++;
                 break;
@@ -396,6 +430,11 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                 counterIndex++;
                 break;
             case 8:
@@ -440,6 +479,11 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                  
                 counterIndex++;
                 break;
@@ -489,6 +533,11 @@ void ArrayToMorse(int ArrayInput[], int ArrayOutput[]){
                  
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 ArrayOutput[outputCounterIndex]=0;
+                 outputCounterIndex++;
+                 
                 counterIndex++;
                 break;
                
@@ -588,7 +637,7 @@ int main (void)  {
    if (btnTPressedFlag){
 
     switch (morseNumber[letterCounter])
-        {
+        {   
             case 1:
             XMC_GPIO_SetOutputHigh(LED1);
             break;
@@ -596,7 +645,7 @@ int main (void)  {
             XMC_GPIO_SetOutputLow(LED1);
             break;
             case 3:  
-            letterCounter=0;            
+            letterCounter=-3;            
             counterTMS=0;
             btnTPressedFlag=false;
             timeBufferFlag=true;
@@ -606,6 +655,9 @@ int main (void)  {
                 
             }
             XMC_GPIO_SetOutputLow(LED1);
+            break;
+            default:
+            XMC_GPIO_SetOutputLow(LED1);    
             break;
         }
    }
@@ -626,12 +678,12 @@ int main (void)  {
             break;
             case 3:
         //        
-            letterCounter=0;            
-            counterTMS=0;
+            letterCounter=-3;            
             btnOPressedFlag=false;
             timeBufferFlag=true;
             XMC_GPIO_SetOutputLow(LED1);
             break;
+
         }
    }//else {XMC_GPIO_SetOutputLow(LED1);}
   }

@@ -1,25 +1,25 @@
    1              		.cpu cortex-m4
-   2              		.eabi_attribute 27, 1
-   3              		.eabi_attribute 20, 1
-   4              		.eabi_attribute 21, 1
-   5              		.eabi_attribute 23, 3
-   6              		.eabi_attribute 24, 1
-   7              		.eabi_attribute 25, 1
-   8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 6
-  10              		.eabi_attribute 34, 1
-  11              		.eabi_attribute 18, 4
-  12              		.file	"xmc4_rtc.c"
-  13              		.text
-  14              	.Ltext0:
-  15              		.cfi_sections	.debug_frame
-  16              		.section	.text.XMC_RTC_IsRunning,"ax",%progbits
-  17              		.align	1
-  18              		.arch armv7e-m
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  22              		.fpu fpv4-sp-d16
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"xmc4_rtc.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.XMC_RTC_IsRunning,"ax",%progbits
+  19              		.align	1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
   24              	XMC_RTC_IsRunning:
   25              	.LFB129:
   26              		.file 1 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_rtc.h"
@@ -737,10 +737,9 @@
   70              		.syntax unified
   71              		.thumb
   72              		.thumb_func
-  73              		.fpu fpv4-sp-d16
-  75              	XMC_SCU_GetMirrorStatus:
-  76              	.LFB163:
-  77              		.file 2 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h"
+  74              	XMC_SCU_GetMirrorStatus:
+  75              	.LFB163:
+  76              		.file 2 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h"
    1:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h **** /**
    2:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h ****  * @file xmc_scu.h
    3:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h ****  * @date 2016-03-09
@@ -1285,50 +1284,49 @@
  542:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h ****  */
  543:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h **** __STATIC_INLINE uint32_t XMC_SCU_GetMirrorStatus(void)
  544:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h **** {
-  78              		.loc 2 544 1
-  79              		.cfi_startproc
-  80              		@ args = 0, pretend = 0, frame = 0
-  81              		@ frame_needed = 1, uses_anonymous_args = 0
-  82              		@ link register save eliminated.
-  83 0000 80B4     		push	{r7}
-  84              	.LCFI4:
-  85              		.cfi_def_cfa_offset 4
-  86              		.cfi_offset 7, -4
-  87 0002 00AF     		add	r7, sp, #0
-  88              	.LCFI5:
-  89              		.cfi_def_cfa_register 7
+  77              		.loc 2 544 1
+  78              		.cfi_startproc
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 1, uses_anonymous_args = 0
+  81              		@ link register save eliminated.
+  82 0000 80B4     		push	{r7}
+  83              	.LCFI4:
+  84              		.cfi_def_cfa_offset 4
+  85              		.cfi_offset 7, -4
+  86 0002 00AF     		add	r7, sp, #0
+  87              	.LCFI5:
+  88              		.cfi_def_cfa_register 7
  545:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h ****   return(SCU_GENERAL->MIRRSTS);
-  90              		.loc 2 545 21
-  91 0004 034B     		ldr	r3, .L7
-  92 0006 D3F8C430 		ldr	r3, [r3, #196]
+  89              		.loc 2 545 21
+  90 0004 034B     		ldr	r3, .L7
+  91 0006 D3F8C430 		ldr	r3, [r3, #196]
  546:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h **** }
-  93              		.loc 2 546 1
-  94 000a 1846     		mov	r0, r3
-  95 000c BD46     		mov	sp, r7
-  96              	.LCFI6:
-  97              		.cfi_def_cfa_register 13
-  98              		@ sp needed
-  99 000e 5DF8047B 		ldr	r7, [sp], #4
- 100              	.LCFI7:
- 101              		.cfi_restore 7
- 102              		.cfi_def_cfa_offset 0
- 103 0012 7047     		bx	lr
- 104              	.L8:
- 105              		.align	2
- 106              	.L7:
- 107 0014 00400050 		.word	1342193664
- 108              		.cfi_endproc
- 109              	.LFE163:
- 111              		.section	.text.XMC_RTC_Enable,"ax",%progbits
- 112              		.align	1
- 113              		.global	XMC_RTC_Enable
- 114              		.syntax unified
- 115              		.thumb
- 116              		.thumb_func
- 117              		.fpu fpv4-sp-d16
- 119              	XMC_RTC_Enable:
- 120              	.LFB164:
- 121              		.file 3 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c"
+  92              		.loc 2 546 1
+  93 000a 1846     		mov	r0, r3
+  94 000c BD46     		mov	sp, r7
+  95              	.LCFI6:
+  96              		.cfi_def_cfa_register 13
+  97              		@ sp needed
+  98 000e 5DF8047B 		ldr	r7, [sp], #4
+  99              	.LCFI7:
+ 100              		.cfi_restore 7
+ 101              		.cfi_def_cfa_offset 0
+ 102 0012 7047     		bx	lr
+ 103              	.L8:
+ 104              		.align	2
+ 105              	.L7:
+ 106 0014 00400050 		.word	1342193664
+ 107              		.cfi_endproc
+ 108              	.LFE163:
+ 110              		.section	.text.XMC_RTC_Enable,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	XMC_RTC_Enable
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	XMC_RTC_Enable:
+ 118              	.LFB164:
+ 119              		.file 3 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c"
    1:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** /**
    2:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  * @file xmc4_rtc.c
    3:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  * @date 2017-08-04
@@ -1403,706 +1401,694 @@
   72:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  */
   73:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** void XMC_RTC_Enable(void)
   74:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 122              		.loc 3 74 1
- 123              		.cfi_startproc
- 124              		@ args = 0, pretend = 0, frame = 0
- 125              		@ frame_needed = 1, uses_anonymous_args = 0
- 126 0000 80B5     		push	{r7, lr}
- 127              	.LCFI8:
- 128              		.cfi_def_cfa_offset 8
- 129              		.cfi_offset 7, -8
- 130              		.cfi_offset 14, -4
- 131 0002 00AF     		add	r7, sp, #0
- 132              	.LCFI9:
- 133              		.cfi_def_cfa_register 7
+ 120              		.loc 3 74 1
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 1, uses_anonymous_args = 0
+ 124 0000 80B5     		push	{r7, lr}
+ 125              	.LCFI8:
+ 126              		.cfi_def_cfa_offset 8
+ 127              		.cfi_offset 7, -8
+ 128              		.cfi_offset 14, -4
+ 129 0002 00AF     		add	r7, sp, #0
+ 130              	.LCFI9:
+ 131              		.cfi_def_cfa_register 7
   75:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   XMC_SCU_HIB_EnableHibernateDomain();
- 134              		.loc 3 75 3
- 135 0004 FFF7FEFF 		bl	XMC_SCU_HIB_EnableHibernateDomain
+ 132              		.loc 3 75 3
+ 133 0004 FFF7FEFF 		bl	XMC_SCU_HIB_EnableHibernateDomain
   76:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 136              		.loc 3 76 1
- 137 0008 00BF     		nop
- 138 000a 80BD     		pop	{r7, pc}
- 139              		.cfi_endproc
- 140              	.LFE164:
- 142              		.section	.text.XMC_RTC_Disable,"ax",%progbits
- 143              		.align	1
- 144              		.global	XMC_RTC_Disable
- 145              		.syntax unified
- 146              		.thumb
- 147              		.thumb_func
- 148              		.fpu fpv4-sp-d16
- 150              	XMC_RTC_Disable:
- 151              	.LFB165:
+ 134              		.loc 3 76 1
+ 135 0008 00BF     		nop
+ 136 000a 80BD     		pop	{r7, pc}
+ 137              		.cfi_endproc
+ 138              	.LFE164:
+ 140              		.section	.text.XMC_RTC_Disable,"ax",%progbits
+ 141              		.align	1
+ 142              		.global	XMC_RTC_Disable
+ 143              		.syntax unified
+ 144              		.thumb
+ 145              		.thumb_func
+ 147              	XMC_RTC_Disable:
+ 148              	.LFB165:
   77:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** 
   78:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** /*
   79:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  * Disables RTC peripheral for programming its registers
   80:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  */
   81:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** void XMC_RTC_Disable(void)
   82:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 152              		.loc 3 82 1
- 153              		.cfi_startproc
- 154              		@ args = 0, pretend = 0, frame = 0
- 155              		@ frame_needed = 1, uses_anonymous_args = 0
- 156              		@ link register save eliminated.
- 157 0000 80B4     		push	{r7}
- 158              	.LCFI10:
- 159              		.cfi_def_cfa_offset 4
- 160              		.cfi_offset 7, -4
- 161 0002 00AF     		add	r7, sp, #0
- 162              	.LCFI11:
- 163              		.cfi_def_cfa_register 7
+ 149              		.loc 3 82 1
+ 150              		.cfi_startproc
+ 151              		@ args = 0, pretend = 0, frame = 0
+ 152              		@ frame_needed = 1, uses_anonymous_args = 0
+ 153              		@ link register save eliminated.
+ 154 0000 80B4     		push	{r7}
+ 155              	.LCFI10:
+ 156              		.cfi_def_cfa_offset 4
+ 157              		.cfi_offset 7, -4
+ 158 0002 00AF     		add	r7, sp, #0
+ 159              	.LCFI11:
+ 160              		.cfi_def_cfa_register 7
   83:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   /*
   84:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****    * Empty because disabling the hibernate
   85:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****    * domain is not done intentionally.
   86:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****    */
   87:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 164              		.loc 3 87 1
- 165 0004 00BF     		nop
- 166 0006 BD46     		mov	sp, r7
- 167              	.LCFI12:
- 168              		.cfi_def_cfa_register 13
- 169              		@ sp needed
- 170 0008 5DF8047B 		ldr	r7, [sp], #4
- 171              	.LCFI13:
- 172              		.cfi_restore 7
- 173              		.cfi_def_cfa_offset 0
- 174 000c 7047     		bx	lr
- 175              		.cfi_endproc
- 176              	.LFE165:
- 178              		.section	.text.XMC_RTC_IsEnabled,"ax",%progbits
- 179              		.align	1
- 180              		.global	XMC_RTC_IsEnabled
- 181              		.syntax unified
- 182              		.thumb
- 183              		.thumb_func
- 184              		.fpu fpv4-sp-d16
- 186              	XMC_RTC_IsEnabled:
- 187              	.LFB166:
+ 161              		.loc 3 87 1
+ 162 0004 00BF     		nop
+ 163 0006 BD46     		mov	sp, r7
+ 164              	.LCFI12:
+ 165              		.cfi_def_cfa_register 13
+ 166              		@ sp needed
+ 167 0008 5DF8047B 		ldr	r7, [sp], #4
+ 168              	.LCFI13:
+ 169              		.cfi_restore 7
+ 170              		.cfi_def_cfa_offset 0
+ 171 000c 7047     		bx	lr
+ 172              		.cfi_endproc
+ 173              	.LFE165:
+ 175              		.section	.text.XMC_RTC_IsEnabled,"ax",%progbits
+ 176              		.align	1
+ 177              		.global	XMC_RTC_IsEnabled
+ 178              		.syntax unified
+ 179              		.thumb
+ 180              		.thumb_func
+ 182              	XMC_RTC_IsEnabled:
+ 183              	.LFB166:
   88:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** 
   89:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** /*
   90:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  * Checks RTC peripheral is enabled for programming to its registers
   91:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  */
   92:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** bool XMC_RTC_IsEnabled(void)
   93:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 188              		.loc 3 93 1
- 189              		.cfi_startproc
- 190              		@ args = 0, pretend = 0, frame = 0
- 191              		@ frame_needed = 1, uses_anonymous_args = 0
- 192 0000 80B5     		push	{r7, lr}
- 193              	.LCFI14:
- 194              		.cfi_def_cfa_offset 8
- 195              		.cfi_offset 7, -8
- 196              		.cfi_offset 14, -4
- 197 0002 00AF     		add	r7, sp, #0
- 198              	.LCFI15:
- 199              		.cfi_def_cfa_register 7
+ 184              		.loc 3 93 1
+ 185              		.cfi_startproc
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 1, uses_anonymous_args = 0
+ 188 0000 80B5     		push	{r7, lr}
+ 189              	.LCFI14:
+ 190              		.cfi_def_cfa_offset 8
+ 191              		.cfi_offset 7, -8
+ 192              		.cfi_offset 14, -4
+ 193 0002 00AF     		add	r7, sp, #0
+ 194              	.LCFI15:
+ 195              		.cfi_def_cfa_register 7
   94:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   return XMC_SCU_HIB_IsHibernateDomainEnabled();
- 200              		.loc 3 94 10
- 201 0004 FFF7FEFF 		bl	XMC_SCU_HIB_IsHibernateDomainEnabled
- 202 0008 0346     		mov	r3, r0
+ 196              		.loc 3 94 10
+ 197 0004 FFF7FEFF 		bl	XMC_SCU_HIB_IsHibernateDomainEnabled
+ 198 0008 0346     		mov	r3, r0
   95:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 203              		.loc 3 95 1
- 204 000a 1846     		mov	r0, r3
- 205 000c 80BD     		pop	{r7, pc}
- 206              		.cfi_endproc
- 207              	.LFE166:
- 209              		.section	.text.XMC_RTC_Init,"ax",%progbits
- 210              		.align	1
- 211              		.global	XMC_RTC_Init
- 212              		.syntax unified
- 213              		.thumb
- 214              		.thumb_func
- 215              		.fpu fpv4-sp-d16
- 217              	XMC_RTC_Init:
- 218              	.LFB167:
+ 199              		.loc 3 95 1
+ 200 000a 1846     		mov	r0, r3
+ 201 000c 80BD     		pop	{r7, pc}
+ 202              		.cfi_endproc
+ 203              	.LFE166:
+ 205              		.section	.text.XMC_RTC_Init,"ax",%progbits
+ 206              		.align	1
+ 207              		.global	XMC_RTC_Init
+ 208              		.syntax unified
+ 209              		.thumb
+ 210              		.thumb_func
+ 212              	XMC_RTC_Init:
+ 213              	.LFB167:
   96:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** 
   97:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** /*
   98:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  * Initialize the RTC peripheral
   99:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  */
  100:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** XMC_RTC_STATUS_t XMC_RTC_Init(const XMC_RTC_CONFIG_t *const config)
  101:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 219              		.loc 3 101 1
- 220              		.cfi_startproc
- 221              		@ args = 0, pretend = 0, frame = 8
- 222              		@ frame_needed = 1, uses_anonymous_args = 0
- 223 0000 80B5     		push	{r7, lr}
- 224              	.LCFI16:
- 225              		.cfi_def_cfa_offset 8
- 226              		.cfi_offset 7, -8
- 227              		.cfi_offset 14, -4
- 228 0002 82B0     		sub	sp, sp, #8
- 229              	.LCFI17:
- 230              		.cfi_def_cfa_offset 16
- 231 0004 00AF     		add	r7, sp, #0
- 232              	.LCFI18:
- 233              		.cfi_def_cfa_register 7
- 234 0006 7860     		str	r0, [r7, #4]
+ 214              		.loc 3 101 1
+ 215              		.cfi_startproc
+ 216              		@ args = 0, pretend = 0, frame = 8
+ 217              		@ frame_needed = 1, uses_anonymous_args = 0
+ 218 0000 80B5     		push	{r7, lr}
+ 219              	.LCFI16:
+ 220              		.cfi_def_cfa_offset 8
+ 221              		.cfi_offset 7, -8
+ 222              		.cfi_offset 14, -4
+ 223 0002 82B0     		sub	sp, sp, #8
+ 224              	.LCFI17:
+ 225              		.cfi_def_cfa_offset 16
+ 226 0004 00AF     		add	r7, sp, #0
+ 227              	.LCFI18:
+ 228              		.cfi_def_cfa_register 7
+ 229 0006 7860     		str	r0, [r7, #4]
  102:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   if (XMC_RTC_IsRunning() == false)
- 235              		.loc 3 102 7
- 236 0008 FFF7FEFF 		bl	XMC_RTC_IsRunning
- 237 000c 0346     		mov	r3, r0
- 238              		.loc 3 102 27
- 239 000e 83F00103 		eor	r3, r3, #1
- 240 0012 DBB2     		uxtb	r3, r3
- 241              		.loc 3 102 6
- 242 0014 002B     		cmp	r3, #0
- 243 0016 3ED0     		beq	.L14
+ 230              		.loc 3 102 7
+ 231 0008 FFF7FEFF 		bl	XMC_RTC_IsRunning
+ 232 000c 0346     		mov	r3, r0
+ 233              		.loc 3 102 27
+ 234 000e 83F00103 		eor	r3, r3, #1
+ 235 0012 DBB2     		uxtb	r3, r3
+ 236              		.loc 3 102 6
+ 237 0014 002B     		cmp	r3, #0
+ 238 0016 3ED0     		beq	.L14
  103:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   {
  104:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     if (XMC_SCU_HIB_IsHibernateDomainEnabled() == false)
- 244              		.loc 3 104 9
- 245 0018 FFF7FEFF 		bl	XMC_SCU_HIB_IsHibernateDomainEnabled
- 246 001c 0346     		mov	r3, r0
- 247              		.loc 3 104 48
- 248 001e 83F00103 		eor	r3, r3, #1
- 249 0022 DBB2     		uxtb	r3, r3
- 250              		.loc 3 104 8
- 251 0024 002B     		cmp	r3, #0
- 252 0026 01D0     		beq	.L15
+ 239              		.loc 3 104 9
+ 240 0018 FFF7FEFF 		bl	XMC_SCU_HIB_IsHibernateDomainEnabled
+ 241 001c 0346     		mov	r3, r0
+ 242              		.loc 3 104 48
+ 243 001e 83F00103 		eor	r3, r3, #1
+ 244 0022 DBB2     		uxtb	r3, r3
+ 245              		.loc 3 104 8
+ 246 0024 002B     		cmp	r3, #0
+ 247 0026 01D0     		beq	.L15
  105:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     {
  106:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****       XMC_SCU_HIB_EnableHibernateDomain();
- 253              		.loc 3 106 7
- 254 0028 FFF7FEFF 		bl	XMC_SCU_HIB_EnableHibernateDomain
- 255              	.L15:
+ 248              		.loc 3 106 7
+ 249 0028 FFF7FEFF 		bl	XMC_SCU_HIB_EnableHibernateDomain
+ 250              	.L15:
  107:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     }
  108:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     
  109:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     XMC_RTC_SetPrescaler(config->prescaler);
- 256              		.loc 3 109 5
- 257 002c 7B68     		ldr	r3, [r7, #4]
- 258 002e 1B8A     		ldrh	r3, [r3, #16]
- 259 0030 1846     		mov	r0, r3
- 260 0032 FFF7FEFF 		bl	XMC_RTC_SetPrescaler
+ 251              		.loc 3 109 5
+ 252 002c 7B68     		ldr	r3, [r7, #4]
+ 253 002e 1B8A     		ldrh	r3, [r3, #16]
+ 254 0030 1846     		mov	r0, r3
+ 255 0032 FFF7FEFF 		bl	XMC_RTC_SetPrescaler
  110:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     
  111:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_TIM0_Msk) != 0U)
- 261              		.loc 3 111 11
- 262 0036 00BF     		nop
- 263              	.L16:
- 264              		.loc 3 111 13 discriminator 1
- 265 0038 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 266 003c 0346     		mov	r3, r0
- 267              		.loc 3 111 39 discriminator 1
- 268 003e 03F40063 		and	r3, r3, #2048
- 269              		.loc 3 111 11 discriminator 1
- 270 0042 002B     		cmp	r3, #0
- 271 0044 F8D1     		bne	.L16
+ 256              		.loc 3 111 11
+ 257 0036 00BF     		nop
+ 258              	.L16:
+ 259              		.loc 3 111 13 discriminator 1
+ 260 0038 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 261 003c 0346     		mov	r3, r0
+ 262              		.loc 3 111 39 discriminator 1
+ 263 003e 03F40063 		and	r3, r3, #2048
+ 264              		.loc 3 111 11 discriminator 1
+ 265 0042 002B     		cmp	r3, #0
+ 266 0044 F8D1     		bne	.L16
  112:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     {
  113:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  114:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     }
  115:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     RTC->TIM0 = config->time.raw0;
- 272              		.loc 3 115 8
- 273 0046 164A     		ldr	r2, .L21
- 274              		.loc 3 115 29
- 275 0048 7B68     		ldr	r3, [r7, #4]
- 276 004a 1B68     		ldr	r3, [r3]
- 277              		.loc 3 115 15
- 278 004c 1362     		str	r3, [r2, #32]
+ 267              		.loc 3 115 8
+ 268 0046 164A     		ldr	r2, .L21
+ 269              		.loc 3 115 29
+ 270 0048 7B68     		ldr	r3, [r7, #4]
+ 271 004a 1B68     		ldr	r3, [r3]
+ 272              		.loc 3 115 15
+ 273 004c 1362     		str	r3, [r2, #32]
  116:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     
  117:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_TIM1_Msk) != 0U)
- 279              		.loc 3 117 11
- 280 004e 00BF     		nop
- 281              	.L17:
- 282              		.loc 3 117 13 discriminator 1
- 283 0050 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 284 0054 0346     		mov	r3, r0
- 285              		.loc 3 117 39 discriminator 1
- 286 0056 03F48053 		and	r3, r3, #4096
- 287              		.loc 3 117 11 discriminator 1
- 288 005a 002B     		cmp	r3, #0
- 289 005c F8D1     		bne	.L17
+ 274              		.loc 3 117 11
+ 275 004e 00BF     		nop
+ 276              	.L17:
+ 277              		.loc 3 117 13 discriminator 1
+ 278 0050 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 279 0054 0346     		mov	r3, r0
+ 280              		.loc 3 117 39 discriminator 1
+ 281 0056 03F48053 		and	r3, r3, #4096
+ 282              		.loc 3 117 11 discriminator 1
+ 283 005a 002B     		cmp	r3, #0
+ 284 005c F8D1     		bne	.L17
  118:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     {
  119:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  120:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     }
  121:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     RTC->TIM1 = config->time.raw1;
- 290              		.loc 3 121 8
- 291 005e 104A     		ldr	r2, .L21
- 292              		.loc 3 121 29
- 293 0060 7B68     		ldr	r3, [r7, #4]
- 294 0062 5B68     		ldr	r3, [r3, #4]
- 295              		.loc 3 121 15
- 296 0064 5362     		str	r3, [r2, #36]
+ 285              		.loc 3 121 8
+ 286 005e 104A     		ldr	r2, .L21
+ 287              		.loc 3 121 29
+ 288 0060 7B68     		ldr	r3, [r7, #4]
+ 289 0062 5B68     		ldr	r3, [r3, #4]
+ 290              		.loc 3 121 15
+ 291 0064 5362     		str	r3, [r2, #36]
  122:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     
  123:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_ATIM0_Msk) != 0U)
- 297              		.loc 3 123 11
- 298 0066 00BF     		nop
- 299              	.L18:
- 300              		.loc 3 123 13 discriminator 1
- 301 0068 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 302 006c 0346     		mov	r3, r0
- 303              		.loc 3 123 39 discriminator 1
- 304 006e 03F40073 		and	r3, r3, #512
- 305              		.loc 3 123 11 discriminator 1
- 306 0072 002B     		cmp	r3, #0
- 307 0074 F8D1     		bne	.L18
+ 292              		.loc 3 123 11
+ 293 0066 00BF     		nop
+ 294              	.L18:
+ 295              		.loc 3 123 13 discriminator 1
+ 296 0068 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 297 006c 0346     		mov	r3, r0
+ 298              		.loc 3 123 39 discriminator 1
+ 299 006e 03F40073 		and	r3, r3, #512
+ 300              		.loc 3 123 11 discriminator 1
+ 301 0072 002B     		cmp	r3, #0
+ 302 0074 F8D1     		bne	.L18
  124:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     {
  125:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  126:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     }
  127:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     RTC->ATIM0 = config->alarm.raw0;
- 308              		.loc 3 127 8
- 309 0076 0A4A     		ldr	r2, .L21
- 310              		.loc 3 127 31
- 311 0078 7B68     		ldr	r3, [r7, #4]
- 312 007a 9B68     		ldr	r3, [r3, #8]
- 313              		.loc 3 127 16
- 314 007c 9361     		str	r3, [r2, #24]
+ 303              		.loc 3 127 8
+ 304 0076 0A4A     		ldr	r2, .L21
+ 305              		.loc 3 127 31
+ 306 0078 7B68     		ldr	r3, [r7, #4]
+ 307 007a 9B68     		ldr	r3, [r3, #8]
+ 308              		.loc 3 127 16
+ 309 007c 9361     		str	r3, [r2, #24]
  128:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     
  129:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_ATIM1_Msk) != 0U)
- 315              		.loc 3 129 11
- 316 007e 00BF     		nop
- 317              	.L19:
- 318              		.loc 3 129 13 discriminator 1
- 319 0080 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 320 0084 0346     		mov	r3, r0
- 321              		.loc 3 129 39 discriminator 1
- 322 0086 03F48063 		and	r3, r3, #1024
- 323              		.loc 3 129 11 discriminator 1
- 324 008a 002B     		cmp	r3, #0
- 325 008c F8D1     		bne	.L19
+ 310              		.loc 3 129 11
+ 311 007e 00BF     		nop
+ 312              	.L19:
+ 313              		.loc 3 129 13 discriminator 1
+ 314 0080 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 315 0084 0346     		mov	r3, r0
+ 316              		.loc 3 129 39 discriminator 1
+ 317 0086 03F48063 		and	r3, r3, #1024
+ 318              		.loc 3 129 11 discriminator 1
+ 319 008a 002B     		cmp	r3, #0
+ 320 008c F8D1     		bne	.L19
  130:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     {
  131:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****       /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  132:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     }
  133:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     RTC->ATIM1 = config->alarm.raw1;    
- 326              		.loc 3 133 8
- 327 008e 044A     		ldr	r2, .L21
- 328              		.loc 3 133 31
- 329 0090 7B68     		ldr	r3, [r7, #4]
- 330 0092 DB68     		ldr	r3, [r3, #12]
- 331              		.loc 3 133 16
- 332 0094 D361     		str	r3, [r2, #28]
- 333              	.L14:
+ 321              		.loc 3 133 8
+ 322 008e 044A     		ldr	r2, .L21
+ 323              		.loc 3 133 31
+ 324 0090 7B68     		ldr	r3, [r7, #4]
+ 325 0092 DB68     		ldr	r3, [r3, #12]
+ 326              		.loc 3 133 16
+ 327 0094 D361     		str	r3, [r2, #28]
+ 328              	.L14:
  134:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   }  
  135:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   return XMC_RTC_STATUS_OK;
- 334              		.loc 3 135 10
- 335 0096 0023     		movs	r3, #0
+ 329              		.loc 3 135 10
+ 330 0096 0023     		movs	r3, #0
  136:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 336              		.loc 3 136 1
- 337 0098 1846     		mov	r0, r3
- 338 009a 0837     		adds	r7, r7, #8
- 339              	.LCFI19:
- 340              		.cfi_def_cfa_offset 8
- 341 009c BD46     		mov	sp, r7
- 342              	.LCFI20:
- 343              		.cfi_def_cfa_register 13
- 344              		@ sp needed
- 345 009e 80BD     		pop	{r7, pc}
- 346              	.L22:
- 347              		.align	2
- 348              	.L21:
- 349 00a0 004A0050 		.word	1342196224
- 350              		.cfi_endproc
- 351              	.LFE167:
- 353              		.section	.text.XMC_RTC_EnableEvent,"ax",%progbits
- 354              		.align	1
- 355              		.global	XMC_RTC_EnableEvent
- 356              		.syntax unified
- 357              		.thumb
- 358              		.thumb_func
- 359              		.fpu fpv4-sp-d16
- 361              	XMC_RTC_EnableEvent:
- 362              	.LFB168:
+ 331              		.loc 3 136 1
+ 332 0098 1846     		mov	r0, r3
+ 333 009a 0837     		adds	r7, r7, #8
+ 334              	.LCFI19:
+ 335              		.cfi_def_cfa_offset 8
+ 336 009c BD46     		mov	sp, r7
+ 337              	.LCFI20:
+ 338              		.cfi_def_cfa_register 13
+ 339              		@ sp needed
+ 340 009e 80BD     		pop	{r7, pc}
+ 341              	.L22:
+ 342              		.align	2
+ 343              	.L21:
+ 344 00a0 004A0050 		.word	1342196224
+ 345              		.cfi_endproc
+ 346              	.LFE167:
+ 348              		.section	.text.XMC_RTC_EnableEvent,"ax",%progbits
+ 349              		.align	1
+ 350              		.global	XMC_RTC_EnableEvent
+ 351              		.syntax unified
+ 352              		.thumb
+ 353              		.thumb_func
+ 355              	XMC_RTC_EnableEvent:
+ 356              	.LFB168:
  137:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** 
  138:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** /*
  139:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  * Enable RTC periodic and alarm event(s)
  140:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  */ 
  141:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** void XMC_RTC_EnableEvent(const uint32_t event)
  142:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 363              		.loc 3 142 1
- 364              		.cfi_startproc
- 365              		@ args = 0, pretend = 0, frame = 8
- 366              		@ frame_needed = 1, uses_anonymous_args = 0
- 367 0000 80B5     		push	{r7, lr}
- 368              	.LCFI21:
- 369              		.cfi_def_cfa_offset 8
- 370              		.cfi_offset 7, -8
- 371              		.cfi_offset 14, -4
- 372 0002 82B0     		sub	sp, sp, #8
- 373              	.LCFI22:
- 374              		.cfi_def_cfa_offset 16
- 375 0004 00AF     		add	r7, sp, #0
- 376              	.LCFI23:
- 377              		.cfi_def_cfa_register 7
- 378 0006 7860     		str	r0, [r7, #4]
+ 357              		.loc 3 142 1
+ 358              		.cfi_startproc
+ 359              		@ args = 0, pretend = 0, frame = 8
+ 360              		@ frame_needed = 1, uses_anonymous_args = 0
+ 361 0000 80B5     		push	{r7, lr}
+ 362              	.LCFI21:
+ 363              		.cfi_def_cfa_offset 8
+ 364              		.cfi_offset 7, -8
+ 365              		.cfi_offset 14, -4
+ 366 0002 82B0     		sub	sp, sp, #8
+ 367              	.LCFI22:
+ 368              		.cfi_def_cfa_offset 16
+ 369 0004 00AF     		add	r7, sp, #0
+ 370              	.LCFI23:
+ 371              		.cfi_def_cfa_register 7
+ 372 0006 7860     		str	r0, [r7, #4]
  143:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_MSKSR_Msk) != 0U)
- 379              		.loc 3 143 9
- 380 0008 00BF     		nop
- 381              	.L24:
- 382              		.loc 3 143 11 discriminator 1
- 383 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 384 000e 0346     		mov	r3, r0
- 385              		.loc 3 143 37 discriminator 1
- 386 0010 03F48043 		and	r3, r3, #16384
- 387              		.loc 3 143 9 discriminator 1
- 388 0014 002B     		cmp	r3, #0
- 389 0016 F8D1     		bne	.L24
+ 373              		.loc 3 143 9
+ 374 0008 00BF     		nop
+ 375              	.L24:
+ 376              		.loc 3 143 11 discriminator 1
+ 377 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 378 000e 0346     		mov	r3, r0
+ 379              		.loc 3 143 37 discriminator 1
+ 380 0010 03F48043 		and	r3, r3, #16384
+ 381              		.loc 3 143 9 discriminator 1
+ 382 0014 002B     		cmp	r3, #0
+ 383 0016 F8D1     		bne	.L24
  144:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   {
  145:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  146:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   }
  147:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   RTC->MSKSR |= event;
- 390              		.loc 3 147 14
- 391 0018 044B     		ldr	r3, .L25
- 392 001a 1A69     		ldr	r2, [r3, #16]
- 393 001c 0349     		ldr	r1, .L25
- 394 001e 7B68     		ldr	r3, [r7, #4]
- 395 0020 1343     		orrs	r3, r3, r2
- 396 0022 0B61     		str	r3, [r1, #16]
+ 384              		.loc 3 147 14
+ 385 0018 044B     		ldr	r3, .L25
+ 386 001a 1A69     		ldr	r2, [r3, #16]
+ 387 001c 0349     		ldr	r1, .L25
+ 388 001e 7B68     		ldr	r3, [r7, #4]
+ 389 0020 1343     		orrs	r3, r3, r2
+ 390 0022 0B61     		str	r3, [r1, #16]
  148:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 397              		.loc 3 148 1
- 398 0024 00BF     		nop
- 399 0026 0837     		adds	r7, r7, #8
- 400              	.LCFI24:
- 401              		.cfi_def_cfa_offset 8
- 402 0028 BD46     		mov	sp, r7
- 403              	.LCFI25:
- 404              		.cfi_def_cfa_register 13
- 405              		@ sp needed
- 406 002a 80BD     		pop	{r7, pc}
- 407              	.L26:
- 408              		.align	2
- 409              	.L25:
- 410 002c 004A0050 		.word	1342196224
- 411              		.cfi_endproc
- 412              	.LFE168:
- 414              		.section	.text.XMC_RTC_DisableEvent,"ax",%progbits
- 415              		.align	1
- 416              		.global	XMC_RTC_DisableEvent
- 417              		.syntax unified
- 418              		.thumb
- 419              		.thumb_func
- 420              		.fpu fpv4-sp-d16
- 422              	XMC_RTC_DisableEvent:
- 423              	.LFB169:
+ 391              		.loc 3 148 1
+ 392 0024 00BF     		nop
+ 393 0026 0837     		adds	r7, r7, #8
+ 394              	.LCFI24:
+ 395              		.cfi_def_cfa_offset 8
+ 396 0028 BD46     		mov	sp, r7
+ 397              	.LCFI25:
+ 398              		.cfi_def_cfa_register 13
+ 399              		@ sp needed
+ 400 002a 80BD     		pop	{r7, pc}
+ 401              	.L26:
+ 402              		.align	2
+ 403              	.L25:
+ 404 002c 004A0050 		.word	1342196224
+ 405              		.cfi_endproc
+ 406              	.LFE168:
+ 408              		.section	.text.XMC_RTC_DisableEvent,"ax",%progbits
+ 409              		.align	1
+ 410              		.global	XMC_RTC_DisableEvent
+ 411              		.syntax unified
+ 412              		.thumb
+ 413              		.thumb_func
+ 415              	XMC_RTC_DisableEvent:
+ 416              	.LFB169:
  149:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** 
  150:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** /*
  151:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  * Disable RTC periodic and alarm event(s)
  152:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  */ 
  153:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** void XMC_RTC_DisableEvent(const uint32_t event)
  154:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 424              		.loc 3 154 1
- 425              		.cfi_startproc
- 426              		@ args = 0, pretend = 0, frame = 8
- 427              		@ frame_needed = 1, uses_anonymous_args = 0
- 428 0000 80B5     		push	{r7, lr}
- 429              	.LCFI26:
- 430              		.cfi_def_cfa_offset 8
- 431              		.cfi_offset 7, -8
- 432              		.cfi_offset 14, -4
- 433 0002 82B0     		sub	sp, sp, #8
- 434              	.LCFI27:
- 435              		.cfi_def_cfa_offset 16
- 436 0004 00AF     		add	r7, sp, #0
- 437              	.LCFI28:
- 438              		.cfi_def_cfa_register 7
- 439 0006 7860     		str	r0, [r7, #4]
+ 417              		.loc 3 154 1
+ 418              		.cfi_startproc
+ 419              		@ args = 0, pretend = 0, frame = 8
+ 420              		@ frame_needed = 1, uses_anonymous_args = 0
+ 421 0000 80B5     		push	{r7, lr}
+ 422              	.LCFI26:
+ 423              		.cfi_def_cfa_offset 8
+ 424              		.cfi_offset 7, -8
+ 425              		.cfi_offset 14, -4
+ 426 0002 82B0     		sub	sp, sp, #8
+ 427              	.LCFI27:
+ 428              		.cfi_def_cfa_offset 16
+ 429 0004 00AF     		add	r7, sp, #0
+ 430              	.LCFI28:
+ 431              		.cfi_def_cfa_register 7
+ 432 0006 7860     		str	r0, [r7, #4]
  155:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_MSKSR_Msk) != 0U)
- 440              		.loc 3 155 9
- 441 0008 00BF     		nop
- 442              	.L28:
- 443              		.loc 3 155 11 discriminator 1
- 444 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 445 000e 0346     		mov	r3, r0
- 446              		.loc 3 155 37 discriminator 1
- 447 0010 03F48043 		and	r3, r3, #16384
- 448              		.loc 3 155 9 discriminator 1
- 449 0014 002B     		cmp	r3, #0
- 450 0016 F8D1     		bne	.L28
+ 433              		.loc 3 155 9
+ 434 0008 00BF     		nop
+ 435              	.L28:
+ 436              		.loc 3 155 11 discriminator 1
+ 437 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 438 000e 0346     		mov	r3, r0
+ 439              		.loc 3 155 37 discriminator 1
+ 440 0010 03F48043 		and	r3, r3, #16384
+ 441              		.loc 3 155 9 discriminator 1
+ 442 0014 002B     		cmp	r3, #0
+ 443 0016 F8D1     		bne	.L28
  156:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   {
  157:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  158:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   }
  159:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   RTC->MSKSR &= ~event;
- 451              		.loc 3 159 14
- 452 0018 054B     		ldr	r3, .L29
- 453 001a 1A69     		ldr	r2, [r3, #16]
- 454              		.loc 3 159 17
- 455 001c 7B68     		ldr	r3, [r7, #4]
- 456 001e DB43     		mvns	r3, r3
- 457              		.loc 3 159 14
- 458 0020 0349     		ldr	r1, .L29
- 459 0022 1340     		ands	r3, r3, r2
- 460 0024 0B61     		str	r3, [r1, #16]
+ 444              		.loc 3 159 14
+ 445 0018 054B     		ldr	r3, .L29
+ 446 001a 1A69     		ldr	r2, [r3, #16]
+ 447              		.loc 3 159 17
+ 448 001c 7B68     		ldr	r3, [r7, #4]
+ 449 001e DB43     		mvns	r3, r3
+ 450              		.loc 3 159 14
+ 451 0020 0349     		ldr	r1, .L29
+ 452 0022 1340     		ands	r3, r3, r2
+ 453 0024 0B61     		str	r3, [r1, #16]
  160:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 461              		.loc 3 160 1
- 462 0026 00BF     		nop
- 463 0028 0837     		adds	r7, r7, #8
- 464              	.LCFI29:
- 465              		.cfi_def_cfa_offset 8
- 466 002a BD46     		mov	sp, r7
- 467              	.LCFI30:
- 468              		.cfi_def_cfa_register 13
- 469              		@ sp needed
- 470 002c 80BD     		pop	{r7, pc}
- 471              	.L30:
- 472 002e 00BF     		.align	2
- 473              	.L29:
- 474 0030 004A0050 		.word	1342196224
- 475              		.cfi_endproc
- 476              	.LFE169:
- 478              		.section	.text.XMC_RTC_ClearEvent,"ax",%progbits
- 479              		.align	1
- 480              		.global	XMC_RTC_ClearEvent
- 481              		.syntax unified
- 482              		.thumb
- 483              		.thumb_func
- 484              		.fpu fpv4-sp-d16
- 486              	XMC_RTC_ClearEvent:
- 487              	.LFB170:
+ 454              		.loc 3 160 1
+ 455 0026 00BF     		nop
+ 456 0028 0837     		adds	r7, r7, #8
+ 457              	.LCFI29:
+ 458              		.cfi_def_cfa_offset 8
+ 459 002a BD46     		mov	sp, r7
+ 460              	.LCFI30:
+ 461              		.cfi_def_cfa_register 13
+ 462              		@ sp needed
+ 463 002c 80BD     		pop	{r7, pc}
+ 464              	.L30:
+ 465 002e 00BF     		.align	2
+ 466              	.L29:
+ 467 0030 004A0050 		.word	1342196224
+ 468              		.cfi_endproc
+ 469              	.LFE169:
+ 471              		.section	.text.XMC_RTC_ClearEvent,"ax",%progbits
+ 472              		.align	1
+ 473              		.global	XMC_RTC_ClearEvent
+ 474              		.syntax unified
+ 475              		.thumb
+ 476              		.thumb_func
+ 478              	XMC_RTC_ClearEvent:
+ 479              	.LFB170:
  161:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** 
  162:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** /*
  163:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  * Clear RTC periodic and alarm event(s)
  164:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****  */ 
  165:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** void XMC_RTC_ClearEvent(const uint32_t event)
  166:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 488              		.loc 3 166 1
- 489              		.cfi_startproc
- 490              		@ args = 0, pretend = 0, frame = 8
- 491              		@ frame_needed = 1, uses_anonymous_args = 0
- 492 0000 80B5     		push	{r7, lr}
- 493              	.LCFI31:
- 494              		.cfi_def_cfa_offset 8
- 495              		.cfi_offset 7, -8
- 496              		.cfi_offset 14, -4
- 497 0002 82B0     		sub	sp, sp, #8
- 498              	.LCFI32:
- 499              		.cfi_def_cfa_offset 16
- 500 0004 00AF     		add	r7, sp, #0
- 501              	.LCFI33:
- 502              		.cfi_def_cfa_register 7
- 503 0006 7860     		str	r0, [r7, #4]
+ 480              		.loc 3 166 1
+ 481              		.cfi_startproc
+ 482              		@ args = 0, pretend = 0, frame = 8
+ 483              		@ frame_needed = 1, uses_anonymous_args = 0
+ 484 0000 80B5     		push	{r7, lr}
+ 485              	.LCFI31:
+ 486              		.cfi_def_cfa_offset 8
+ 487              		.cfi_offset 7, -8
+ 488              		.cfi_offset 14, -4
+ 489 0002 82B0     		sub	sp, sp, #8
+ 490              	.LCFI32:
+ 491              		.cfi_def_cfa_offset 16
+ 492 0004 00AF     		add	r7, sp, #0
+ 493              	.LCFI33:
+ 494              		.cfi_def_cfa_register 7
+ 495 0006 7860     		str	r0, [r7, #4]
  167:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CLRSR_Msk) != 0U)
- 504              		.loc 3 167 9
- 505 0008 00BF     		nop
- 506              	.L32:
- 507              		.loc 3 167 11 discriminator 1
- 508 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 509 000e 0346     		mov	r3, r0
- 510              		.loc 3 167 37 discriminator 1
- 511 0010 03F40043 		and	r3, r3, #32768
- 512              		.loc 3 167 9 discriminator 1
- 513 0014 002B     		cmp	r3, #0
- 514 0016 F8D1     		bne	.L32
+ 496              		.loc 3 167 9
+ 497 0008 00BF     		nop
+ 498              	.L32:
+ 499              		.loc 3 167 11 discriminator 1
+ 500 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 501 000e 0346     		mov	r3, r0
+ 502              		.loc 3 167 37 discriminator 1
+ 503 0010 03F40043 		and	r3, r3, #32768
+ 504              		.loc 3 167 9 discriminator 1
+ 505 0014 002B     		cmp	r3, #0
+ 506 0016 F8D1     		bne	.L32
  168:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   {
  169:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  170:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   }
  171:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   RTC->CLRSR = event;
- 515              		.loc 3 171 6
- 516 0018 034A     		ldr	r2, .L33
- 517              		.loc 3 171 14
- 518 001a 7B68     		ldr	r3, [r7, #4]
- 519 001c 5361     		str	r3, [r2, #20]
+ 507              		.loc 3 171 6
+ 508 0018 034A     		ldr	r2, .L33
+ 509              		.loc 3 171 14
+ 510 001a 7B68     		ldr	r3, [r7, #4]
+ 511 001c 5361     		str	r3, [r2, #20]
  172:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 520              		.loc 3 172 1
- 521 001e 00BF     		nop
- 522 0020 0837     		adds	r7, r7, #8
- 523              	.LCFI34:
- 524              		.cfi_def_cfa_offset 8
- 525 0022 BD46     		mov	sp, r7
- 526              	.LCFI35:
- 527              		.cfi_def_cfa_register 13
- 528              		@ sp needed
- 529 0024 80BD     		pop	{r7, pc}
- 530              	.L34:
- 531 0026 00BF     		.align	2
- 532              	.L33:
- 533 0028 004A0050 		.word	1342196224
- 534              		.cfi_endproc
- 535              	.LFE170:
- 537              		.section	.text.XMC_RTC_EnableHibernationWakeUp,"ax",%progbits
- 538              		.align	1
- 539              		.global	XMC_RTC_EnableHibernationWakeUp
- 540              		.syntax unified
- 541              		.thumb
- 542              		.thumb_func
- 543              		.fpu fpv4-sp-d16
- 545              	XMC_RTC_EnableHibernationWakeUp:
- 546              	.LFB171:
+ 512              		.loc 3 172 1
+ 513 001e 00BF     		nop
+ 514 0020 0837     		adds	r7, r7, #8
+ 515              	.LCFI34:
+ 516              		.cfi_def_cfa_offset 8
+ 517 0022 BD46     		mov	sp, r7
+ 518              	.LCFI35:
+ 519              		.cfi_def_cfa_register 13
+ 520              		@ sp needed
+ 521 0024 80BD     		pop	{r7, pc}
+ 522              	.L34:
+ 523 0026 00BF     		.align	2
+ 524              	.L33:
+ 525 0028 004A0050 		.word	1342196224
+ 526              		.cfi_endproc
+ 527              	.LFE170:
+ 529              		.section	.text.XMC_RTC_EnableHibernationWakeUp,"ax",%progbits
+ 530              		.align	1
+ 531              		.global	XMC_RTC_EnableHibernationWakeUp
+ 532              		.syntax unified
+ 533              		.thumb
+ 534              		.thumb_func
+ 536              	XMC_RTC_EnableHibernationWakeUp:
+ 537              	.LFB171:
  173:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** 
  174:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** void XMC_RTC_EnableHibernationWakeUp(const uint32_t event)
  175:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 547              		.loc 3 175 1
- 548              		.cfi_startproc
- 549              		@ args = 0, pretend = 0, frame = 8
- 550              		@ frame_needed = 1, uses_anonymous_args = 0
- 551 0000 80B5     		push	{r7, lr}
- 552              	.LCFI36:
- 553              		.cfi_def_cfa_offset 8
- 554              		.cfi_offset 7, -8
- 555              		.cfi_offset 14, -4
- 556 0002 82B0     		sub	sp, sp, #8
- 557              	.LCFI37:
- 558              		.cfi_def_cfa_offset 16
- 559 0004 00AF     		add	r7, sp, #0
- 560              	.LCFI38:
- 561              		.cfi_def_cfa_register 7
- 562 0006 7860     		str	r0, [r7, #4]
+ 538              		.loc 3 175 1
+ 539              		.cfi_startproc
+ 540              		@ args = 0, pretend = 0, frame = 8
+ 541              		@ frame_needed = 1, uses_anonymous_args = 0
+ 542 0000 80B5     		push	{r7, lr}
+ 543              	.LCFI36:
+ 544              		.cfi_def_cfa_offset 8
+ 545              		.cfi_offset 7, -8
+ 546              		.cfi_offset 14, -4
+ 547 0002 82B0     		sub	sp, sp, #8
+ 548              	.LCFI37:
+ 549              		.cfi_def_cfa_offset 16
+ 550 0004 00AF     		add	r7, sp, #0
+ 551              	.LCFI38:
+ 552              		.cfi_def_cfa_register 7
+ 553 0006 7860     		str	r0, [r7, #4]
  176:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   while((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk) != 0U)
- 563              		.loc 3 176 8
- 564 0008 00BF     		nop
- 565              	.L36:
- 566              		.loc 3 176 10 discriminator 1
- 567 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 568 000e 0346     		mov	r3, r0
- 569              		.loc 3 176 36 discriminator 1
- 570 0010 03F48073 		and	r3, r3, #256
- 571              		.loc 3 176 8 discriminator 1
- 572 0014 002B     		cmp	r3, #0
- 573 0016 F8D1     		bne	.L36
+ 554              		.loc 3 176 8
+ 555 0008 00BF     		nop
+ 556              	.L36:
+ 557              		.loc 3 176 10 discriminator 1
+ 558 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 559 000e 0346     		mov	r3, r0
+ 560              		.loc 3 176 36 discriminator 1
+ 561 0010 03F48073 		and	r3, r3, #256
+ 562              		.loc 3 176 8 discriminator 1
+ 563 0014 002B     		cmp	r3, #0
+ 564 0016 F8D1     		bne	.L36
  177:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   {
  178:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  179:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   }
  180:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   RTC->CTR |= event;
- 574              		.loc 3 180 12
- 575 0018 044B     		ldr	r3, .L37
- 576 001a 5A68     		ldr	r2, [r3, #4]
- 577 001c 0349     		ldr	r1, .L37
- 578 001e 7B68     		ldr	r3, [r7, #4]
- 579 0020 1343     		orrs	r3, r3, r2
- 580 0022 4B60     		str	r3, [r1, #4]
+ 565              		.loc 3 180 12
+ 566 0018 044B     		ldr	r3, .L37
+ 567 001a 5A68     		ldr	r2, [r3, #4]
+ 568 001c 0349     		ldr	r1, .L37
+ 569 001e 7B68     		ldr	r3, [r7, #4]
+ 570 0020 1343     		orrs	r3, r3, r2
+ 571 0022 4B60     		str	r3, [r1, #4]
  181:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 581              		.loc 3 181 1
- 582 0024 00BF     		nop
- 583 0026 0837     		adds	r7, r7, #8
- 584              	.LCFI39:
- 585              		.cfi_def_cfa_offset 8
- 586 0028 BD46     		mov	sp, r7
- 587              	.LCFI40:
- 588              		.cfi_def_cfa_register 13
- 589              		@ sp needed
- 590 002a 80BD     		pop	{r7, pc}
- 591              	.L38:
- 592              		.align	2
- 593              	.L37:
- 594 002c 004A0050 		.word	1342196224
- 595              		.cfi_endproc
- 596              	.LFE171:
- 598              		.section	.text.XMC_RTC_DisableHibernationWakeUp,"ax",%progbits
- 599              		.align	1
- 600              		.global	XMC_RTC_DisableHibernationWakeUp
- 601              		.syntax unified
- 602              		.thumb
- 603              		.thumb_func
- 604              		.fpu fpv4-sp-d16
- 606              	XMC_RTC_DisableHibernationWakeUp:
- 607              	.LFB172:
+ 572              		.loc 3 181 1
+ 573 0024 00BF     		nop
+ 574 0026 0837     		adds	r7, r7, #8
+ 575              	.LCFI39:
+ 576              		.cfi_def_cfa_offset 8
+ 577 0028 BD46     		mov	sp, r7
+ 578              	.LCFI40:
+ 579              		.cfi_def_cfa_register 13
+ 580              		@ sp needed
+ 581 002a 80BD     		pop	{r7, pc}
+ 582              	.L38:
+ 583              		.align	2
+ 584              	.L37:
+ 585 002c 004A0050 		.word	1342196224
+ 586              		.cfi_endproc
+ 587              	.LFE171:
+ 589              		.section	.text.XMC_RTC_DisableHibernationWakeUp,"ax",%progbits
+ 590              		.align	1
+ 591              		.global	XMC_RTC_DisableHibernationWakeUp
+ 592              		.syntax unified
+ 593              		.thumb
+ 594              		.thumb_func
+ 596              	XMC_RTC_DisableHibernationWakeUp:
+ 597              	.LFB172:
  182:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** 
  183:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** void XMC_RTC_DisableHibernationWakeUp(const uint32_t event)
  184:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** {
- 608              		.loc 3 184 1
- 609              		.cfi_startproc
- 610              		@ args = 0, pretend = 0, frame = 8
- 611              		@ frame_needed = 1, uses_anonymous_args = 0
- 612 0000 80B5     		push	{r7, lr}
- 613              	.LCFI41:
- 614              		.cfi_def_cfa_offset 8
- 615              		.cfi_offset 7, -8
- 616              		.cfi_offset 14, -4
- 617 0002 82B0     		sub	sp, sp, #8
- 618              	.LCFI42:
- 619              		.cfi_def_cfa_offset 16
- 620 0004 00AF     		add	r7, sp, #0
- 621              	.LCFI43:
- 622              		.cfi_def_cfa_register 7
- 623 0006 7860     		str	r0, [r7, #4]
+ 598              		.loc 3 184 1
+ 599              		.cfi_startproc
+ 600              		@ args = 0, pretend = 0, frame = 8
+ 601              		@ frame_needed = 1, uses_anonymous_args = 0
+ 602 0000 80B5     		push	{r7, lr}
+ 603              	.LCFI41:
+ 604              		.cfi_def_cfa_offset 8
+ 605              		.cfi_offset 7, -8
+ 606              		.cfi_offset 14, -4
+ 607 0002 82B0     		sub	sp, sp, #8
+ 608              	.LCFI42:
+ 609              		.cfi_def_cfa_offset 16
+ 610 0004 00AF     		add	r7, sp, #0
+ 611              	.LCFI43:
+ 612              		.cfi_def_cfa_register 7
+ 613 0006 7860     		str	r0, [r7, #4]
  185:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   while((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk) != 0U)
- 624              		.loc 3 185 8
- 625 0008 00BF     		nop
- 626              	.L40:
- 627              		.loc 3 185 10 discriminator 1
- 628 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 629 000e 0346     		mov	r3, r0
- 630              		.loc 3 185 36 discriminator 1
- 631 0010 03F48073 		and	r3, r3, #256
- 632              		.loc 3 185 8 discriminator 1
- 633 0014 002B     		cmp	r3, #0
- 634 0016 F8D1     		bne	.L40
+ 614              		.loc 3 185 8
+ 615 0008 00BF     		nop
+ 616              	.L40:
+ 617              		.loc 3 185 10 discriminator 1
+ 618 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 619 000e 0346     		mov	r3, r0
+ 620              		.loc 3 185 36 discriminator 1
+ 621 0010 03F48073 		and	r3, r3, #256
+ 622              		.loc 3 185 8 discriminator 1
+ 623 0014 002B     		cmp	r3, #0
+ 624 0016 F8D1     		bne	.L40
  186:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   {
  187:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  188:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   }
  189:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c ****   RTC->CTR &= ~event;
- 635              		.loc 3 189 12
- 636 0018 054B     		ldr	r3, .L41
- 637 001a 5A68     		ldr	r2, [r3, #4]
- 638              		.loc 3 189 15
- 639 001c 7B68     		ldr	r3, [r7, #4]
- 640 001e DB43     		mvns	r3, r3
- 641              		.loc 3 189 12
- 642 0020 0349     		ldr	r1, .L41
- 643 0022 1340     		ands	r3, r3, r2
- 644 0024 4B60     		str	r3, [r1, #4]
+ 625              		.loc 3 189 12
+ 626 0018 054B     		ldr	r3, .L41
+ 627 001a 5A68     		ldr	r2, [r3, #4]
+ 628              		.loc 3 189 15
+ 629 001c 7B68     		ldr	r3, [r7, #4]
+ 630 001e DB43     		mvns	r3, r3
+ 631              		.loc 3 189 12
+ 632 0020 0349     		ldr	r1, .L41
+ 633 0022 1340     		ands	r3, r3, r2
+ 634 0024 4B60     		str	r3, [r1, #4]
  190:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc4_rtc.c **** }
- 645              		.loc 3 190 1
- 646 0026 00BF     		nop
- 647 0028 0837     		adds	r7, r7, #8
- 648              	.LCFI44:
- 649              		.cfi_def_cfa_offset 8
- 650 002a BD46     		mov	sp, r7
- 651              	.LCFI45:
- 652              		.cfi_def_cfa_register 13
- 653              		@ sp needed
- 654 002c 80BD     		pop	{r7, pc}
- 655              	.L42:
- 656 002e 00BF     		.align	2
- 657              	.L41:
- 658 0030 004A0050 		.word	1342196224
- 659              		.cfi_endproc
- 660              	.LFE172:
- 662              		.text
- 663              	.Letext0:
- 664              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 665              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 666              		.file 6 "/usr/include/newlib/sys/_types.h"
- 667              		.file 7 "/usr/include/newlib/sys/reent.h"
- 668              		.file 8 "/usr/include/newlib/sys/lock.h"
- 669              		.file 9 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h"
- 670              		.file 10 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_
- 671              		.file 11 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500
- 672              		.file 12 "/usr/include/newlib/time.h"
+ 635              		.loc 3 190 1
+ 636 0026 00BF     		nop
+ 637 0028 0837     		adds	r7, r7, #8
+ 638              	.LCFI44:
+ 639              		.cfi_def_cfa_offset 8
+ 640 002a BD46     		mov	sp, r7
+ 641              	.LCFI45:
+ 642              		.cfi_def_cfa_register 13
+ 643              		@ sp needed
+ 644 002c 80BD     		pop	{r7, pc}
+ 645              	.L42:
+ 646 002e 00BF     		.align	2
+ 647              	.L41:
+ 648 0030 004A0050 		.word	1342196224
+ 649              		.cfi_endproc
+ 650              	.LFE172:
+ 652              		.text
+ 653              	.Letext0:
+ 654              		.file 4 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/mach
+ 655              		.file 5 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
+ 656              		.file 6 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500.
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 xmc4_rtc.c
-     /tmp/ccV6gFku.s:17     .text.XMC_RTC_IsRunning:0000000000000000 $t
-     /tmp/ccV6gFku.s:24     .text.XMC_RTC_IsRunning:0000000000000000 XMC_RTC_IsRunning
-     /tmp/ccV6gFku.s:64     .text.XMC_RTC_IsRunning:0000000000000020 $d
-     /tmp/ccV6gFku.s:69     .text.XMC_SCU_GetMirrorStatus:0000000000000000 $t
-     /tmp/ccV6gFku.s:75     .text.XMC_SCU_GetMirrorStatus:0000000000000000 XMC_SCU_GetMirrorStatus
-     /tmp/ccV6gFku.s:107    .text.XMC_SCU_GetMirrorStatus:0000000000000014 $d
-     /tmp/ccV6gFku.s:112    .text.XMC_RTC_Enable:0000000000000000 $t
-     /tmp/ccV6gFku.s:119    .text.XMC_RTC_Enable:0000000000000000 XMC_RTC_Enable
-     /tmp/ccV6gFku.s:143    .text.XMC_RTC_Disable:0000000000000000 $t
-     /tmp/ccV6gFku.s:150    .text.XMC_RTC_Disable:0000000000000000 XMC_RTC_Disable
-     /tmp/ccV6gFku.s:179    .text.XMC_RTC_IsEnabled:0000000000000000 $t
-     /tmp/ccV6gFku.s:186    .text.XMC_RTC_IsEnabled:0000000000000000 XMC_RTC_IsEnabled
-     /tmp/ccV6gFku.s:210    .text.XMC_RTC_Init:0000000000000000 $t
-     /tmp/ccV6gFku.s:217    .text.XMC_RTC_Init:0000000000000000 XMC_RTC_Init
-     /tmp/ccV6gFku.s:349    .text.XMC_RTC_Init:00000000000000a0 $d
-     /tmp/ccV6gFku.s:354    .text.XMC_RTC_EnableEvent:0000000000000000 $t
-     /tmp/ccV6gFku.s:361    .text.XMC_RTC_EnableEvent:0000000000000000 XMC_RTC_EnableEvent
-     /tmp/ccV6gFku.s:410    .text.XMC_RTC_EnableEvent:000000000000002c $d
-     /tmp/ccV6gFku.s:415    .text.XMC_RTC_DisableEvent:0000000000000000 $t
-     /tmp/ccV6gFku.s:422    .text.XMC_RTC_DisableEvent:0000000000000000 XMC_RTC_DisableEvent
-     /tmp/ccV6gFku.s:474    .text.XMC_RTC_DisableEvent:0000000000000030 $d
-     /tmp/ccV6gFku.s:479    .text.XMC_RTC_ClearEvent:0000000000000000 $t
-     /tmp/ccV6gFku.s:486    .text.XMC_RTC_ClearEvent:0000000000000000 XMC_RTC_ClearEvent
-     /tmp/ccV6gFku.s:533    .text.XMC_RTC_ClearEvent:0000000000000028 $d
-     /tmp/ccV6gFku.s:538    .text.XMC_RTC_EnableHibernationWakeUp:0000000000000000 $t
-     /tmp/ccV6gFku.s:545    .text.XMC_RTC_EnableHibernationWakeUp:0000000000000000 XMC_RTC_EnableHibernationWakeUp
-     /tmp/ccV6gFku.s:594    .text.XMC_RTC_EnableHibernationWakeUp:000000000000002c $d
-     /tmp/ccV6gFku.s:599    .text.XMC_RTC_DisableHibernationWakeUp:0000000000000000 $t
-     /tmp/ccV6gFku.s:606    .text.XMC_RTC_DisableHibernationWakeUp:0000000000000000 XMC_RTC_DisableHibernationWakeUp
-     /tmp/ccV6gFku.s:658    .text.XMC_RTC_DisableHibernationWakeUp:0000000000000030 $d
-                           .group:0000000000000000 wm4.0.1ef749480d5223b912d851bdb3b2139f
+     /tmp/ccKtrInu.s:19     .text.XMC_RTC_IsRunning:0000000000000000 $t
+     /tmp/ccKtrInu.s:24     .text.XMC_RTC_IsRunning:0000000000000000 XMC_RTC_IsRunning
+     /tmp/ccKtrInu.s:64     .text.XMC_RTC_IsRunning:0000000000000020 $d
+     /tmp/ccKtrInu.s:69     .text.XMC_SCU_GetMirrorStatus:0000000000000000 $t
+     /tmp/ccKtrInu.s:74     .text.XMC_SCU_GetMirrorStatus:0000000000000000 XMC_SCU_GetMirrorStatus
+     /tmp/ccKtrInu.s:106    .text.XMC_SCU_GetMirrorStatus:0000000000000014 $d
+     /tmp/ccKtrInu.s:111    .text.XMC_RTC_Enable:0000000000000000 $t
+     /tmp/ccKtrInu.s:117    .text.XMC_RTC_Enable:0000000000000000 XMC_RTC_Enable
+     /tmp/ccKtrInu.s:141    .text.XMC_RTC_Disable:0000000000000000 $t
+     /tmp/ccKtrInu.s:147    .text.XMC_RTC_Disable:0000000000000000 XMC_RTC_Disable
+     /tmp/ccKtrInu.s:176    .text.XMC_RTC_IsEnabled:0000000000000000 $t
+     /tmp/ccKtrInu.s:182    .text.XMC_RTC_IsEnabled:0000000000000000 XMC_RTC_IsEnabled
+     /tmp/ccKtrInu.s:206    .text.XMC_RTC_Init:0000000000000000 $t
+     /tmp/ccKtrInu.s:212    .text.XMC_RTC_Init:0000000000000000 XMC_RTC_Init
+     /tmp/ccKtrInu.s:344    .text.XMC_RTC_Init:00000000000000a0 $d
+     /tmp/ccKtrInu.s:349    .text.XMC_RTC_EnableEvent:0000000000000000 $t
+     /tmp/ccKtrInu.s:355    .text.XMC_RTC_EnableEvent:0000000000000000 XMC_RTC_EnableEvent
+     /tmp/ccKtrInu.s:404    .text.XMC_RTC_EnableEvent:000000000000002c $d
+     /tmp/ccKtrInu.s:409    .text.XMC_RTC_DisableEvent:0000000000000000 $t
+     /tmp/ccKtrInu.s:415    .text.XMC_RTC_DisableEvent:0000000000000000 XMC_RTC_DisableEvent
+     /tmp/ccKtrInu.s:467    .text.XMC_RTC_DisableEvent:0000000000000030 $d
+     /tmp/ccKtrInu.s:472    .text.XMC_RTC_ClearEvent:0000000000000000 $t
+     /tmp/ccKtrInu.s:478    .text.XMC_RTC_ClearEvent:0000000000000000 XMC_RTC_ClearEvent
+     /tmp/ccKtrInu.s:525    .text.XMC_RTC_ClearEvent:0000000000000028 $d
+     /tmp/ccKtrInu.s:530    .text.XMC_RTC_EnableHibernationWakeUp:0000000000000000 $t
+     /tmp/ccKtrInu.s:536    .text.XMC_RTC_EnableHibernationWakeUp:0000000000000000 XMC_RTC_EnableHibernationWakeUp
+     /tmp/ccKtrInu.s:585    .text.XMC_RTC_EnableHibernationWakeUp:000000000000002c $d
+     /tmp/ccKtrInu.s:590    .text.XMC_RTC_DisableHibernationWakeUp:0000000000000000 $t
+     /tmp/ccKtrInu.s:596    .text.XMC_RTC_DisableHibernationWakeUp:0000000000000000 XMC_RTC_DisableHibernationWakeUp
+     /tmp/ccKtrInu.s:648    .text.XMC_RTC_DisableHibernationWakeUp:0000000000000030 $d
+                           .group:0000000000000000 wm4.0.467689a90594456bf46c01d2d8793c7f
                            .group:0000000000000000 wm4.stddef.h.39.27677723d43e5b5a7afdf8d798429f1d
-                           .group:0000000000000000 wm4.stdint.h.29.6d480f4ba0f60596e88234283d42444f
+                           .group:0000000000000000 wm4._newlib_version.h.4.bfdf54b0af045d4a71376ae00f63a22c
+                           .group:0000000000000000 wm4.features.h.33.5bd1eea2d80518b50f7af0b5ce6750e0
+                           .group:0000000000000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:0000000000000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
                            .group:0000000000000000 wm4.stdbool.h.29.07dce69c3b78884144b7f7bd19483461
-                           .group:0000000000000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
-                           .group:0000000000000000 wm4.newlib.h.21.1ae2897bc09bbe4bc80ffb801fb02432
-                           .group:0000000000000000 wm4.ieeefp.h.77.f33a4dce62116f6f5175ff8bae57a54c
-                           .group:0000000000000000 wm4.features.h.22.026edb2397769f4ae13f35900dbdb560
+                           .group:0000000000000000 wm4.newlib.h.8.7cb3972cd43265932d4782d5eb589854
+                           .group:0000000000000000 wm4.ieeefp.h.77.c88535c35f465c05b101960cf0179075
                            .group:0000000000000000 wm4.config.h.224.c701144a7b0518c6ee9b9b5465b79f81
                            .group:0000000000000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
                            .group:0000000000000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2
                            .group:0000000000000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
-                           .group:0000000000000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
                            .group:0000000000000000 wm4._types.h.127.34941de1b2539d59d5cac00e0dd27a45
                            .group:0000000000000000 wm4.reent.h.17.e292bf8b0bec6c96e131a54347145a30
-                           .group:0000000000000000 wm4.lock.h.2.c0958401bd0ce484d507ee19aacab817
+                           .group:0000000000000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
                            .group:0000000000000000 wm4.reent.h.77.dcd6129ff07fe81bd5636db29abe53b2
-                           .group:0000000000000000 wm4.cdefs.h.49.2bf373aedffd8b393ccd11dc057e8547
+                           .group:0000000000000000 wm4.cdefs.h.49.a54b2d5c07711bc7320a3fea9f12cb56
                            .group:0000000000000000 wm4.string.h.15.dab3980bf35408a4c507182805e2de3a
                            .group:0000000000000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
                            .group:0000000000000000 wm4.xmc_device.h.61.ba2d082e12f51240746cffdd60d42b81
@@ -2118,16 +2104,15 @@ DEFINED SYMBOLS
                            .group:0000000000000000 wm4.time.h.2.4581ce0ffb6627cfc02162c94bf846c9
                            .group:0000000000000000 wm4.time.h.25.0e6a0fdbc9955f5707ed54246ed2e089
                            .group:0000000000000000 wm4.types.h.40.8b6acba56cefbb11746718204edc8f5e
-                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
                            .group:0000000000000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
                            .group:0000000000000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
                            .group:0000000000000000 wm4._timeval.h.32.bec3221fa7a9bb0bdde696c9c57e47d2
                            .group:0000000000000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
-                           .group:0000000000000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:0000000000000000 wm4.select.h.19.40cd3f2bfc456b193b790c2754690ebf
                            .group:0000000000000000 wm4.types.h.51.5571ec98f267d17d3c670b7a3ba33afa
                            .group:0000000000000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
                            .group:0000000000000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
-                           .group:0000000000000000 wm4.time.h.162.85256a1e684b58f061361067da714e0e
+                           .group:0000000000000000 wm4.time.h.142.403dcded079b6de6a2d2f21a34c2ae96
                            .group:0000000000000000 wm4.xmc4_scu.h.106.b7d8d773976d331f6820948fe093a27d
 
 UNDEFINED SYMBOLS

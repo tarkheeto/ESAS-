@@ -1,26 +1,26 @@
    1              		.cpu cortex-m4
-   2              		.eabi_attribute 27, 1
-   3              		.eabi_attribute 20, 1
-   4              		.eabi_attribute 21, 1
-   5              		.eabi_attribute 23, 3
-   6              		.eabi_attribute 24, 1
-   7              		.eabi_attribute 25, 1
-   8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 6
-  10              		.eabi_attribute 34, 1
-  11              		.eabi_attribute 18, 4
-  12              		.file	"xmc_gpio.c"
-  13              		.text
-  14              	.Ltext0:
-  15              		.cfi_sections	.debug_frame
-  16              		.section	.text.XMC_GPIO_SetMode,"ax",%progbits
-  17              		.align	1
-  18              		.global	XMC_GPIO_SetMode
-  19              		.arch armv7e-m
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  23              		.fpu fpv4-sp-d16
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"xmc_gpio.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.XMC_GPIO_SetMode,"ax",%progbits
+  19              		.align	1
+  20              		.global	XMC_GPIO_SetMode
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
   25              	XMC_GPIO_SetMode:
   26              	.LFB138:
   27              		.file 1 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c"
@@ -195,120 +195,116 @@
  125              		.syntax unified
  126              		.thumb
  127              		.thumb_func
- 128              		.fpu fpv4-sp-d16
- 130              	XMC_GPIO_SetHardwareControl:
- 131              	.LFB139:
+ 129              	XMC_GPIO_SetHardwareControl:
+ 130              	.LFB139:
   73:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c **** 
   74:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c **** void XMC_GPIO_SetHardwareControl(XMC_GPIO_PORT_t *const port, const uint8_t pin, const XMC_GPIO_HWC
   75:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c **** {
- 132              		.loc 1 75 1
- 133              		.cfi_startproc
- 134              		@ args = 0, pretend = 0, frame = 8
- 135              		@ frame_needed = 1, uses_anonymous_args = 0
- 136              		@ link register save eliminated.
- 137 0000 80B4     		push	{r7}
- 138              	.LCFI6:
- 139              		.cfi_def_cfa_offset 4
- 140              		.cfi_offset 7, -4
- 141 0002 83B0     		sub	sp, sp, #12
- 142              	.LCFI7:
- 143              		.cfi_def_cfa_offset 16
- 144 0004 00AF     		add	r7, sp, #0
- 145              	.LCFI8:
- 146              		.cfi_def_cfa_register 7
- 147 0006 7860     		str	r0, [r7, #4]
- 148 0008 0B46     		mov	r3, r1
- 149 000a FB70     		strb	r3, [r7, #3]
- 150 000c 1346     		mov	r3, r2
- 151 000e BB70     		strb	r3, [r7, #2]
+ 131              		.loc 1 75 1
+ 132              		.cfi_startproc
+ 133              		@ args = 0, pretend = 0, frame = 8
+ 134              		@ frame_needed = 1, uses_anonymous_args = 0
+ 135              		@ link register save eliminated.
+ 136 0000 80B4     		push	{r7}
+ 137              	.LCFI6:
+ 138              		.cfi_def_cfa_offset 4
+ 139              		.cfi_offset 7, -4
+ 140 0002 83B0     		sub	sp, sp, #12
+ 141              	.LCFI7:
+ 142              		.cfi_def_cfa_offset 16
+ 143 0004 00AF     		add	r7, sp, #0
+ 144              	.LCFI8:
+ 145              		.cfi_def_cfa_register 7
+ 146 0006 7860     		str	r0, [r7, #4]
+ 147 0008 0B46     		mov	r3, r1
+ 148 000a FB70     		strb	r3, [r7, #3]
+ 149 000c 1346     		mov	r3, r2
+ 150 000e BB70     		strb	r3, [r7, #2]
   76:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c ****   XMC_ASSERT("XMC_GPIO_SetHardwareControl: Invalid port", XMC_GPIO_CHECK_PORT(port));
   77:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c ****   XMC_ASSERT("XMC_GPIO_SetHardwareControl: Invalid hwctrl", XMC_GPIO_CHECK_HWCTRL(hwctrl));
   78:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c **** 
   79:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c ****   port->HWSEL &= ~(uint32_t)((uint32_t)PORT_HWSEL_Msk << ((uint32_t)pin << 1U));
- 152              		.loc 1 79 15
- 153 0010 7B68     		ldr	r3, [r7, #4]
- 154 0012 5A6F     		ldr	r2, [r3, #116]
- 155              		.loc 1 79 59
- 156 0014 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 157              		.loc 1 79 73
- 158 0016 5B00     		lsls	r3, r3, #1
- 159              		.loc 1 79 19
- 160 0018 0321     		movs	r1, #3
- 161 001a 01FA03F3 		lsl	r3, r1, r3
- 162              		.loc 1 79 18
- 163 001e DB43     		mvns	r3, r3
- 164              		.loc 1 79 15
- 165 0020 1A40     		ands	r2, r2, r3
- 166 0022 7B68     		ldr	r3, [r7, #4]
- 167 0024 5A67     		str	r2, [r3, #116]
+ 151              		.loc 1 79 15
+ 152 0010 7B68     		ldr	r3, [r7, #4]
+ 153 0012 5A6F     		ldr	r2, [r3, #116]
+ 154              		.loc 1 79 59
+ 155 0014 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 156              		.loc 1 79 73
+ 157 0016 5B00     		lsls	r3, r3, #1
+ 158              		.loc 1 79 19
+ 159 0018 0321     		movs	r1, #3
+ 160 001a 01FA03F3 		lsl	r3, r1, r3
+ 161              		.loc 1 79 18
+ 162 001e DB43     		mvns	r3, r3
+ 163              		.loc 1 79 15
+ 164 0020 1A40     		ands	r2, r2, r3
+ 165 0022 7B68     		ldr	r3, [r7, #4]
+ 166 0024 5A67     		str	r2, [r3, #116]
   80:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c ****   port->HWSEL |= (uint32_t)hwctrl << ((uint32_t)pin << 1U);
- 168              		.loc 1 80 15
- 169 0026 7B68     		ldr	r3, [r7, #4]
- 170 0028 5A6F     		ldr	r2, [r3, #116]
- 171              		.loc 1 80 18
- 172 002a B978     		ldrb	r1, [r7, #2]	@ zero_extendqisi2
- 173              		.loc 1 80 39
- 174 002c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 175              		.loc 1 80 53
- 176 002e 5B00     		lsls	r3, r3, #1
- 177              		.loc 1 80 35
- 178 0030 01FA03F3 		lsl	r3, r1, r3
- 179              		.loc 1 80 15
- 180 0034 1A43     		orrs	r2, r2, r3
- 181 0036 7B68     		ldr	r3, [r7, #4]
- 182 0038 5A67     		str	r2, [r3, #116]
+ 167              		.loc 1 80 15
+ 168 0026 7B68     		ldr	r3, [r7, #4]
+ 169 0028 5A6F     		ldr	r2, [r3, #116]
+ 170              		.loc 1 80 18
+ 171 002a B978     		ldrb	r1, [r7, #2]	@ zero_extendqisi2
+ 172              		.loc 1 80 39
+ 173 002c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 174              		.loc 1 80 53
+ 175 002e 5B00     		lsls	r3, r3, #1
+ 176              		.loc 1 80 35
+ 177 0030 01FA03F3 		lsl	r3, r1, r3
+ 178              		.loc 1 80 15
+ 179 0034 1A43     		orrs	r2, r2, r3
+ 180 0036 7B68     		ldr	r3, [r7, #4]
+ 181 0038 5A67     		str	r2, [r3, #116]
   81:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_gpio.c **** }
- 183              		.loc 1 81 1
- 184 003a 00BF     		nop
- 185 003c 0C37     		adds	r7, r7, #12
- 186              	.LCFI9:
- 187              		.cfi_def_cfa_offset 4
- 188 003e BD46     		mov	sp, r7
- 189              	.LCFI10:
- 190              		.cfi_def_cfa_register 13
- 191              		@ sp needed
- 192 0040 5DF8047B 		ldr	r7, [sp], #4
- 193              	.LCFI11:
- 194              		.cfi_restore 7
- 195              		.cfi_def_cfa_offset 0
- 196 0044 7047     		bx	lr
- 197              		.cfi_endproc
- 198              	.LFE139:
- 200              		.text
- 201              	.Letext0:
- 202              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 203              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 204              		.file 4 "/usr/include/newlib/sys/_types.h"
- 205              		.file 5 "/usr/include/newlib/sys/reent.h"
- 206              		.file 6 "/usr/include/newlib/sys/lock.h"
- 207              		.file 7 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h"
- 208              		.file 8 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_X
- 209              		.file 9 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h"
- 210              		.file 10 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
+ 182              		.loc 1 81 1
+ 183 003a 00BF     		nop
+ 184 003c 0C37     		adds	r7, r7, #12
+ 185              	.LCFI9:
+ 186              		.cfi_def_cfa_offset 4
+ 187 003e BD46     		mov	sp, r7
+ 188              	.LCFI10:
+ 189              		.cfi_def_cfa_register 13
+ 190              		@ sp needed
+ 191 0040 5DF8047B 		ldr	r7, [sp], #4
+ 192              	.LCFI11:
+ 193              		.cfi_restore 7
+ 194              		.cfi_def_cfa_offset 0
+ 195 0044 7047     		bx	lr
+ 196              		.cfi_endproc
+ 197              	.LFE139:
+ 199              		.text
+ 200              	.Letext0:
+ 201              		.file 2 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/mach
+ 202              		.file 3 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
+ 203              		.file 4 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h"
+ 204              		.file 5 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 xmc_gpio.c
-     /tmp/ccJi0sTl.s:17     .text.XMC_GPIO_SetMode:0000000000000000 $t
-     /tmp/ccJi0sTl.s:25     .text.XMC_GPIO_SetMode:0000000000000000 XMC_GPIO_SetMode
-     /tmp/ccJi0sTl.s:123    .text.XMC_GPIO_SetHardwareControl:0000000000000000 $t
-     /tmp/ccJi0sTl.s:130    .text.XMC_GPIO_SetHardwareControl:0000000000000000 XMC_GPIO_SetHardwareControl
-                           .group:0000000000000000 wm4.0.1ef749480d5223b912d851bdb3b2139f
+     /tmp/cceI0MaB.s:19     .text.XMC_GPIO_SetMode:0000000000000000 $t
+     /tmp/cceI0MaB.s:25     .text.XMC_GPIO_SetMode:0000000000000000 XMC_GPIO_SetMode
+     /tmp/cceI0MaB.s:123    .text.XMC_GPIO_SetHardwareControl:0000000000000000 $t
+     /tmp/cceI0MaB.s:129    .text.XMC_GPIO_SetHardwareControl:0000000000000000 XMC_GPIO_SetHardwareControl
+                           .group:0000000000000000 wm4.0.467689a90594456bf46c01d2d8793c7f
                            .group:0000000000000000 wm4.stddef.h.39.27677723d43e5b5a7afdf8d798429f1d
-                           .group:0000000000000000 wm4.stdint.h.29.6d480f4ba0f60596e88234283d42444f
+                           .group:0000000000000000 wm4._newlib_version.h.4.bfdf54b0af045d4a71376ae00f63a22c
+                           .group:0000000000000000 wm4.features.h.33.5bd1eea2d80518b50f7af0b5ce6750e0
+                           .group:0000000000000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:0000000000000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
                            .group:0000000000000000 wm4.stdbool.h.29.07dce69c3b78884144b7f7bd19483461
-                           .group:0000000000000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
-                           .group:0000000000000000 wm4.newlib.h.21.1ae2897bc09bbe4bc80ffb801fb02432
-                           .group:0000000000000000 wm4.ieeefp.h.77.f33a4dce62116f6f5175ff8bae57a54c
-                           .group:0000000000000000 wm4.features.h.22.026edb2397769f4ae13f35900dbdb560
+                           .group:0000000000000000 wm4.newlib.h.8.7cb3972cd43265932d4782d5eb589854
+                           .group:0000000000000000 wm4.ieeefp.h.77.c88535c35f465c05b101960cf0179075
                            .group:0000000000000000 wm4.config.h.224.c701144a7b0518c6ee9b9b5465b79f81
                            .group:0000000000000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
                            .group:0000000000000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2
                            .group:0000000000000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
-                           .group:0000000000000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
                            .group:0000000000000000 wm4._types.h.127.34941de1b2539d59d5cac00e0dd27a45
                            .group:0000000000000000 wm4.reent.h.17.e292bf8b0bec6c96e131a54347145a30
-                           .group:0000000000000000 wm4.lock.h.2.c0958401bd0ce484d507ee19aacab817
+                           .group:0000000000000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
                            .group:0000000000000000 wm4.reent.h.77.dcd6129ff07fe81bd5636db29abe53b2
-                           .group:0000000000000000 wm4.cdefs.h.49.2bf373aedffd8b393ccd11dc057e8547
+                           .group:0000000000000000 wm4.cdefs.h.49.a54b2d5c07711bc7320a3fea9f12cb56
                            .group:0000000000000000 wm4.string.h.15.dab3980bf35408a4c507182805e2de3a
                            .group:0000000000000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
                            .group:0000000000000000 wm4.xmc_device.h.61.ba2d082e12f51240746cffdd60d42b81

@@ -1,25 +1,25 @@
    1              		.cpu cortex-m4
-   2              		.eabi_attribute 27, 1
-   3              		.eabi_attribute 20, 1
-   4              		.eabi_attribute 21, 1
-   5              		.eabi_attribute 23, 3
-   6              		.eabi_attribute 24, 1
-   7              		.eabi_attribute 25, 1
-   8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 6
-  10              		.eabi_attribute 34, 1
-  11              		.eabi_attribute 18, 4
-  12              		.file	"xmc_rtc.c"
-  13              		.text
-  14              	.Ltext0:
-  15              		.cfi_sections	.debug_frame
-  16              		.section	.text.XMC_SCU_GetMirrorStatus,"ax",%progbits
-  17              		.align	1
-  18              		.arch armv7e-m
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  22              		.fpu fpv4-sp-d16
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"xmc_rtc.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.XMC_SCU_GetMirrorStatus,"ax",%progbits
+  19              		.align	1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
   24              	XMC_SCU_GetMirrorStatus:
   25              	.LFB161:
   26              		.file 1 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_scu.h"
@@ -607,10 +607,9 @@
   63              		.syntax unified
   64              		.thumb
   65              		.thumb_func
-  66              		.fpu fpv4-sp-d16
-  68              	XMC_RTC_Start:
-  69              	.LFB164:
-  70              		.file 2 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c"
+  67              	XMC_RTC_Start:
+  68              	.LFB164:
+  69              		.file 2 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c"
    1:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /**
    2:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * @file xmc_rtc.c
    3:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * @date 2015-05-19
@@ -705,226 +704,223 @@
   92:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
   93:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_Start(void)
   94:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
-  71              		.loc 2 94 1
-  72              		.cfi_startproc
-  73              		@ args = 0, pretend = 0, frame = 0
-  74              		@ frame_needed = 1, uses_anonymous_args = 0
-  75 0000 80B5     		push	{r7, lr}
-  76              	.LCFI4:
-  77              		.cfi_def_cfa_offset 8
-  78              		.cfi_offset 7, -8
-  79              		.cfi_offset 14, -4
-  80 0002 00AF     		add	r7, sp, #0
-  81              	.LCFI5:
-  82              		.cfi_def_cfa_register 7
+  70              		.loc 2 94 1
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 0
+  73              		@ frame_needed = 1, uses_anonymous_args = 0
+  74 0000 80B5     		push	{r7, lr}
+  75              	.LCFI4:
+  76              		.cfi_def_cfa_offset 8
+  77              		.cfi_offset 7, -8
+  78              		.cfi_offset 14, -4
+  79 0002 00AF     		add	r7, sp, #0
+  80              	.LCFI5:
+  81              		.cfi_def_cfa_register 7
   95:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   while((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk) != 0U)
-  83              		.loc 2 95 8
-  84 0004 00BF     		nop
-  85              	.L6:
-  86              		.loc 2 95 10 discriminator 1
-  87 0006 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
-  88 000a 0346     		mov	r3, r0
-  89              		.loc 2 95 36 discriminator 1
-  90 000c 03F48073 		and	r3, r3, #256
-  91              		.loc 2 95 8 discriminator 1
-  92 0010 002B     		cmp	r3, #0
-  93 0012 F8D1     		bne	.L6
+  82              		.loc 2 95 8
+  83 0004 00BF     		nop
+  84              	.L6:
+  85              		.loc 2 95 10 discriminator 1
+  86 0006 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+  87 000a 0346     		mov	r3, r0
+  88              		.loc 2 95 36 discriminator 1
+  89 000c 03F48073 		and	r3, r3, #256
+  90              		.loc 2 95 8 discriminator 1
+  91 0010 002B     		cmp	r3, #0
+  92 0012 F8D1     		bne	.L6
   96:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   {
   97:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
   98:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   }
   99:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   RTC->CTR |= (uint32_t)RTC_CTR_ENB_Msk;
-  94              		.loc 2 99 12
-  95 0014 034B     		ldr	r3, .L7
-  96 0016 5B68     		ldr	r3, [r3, #4]
-  97 0018 024A     		ldr	r2, .L7
-  98 001a 43F00103 		orr	r3, r3, #1
-  99 001e 5360     		str	r3, [r2, #4]
+  93              		.loc 2 99 12
+  94 0014 034B     		ldr	r3, .L7
+  95 0016 5B68     		ldr	r3, [r3, #4]
+  96 0018 024A     		ldr	r2, .L7
+  97 001a 43F00103 		orr	r3, r3, #1
+  98 001e 5360     		str	r3, [r2, #4]
  100:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 100              		.loc 2 100 1
- 101 0020 00BF     		nop
- 102 0022 80BD     		pop	{r7, pc}
- 103              	.L8:
- 104              		.align	2
- 105              	.L7:
- 106 0024 004A0050 		.word	1342196224
- 107              		.cfi_endproc
- 108              	.LFE164:
- 110              		.section	.text.XMC_RTC_Stop,"ax",%progbits
- 111              		.align	1
- 112              		.global	XMC_RTC_Stop
- 113              		.syntax unified
- 114              		.thumb
- 115              		.thumb_func
- 116              		.fpu fpv4-sp-d16
- 118              	XMC_RTC_Stop:
- 119              	.LFB165:
+  99              		.loc 2 100 1
+ 100 0020 00BF     		nop
+ 101 0022 80BD     		pop	{r7, pc}
+ 102              	.L8:
+ 103              		.align	2
+ 104              	.L7:
+ 105 0024 004A0050 		.word	1342196224
+ 106              		.cfi_endproc
+ 107              	.LFE164:
+ 109              		.section	.text.XMC_RTC_Stop,"ax",%progbits
+ 110              		.align	1
+ 111              		.global	XMC_RTC_Stop
+ 112              		.syntax unified
+ 113              		.thumb
+ 114              		.thumb_func
+ 116              	XMC_RTC_Stop:
+ 117              	.LFB165:
  101:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  102:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  103:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Disables RTC peripheral to start counting time
  104:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  105:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_Stop(void)
  106:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 120              		.loc 2 106 1
- 121              		.cfi_startproc
- 122              		@ args = 0, pretend = 0, frame = 0
- 123              		@ frame_needed = 1, uses_anonymous_args = 0
- 124 0000 80B5     		push	{r7, lr}
- 125              	.LCFI6:
- 126              		.cfi_def_cfa_offset 8
- 127              		.cfi_offset 7, -8
- 128              		.cfi_offset 14, -4
- 129 0002 00AF     		add	r7, sp, #0
- 130              	.LCFI7:
- 131              		.cfi_def_cfa_register 7
+ 118              		.loc 2 106 1
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 1, uses_anonymous_args = 0
+ 122 0000 80B5     		push	{r7, lr}
+ 123              	.LCFI6:
+ 124              		.cfi_def_cfa_offset 8
+ 125              		.cfi_offset 7, -8
+ 126              		.cfi_offset 14, -4
+ 127 0002 00AF     		add	r7, sp, #0
+ 128              	.LCFI7:
+ 129              		.cfi_def_cfa_register 7
  107:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   while((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk) != 0U)
- 132              		.loc 2 107 8
- 133 0004 00BF     		nop
- 134              	.L10:
- 135              		.loc 2 107 10 discriminator 1
- 136 0006 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 137 000a 0346     		mov	r3, r0
- 138              		.loc 2 107 36 discriminator 1
- 139 000c 03F48073 		and	r3, r3, #256
- 140              		.loc 2 107 8 discriminator 1
- 141 0010 002B     		cmp	r3, #0
- 142 0012 F8D1     		bne	.L10
+ 130              		.loc 2 107 8
+ 131 0004 00BF     		nop
+ 132              	.L10:
+ 133              		.loc 2 107 10 discriminator 1
+ 134 0006 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 135 000a 0346     		mov	r3, r0
+ 136              		.loc 2 107 36 discriminator 1
+ 137 000c 03F48073 		and	r3, r3, #256
+ 138              		.loc 2 107 8 discriminator 1
+ 139 0010 002B     		cmp	r3, #0
+ 140 0012 F8D1     		bne	.L10
  108:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   {
  109:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  110:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   }
  111:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   RTC->CTR &= ~(uint32_t)RTC_CTR_ENB_Msk;
- 143              		.loc 2 111 12
- 144 0014 034B     		ldr	r3, .L11
- 145 0016 5B68     		ldr	r3, [r3, #4]
- 146 0018 024A     		ldr	r2, .L11
- 147 001a 23F00103 		bic	r3, r3, #1
- 148 001e 5360     		str	r3, [r2, #4]
+ 141              		.loc 2 111 12
+ 142 0014 034B     		ldr	r3, .L11
+ 143 0016 5B68     		ldr	r3, [r3, #4]
+ 144 0018 024A     		ldr	r2, .L11
+ 145 001a 23F00103 		bic	r3, r3, #1
+ 146 001e 5360     		str	r3, [r2, #4]
  112:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 149              		.loc 2 112 1
- 150 0020 00BF     		nop
- 151 0022 80BD     		pop	{r7, pc}
- 152              	.L12:
- 153              		.align	2
- 154              	.L11:
- 155 0024 004A0050 		.word	1342196224
- 156              		.cfi_endproc
- 157              	.LFE165:
- 159              		.section	.text.XMC_RTC_SetPrescaler,"ax",%progbits
- 160              		.align	1
- 161              		.global	XMC_RTC_SetPrescaler
- 162              		.syntax unified
- 163              		.thumb
- 164              		.thumb_func
- 165              		.fpu fpv4-sp-d16
- 167              	XMC_RTC_SetPrescaler:
- 168              	.LFB166:
+ 147              		.loc 2 112 1
+ 148 0020 00BF     		nop
+ 149 0022 80BD     		pop	{r7, pc}
+ 150              	.L12:
+ 151              		.align	2
+ 152              	.L11:
+ 153 0024 004A0050 		.word	1342196224
+ 154              		.cfi_endproc
+ 155              	.LFE165:
+ 157              		.section	.text.XMC_RTC_SetPrescaler,"ax",%progbits
+ 158              		.align	1
+ 159              		.global	XMC_RTC_SetPrescaler
+ 160              		.syntax unified
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	XMC_RTC_SetPrescaler:
+ 165              	.LFB166:
  113:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  114:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  115:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Sets the RTC module prescaler value
  116:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  117:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_SetPrescaler(uint16_t prescaler)
  118:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 169              		.loc 2 118 1
- 170              		.cfi_startproc
- 171              		@ args = 0, pretend = 0, frame = 8
- 172              		@ frame_needed = 1, uses_anonymous_args = 0
- 173 0000 80B5     		push	{r7, lr}
- 174              	.LCFI8:
- 175              		.cfi_def_cfa_offset 8
- 176              		.cfi_offset 7, -8
- 177              		.cfi_offset 14, -4
- 178 0002 82B0     		sub	sp, sp, #8
- 179              	.LCFI9:
- 180              		.cfi_def_cfa_offset 16
- 181 0004 00AF     		add	r7, sp, #0
- 182              	.LCFI10:
- 183              		.cfi_def_cfa_register 7
- 184 0006 0346     		mov	r3, r0
- 185 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 166              		.loc 2 118 1
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 8
+ 169              		@ frame_needed = 1, uses_anonymous_args = 0
+ 170 0000 80B5     		push	{r7, lr}
+ 171              	.LCFI8:
+ 172              		.cfi_def_cfa_offset 8
+ 173              		.cfi_offset 7, -8
+ 174              		.cfi_offset 14, -4
+ 175 0002 82B0     		sub	sp, sp, #8
+ 176              	.LCFI9:
+ 177              		.cfi_def_cfa_offset 16
+ 178 0004 00AF     		add	r7, sp, #0
+ 179              	.LCFI10:
+ 180              		.cfi_def_cfa_register 7
+ 181 0006 0346     		mov	r3, r0
+ 182 0008 FB80     		strh	r3, [r7, #6]	@ movhi
  119:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_ASSERT("XMC_RTC_SetPrescaler:Wrong prescaler value", (prescaler < XMC_RTC_MAXPRESCALER));
  120:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   
  121:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   while((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk) != 0U)
- 186              		.loc 2 121 8
- 187 000a 00BF     		nop
- 188              	.L14:
- 189              		.loc 2 121 10 discriminator 1
- 190 000c FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 191 0010 0346     		mov	r3, r0
- 192              		.loc 2 121 36 discriminator 1
- 193 0012 03F48073 		and	r3, r3, #256
- 194              		.loc 2 121 8 discriminator 1
- 195 0016 002B     		cmp	r3, #0
- 196 0018 F8D1     		bne	.L14
+ 183              		.loc 2 121 8
+ 184 000a 00BF     		nop
+ 185              	.L14:
+ 186              		.loc 2 121 10 discriminator 1
+ 187 000c FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 188 0010 0346     		mov	r3, r0
+ 189              		.loc 2 121 36 discriminator 1
+ 190 0012 03F48073 		and	r3, r3, #256
+ 191              		.loc 2 121 8 discriminator 1
+ 192 0016 002B     		cmp	r3, #0
+ 193 0018 F8D1     		bne	.L14
  122:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   {
  123:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****     /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  124:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   }
  125:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   RTC->CTR = (RTC->CTR & ~(uint32_t)RTC_CTR_DIV_Msk) |
- 197              		.loc 2 125 18
- 198 001a 064B     		ldr	r3, .L15
- 199 001c 5B68     		ldr	r3, [r3, #4]
- 200              		.loc 2 125 24
- 201 001e 9AB2     		uxth	r2, r3
+ 194              		.loc 2 125 18
+ 195 001a 064B     		ldr	r3, .L15
+ 196 001c 5B68     		ldr	r3, [r3, #4]
+ 197              		.loc 2 125 24
+ 198 001e 9AB2     		uxth	r2, r3
  126:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****              ((uint32_t)prescaler << (uint32_t)RTC_CTR_DIV_Pos);
- 202              		.loc 2 126 15
- 203 0020 FB88     		ldrh	r3, [r7, #6]
- 204              		.loc 2 126 35
- 205 0022 1B04     		lsls	r3, r3, #16
+ 199              		.loc 2 126 15
+ 200 0020 FB88     		ldrh	r3, [r7, #6]
+ 201              		.loc 2 126 35
+ 202 0022 1B04     		lsls	r3, r3, #16
  125:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****              ((uint32_t)prescaler << (uint32_t)RTC_CTR_DIV_Pos);
- 206              		.loc 2 125 6
- 207 0024 0349     		ldr	r1, .L15
+ 203              		.loc 2 125 6
+ 204 0024 0349     		ldr	r1, .L15
  125:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****              ((uint32_t)prescaler << (uint32_t)RTC_CTR_DIV_Pos);
- 208              		.loc 2 125 54
- 209 0026 1343     		orrs	r3, r3, r2
+ 205              		.loc 2 125 54
+ 206 0026 1343     		orrs	r3, r3, r2
  125:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****              ((uint32_t)prescaler << (uint32_t)RTC_CTR_DIV_Pos);
- 210              		.loc 2 125 12
- 211 0028 4B60     		str	r3, [r1, #4]
+ 207              		.loc 2 125 12
+ 208 0028 4B60     		str	r3, [r1, #4]
  127:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 212              		.loc 2 127 1
- 213 002a 00BF     		nop
- 214 002c 0837     		adds	r7, r7, #8
- 215              	.LCFI11:
- 216              		.cfi_def_cfa_offset 8
- 217 002e BD46     		mov	sp, r7
- 218              	.LCFI12:
- 219              		.cfi_def_cfa_register 13
- 220              		@ sp needed
- 221 0030 80BD     		pop	{r7, pc}
- 222              	.L16:
- 223 0032 00BF     		.align	2
- 224              	.L15:
- 225 0034 004A0050 		.word	1342196224
- 226              		.cfi_endproc
- 227              	.LFE166:
- 229              		.section	.text.XMC_RTC_SetTime,"ax",%progbits
- 230              		.align	1
- 231              		.global	XMC_RTC_SetTime
- 232              		.syntax unified
- 233              		.thumb
- 234              		.thumb_func
- 235              		.fpu fpv4-sp-d16
- 237              	XMC_RTC_SetTime:
- 238              	.LFB167:
+ 209              		.loc 2 127 1
+ 210 002a 00BF     		nop
+ 211 002c 0837     		adds	r7, r7, #8
+ 212              	.LCFI11:
+ 213              		.cfi_def_cfa_offset 8
+ 214 002e BD46     		mov	sp, r7
+ 215              	.LCFI12:
+ 216              		.cfi_def_cfa_register 13
+ 217              		@ sp needed
+ 218 0030 80BD     		pop	{r7, pc}
+ 219              	.L16:
+ 220 0032 00BF     		.align	2
+ 221              	.L15:
+ 222 0034 004A0050 		.word	1342196224
+ 223              		.cfi_endproc
+ 224              	.LFE166:
+ 226              		.section	.text.XMC_RTC_SetTime,"ax",%progbits
+ 227              		.align	1
+ 228              		.global	XMC_RTC_SetTime
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 233              	XMC_RTC_SetTime:
+ 234              	.LFB167:
  128:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  129:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  130:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Sets the RTC_TIM0, RTC_TIM1 registers with time values
  131:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  132:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_SetTime(const XMC_RTC_TIME_t *const time)
  133:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 239              		.loc 2 133 1
- 240              		.cfi_startproc
- 241              		@ args = 0, pretend = 0, frame = 8
- 242              		@ frame_needed = 1, uses_anonymous_args = 0
- 243 0000 80B5     		push	{r7, lr}
- 244              	.LCFI13:
- 245              		.cfi_def_cfa_offset 8
- 246              		.cfi_offset 7, -8
- 247              		.cfi_offset 14, -4
- 248 0002 82B0     		sub	sp, sp, #8
- 249              	.LCFI14:
- 250              		.cfi_def_cfa_offset 16
- 251 0004 00AF     		add	r7, sp, #0
- 252              	.LCFI15:
- 253              		.cfi_def_cfa_register 7
- 254 0006 7860     		str	r0, [r7, #4]
+ 235              		.loc 2 133 1
+ 236              		.cfi_startproc
+ 237              		@ args = 0, pretend = 0, frame = 8
+ 238              		@ frame_needed = 1, uses_anonymous_args = 0
+ 239 0000 80B5     		push	{r7, lr}
+ 240              	.LCFI13:
+ 241              		.cfi_def_cfa_offset 8
+ 242              		.cfi_offset 7, -8
+ 243              		.cfi_offset 14, -4
+ 244 0002 82B0     		sub	sp, sp, #8
+ 245              	.LCFI14:
+ 246              		.cfi_def_cfa_offset 16
+ 247 0004 00AF     		add	r7, sp, #0
+ 248              	.LCFI15:
+ 249              		.cfi_def_cfa_register 7
+ 250 0006 7860     		str	r0, [r7, #4]
  134:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_ASSERT("XMC_RTC_SetTime:Wrong seconds value", ((uint32_t)time->seconds < XMC_RTC_MAXSECONDS))
  135:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_ASSERT("XMC_RTC_SetTime:Wrong minutes value", ((uint32_t)time->minutes < XMC_RTC_MAXMINUTES))
  136:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_ASSERT("XMC_RTC_SetTime:Wrong hours value", ((uint32_t)time->hours < XMC_RTC_MAXHOURS));
@@ -935,52 +931,52 @@
  141:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  142:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   #if (XMC_RTC_INIT_SEQUENCE == 1U)
  143:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_TIM0_Msk) != 0U)
- 255              		.loc 2 143 13
- 256 0008 00BF     		nop
- 257              	.L18:
- 258              		.loc 2 143 15 discriminator 1
- 259 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 260 000e 0346     		mov	r3, r0
- 261              		.loc 2 143 41 discriminator 1
- 262 0010 03F40063 		and	r3, r3, #2048
- 263              		.loc 2 143 13 discriminator 1
- 264 0014 002B     		cmp	r3, #0
- 265 0016 F8D1     		bne	.L18
+ 251              		.loc 2 143 13
+ 252 0008 00BF     		nop
+ 253              	.L18:
+ 254              		.loc 2 143 15 discriminator 1
+ 255 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 256 000e 0346     		mov	r3, r0
+ 257              		.loc 2 143 41 discriminator 1
+ 258 0010 03F40063 		and	r3, r3, #2048
+ 259              		.loc 2 143 13 discriminator 1
+ 260 0014 002B     		cmp	r3, #0
+ 261 0016 F8D1     		bne	.L18
  144:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       { 
  145:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****          /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  146:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       }
  147:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       RTC->TIM0 = time->raw0;
- 266              		.loc 2 147 10
- 267 0018 094A     		ldr	r2, .L20
- 268              		.loc 2 147 23
- 269 001a 7B68     		ldr	r3, [r7, #4]
- 270 001c 1B68     		ldr	r3, [r3]
- 271              		.loc 2 147 17
- 272 001e 1362     		str	r3, [r2, #32]
+ 262              		.loc 2 147 10
+ 263 0018 094A     		ldr	r2, .L20
+ 264              		.loc 2 147 23
+ 265 001a 7B68     		ldr	r3, [r7, #4]
+ 266 001c 1B68     		ldr	r3, [r3]
+ 267              		.loc 2 147 17
+ 268 001e 1362     		str	r3, [r2, #32]
  148:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       
  149:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_TIM1_Msk) != 0U)
- 273              		.loc 2 149 13
- 274 0020 00BF     		nop
- 275              	.L19:
- 276              		.loc 2 149 15 discriminator 1
- 277 0022 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 278 0026 0346     		mov	r3, r0
- 279              		.loc 2 149 41 discriminator 1
- 280 0028 03F48053 		and	r3, r3, #4096
- 281              		.loc 2 149 13 discriminator 1
- 282 002c 002B     		cmp	r3, #0
- 283 002e F8D1     		bne	.L19
+ 269              		.loc 2 149 13
+ 270 0020 00BF     		nop
+ 271              	.L19:
+ 272              		.loc 2 149 15 discriminator 1
+ 273 0022 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 274 0026 0346     		mov	r3, r0
+ 275              		.loc 2 149 41 discriminator 1
+ 276 0028 03F48053 		and	r3, r3, #4096
+ 277              		.loc 2 149 13 discriminator 1
+ 278 002c 002B     		cmp	r3, #0
+ 279 002e F8D1     		bne	.L19
  150:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       {
  151:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****         /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  152:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       }
  153:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       RTC->TIM1 = time->raw1;	     
- 284              		.loc 2 153 10
- 285 0030 034A     		ldr	r2, .L20
- 286              		.loc 2 153 23
- 287 0032 7B68     		ldr	r3, [r7, #4]
- 288 0034 5B68     		ldr	r3, [r3, #4]
- 289              		.loc 2 153 17
- 290 0036 5362     		str	r3, [r2, #36]
+ 280              		.loc 2 153 10
+ 281 0030 034A     		ldr	r2, .L20
+ 282              		.loc 2 153 23
+ 283 0032 7B68     		ldr	r3, [r7, #4]
+ 284 0034 5B68     		ldr	r3, [r3, #4]
+ 285              		.loc 2 153 17
+ 286 0036 5362     		str	r3, [r2, #36]
  154:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   #endif
  155:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   #if (XMC_RTC_INIT_SEQUENCE == 0U)
  156:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       while ((XMC_SCU_GetMirrorStatus() & (SCU_GENERAL_MIRRSTS_RTC_TIM0_Msk | SCU_GENERAL_MIRRSTS_R
@@ -991,380 +987,376 @@
  161:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       RTC->TIM1 = time->raw1;	; 
  162:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   #endif  
  163:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 291              		.loc 2 163 1
- 292 0038 00BF     		nop
- 293 003a 0837     		adds	r7, r7, #8
- 294              	.LCFI16:
- 295              		.cfi_def_cfa_offset 8
- 296 003c BD46     		mov	sp, r7
- 297              	.LCFI17:
- 298              		.cfi_def_cfa_register 13
- 299              		@ sp needed
- 300 003e 80BD     		pop	{r7, pc}
- 301              	.L21:
- 302              		.align	2
- 303              	.L20:
- 304 0040 004A0050 		.word	1342196224
- 305              		.cfi_endproc
- 306              	.LFE167:
- 308              		.section	.text.XMC_RTC_GetTime,"ax",%progbits
- 309              		.align	1
- 310              		.global	XMC_RTC_GetTime
- 311              		.syntax unified
- 312              		.thumb
- 313              		.thumb_func
- 314              		.fpu fpv4-sp-d16
- 316              	XMC_RTC_GetTime:
- 317              	.LFB168:
+ 287              		.loc 2 163 1
+ 288 0038 00BF     		nop
+ 289 003a 0837     		adds	r7, r7, #8
+ 290              	.LCFI16:
+ 291              		.cfi_def_cfa_offset 8
+ 292 003c BD46     		mov	sp, r7
+ 293              	.LCFI17:
+ 294              		.cfi_def_cfa_register 13
+ 295              		@ sp needed
+ 296 003e 80BD     		pop	{r7, pc}
+ 297              	.L21:
+ 298              		.align	2
+ 299              	.L20:
+ 300 0040 004A0050 		.word	1342196224
+ 301              		.cfi_endproc
+ 302              	.LFE167:
+ 304              		.section	.text.XMC_RTC_GetTime,"ax",%progbits
+ 305              		.align	1
+ 306              		.global	XMC_RTC_GetTime
+ 307              		.syntax unified
+ 308              		.thumb
+ 309              		.thumb_func
+ 311              	XMC_RTC_GetTime:
+ 312              	.LFB168:
  164:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  165:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  166:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Gets the RTC module time value
  167:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  168:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_GetTime(XMC_RTC_TIME_t *const time)
  169:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 318              		.loc 2 169 1
- 319              		.cfi_startproc
- 320              		@ args = 0, pretend = 0, frame = 8
- 321              		@ frame_needed = 1, uses_anonymous_args = 0
- 322              		@ link register save eliminated.
- 323 0000 80B4     		push	{r7}
- 324              	.LCFI18:
- 325              		.cfi_def_cfa_offset 4
- 326              		.cfi_offset 7, -4
- 327 0002 83B0     		sub	sp, sp, #12
- 328              	.LCFI19:
- 329              		.cfi_def_cfa_offset 16
- 330 0004 00AF     		add	r7, sp, #0
- 331              	.LCFI20:
- 332              		.cfi_def_cfa_register 7
- 333 0006 7860     		str	r0, [r7, #4]
+ 313              		.loc 2 169 1
+ 314              		.cfi_startproc
+ 315              		@ args = 0, pretend = 0, frame = 8
+ 316              		@ frame_needed = 1, uses_anonymous_args = 0
+ 317              		@ link register save eliminated.
+ 318 0000 80B4     		push	{r7}
+ 319              	.LCFI18:
+ 320              		.cfi_def_cfa_offset 4
+ 321              		.cfi_offset 7, -4
+ 322 0002 83B0     		sub	sp, sp, #12
+ 323              	.LCFI19:
+ 324              		.cfi_def_cfa_offset 16
+ 325 0004 00AF     		add	r7, sp, #0
+ 326              	.LCFI20:
+ 327              		.cfi_def_cfa_register 7
+ 328 0006 7860     		str	r0, [r7, #4]
  170:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time->raw0 = RTC->TIM0;
- 334              		.loc 2 170 19
- 335 0008 064B     		ldr	r3, .L23
- 336 000a 1A6A     		ldr	r2, [r3, #32]
- 337              		.loc 2 170 14
- 338 000c 7B68     		ldr	r3, [r7, #4]
- 339 000e 1A60     		str	r2, [r3]
+ 329              		.loc 2 170 19
+ 330 0008 064B     		ldr	r3, .L23
+ 331 000a 1A6A     		ldr	r2, [r3, #32]
+ 332              		.loc 2 170 14
+ 333 000c 7B68     		ldr	r3, [r7, #4]
+ 334 000e 1A60     		str	r2, [r3]
  171:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time->raw1 = RTC->TIM1;
- 340              		.loc 2 171 19
- 341 0010 044B     		ldr	r3, .L23
- 342 0012 5A6A     		ldr	r2, [r3, #36]
- 343              		.loc 2 171 14
- 344 0014 7B68     		ldr	r3, [r7, #4]
- 345 0016 5A60     		str	r2, [r3, #4]
+ 335              		.loc 2 171 19
+ 336 0010 044B     		ldr	r3, .L23
+ 337 0012 5A6A     		ldr	r2, [r3, #36]
+ 338              		.loc 2 171 14
+ 339 0014 7B68     		ldr	r3, [r7, #4]
+ 340 0016 5A60     		str	r2, [r3, #4]
  172:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 346              		.loc 2 172 1
- 347 0018 00BF     		nop
- 348 001a 0C37     		adds	r7, r7, #12
- 349              	.LCFI21:
- 350              		.cfi_def_cfa_offset 4
- 351 001c BD46     		mov	sp, r7
- 352              	.LCFI22:
- 353              		.cfi_def_cfa_register 13
- 354              		@ sp needed
- 355 001e 5DF8047B 		ldr	r7, [sp], #4
- 356              	.LCFI23:
- 357              		.cfi_restore 7
- 358              		.cfi_def_cfa_offset 0
- 359 0022 7047     		bx	lr
- 360              	.L24:
- 361              		.align	2
- 362              	.L23:
- 363 0024 004A0050 		.word	1342196224
- 364              		.cfi_endproc
- 365              	.LFE168:
- 367              		.section	.text.XMC_RTC_SetTimeStdFormat,"ax",%progbits
- 368              		.align	1
- 369              		.global	XMC_RTC_SetTimeStdFormat
- 370              		.syntax unified
- 371              		.thumb
- 372              		.thumb_func
- 373              		.fpu fpv4-sp-d16
- 375              	XMC_RTC_SetTimeStdFormat:
- 376              	.LFB169:
+ 341              		.loc 2 172 1
+ 342 0018 00BF     		nop
+ 343 001a 0C37     		adds	r7, r7, #12
+ 344              	.LCFI21:
+ 345              		.cfi_def_cfa_offset 4
+ 346 001c BD46     		mov	sp, r7
+ 347              	.LCFI22:
+ 348              		.cfi_def_cfa_register 13
+ 349              		@ sp needed
+ 350 001e 5DF8047B 		ldr	r7, [sp], #4
+ 351              	.LCFI23:
+ 352              		.cfi_restore 7
+ 353              		.cfi_def_cfa_offset 0
+ 354 0022 7047     		bx	lr
+ 355              	.L24:
+ 356              		.align	2
+ 357              	.L23:
+ 358 0024 004A0050 		.word	1342196224
+ 359              		.cfi_endproc
+ 360              	.LFE168:
+ 362              		.section	.text.XMC_RTC_SetTimeStdFormat,"ax",%progbits
+ 363              		.align	1
+ 364              		.global	XMC_RTC_SetTimeStdFormat
+ 365              		.syntax unified
+ 366              		.thumb
+ 367              		.thumb_func
+ 369              	XMC_RTC_SetTimeStdFormat:
+ 370              	.LFB169:
  173:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  174:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  175:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Sets the RTC module time values in standard format
  176:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  177:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_SetTimeStdFormat(const struct tm *const stdtime)
  178:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 377              		.loc 2 178 1
- 378              		.cfi_startproc
- 379              		@ args = 0, pretend = 0, frame = 16
- 380              		@ frame_needed = 1, uses_anonymous_args = 0
- 381 0000 80B5     		push	{r7, lr}
- 382              	.LCFI24:
- 383              		.cfi_def_cfa_offset 8
- 384              		.cfi_offset 7, -8
- 385              		.cfi_offset 14, -4
- 386 0002 84B0     		sub	sp, sp, #16
- 387              	.LCFI25:
- 388              		.cfi_def_cfa_offset 24
- 389 0004 00AF     		add	r7, sp, #0
- 390              	.LCFI26:
- 391              		.cfi_def_cfa_register 7
- 392 0006 7860     		str	r0, [r7, #4]
+ 371              		.loc 2 178 1
+ 372              		.cfi_startproc
+ 373              		@ args = 0, pretend = 0, frame = 16
+ 374              		@ frame_needed = 1, uses_anonymous_args = 0
+ 375 0000 80B5     		push	{r7, lr}
+ 376              	.LCFI24:
+ 377              		.cfi_def_cfa_offset 8
+ 378              		.cfi_offset 7, -8
+ 379              		.cfi_offset 14, -4
+ 380 0002 84B0     		sub	sp, sp, #16
+ 381              	.LCFI25:
+ 382              		.cfi_def_cfa_offset 24
+ 383 0004 00AF     		add	r7, sp, #0
+ 384              	.LCFI26:
+ 385              		.cfi_def_cfa_register 7
+ 386 0006 7860     		str	r0, [r7, #4]
  179:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  180:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_RTC_TIME_t time;
  181:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  182:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.seconds = stdtime->tm_sec;
- 393              		.loc 2 182 25
- 394 0008 7B68     		ldr	r3, [r7, #4]
- 395 000a 1B68     		ldr	r3, [r3]
- 396 000c 03F03F03 		and	r3, r3, #63
- 397 0010 DAB2     		uxtb	r2, r3
- 398              		.loc 2 182 16
- 399 0012 3B7A     		ldrb	r3, [r7, #8]
- 400 0014 62F30503 		bfi	r3, r2, #0, #6
- 401 0018 3B72     		strb	r3, [r7, #8]
+ 387              		.loc 2 182 25
+ 388 0008 7B68     		ldr	r3, [r7, #4]
+ 389 000a 1B68     		ldr	r3, [r3]
+ 390 000c 03F03F03 		and	r3, r3, #63
+ 391 0010 DAB2     		uxtb	r2, r3
+ 392              		.loc 2 182 16
+ 393 0012 3B7A     		ldrb	r3, [r7, #8]
+ 394 0014 62F30503 		bfi	r3, r2, #0, #6
+ 395 0018 3B72     		strb	r3, [r7, #8]
  183:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.minutes = stdtime->tm_min;
- 402              		.loc 2 183 25
- 403 001a 7B68     		ldr	r3, [r7, #4]
- 404 001c 5B68     		ldr	r3, [r3, #4]
- 405 001e 03F03F03 		and	r3, r3, #63
- 406 0022 DAB2     		uxtb	r2, r3
- 407              		.loc 2 183 16
- 408 0024 7B7A     		ldrb	r3, [r7, #9]
- 409 0026 62F30503 		bfi	r3, r2, #0, #6
- 410 002a 7B72     		strb	r3, [r7, #9]
+ 396              		.loc 2 183 25
+ 397 001a 7B68     		ldr	r3, [r7, #4]
+ 398 001c 5B68     		ldr	r3, [r3, #4]
+ 399 001e 03F03F03 		and	r3, r3, #63
+ 400 0022 DAB2     		uxtb	r2, r3
+ 401              		.loc 2 183 16
+ 402 0024 7B7A     		ldrb	r3, [r7, #9]
+ 403 0026 62F30503 		bfi	r3, r2, #0, #6
+ 404 002a 7B72     		strb	r3, [r7, #9]
  184:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.hours = stdtime->tm_hour;
- 411              		.loc 2 184 23
- 412 002c 7B68     		ldr	r3, [r7, #4]
- 413 002e 9B68     		ldr	r3, [r3, #8]
- 414 0030 03F01F03 		and	r3, r3, #31
- 415 0034 DAB2     		uxtb	r2, r3
- 416              		.loc 2 184 14
- 417 0036 BB7A     		ldrb	r3, [r7, #10]
- 418 0038 62F30403 		bfi	r3, r2, #0, #5
- 419 003c BB72     		strb	r3, [r7, #10]
+ 405              		.loc 2 184 23
+ 406 002c 7B68     		ldr	r3, [r7, #4]
+ 407 002e 9B68     		ldr	r3, [r3, #8]
+ 408 0030 03F01F03 		and	r3, r3, #31
+ 409 0034 DAB2     		uxtb	r2, r3
+ 410              		.loc 2 184 14
+ 411 0036 BB7A     		ldrb	r3, [r7, #10]
+ 412 0038 62F30403 		bfi	r3, r2, #0, #5
+ 413 003c BB72     		strb	r3, [r7, #10]
  185:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.days = stdtime->tm_mday - 1;
- 420              		.loc 2 185 22
- 421 003e 7B68     		ldr	r3, [r7, #4]
- 422 0040 DB68     		ldr	r3, [r3, #12]
- 423              		.loc 2 185 32
- 424 0042 DBB2     		uxtb	r3, r3
- 425 0044 013B     		subs	r3, r3, #1
- 426 0046 DBB2     		uxtb	r3, r3
- 427 0048 03F01F03 		and	r3, r3, #31
- 428 004c DAB2     		uxtb	r2, r3
- 429              		.loc 2 185 13
- 430 004e FB7A     		ldrb	r3, [r7, #11]
- 431 0050 62F30403 		bfi	r3, r2, #0, #5
- 432 0054 FB72     		strb	r3, [r7, #11]
+ 414              		.loc 2 185 22
+ 415 003e 7B68     		ldr	r3, [r7, #4]
+ 416 0040 DB68     		ldr	r3, [r3, #12]
+ 417              		.loc 2 185 32
+ 418 0042 DBB2     		uxtb	r3, r3
+ 419 0044 013B     		subs	r3, r3, #1
+ 420 0046 DBB2     		uxtb	r3, r3
+ 421 0048 03F01F03 		and	r3, r3, #31
+ 422 004c DAB2     		uxtb	r2, r3
+ 423              		.loc 2 185 13
+ 424 004e FB7A     		ldrb	r3, [r7, #11]
+ 425 0050 62F30403 		bfi	r3, r2, #0, #5
+ 426 0054 FB72     		strb	r3, [r7, #11]
  186:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.month = stdtime->tm_mon;
- 433              		.loc 2 186 23
- 434 0056 7B68     		ldr	r3, [r7, #4]
- 435 0058 1B69     		ldr	r3, [r3, #16]
- 436 005a 03F00F03 		and	r3, r3, #15
- 437 005e DAB2     		uxtb	r2, r3
- 438              		.loc 2 186 14
- 439 0060 7B7B     		ldrb	r3, [r7, #13]
- 440 0062 62F30303 		bfi	r3, r2, #0, #4
- 441 0066 7B73     		strb	r3, [r7, #13]
+ 427              		.loc 2 186 23
+ 428 0056 7B68     		ldr	r3, [r7, #4]
+ 429 0058 1B69     		ldr	r3, [r3, #16]
+ 430 005a 03F00F03 		and	r3, r3, #15
+ 431 005e DAB2     		uxtb	r2, r3
+ 432              		.loc 2 186 14
+ 433 0060 7B7B     		ldrb	r3, [r7, #13]
+ 434 0062 62F30303 		bfi	r3, r2, #0, #4
+ 435 0066 7B73     		strb	r3, [r7, #13]
  187:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.year = stdtime->tm_year + XMC_RTC_YEAR_OFFSET;
- 442              		.loc 2 187 22
- 443 0068 7B68     		ldr	r3, [r7, #4]
- 444 006a 5B69     		ldr	r3, [r3, #20]
- 445              		.loc 2 187 32
- 446 006c 9BB2     		uxth	r3, r3
- 447 006e 03F26C73 		addw	r3, r3, #1900
- 448 0072 9BB2     		uxth	r3, r3
- 449              		.loc 2 187 13
- 450 0074 FB81     		strh	r3, [r7, #14]	@ movhi
+ 436              		.loc 2 187 22
+ 437 0068 7B68     		ldr	r3, [r7, #4]
+ 438 006a 5B69     		ldr	r3, [r3, #20]
+ 439              		.loc 2 187 32
+ 440 006c 9BB2     		uxth	r3, r3
+ 441 006e 03F26C73 		addw	r3, r3, #1900
+ 442 0072 9BB2     		uxth	r3, r3
+ 443              		.loc 2 187 13
+ 444 0074 FB81     		strh	r3, [r7, #14]	@ movhi
  188:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.daysofweek = stdtime->tm_wday;
- 451              		.loc 2 188 28
- 452 0076 7B68     		ldr	r3, [r7, #4]
- 453 0078 9B69     		ldr	r3, [r3, #24]
- 454 007a 03F00703 		and	r3, r3, #7
- 455 007e DAB2     		uxtb	r2, r3
- 456              		.loc 2 188 19
- 457 0080 3B7B     		ldrb	r3, [r7, #12]
- 458 0082 62F30203 		bfi	r3, r2, #0, #3
- 459 0086 3B73     		strb	r3, [r7, #12]
+ 445              		.loc 2 188 28
+ 446 0076 7B68     		ldr	r3, [r7, #4]
+ 447 0078 9B69     		ldr	r3, [r3, #24]
+ 448 007a 03F00703 		and	r3, r3, #7
+ 449 007e DAB2     		uxtb	r2, r3
+ 450              		.loc 2 188 19
+ 451 0080 3B7B     		ldrb	r3, [r7, #12]
+ 452 0082 62F30203 		bfi	r3, r2, #0, #3
+ 453 0086 3B73     		strb	r3, [r7, #12]
  189:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  190:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_RTC_SetTime(&time);
- 460              		.loc 2 190 3
- 461 0088 07F10803 		add	r3, r7, #8
- 462 008c 1846     		mov	r0, r3
- 463 008e FFF7FEFF 		bl	XMC_RTC_SetTime
+ 454              		.loc 2 190 3
+ 455 0088 07F10803 		add	r3, r7, #8
+ 456 008c 1846     		mov	r0, r3
+ 457 008e FFF7FEFF 		bl	XMC_RTC_SetTime
  191:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 464              		.loc 2 191 1
- 465 0092 00BF     		nop
- 466 0094 1037     		adds	r7, r7, #16
- 467              	.LCFI27:
- 468              		.cfi_def_cfa_offset 8
- 469 0096 BD46     		mov	sp, r7
- 470              	.LCFI28:
- 471              		.cfi_def_cfa_register 13
- 472              		@ sp needed
- 473 0098 80BD     		pop	{r7, pc}
- 474              		.cfi_endproc
- 475              	.LFE169:
- 477              		.section	.text.XMC_RTC_GetTimeStdFormat,"ax",%progbits
- 478              		.align	1
- 479              		.global	XMC_RTC_GetTimeStdFormat
- 480              		.syntax unified
- 481              		.thumb
- 482              		.thumb_func
- 483              		.fpu fpv4-sp-d16
- 485              	XMC_RTC_GetTimeStdFormat:
- 486              	.LFB170:
+ 458              		.loc 2 191 1
+ 459 0092 00BF     		nop
+ 460 0094 1037     		adds	r7, r7, #16
+ 461              	.LCFI27:
+ 462              		.cfi_def_cfa_offset 8
+ 463 0096 BD46     		mov	sp, r7
+ 464              	.LCFI28:
+ 465              		.cfi_def_cfa_register 13
+ 466              		@ sp needed
+ 467 0098 80BD     		pop	{r7, pc}
+ 468              		.cfi_endproc
+ 469              	.LFE169:
+ 471              		.section	.text.XMC_RTC_GetTimeStdFormat,"ax",%progbits
+ 472              		.align	1
+ 473              		.global	XMC_RTC_GetTimeStdFormat
+ 474              		.syntax unified
+ 475              		.thumb
+ 476              		.thumb_func
+ 478              	XMC_RTC_GetTimeStdFormat:
+ 479              	.LFB170:
  192:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  193:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  194:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Gets the RTC module time values in standard format
  195:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  196:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_GetTimeStdFormat(struct tm *const stdtime)
  197:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 487              		.loc 2 197 1
- 488              		.cfi_startproc
- 489              		@ args = 0, pretend = 0, frame = 16
- 490              		@ frame_needed = 1, uses_anonymous_args = 0
- 491              		@ link register save eliminated.
- 492 0000 80B4     		push	{r7}
- 493              	.LCFI29:
- 494              		.cfi_def_cfa_offset 4
- 495              		.cfi_offset 7, -4
- 496 0002 85B0     		sub	sp, sp, #20
- 497              	.LCFI30:
- 498              		.cfi_def_cfa_offset 24
- 499 0004 00AF     		add	r7, sp, #0
- 500              	.LCFI31:
- 501              		.cfi_def_cfa_register 7
- 502 0006 7860     		str	r0, [r7, #4]
+ 480              		.loc 2 197 1
+ 481              		.cfi_startproc
+ 482              		@ args = 0, pretend = 0, frame = 16
+ 483              		@ frame_needed = 1, uses_anonymous_args = 0
+ 484              		@ link register save eliminated.
+ 485 0000 80B4     		push	{r7}
+ 486              	.LCFI29:
+ 487              		.cfi_def_cfa_offset 4
+ 488              		.cfi_offset 7, -4
+ 489 0002 85B0     		sub	sp, sp, #20
+ 490              	.LCFI30:
+ 491              		.cfi_def_cfa_offset 24
+ 492 0004 00AF     		add	r7, sp, #0
+ 493              	.LCFI31:
+ 494              		.cfi_def_cfa_register 7
+ 495 0006 7860     		str	r0, [r7, #4]
  198:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_RTC_TIME_t time;
  199:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.raw0 = RTC->TIM0;
- 503              		.loc 2 199 18
- 504 0008 1D4B     		ldr	r3, .L27
- 505 000a 1B6A     		ldr	r3, [r3, #32]
- 506              		.loc 2 199 13
- 507 000c BB60     		str	r3, [r7, #8]
+ 496              		.loc 2 199 18
+ 497 0008 1D4B     		ldr	r3, .L27
+ 498 000a 1B6A     		ldr	r3, [r3, #32]
+ 499              		.loc 2 199 13
+ 500 000c BB60     		str	r3, [r7, #8]
  200:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   time.raw1 = RTC->TIM1;
- 508              		.loc 2 200 18
- 509 000e 1C4B     		ldr	r3, .L27
- 510 0010 5B6A     		ldr	r3, [r3, #36]
- 511              		.loc 2 200 13
- 512 0012 FB60     		str	r3, [r7, #12]
+ 501              		.loc 2 200 18
+ 502 000e 1C4B     		ldr	r3, .L27
+ 503 0010 5B6A     		ldr	r3, [r3, #36]
+ 504              		.loc 2 200 13
+ 505 0012 FB60     		str	r3, [r7, #12]
  201:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   
  202:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_sec = (int8_t)time.seconds;
- 513              		.loc 2 202 33
- 514 0014 3B7A     		ldrb	r3, [r7, #8]
- 515 0016 C3F30503 		ubfx	r3, r3, #0, #6
- 516 001a DBB2     		uxtb	r3, r3
- 517              		.loc 2 202 21
- 518 001c 1A46     		mov	r2, r3
- 519              		.loc 2 202 19
- 520 001e 7B68     		ldr	r3, [r7, #4]
- 521 0020 1A60     		str	r2, [r3]
+ 506              		.loc 2 202 33
+ 507 0014 3B7A     		ldrb	r3, [r7, #8]
+ 508 0016 C3F30503 		ubfx	r3, r3, #0, #6
+ 509 001a DBB2     		uxtb	r3, r3
+ 510              		.loc 2 202 21
+ 511 001c 1A46     		mov	r2, r3
+ 512              		.loc 2 202 19
+ 513 001e 7B68     		ldr	r3, [r7, #4]
+ 514 0020 1A60     		str	r2, [r3]
  203:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_min = (int8_t)time.minutes;
- 522              		.loc 2 203 33
- 523 0022 7B7A     		ldrb	r3, [r7, #9]
- 524 0024 C3F30503 		ubfx	r3, r3, #0, #6
- 525 0028 DBB2     		uxtb	r3, r3
- 526              		.loc 2 203 21
- 527 002a 1A46     		mov	r2, r3
- 528              		.loc 2 203 19
- 529 002c 7B68     		ldr	r3, [r7, #4]
- 530 002e 5A60     		str	r2, [r3, #4]
+ 515              		.loc 2 203 33
+ 516 0022 7B7A     		ldrb	r3, [r7, #9]
+ 517 0024 C3F30503 		ubfx	r3, r3, #0, #6
+ 518 0028 DBB2     		uxtb	r3, r3
+ 519              		.loc 2 203 21
+ 520 002a 1A46     		mov	r2, r3
+ 521              		.loc 2 203 19
+ 522 002c 7B68     		ldr	r3, [r7, #4]
+ 523 002e 5A60     		str	r2, [r3, #4]
  204:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_hour = (int8_t)time.hours;
- 531              		.loc 2 204 34
- 532 0030 BB7A     		ldrb	r3, [r7, #10]
- 533 0032 C3F30403 		ubfx	r3, r3, #0, #5
- 534 0036 DBB2     		uxtb	r3, r3
- 535              		.loc 2 204 22
- 536 0038 1A46     		mov	r2, r3
- 537              		.loc 2 204 20
- 538 003a 7B68     		ldr	r3, [r7, #4]
- 539 003c 9A60     		str	r2, [r3, #8]
+ 524              		.loc 2 204 34
+ 525 0030 BB7A     		ldrb	r3, [r7, #10]
+ 526 0032 C3F30403 		ubfx	r3, r3, #0, #5
+ 527 0036 DBB2     		uxtb	r3, r3
+ 528              		.loc 2 204 22
+ 529 0038 1A46     		mov	r2, r3
+ 530              		.loc 2 204 20
+ 531 003a 7B68     		ldr	r3, [r7, #4]
+ 532 003c 9A60     		str	r2, [r3, #8]
  205:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_mday = ((int8_t)time.days + (int8_t)1);
- 540              		.loc 2 205 35
- 541 003e FB7A     		ldrb	r3, [r7, #11]
- 542 0040 C3F30403 		ubfx	r3, r3, #0, #5
- 543 0044 DBB2     		uxtb	r3, r3
- 544              		.loc 2 205 41
- 545 0046 5A1C     		adds	r2, r3, #1
- 546              		.loc 2 205 20
- 547 0048 7B68     		ldr	r3, [r7, #4]
- 548 004a DA60     		str	r2, [r3, #12]
+ 533              		.loc 2 205 35
+ 534 003e FB7A     		ldrb	r3, [r7, #11]
+ 535 0040 C3F30403 		ubfx	r3, r3, #0, #5
+ 536 0044 DBB2     		uxtb	r3, r3
+ 537              		.loc 2 205 41
+ 538 0046 5A1C     		adds	r2, r3, #1
+ 539              		.loc 2 205 20
+ 540 0048 7B68     		ldr	r3, [r7, #4]
+ 541 004a DA60     		str	r2, [r3, #12]
  206:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_mon = (int8_t)time.month;
- 549              		.loc 2 206 33
- 550 004c 7B7B     		ldrb	r3, [r7, #13]
- 551 004e C3F30303 		ubfx	r3, r3, #0, #4
- 552 0052 DBB2     		uxtb	r3, r3
- 553              		.loc 2 206 21
- 554 0054 1A46     		mov	r2, r3
- 555              		.loc 2 206 19
- 556 0056 7B68     		ldr	r3, [r7, #4]
- 557 0058 1A61     		str	r2, [r3, #16]
+ 542              		.loc 2 206 33
+ 543 004c 7B7B     		ldrb	r3, [r7, #13]
+ 544 004e C3F30303 		ubfx	r3, r3, #0, #4
+ 545 0052 DBB2     		uxtb	r3, r3
+ 546              		.loc 2 206 21
+ 547 0054 1A46     		mov	r2, r3
+ 548              		.loc 2 206 19
+ 549 0056 7B68     		ldr	r3, [r7, #4]
+ 550 0058 1A61     		str	r2, [r3, #16]
  207:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_year = (int32_t)time.year - (int32_t)XMC_RTC_YEAR_OFFSET;
- 558              		.loc 2 207 35
- 559 005a FB89     		ldrh	r3, [r7, #14]
- 560              		.loc 2 207 41
- 561 005c A3F26C72 		subw	r2, r3, #1900
- 562              		.loc 2 207 20
- 563 0060 7B68     		ldr	r3, [r7, #4]
- 564 0062 5A61     		str	r2, [r3, #20]
+ 551              		.loc 2 207 35
+ 552 005a FB89     		ldrh	r3, [r7, #14]
+ 553              		.loc 2 207 41
+ 554 005c A3F26C72 		subw	r2, r3, #1900
+ 555              		.loc 2 207 20
+ 556 0060 7B68     		ldr	r3, [r7, #4]
+ 557 0062 5A61     		str	r2, [r3, #20]
  208:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_wday = (int8_t)time.daysofweek;
- 565              		.loc 2 208 34
- 566 0064 3B7B     		ldrb	r3, [r7, #12]
- 567 0066 C3F30203 		ubfx	r3, r3, #0, #3
- 568 006a DBB2     		uxtb	r3, r3
- 569              		.loc 2 208 22
- 570 006c 1A46     		mov	r2, r3
- 571              		.loc 2 208 20
- 572 006e 7B68     		ldr	r3, [r7, #4]
- 573 0070 9A61     		str	r2, [r3, #24]
+ 558              		.loc 2 208 34
+ 559 0064 3B7B     		ldrb	r3, [r7, #12]
+ 560 0066 C3F30203 		ubfx	r3, r3, #0, #3
+ 561 006a DBB2     		uxtb	r3, r3
+ 562              		.loc 2 208 22
+ 563 006c 1A46     		mov	r2, r3
+ 564              		.loc 2 208 20
+ 565 006e 7B68     		ldr	r3, [r7, #4]
+ 566 0070 9A61     		str	r2, [r3, #24]
  209:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 574              		.loc 2 209 1
- 575 0072 00BF     		nop
- 576 0074 1437     		adds	r7, r7, #20
- 577              	.LCFI32:
- 578              		.cfi_def_cfa_offset 4
- 579 0076 BD46     		mov	sp, r7
- 580              	.LCFI33:
- 581              		.cfi_def_cfa_register 13
- 582              		@ sp needed
- 583 0078 5DF8047B 		ldr	r7, [sp], #4
- 584              	.LCFI34:
- 585              		.cfi_restore 7
- 586              		.cfi_def_cfa_offset 0
- 587 007c 7047     		bx	lr
- 588              	.L28:
- 589 007e 00BF     		.align	2
- 590              	.L27:
- 591 0080 004A0050 		.word	1342196224
- 592              		.cfi_endproc
- 593              	.LFE170:
- 595              		.section	.text.XMC_RTC_SetAlarm,"ax",%progbits
- 596              		.align	1
- 597              		.global	XMC_RTC_SetAlarm
- 598              		.syntax unified
- 599              		.thumb
- 600              		.thumb_func
- 601              		.fpu fpv4-sp-d16
- 603              	XMC_RTC_SetAlarm:
- 604              	.LFB171:
+ 567              		.loc 2 209 1
+ 568 0072 00BF     		nop
+ 569 0074 1437     		adds	r7, r7, #20
+ 570              	.LCFI32:
+ 571              		.cfi_def_cfa_offset 4
+ 572 0076 BD46     		mov	sp, r7
+ 573              	.LCFI33:
+ 574              		.cfi_def_cfa_register 13
+ 575              		@ sp needed
+ 576 0078 5DF8047B 		ldr	r7, [sp], #4
+ 577              	.LCFI34:
+ 578              		.cfi_restore 7
+ 579              		.cfi_def_cfa_offset 0
+ 580 007c 7047     		bx	lr
+ 581              	.L28:
+ 582 007e 00BF     		.align	2
+ 583              	.L27:
+ 584 0080 004A0050 		.word	1342196224
+ 585              		.cfi_endproc
+ 586              	.LFE170:
+ 588              		.section	.text.XMC_RTC_SetAlarm,"ax",%progbits
+ 589              		.align	1
+ 590              		.global	XMC_RTC_SetAlarm
+ 591              		.syntax unified
+ 592              		.thumb
+ 593              		.thumb_func
+ 595              	XMC_RTC_SetAlarm:
+ 596              	.LFB171:
  210:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  211:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  212:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Sets the RTC module alarm time value
  213:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  214:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_SetAlarm(const XMC_RTC_ALARM_t *const alarm)
  215:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 605              		.loc 2 215 1
- 606              		.cfi_startproc
- 607              		@ args = 0, pretend = 0, frame = 8
- 608              		@ frame_needed = 1, uses_anonymous_args = 0
- 609 0000 80B5     		push	{r7, lr}
- 610              	.LCFI35:
- 611              		.cfi_def_cfa_offset 8
- 612              		.cfi_offset 7, -8
- 613              		.cfi_offset 14, -4
- 614 0002 82B0     		sub	sp, sp, #8
- 615              	.LCFI36:
- 616              		.cfi_def_cfa_offset 16
- 617 0004 00AF     		add	r7, sp, #0
- 618              	.LCFI37:
- 619              		.cfi_def_cfa_register 7
- 620 0006 7860     		str	r0, [r7, #4]
+ 597              		.loc 2 215 1
+ 598              		.cfi_startproc
+ 599              		@ args = 0, pretend = 0, frame = 8
+ 600              		@ frame_needed = 1, uses_anonymous_args = 0
+ 601 0000 80B5     		push	{r7, lr}
+ 602              	.LCFI35:
+ 603              		.cfi_def_cfa_offset 8
+ 604              		.cfi_offset 7, -8
+ 605              		.cfi_offset 14, -4
+ 606 0002 82B0     		sub	sp, sp, #8
+ 607              	.LCFI36:
+ 608              		.cfi_def_cfa_offset 16
+ 609 0004 00AF     		add	r7, sp, #0
+ 610              	.LCFI37:
+ 611              		.cfi_def_cfa_register 7
+ 612 0006 7860     		str	r0, [r7, #4]
  216:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_ASSERT("XMC_RTC_SetAlarm:Wrong seconds value", ((uint32_t)alarm->seconds < XMC_RTC_MAXSECONDS
  217:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_ASSERT("XMC_RTC_SetAlarm:Wrong minutes value", ((uint32_t)alarm->minutes < XMC_RTC_MAXMINUTES
  218:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_ASSERT("XMC_RTC_SetAlarm:Wrong hours value", ((uint32_t)alarm->hours < XMC_RTC_MAXHOURS));
@@ -1374,52 +1366,52 @@
  222:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  223:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   #if (XMC_RTC_INIT_SEQUENCE == 1U)
  224:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_ATIM0_Msk) != 0U)
- 621              		.loc 2 224 13
- 622 0008 00BF     		nop
- 623              	.L30:
- 624              		.loc 2 224 15 discriminator 1
- 625 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 626 000e 0346     		mov	r3, r0
- 627              		.loc 2 224 41 discriminator 1
- 628 0010 03F40073 		and	r3, r3, #512
- 629              		.loc 2 224 13 discriminator 1
- 630 0014 002B     		cmp	r3, #0
- 631 0016 F8D1     		bne	.L30
+ 613              		.loc 2 224 13
+ 614 0008 00BF     		nop
+ 615              	.L30:
+ 616              		.loc 2 224 15 discriminator 1
+ 617 000a FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 618 000e 0346     		mov	r3, r0
+ 619              		.loc 2 224 41 discriminator 1
+ 620 0010 03F40073 		and	r3, r3, #512
+ 621              		.loc 2 224 13 discriminator 1
+ 622 0014 002B     		cmp	r3, #0
+ 623 0016 F8D1     		bne	.L30
  225:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       {
  226:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****         /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  227:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       }
  228:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       RTC->ATIM0 = alarm->raw0;
- 632              		.loc 2 228 10
- 633 0018 094A     		ldr	r2, .L32
- 634              		.loc 2 228 25
- 635 001a 7B68     		ldr	r3, [r7, #4]
- 636 001c 1B68     		ldr	r3, [r3]
- 637              		.loc 2 228 18
- 638 001e 9361     		str	r3, [r2, #24]
+ 624              		.loc 2 228 10
+ 625 0018 094A     		ldr	r2, .L32
+ 626              		.loc 2 228 25
+ 627 001a 7B68     		ldr	r3, [r7, #4]
+ 628 001c 1B68     		ldr	r3, [r3]
+ 629              		.loc 2 228 18
+ 630 001e 9361     		str	r3, [r2, #24]
  229:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       
  230:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       while ((XMC_SCU_GetMirrorStatus() & SCU_GENERAL_MIRRSTS_RTC_ATIM1_Msk) != 0U)
- 639              		.loc 2 230 13
- 640 0020 00BF     		nop
- 641              	.L31:
- 642              		.loc 2 230 15 discriminator 1
- 643 0022 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
- 644 0026 0346     		mov	r3, r0
- 645              		.loc 2 230 41 discriminator 1
- 646 0028 03F48063 		and	r3, r3, #1024
- 647              		.loc 2 230 13 discriminator 1
- 648 002c 002B     		cmp	r3, #0
- 649 002e F8D1     		bne	.L31
+ 631              		.loc 2 230 13
+ 632 0020 00BF     		nop
+ 633              	.L31:
+ 634              		.loc 2 230 15 discriminator 1
+ 635 0022 FFF7FEFF 		bl	XMC_SCU_GetMirrorStatus
+ 636 0026 0346     		mov	r3, r0
+ 637              		.loc 2 230 41 discriminator 1
+ 638 0028 03F48063 		and	r3, r3, #1024
+ 639              		.loc 2 230 13 discriminator 1
+ 640 002c 002B     		cmp	r3, #0
+ 641 002e F8D1     		bne	.L31
  231:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       {
  232:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****         /* check SCU_MIRRSTS to ensure that no transfer over serial interface is pending */
  233:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       }
  234:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       RTC->ATIM1 = alarm->raw1; 
- 650              		.loc 2 234 10
- 651 0030 034A     		ldr	r2, .L32
- 652              		.loc 2 234 25
- 653 0032 7B68     		ldr	r3, [r7, #4]
- 654 0034 5B68     		ldr	r3, [r3, #4]
- 655              		.loc 2 234 18
- 656 0036 D361     		str	r3, [r2, #28]
+ 642              		.loc 2 234 10
+ 643 0030 034A     		ldr	r2, .L32
+ 644              		.loc 2 234 25
+ 645 0032 7B68     		ldr	r3, [r7, #4]
+ 646 0034 5B68     		ldr	r3, [r3, #4]
+ 647              		.loc 2 234 18
+ 648 0036 D361     		str	r3, [r2, #28]
  235:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   #endif
  236:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   #if (XMC_RTC_INIT_SEQUENCE == 0U)
  237:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       while ((XMC_SCU_GetMirrorStatus() & (SCU_GENERAL_MIRRSTS_RTC_ATIM0_Msk | SCU_GENERAL_MIRRSTS_
@@ -1430,97 +1422,95 @@
  242:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****       RTC->ATIM1 = alarm->raw1; 
  243:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   #endif  
  244:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 657              		.loc 2 244 1
- 658 0038 00BF     		nop
- 659 003a 0837     		adds	r7, r7, #8
- 660              	.LCFI38:
- 661              		.cfi_def_cfa_offset 8
- 662 003c BD46     		mov	sp, r7
- 663              	.LCFI39:
- 664              		.cfi_def_cfa_register 13
- 665              		@ sp needed
- 666 003e 80BD     		pop	{r7, pc}
- 667              	.L33:
- 668              		.align	2
- 669              	.L32:
- 670 0040 004A0050 		.word	1342196224
- 671              		.cfi_endproc
- 672              	.LFE171:
- 674              		.section	.text.XMC_RTC_GetAlarm,"ax",%progbits
- 675              		.align	1
- 676              		.global	XMC_RTC_GetAlarm
- 677              		.syntax unified
- 678              		.thumb
- 679              		.thumb_func
- 680              		.fpu fpv4-sp-d16
- 682              	XMC_RTC_GetAlarm:
- 683              	.LFB172:
+ 649              		.loc 2 244 1
+ 650 0038 00BF     		nop
+ 651 003a 0837     		adds	r7, r7, #8
+ 652              	.LCFI38:
+ 653              		.cfi_def_cfa_offset 8
+ 654 003c BD46     		mov	sp, r7
+ 655              	.LCFI39:
+ 656              		.cfi_def_cfa_register 13
+ 657              		@ sp needed
+ 658 003e 80BD     		pop	{r7, pc}
+ 659              	.L33:
+ 660              		.align	2
+ 661              	.L32:
+ 662 0040 004A0050 		.word	1342196224
+ 663              		.cfi_endproc
+ 664              	.LFE171:
+ 666              		.section	.text.XMC_RTC_GetAlarm,"ax",%progbits
+ 667              		.align	1
+ 668              		.global	XMC_RTC_GetAlarm
+ 669              		.syntax unified
+ 670              		.thumb
+ 671              		.thumb_func
+ 673              	XMC_RTC_GetAlarm:
+ 674              	.LFB172:
  245:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  246:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  247:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Gets the RTC module alarm time value
  248:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  249:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_GetAlarm(XMC_RTC_ALARM_t *const alarm)
  250:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 684              		.loc 2 250 1
- 685              		.cfi_startproc
- 686              		@ args = 0, pretend = 0, frame = 8
- 687              		@ frame_needed = 1, uses_anonymous_args = 0
- 688              		@ link register save eliminated.
- 689 0000 80B4     		push	{r7}
- 690              	.LCFI40:
- 691              		.cfi_def_cfa_offset 4
- 692              		.cfi_offset 7, -4
- 693 0002 83B0     		sub	sp, sp, #12
- 694              	.LCFI41:
- 695              		.cfi_def_cfa_offset 16
- 696 0004 00AF     		add	r7, sp, #0
- 697              	.LCFI42:
- 698              		.cfi_def_cfa_register 7
- 699 0006 7860     		str	r0, [r7, #4]
+ 675              		.loc 2 250 1
+ 676              		.cfi_startproc
+ 677              		@ args = 0, pretend = 0, frame = 8
+ 678              		@ frame_needed = 1, uses_anonymous_args = 0
+ 679              		@ link register save eliminated.
+ 680 0000 80B4     		push	{r7}
+ 681              	.LCFI40:
+ 682              		.cfi_def_cfa_offset 4
+ 683              		.cfi_offset 7, -4
+ 684 0002 83B0     		sub	sp, sp, #12
+ 685              	.LCFI41:
+ 686              		.cfi_def_cfa_offset 16
+ 687 0004 00AF     		add	r7, sp, #0
+ 688              	.LCFI42:
+ 689              		.cfi_def_cfa_register 7
+ 690 0006 7860     		str	r0, [r7, #4]
  251:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm->raw0 = RTC->ATIM0;
- 700              		.loc 2 251 20
- 701 0008 064B     		ldr	r3, .L35
- 702 000a 9A69     		ldr	r2, [r3, #24]
- 703              		.loc 2 251 15
- 704 000c 7B68     		ldr	r3, [r7, #4]
- 705 000e 1A60     		str	r2, [r3]
+ 691              		.loc 2 251 20
+ 692 0008 064B     		ldr	r3, .L35
+ 693 000a 9A69     		ldr	r2, [r3, #24]
+ 694              		.loc 2 251 15
+ 695 000c 7B68     		ldr	r3, [r7, #4]
+ 696 000e 1A60     		str	r2, [r3]
  252:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm->raw1 = RTC->ATIM1;
- 706              		.loc 2 252 20
- 707 0010 044B     		ldr	r3, .L35
- 708 0012 DA69     		ldr	r2, [r3, #28]
- 709              		.loc 2 252 15
- 710 0014 7B68     		ldr	r3, [r7, #4]
- 711 0016 5A60     		str	r2, [r3, #4]
+ 697              		.loc 2 252 20
+ 698 0010 044B     		ldr	r3, .L35
+ 699 0012 DA69     		ldr	r2, [r3, #28]
+ 700              		.loc 2 252 15
+ 701 0014 7B68     		ldr	r3, [r7, #4]
+ 702 0016 5A60     		str	r2, [r3, #4]
  253:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 712              		.loc 2 253 1
- 713 0018 00BF     		nop
- 714 001a 0C37     		adds	r7, r7, #12
- 715              	.LCFI43:
- 716              		.cfi_def_cfa_offset 4
- 717 001c BD46     		mov	sp, r7
- 718              	.LCFI44:
- 719              		.cfi_def_cfa_register 13
- 720              		@ sp needed
- 721 001e 5DF8047B 		ldr	r7, [sp], #4
- 722              	.LCFI45:
- 723              		.cfi_restore 7
- 724              		.cfi_def_cfa_offset 0
- 725 0022 7047     		bx	lr
- 726              	.L36:
- 727              		.align	2
- 728              	.L35:
- 729 0024 004A0050 		.word	1342196224
- 730              		.cfi_endproc
- 731              	.LFE172:
- 733              		.section	.text.XMC_RTC_SetAlarmStdFormat,"ax",%progbits
- 734              		.align	1
- 735              		.global	XMC_RTC_SetAlarmStdFormat
- 736              		.syntax unified
- 737              		.thumb
- 738              		.thumb_func
- 739              		.fpu fpv4-sp-d16
- 741              	XMC_RTC_SetAlarmStdFormat:
- 742              	.LFB173:
+ 703              		.loc 2 253 1
+ 704 0018 00BF     		nop
+ 705 001a 0C37     		adds	r7, r7, #12
+ 706              	.LCFI43:
+ 707              		.cfi_def_cfa_offset 4
+ 708 001c BD46     		mov	sp, r7
+ 709              	.LCFI44:
+ 710              		.cfi_def_cfa_register 13
+ 711              		@ sp needed
+ 712 001e 5DF8047B 		ldr	r7, [sp], #4
+ 713              	.LCFI45:
+ 714              		.cfi_restore 7
+ 715              		.cfi_def_cfa_offset 0
+ 716 0022 7047     		bx	lr
+ 717              	.L36:
+ 718              		.align	2
+ 719              	.L35:
+ 720 0024 004A0050 		.word	1342196224
+ 721              		.cfi_endproc
+ 722              	.LFE172:
+ 724              		.section	.text.XMC_RTC_SetAlarmStdFormat,"ax",%progbits
+ 725              		.align	1
+ 726              		.global	XMC_RTC_SetAlarmStdFormat
+ 727              		.syntax unified
+ 728              		.thumb
+ 729              		.thumb_func
+ 731              	XMC_RTC_SetAlarmStdFormat:
+ 732              	.LFB173:
  254:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  255:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  256:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
@@ -1528,351 +1518,346 @@
  258:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  259:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_SetAlarmStdFormat(const struct tm *const stdtime)
  260:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 743              		.loc 2 260 1
- 744              		.cfi_startproc
- 745              		@ args = 0, pretend = 0, frame = 16
- 746              		@ frame_needed = 1, uses_anonymous_args = 0
- 747 0000 80B5     		push	{r7, lr}
- 748              	.LCFI46:
- 749              		.cfi_def_cfa_offset 8
- 750              		.cfi_offset 7, -8
- 751              		.cfi_offset 14, -4
- 752 0002 84B0     		sub	sp, sp, #16
- 753              	.LCFI47:
- 754              		.cfi_def_cfa_offset 24
- 755 0004 00AF     		add	r7, sp, #0
- 756              	.LCFI48:
- 757              		.cfi_def_cfa_register 7
- 758 0006 7860     		str	r0, [r7, #4]
+ 733              		.loc 2 260 1
+ 734              		.cfi_startproc
+ 735              		@ args = 0, pretend = 0, frame = 16
+ 736              		@ frame_needed = 1, uses_anonymous_args = 0
+ 737 0000 80B5     		push	{r7, lr}
+ 738              	.LCFI46:
+ 739              		.cfi_def_cfa_offset 8
+ 740              		.cfi_offset 7, -8
+ 741              		.cfi_offset 14, -4
+ 742 0002 84B0     		sub	sp, sp, #16
+ 743              	.LCFI47:
+ 744              		.cfi_def_cfa_offset 24
+ 745 0004 00AF     		add	r7, sp, #0
+ 746              	.LCFI48:
+ 747              		.cfi_def_cfa_register 7
+ 748 0006 7860     		str	r0, [r7, #4]
  261:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_RTC_ALARM_t alarm;
  262:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   
  263:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  264:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm.seconds = stdtime->tm_sec;
- 759              		.loc 2 264 26
- 760 0008 7B68     		ldr	r3, [r7, #4]
- 761 000a 1B68     		ldr	r3, [r3]
- 762 000c 03F03F03 		and	r3, r3, #63
- 763 0010 DAB2     		uxtb	r2, r3
- 764              		.loc 2 264 17
- 765 0012 3B7A     		ldrb	r3, [r7, #8]
- 766 0014 62F30503 		bfi	r3, r2, #0, #6
- 767 0018 3B72     		strb	r3, [r7, #8]
+ 749              		.loc 2 264 26
+ 750 0008 7B68     		ldr	r3, [r7, #4]
+ 751 000a 1B68     		ldr	r3, [r3]
+ 752 000c 03F03F03 		and	r3, r3, #63
+ 753 0010 DAB2     		uxtb	r2, r3
+ 754              		.loc 2 264 17
+ 755 0012 3B7A     		ldrb	r3, [r7, #8]
+ 756 0014 62F30503 		bfi	r3, r2, #0, #6
+ 757 0018 3B72     		strb	r3, [r7, #8]
  265:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm.minutes = stdtime->tm_min;
- 768              		.loc 2 265 26
- 769 001a 7B68     		ldr	r3, [r7, #4]
- 770 001c 5B68     		ldr	r3, [r3, #4]
- 771 001e 03F03F03 		and	r3, r3, #63
- 772 0022 DAB2     		uxtb	r2, r3
- 773              		.loc 2 265 17
- 774 0024 7B7A     		ldrb	r3, [r7, #9]
- 775 0026 62F30503 		bfi	r3, r2, #0, #6
- 776 002a 7B72     		strb	r3, [r7, #9]
+ 758              		.loc 2 265 26
+ 759 001a 7B68     		ldr	r3, [r7, #4]
+ 760 001c 5B68     		ldr	r3, [r3, #4]
+ 761 001e 03F03F03 		and	r3, r3, #63
+ 762 0022 DAB2     		uxtb	r2, r3
+ 763              		.loc 2 265 17
+ 764 0024 7B7A     		ldrb	r3, [r7, #9]
+ 765 0026 62F30503 		bfi	r3, r2, #0, #6
+ 766 002a 7B72     		strb	r3, [r7, #9]
  266:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm.hours = stdtime->tm_hour;
- 777              		.loc 2 266 24
- 778 002c 7B68     		ldr	r3, [r7, #4]
- 779 002e 9B68     		ldr	r3, [r3, #8]
- 780 0030 03F01F03 		and	r3, r3, #31
- 781 0034 DAB2     		uxtb	r2, r3
- 782              		.loc 2 266 15
- 783 0036 BB7A     		ldrb	r3, [r7, #10]
- 784 0038 62F30403 		bfi	r3, r2, #0, #5
- 785 003c BB72     		strb	r3, [r7, #10]
+ 767              		.loc 2 266 24
+ 768 002c 7B68     		ldr	r3, [r7, #4]
+ 769 002e 9B68     		ldr	r3, [r3, #8]
+ 770 0030 03F01F03 		and	r3, r3, #31
+ 771 0034 DAB2     		uxtb	r2, r3
+ 772              		.loc 2 266 15
+ 773 0036 BB7A     		ldrb	r3, [r7, #10]
+ 774 0038 62F30403 		bfi	r3, r2, #0, #5
+ 775 003c BB72     		strb	r3, [r7, #10]
  267:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm.days = stdtime->tm_mday - 1;
- 786              		.loc 2 267 23
- 787 003e 7B68     		ldr	r3, [r7, #4]
- 788 0040 DB68     		ldr	r3, [r3, #12]
- 789              		.loc 2 267 33
- 790 0042 DBB2     		uxtb	r3, r3
- 791 0044 013B     		subs	r3, r3, #1
- 792 0046 DBB2     		uxtb	r3, r3
- 793 0048 03F01F03 		and	r3, r3, #31
- 794 004c DAB2     		uxtb	r2, r3
- 795              		.loc 2 267 14
- 796 004e FB7A     		ldrb	r3, [r7, #11]
- 797 0050 62F30403 		bfi	r3, r2, #0, #5
- 798 0054 FB72     		strb	r3, [r7, #11]
+ 776              		.loc 2 267 23
+ 777 003e 7B68     		ldr	r3, [r7, #4]
+ 778 0040 DB68     		ldr	r3, [r3, #12]
+ 779              		.loc 2 267 33
+ 780 0042 DBB2     		uxtb	r3, r3
+ 781 0044 013B     		subs	r3, r3, #1
+ 782 0046 DBB2     		uxtb	r3, r3
+ 783 0048 03F01F03 		and	r3, r3, #31
+ 784 004c DAB2     		uxtb	r2, r3
+ 785              		.loc 2 267 14
+ 786 004e FB7A     		ldrb	r3, [r7, #11]
+ 787 0050 62F30403 		bfi	r3, r2, #0, #5
+ 788 0054 FB72     		strb	r3, [r7, #11]
  268:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm.month = stdtime->tm_mon;
- 799              		.loc 2 268 24
- 800 0056 7B68     		ldr	r3, [r7, #4]
- 801 0058 1B69     		ldr	r3, [r3, #16]
- 802 005a 03F00F03 		and	r3, r3, #15
- 803 005e DAB2     		uxtb	r2, r3
- 804              		.loc 2 268 15
- 805 0060 7B7B     		ldrb	r3, [r7, #13]
- 806 0062 62F30303 		bfi	r3, r2, #0, #4
- 807 0066 7B73     		strb	r3, [r7, #13]
+ 789              		.loc 2 268 24
+ 790 0056 7B68     		ldr	r3, [r7, #4]
+ 791 0058 1B69     		ldr	r3, [r3, #16]
+ 792 005a 03F00F03 		and	r3, r3, #15
+ 793 005e DAB2     		uxtb	r2, r3
+ 794              		.loc 2 268 15
+ 795 0060 7B7B     		ldrb	r3, [r7, #13]
+ 796 0062 62F30303 		bfi	r3, r2, #0, #4
+ 797 0066 7B73     		strb	r3, [r7, #13]
  269:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm.year = stdtime->tm_year + XMC_RTC_YEAR_OFFSET;
- 808              		.loc 2 269 23
- 809 0068 7B68     		ldr	r3, [r7, #4]
- 810 006a 5B69     		ldr	r3, [r3, #20]
- 811              		.loc 2 269 33
- 812 006c 9BB2     		uxth	r3, r3
- 813 006e 03F26C73 		addw	r3, r3, #1900
- 814 0072 9BB2     		uxth	r3, r3
- 815              		.loc 2 269 14
- 816 0074 FB81     		strh	r3, [r7, #14]	@ movhi
+ 798              		.loc 2 269 23
+ 799 0068 7B68     		ldr	r3, [r7, #4]
+ 800 006a 5B69     		ldr	r3, [r3, #20]
+ 801              		.loc 2 269 33
+ 802 006c 9BB2     		uxth	r3, r3
+ 803 006e 03F26C73 		addw	r3, r3, #1900
+ 804 0072 9BB2     		uxth	r3, r3
+ 805              		.loc 2 269 14
+ 806 0074 FB81     		strh	r3, [r7, #14]	@ movhi
  270:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  271:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_RTC_SetAlarm(&alarm);
- 817              		.loc 2 271 3
- 818 0076 07F10803 		add	r3, r7, #8
- 819 007a 1846     		mov	r0, r3
- 820 007c FFF7FEFF 		bl	XMC_RTC_SetAlarm
+ 807              		.loc 2 271 3
+ 808 0076 07F10803 		add	r3, r7, #8
+ 809 007a 1846     		mov	r0, r3
+ 810 007c FFF7FEFF 		bl	XMC_RTC_SetAlarm
  272:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 821              		.loc 2 272 1
- 822 0080 00BF     		nop
- 823 0082 1037     		adds	r7, r7, #16
- 824              	.LCFI49:
- 825              		.cfi_def_cfa_offset 8
- 826 0084 BD46     		mov	sp, r7
- 827              	.LCFI50:
- 828              		.cfi_def_cfa_register 13
- 829              		@ sp needed
- 830 0086 80BD     		pop	{r7, pc}
- 831              		.cfi_endproc
- 832              	.LFE173:
- 834              		.section	.text.XMC_RTC_GetAlarmStdFormat,"ax",%progbits
- 835              		.align	1
- 836              		.global	XMC_RTC_GetAlarmStdFormat
- 837              		.syntax unified
- 838              		.thumb
- 839              		.thumb_func
- 840              		.fpu fpv4-sp-d16
- 842              	XMC_RTC_GetAlarmStdFormat:
- 843              	.LFB174:
+ 811              		.loc 2 272 1
+ 812 0080 00BF     		nop
+ 813 0082 1037     		adds	r7, r7, #16
+ 814              	.LCFI49:
+ 815              		.cfi_def_cfa_offset 8
+ 816 0084 BD46     		mov	sp, r7
+ 817              	.LCFI50:
+ 818              		.cfi_def_cfa_register 13
+ 819              		@ sp needed
+ 820 0086 80BD     		pop	{r7, pc}
+ 821              		.cfi_endproc
+ 822              	.LFE173:
+ 824              		.section	.text.XMC_RTC_GetAlarmStdFormat,"ax",%progbits
+ 825              		.align	1
+ 826              		.global	XMC_RTC_GetAlarmStdFormat
+ 827              		.syntax unified
+ 828              		.thumb
+ 829              		.thumb_func
+ 831              	XMC_RTC_GetAlarmStdFormat:
+ 832              	.LFB174:
  273:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  274:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  275:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Gets the RTC module alarm time value in standard format
  276:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  277:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** void XMC_RTC_GetAlarmStdFormat(struct tm *const stdtime)
  278:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 844              		.loc 2 278 1
- 845              		.cfi_startproc
- 846              		@ args = 0, pretend = 0, frame = 16
- 847              		@ frame_needed = 1, uses_anonymous_args = 0
- 848              		@ link register save eliminated.
- 849 0000 80B4     		push	{r7}
- 850              	.LCFI51:
- 851              		.cfi_def_cfa_offset 4
- 852              		.cfi_offset 7, -4
- 853 0002 85B0     		sub	sp, sp, #20
- 854              	.LCFI52:
- 855              		.cfi_def_cfa_offset 24
- 856 0004 00AF     		add	r7, sp, #0
- 857              	.LCFI53:
- 858              		.cfi_def_cfa_register 7
- 859 0006 7860     		str	r0, [r7, #4]
+ 833              		.loc 2 278 1
+ 834              		.cfi_startproc
+ 835              		@ args = 0, pretend = 0, frame = 16
+ 836              		@ frame_needed = 1, uses_anonymous_args = 0
+ 837              		@ link register save eliminated.
+ 838 0000 80B4     		push	{r7}
+ 839              	.LCFI51:
+ 840              		.cfi_def_cfa_offset 4
+ 841              		.cfi_offset 7, -4
+ 842 0002 85B0     		sub	sp, sp, #20
+ 843              	.LCFI52:
+ 844              		.cfi_def_cfa_offset 24
+ 845 0004 00AF     		add	r7, sp, #0
+ 846              	.LCFI53:
+ 847              		.cfi_def_cfa_register 7
+ 848 0006 7860     		str	r0, [r7, #4]
  279:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   XMC_RTC_ALARM_t alarm;
  280:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   
  281:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm.raw0 = RTC->ATIM0;
- 860              		.loc 2 281 19
- 861 0008 194B     		ldr	r3, .L39
- 862 000a 9B69     		ldr	r3, [r3, #24]
- 863              		.loc 2 281 14
- 864 000c BB60     		str	r3, [r7, #8]
+ 849              		.loc 2 281 19
+ 850 0008 194B     		ldr	r3, .L39
+ 851 000a 9B69     		ldr	r3, [r3, #24]
+ 852              		.loc 2 281 14
+ 853 000c BB60     		str	r3, [r7, #8]
  282:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   alarm.raw1 = RTC->ATIM1;
- 865              		.loc 2 282 19
- 866 000e 184B     		ldr	r3, .L39
- 867 0010 DB69     		ldr	r3, [r3, #28]
- 868              		.loc 2 282 14
- 869 0012 FB60     		str	r3, [r7, #12]
+ 854              		.loc 2 282 19
+ 855 000e 184B     		ldr	r3, .L39
+ 856 0010 DB69     		ldr	r3, [r3, #28]
+ 857              		.loc 2 282 14
+ 858 0012 FB60     		str	r3, [r7, #12]
  283:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  284:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_sec = (int8_t)alarm.seconds;
- 870              		.loc 2 284 34
- 871 0014 3B7A     		ldrb	r3, [r7, #8]
- 872 0016 C3F30503 		ubfx	r3, r3, #0, #6
- 873 001a DBB2     		uxtb	r3, r3
- 874              		.loc 2 284 21
- 875 001c 1A46     		mov	r2, r3
- 876              		.loc 2 284 19
- 877 001e 7B68     		ldr	r3, [r7, #4]
- 878 0020 1A60     		str	r2, [r3]
+ 859              		.loc 2 284 34
+ 860 0014 3B7A     		ldrb	r3, [r7, #8]
+ 861 0016 C3F30503 		ubfx	r3, r3, #0, #6
+ 862 001a DBB2     		uxtb	r3, r3
+ 863              		.loc 2 284 21
+ 864 001c 1A46     		mov	r2, r3
+ 865              		.loc 2 284 19
+ 866 001e 7B68     		ldr	r3, [r7, #4]
+ 867 0020 1A60     		str	r2, [r3]
  285:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_min = (int8_t)alarm.minutes;
- 879              		.loc 2 285 34
- 880 0022 7B7A     		ldrb	r3, [r7, #9]
- 881 0024 C3F30503 		ubfx	r3, r3, #0, #6
- 882 0028 DBB2     		uxtb	r3, r3
- 883              		.loc 2 285 21
- 884 002a 1A46     		mov	r2, r3
- 885              		.loc 2 285 19
- 886 002c 7B68     		ldr	r3, [r7, #4]
- 887 002e 5A60     		str	r2, [r3, #4]
+ 868              		.loc 2 285 34
+ 869 0022 7B7A     		ldrb	r3, [r7, #9]
+ 870 0024 C3F30503 		ubfx	r3, r3, #0, #6
+ 871 0028 DBB2     		uxtb	r3, r3
+ 872              		.loc 2 285 21
+ 873 002a 1A46     		mov	r2, r3
+ 874              		.loc 2 285 19
+ 875 002c 7B68     		ldr	r3, [r7, #4]
+ 876 002e 5A60     		str	r2, [r3, #4]
  286:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_hour = (int8_t)alarm.hours;
- 888              		.loc 2 286 35
- 889 0030 BB7A     		ldrb	r3, [r7, #10]
- 890 0032 C3F30403 		ubfx	r3, r3, #0, #5
- 891 0036 DBB2     		uxtb	r3, r3
- 892              		.loc 2 286 22
- 893 0038 1A46     		mov	r2, r3
- 894              		.loc 2 286 20
- 895 003a 7B68     		ldr	r3, [r7, #4]
- 896 003c 9A60     		str	r2, [r3, #8]
+ 877              		.loc 2 286 35
+ 878 0030 BB7A     		ldrb	r3, [r7, #10]
+ 879 0032 C3F30403 		ubfx	r3, r3, #0, #5
+ 880 0036 DBB2     		uxtb	r3, r3
+ 881              		.loc 2 286 22
+ 882 0038 1A46     		mov	r2, r3
+ 883              		.loc 2 286 20
+ 884 003a 7B68     		ldr	r3, [r7, #4]
+ 885 003c 9A60     		str	r2, [r3, #8]
  287:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_mday = ((int8_t)alarm.days + (int8_t)1);
- 897              		.loc 2 287 36
- 898 003e FB7A     		ldrb	r3, [r7, #11]
- 899 0040 C3F30403 		ubfx	r3, r3, #0, #5
- 900 0044 DBB2     		uxtb	r3, r3
- 901              		.loc 2 287 42
- 902 0046 5A1C     		adds	r2, r3, #1
- 903              		.loc 2 287 20
- 904 0048 7B68     		ldr	r3, [r7, #4]
- 905 004a DA60     		str	r2, [r3, #12]
+ 886              		.loc 2 287 36
+ 887 003e FB7A     		ldrb	r3, [r7, #11]
+ 888 0040 C3F30403 		ubfx	r3, r3, #0, #5
+ 889 0044 DBB2     		uxtb	r3, r3
+ 890              		.loc 2 287 42
+ 891 0046 5A1C     		adds	r2, r3, #1
+ 892              		.loc 2 287 20
+ 893 0048 7B68     		ldr	r3, [r7, #4]
+ 894 004a DA60     		str	r2, [r3, #12]
  288:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_mon = (int8_t)alarm.month;
- 906              		.loc 2 288 34
- 907 004c 7B7B     		ldrb	r3, [r7, #13]
- 908 004e C3F30303 		ubfx	r3, r3, #0, #4
- 909 0052 DBB2     		uxtb	r3, r3
- 910              		.loc 2 288 21
- 911 0054 1A46     		mov	r2, r3
- 912              		.loc 2 288 19
- 913 0056 7B68     		ldr	r3, [r7, #4]
- 914 0058 1A61     		str	r2, [r3, #16]
+ 895              		.loc 2 288 34
+ 896 004c 7B7B     		ldrb	r3, [r7, #13]
+ 897 004e C3F30303 		ubfx	r3, r3, #0, #4
+ 898 0052 DBB2     		uxtb	r3, r3
+ 899              		.loc 2 288 21
+ 900 0054 1A46     		mov	r2, r3
+ 901              		.loc 2 288 19
+ 902 0056 7B68     		ldr	r3, [r7, #4]
+ 903 0058 1A61     		str	r2, [r3, #16]
  289:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   stdtime->tm_year = (int32_t)alarm.year - (int32_t)XMC_RTC_YEAR_OFFSET;
- 915              		.loc 2 289 36
- 916 005a FB89     		ldrh	r3, [r7, #14]
- 917              		.loc 2 289 42
- 918 005c A3F26C72 		subw	r2, r3, #1900
- 919              		.loc 2 289 20
- 920 0060 7B68     		ldr	r3, [r7, #4]
- 921 0062 5A61     		str	r2, [r3, #20]
+ 904              		.loc 2 289 36
+ 905 005a FB89     		ldrh	r3, [r7, #14]
+ 906              		.loc 2 289 42
+ 907 005c A3F26C72 		subw	r2, r3, #1900
+ 908              		.loc 2 289 20
+ 909 0060 7B68     		ldr	r3, [r7, #4]
+ 910 0062 5A61     		str	r2, [r3, #20]
  290:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 922              		.loc 2 290 1
- 923 0064 00BF     		nop
- 924 0066 1437     		adds	r7, r7, #20
- 925              	.LCFI54:
- 926              		.cfi_def_cfa_offset 4
- 927 0068 BD46     		mov	sp, r7
- 928              	.LCFI55:
- 929              		.cfi_def_cfa_register 13
- 930              		@ sp needed
- 931 006a 5DF8047B 		ldr	r7, [sp], #4
- 932              	.LCFI56:
- 933              		.cfi_restore 7
- 934              		.cfi_def_cfa_offset 0
- 935 006e 7047     		bx	lr
- 936              	.L40:
- 937              		.align	2
- 938              	.L39:
- 939 0070 004A0050 		.word	1342196224
- 940              		.cfi_endproc
- 941              	.LFE174:
- 943              		.section	.text.XMC_RTC_GetEventStatus,"ax",%progbits
- 944              		.align	1
- 945              		.global	XMC_RTC_GetEventStatus
- 946              		.syntax unified
- 947              		.thumb
- 948              		.thumb_func
- 949              		.fpu fpv4-sp-d16
- 951              	XMC_RTC_GetEventStatus:
- 952              	.LFB175:
+ 911              		.loc 2 290 1
+ 912 0064 00BF     		nop
+ 913 0066 1437     		adds	r7, r7, #20
+ 914              	.LCFI54:
+ 915              		.cfi_def_cfa_offset 4
+ 916 0068 BD46     		mov	sp, r7
+ 917              	.LCFI55:
+ 918              		.cfi_def_cfa_register 13
+ 919              		@ sp needed
+ 920 006a 5DF8047B 		ldr	r7, [sp], #4
+ 921              	.LCFI56:
+ 922              		.cfi_restore 7
+ 923              		.cfi_def_cfa_offset 0
+ 924 006e 7047     		bx	lr
+ 925              	.L40:
+ 926              		.align	2
+ 927              	.L39:
+ 928 0070 004A0050 		.word	1342196224
+ 929              		.cfi_endproc
+ 930              	.LFE174:
+ 932              		.section	.text.XMC_RTC_GetEventStatus,"ax",%progbits
+ 933              		.align	1
+ 934              		.global	XMC_RTC_GetEventStatus
+ 935              		.syntax unified
+ 936              		.thumb
+ 937              		.thumb_func
+ 939              	XMC_RTC_GetEventStatus:
+ 940              	.LFB175:
  291:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** 
  292:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** /*
  293:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  * Gets the RTC periodic and alarm event(s) status
  294:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****  */
  295:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** uint32_t XMC_RTC_GetEventStatus(void)
  296:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** {
- 953              		.loc 2 296 1
- 954              		.cfi_startproc
- 955              		@ args = 0, pretend = 0, frame = 0
- 956              		@ frame_needed = 1, uses_anonymous_args = 0
- 957              		@ link register save eliminated.
- 958 0000 80B4     		push	{r7}
- 959              	.LCFI57:
- 960              		.cfi_def_cfa_offset 4
- 961              		.cfi_offset 7, -4
- 962 0002 00AF     		add	r7, sp, #0
- 963              	.LCFI58:
- 964              		.cfi_def_cfa_register 7
+ 941              		.loc 2 296 1
+ 942              		.cfi_startproc
+ 943              		@ args = 0, pretend = 0, frame = 0
+ 944              		@ frame_needed = 1, uses_anonymous_args = 0
+ 945              		@ link register save eliminated.
+ 946 0000 80B4     		push	{r7}
+ 947              	.LCFI57:
+ 948              		.cfi_def_cfa_offset 4
+ 949              		.cfi_offset 7, -4
+ 950 0002 00AF     		add	r7, sp, #0
+ 951              	.LCFI58:
+ 952              		.cfi_def_cfa_register 7
  297:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c ****   return RTC->STSSR;
- 965              		.loc 2 297 13
- 966 0004 034B     		ldr	r3, .L43
- 967 0006 DB68     		ldr	r3, [r3, #12]
+ 953              		.loc 2 297 13
+ 954 0004 034B     		ldr	r3, .L43
+ 955 0006 DB68     		ldr	r3, [r3, #12]
  298:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/src/xmc_rtc.c **** }
- 968              		.loc 2 298 1
- 969 0008 1846     		mov	r0, r3
- 970 000a BD46     		mov	sp, r7
- 971              	.LCFI59:
- 972              		.cfi_def_cfa_register 13
- 973              		@ sp needed
- 974 000c 5DF8047B 		ldr	r7, [sp], #4
- 975              	.LCFI60:
- 976              		.cfi_restore 7
- 977              		.cfi_def_cfa_offset 0
- 978 0010 7047     		bx	lr
- 979              	.L44:
- 980 0012 00BF     		.align	2
- 981              	.L43:
- 982 0014 004A0050 		.word	1342196224
- 983              		.cfi_endproc
- 984              	.LFE175:
- 986              		.text
- 987              	.Letext0:
- 988              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 989              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 990              		.file 5 "/usr/include/newlib/sys/_types.h"
- 991              		.file 6 "/usr/include/newlib/sys/reent.h"
- 992              		.file 7 "/usr/include/newlib/sys/lock.h"
- 993              		.file 8 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h"
- 994              		.file 9 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_X
- 995              		.file 10 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500
- 996              		.file 11 "/usr/include/newlib/time.h"
- 997              		.file 12 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_rtc.h"
+ 956              		.loc 2 298 1
+ 957 0008 1846     		mov	r0, r3
+ 958 000a BD46     		mov	sp, r7
+ 959              	.LCFI59:
+ 960              		.cfi_def_cfa_register 13
+ 961              		@ sp needed
+ 962 000c 5DF8047B 		ldr	r7, [sp], #4
+ 963              	.LCFI60:
+ 964              		.cfi_restore 7
+ 965              		.cfi_def_cfa_offset 0
+ 966 0010 7047     		bx	lr
+ 967              	.L44:
+ 968 0012 00BF     		.align	2
+ 969              	.L43:
+ 970 0014 004A0050 		.word	1342196224
+ 971              		.cfi_endproc
+ 972              	.LFE175:
+ 974              		.text
+ 975              	.Letext0:
+ 976              		.file 3 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/mach
+ 977              		.file 4 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
+ 978              		.file 5 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500.
+ 979              		.file 6 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/time
+ 980              		.file 7 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_rtc.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 xmc_rtc.c
-     /tmp/ccm8L8Q8.s:17     .text.XMC_SCU_GetMirrorStatus:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:24     .text.XMC_SCU_GetMirrorStatus:0000000000000000 XMC_SCU_GetMirrorStatus
-     /tmp/ccm8L8Q8.s:56     .text.XMC_SCU_GetMirrorStatus:0000000000000014 $d
-     /tmp/ccm8L8Q8.s:61     .text.XMC_RTC_Start:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:68     .text.XMC_RTC_Start:0000000000000000 XMC_RTC_Start
-     /tmp/ccm8L8Q8.s:106    .text.XMC_RTC_Start:0000000000000024 $d
-     /tmp/ccm8L8Q8.s:111    .text.XMC_RTC_Stop:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:118    .text.XMC_RTC_Stop:0000000000000000 XMC_RTC_Stop
-     /tmp/ccm8L8Q8.s:155    .text.XMC_RTC_Stop:0000000000000024 $d
-     /tmp/ccm8L8Q8.s:160    .text.XMC_RTC_SetPrescaler:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:167    .text.XMC_RTC_SetPrescaler:0000000000000000 XMC_RTC_SetPrescaler
-     /tmp/ccm8L8Q8.s:225    .text.XMC_RTC_SetPrescaler:0000000000000034 $d
-     /tmp/ccm8L8Q8.s:230    .text.XMC_RTC_SetTime:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:237    .text.XMC_RTC_SetTime:0000000000000000 XMC_RTC_SetTime
-     /tmp/ccm8L8Q8.s:304    .text.XMC_RTC_SetTime:0000000000000040 $d
-     /tmp/ccm8L8Q8.s:309    .text.XMC_RTC_GetTime:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:316    .text.XMC_RTC_GetTime:0000000000000000 XMC_RTC_GetTime
-     /tmp/ccm8L8Q8.s:363    .text.XMC_RTC_GetTime:0000000000000024 $d
-     /tmp/ccm8L8Q8.s:368    .text.XMC_RTC_SetTimeStdFormat:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:375    .text.XMC_RTC_SetTimeStdFormat:0000000000000000 XMC_RTC_SetTimeStdFormat
-     /tmp/ccm8L8Q8.s:478    .text.XMC_RTC_GetTimeStdFormat:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:485    .text.XMC_RTC_GetTimeStdFormat:0000000000000000 XMC_RTC_GetTimeStdFormat
-     /tmp/ccm8L8Q8.s:591    .text.XMC_RTC_GetTimeStdFormat:0000000000000080 $d
-     /tmp/ccm8L8Q8.s:596    .text.XMC_RTC_SetAlarm:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:603    .text.XMC_RTC_SetAlarm:0000000000000000 XMC_RTC_SetAlarm
-     /tmp/ccm8L8Q8.s:670    .text.XMC_RTC_SetAlarm:0000000000000040 $d
-     /tmp/ccm8L8Q8.s:675    .text.XMC_RTC_GetAlarm:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:682    .text.XMC_RTC_GetAlarm:0000000000000000 XMC_RTC_GetAlarm
-     /tmp/ccm8L8Q8.s:729    .text.XMC_RTC_GetAlarm:0000000000000024 $d
-     /tmp/ccm8L8Q8.s:734    .text.XMC_RTC_SetAlarmStdFormat:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:741    .text.XMC_RTC_SetAlarmStdFormat:0000000000000000 XMC_RTC_SetAlarmStdFormat
-     /tmp/ccm8L8Q8.s:835    .text.XMC_RTC_GetAlarmStdFormat:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:842    .text.XMC_RTC_GetAlarmStdFormat:0000000000000000 XMC_RTC_GetAlarmStdFormat
-     /tmp/ccm8L8Q8.s:939    .text.XMC_RTC_GetAlarmStdFormat:0000000000000070 $d
-     /tmp/ccm8L8Q8.s:944    .text.XMC_RTC_GetEventStatus:0000000000000000 $t
-     /tmp/ccm8L8Q8.s:951    .text.XMC_RTC_GetEventStatus:0000000000000000 XMC_RTC_GetEventStatus
-     /tmp/ccm8L8Q8.s:982    .text.XMC_RTC_GetEventStatus:0000000000000014 $d
-                           .group:0000000000000000 wm4.0.1ef749480d5223b912d851bdb3b2139f
+     /tmp/ccoLUKha.s:19     .text.XMC_SCU_GetMirrorStatus:0000000000000000 $t
+     /tmp/ccoLUKha.s:24     .text.XMC_SCU_GetMirrorStatus:0000000000000000 XMC_SCU_GetMirrorStatus
+     /tmp/ccoLUKha.s:56     .text.XMC_SCU_GetMirrorStatus:0000000000000014 $d
+     /tmp/ccoLUKha.s:61     .text.XMC_RTC_Start:0000000000000000 $t
+     /tmp/ccoLUKha.s:67     .text.XMC_RTC_Start:0000000000000000 XMC_RTC_Start
+     /tmp/ccoLUKha.s:105    .text.XMC_RTC_Start:0000000000000024 $d
+     /tmp/ccoLUKha.s:110    .text.XMC_RTC_Stop:0000000000000000 $t
+     /tmp/ccoLUKha.s:116    .text.XMC_RTC_Stop:0000000000000000 XMC_RTC_Stop
+     /tmp/ccoLUKha.s:153    .text.XMC_RTC_Stop:0000000000000024 $d
+     /tmp/ccoLUKha.s:158    .text.XMC_RTC_SetPrescaler:0000000000000000 $t
+     /tmp/ccoLUKha.s:164    .text.XMC_RTC_SetPrescaler:0000000000000000 XMC_RTC_SetPrescaler
+     /tmp/ccoLUKha.s:222    .text.XMC_RTC_SetPrescaler:0000000000000034 $d
+     /tmp/ccoLUKha.s:227    .text.XMC_RTC_SetTime:0000000000000000 $t
+     /tmp/ccoLUKha.s:233    .text.XMC_RTC_SetTime:0000000000000000 XMC_RTC_SetTime
+     /tmp/ccoLUKha.s:300    .text.XMC_RTC_SetTime:0000000000000040 $d
+     /tmp/ccoLUKha.s:305    .text.XMC_RTC_GetTime:0000000000000000 $t
+     /tmp/ccoLUKha.s:311    .text.XMC_RTC_GetTime:0000000000000000 XMC_RTC_GetTime
+     /tmp/ccoLUKha.s:358    .text.XMC_RTC_GetTime:0000000000000024 $d
+     /tmp/ccoLUKha.s:363    .text.XMC_RTC_SetTimeStdFormat:0000000000000000 $t
+     /tmp/ccoLUKha.s:369    .text.XMC_RTC_SetTimeStdFormat:0000000000000000 XMC_RTC_SetTimeStdFormat
+     /tmp/ccoLUKha.s:472    .text.XMC_RTC_GetTimeStdFormat:0000000000000000 $t
+     /tmp/ccoLUKha.s:478    .text.XMC_RTC_GetTimeStdFormat:0000000000000000 XMC_RTC_GetTimeStdFormat
+     /tmp/ccoLUKha.s:584    .text.XMC_RTC_GetTimeStdFormat:0000000000000080 $d
+     /tmp/ccoLUKha.s:589    .text.XMC_RTC_SetAlarm:0000000000000000 $t
+     /tmp/ccoLUKha.s:595    .text.XMC_RTC_SetAlarm:0000000000000000 XMC_RTC_SetAlarm
+     /tmp/ccoLUKha.s:662    .text.XMC_RTC_SetAlarm:0000000000000040 $d
+     /tmp/ccoLUKha.s:667    .text.XMC_RTC_GetAlarm:0000000000000000 $t
+     /tmp/ccoLUKha.s:673    .text.XMC_RTC_GetAlarm:0000000000000000 XMC_RTC_GetAlarm
+     /tmp/ccoLUKha.s:720    .text.XMC_RTC_GetAlarm:0000000000000024 $d
+     /tmp/ccoLUKha.s:725    .text.XMC_RTC_SetAlarmStdFormat:0000000000000000 $t
+     /tmp/ccoLUKha.s:731    .text.XMC_RTC_SetAlarmStdFormat:0000000000000000 XMC_RTC_SetAlarmStdFormat
+     /tmp/ccoLUKha.s:825    .text.XMC_RTC_GetAlarmStdFormat:0000000000000000 $t
+     /tmp/ccoLUKha.s:831    .text.XMC_RTC_GetAlarmStdFormat:0000000000000000 XMC_RTC_GetAlarmStdFormat
+     /tmp/ccoLUKha.s:928    .text.XMC_RTC_GetAlarmStdFormat:0000000000000070 $d
+     /tmp/ccoLUKha.s:933    .text.XMC_RTC_GetEventStatus:0000000000000000 $t
+     /tmp/ccoLUKha.s:939    .text.XMC_RTC_GetEventStatus:0000000000000000 XMC_RTC_GetEventStatus
+     /tmp/ccoLUKha.s:970    .text.XMC_RTC_GetEventStatus:0000000000000014 $d
+                           .group:0000000000000000 wm4.0.467689a90594456bf46c01d2d8793c7f
                            .group:0000000000000000 wm4.stddef.h.39.27677723d43e5b5a7afdf8d798429f1d
-                           .group:0000000000000000 wm4.stdint.h.29.6d480f4ba0f60596e88234283d42444f
+                           .group:0000000000000000 wm4._newlib_version.h.4.bfdf54b0af045d4a71376ae00f63a22c
+                           .group:0000000000000000 wm4.features.h.33.5bd1eea2d80518b50f7af0b5ce6750e0
+                           .group:0000000000000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:0000000000000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
                            .group:0000000000000000 wm4.stdbool.h.29.07dce69c3b78884144b7f7bd19483461
-                           .group:0000000000000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
-                           .group:0000000000000000 wm4.newlib.h.21.1ae2897bc09bbe4bc80ffb801fb02432
-                           .group:0000000000000000 wm4.ieeefp.h.77.f33a4dce62116f6f5175ff8bae57a54c
-                           .group:0000000000000000 wm4.features.h.22.026edb2397769f4ae13f35900dbdb560
+                           .group:0000000000000000 wm4.newlib.h.8.7cb3972cd43265932d4782d5eb589854
+                           .group:0000000000000000 wm4.ieeefp.h.77.c88535c35f465c05b101960cf0179075
                            .group:0000000000000000 wm4.config.h.224.c701144a7b0518c6ee9b9b5465b79f81
                            .group:0000000000000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
                            .group:0000000000000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2
                            .group:0000000000000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
-                           .group:0000000000000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
                            .group:0000000000000000 wm4._types.h.127.34941de1b2539d59d5cac00e0dd27a45
                            .group:0000000000000000 wm4.reent.h.17.e292bf8b0bec6c96e131a54347145a30
-                           .group:0000000000000000 wm4.lock.h.2.c0958401bd0ce484d507ee19aacab817
+                           .group:0000000000000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
                            .group:0000000000000000 wm4.reent.h.77.dcd6129ff07fe81bd5636db29abe53b2
-                           .group:0000000000000000 wm4.cdefs.h.49.2bf373aedffd8b393ccd11dc057e8547
+                           .group:0000000000000000 wm4.cdefs.h.49.a54b2d5c07711bc7320a3fea9f12cb56
                            .group:0000000000000000 wm4.string.h.15.dab3980bf35408a4c507182805e2de3a
                            .group:0000000000000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
                            .group:0000000000000000 wm4.xmc_device.h.61.ba2d082e12f51240746cffdd60d42b81
@@ -1889,15 +1874,14 @@ DEFINED SYMBOLS
                            .group:0000000000000000 wm4.time.h.2.4581ce0ffb6627cfc02162c94bf846c9
                            .group:0000000000000000 wm4.time.h.25.0e6a0fdbc9955f5707ed54246ed2e089
                            .group:0000000000000000 wm4.types.h.40.8b6acba56cefbb11746718204edc8f5e
-                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
                            .group:0000000000000000 wm4._endian.h.31.65a10590763c3dde1ac4a7f66d7d4891
                            .group:0000000000000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
                            .group:0000000000000000 wm4._timeval.h.32.bec3221fa7a9bb0bdde696c9c57e47d2
                            .group:0000000000000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
-                           .group:0000000000000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:0000000000000000 wm4.select.h.19.40cd3f2bfc456b193b790c2754690ebf
                            .group:0000000000000000 wm4.types.h.51.5571ec98f267d17d3c670b7a3ba33afa
                            .group:0000000000000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
                            .group:0000000000000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
-                           .group:0000000000000000 wm4.time.h.162.85256a1e684b58f061361067da714e0e
+                           .group:0000000000000000 wm4.time.h.142.403dcded079b6de6a2d2f21a34c2ae96
 
 NO UNDEFINED SYMBOLS

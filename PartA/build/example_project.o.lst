@@ -1,25 +1,25 @@
    1              		.cpu cortex-m4
-   2              		.eabi_attribute 27, 1
-   3              		.eabi_attribute 20, 1
-   4              		.eabi_attribute 21, 1
-   5              		.eabi_attribute 23, 3
-   6              		.eabi_attribute 24, 1
-   7              		.eabi_attribute 25, 1
-   8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 6
-  10              		.eabi_attribute 34, 1
-  11              		.eabi_attribute 18, 4
-  12              		.file	"example_project.c"
-  13              		.text
-  14              	.Ltext0:
-  15              		.cfi_sections	.debug_frame
-  16              		.section	.text.__NVIC_SetPriority,"ax",%progbits
-  17              		.align	1
-  18              		.arch armv7e-m
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  22              		.fpu fpv4-sp-d16
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"example_project.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.__NVIC_SetPriority,"ax",%progbits
+  19              		.align	1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
   24              	__NVIC_SetPriority:
   25              	.LFB111:
   26              		.file 1 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h"
@@ -1918,9 +1918,8 @@
  106              		.syntax unified
  107              		.thumb
  108              		.thumb_func
- 109              		.fpu fpv4-sp-d16
- 111              	SysTick_Config:
- 112              	.LFB119:
+ 110              	SysTick_Config:
+ 111              	.LFB119:
 1809:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h **** 
 1810:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h **** 
 1811:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h **** /**
@@ -2110,94 +2109,93 @@
 1995:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****  */
 1996:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h **** __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
 1997:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h **** {
- 113              		.loc 1 1997 1
- 114              		.cfi_startproc
- 115              		@ args = 0, pretend = 0, frame = 8
- 116              		@ frame_needed = 1, uses_anonymous_args = 0
- 117 0000 80B5     		push	{r7, lr}
- 118              	.LCFI6:
- 119              		.cfi_def_cfa_offset 8
- 120              		.cfi_offset 7, -8
- 121              		.cfi_offset 14, -4
- 122 0002 82B0     		sub	sp, sp, #8
- 123              	.LCFI7:
- 124              		.cfi_def_cfa_offset 16
- 125 0004 00AF     		add	r7, sp, #0
- 126              	.LCFI8:
- 127              		.cfi_def_cfa_register 7
- 128 0006 7860     		str	r0, [r7, #4]
+ 112              		.loc 1 1997 1
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 8
+ 115              		@ frame_needed = 1, uses_anonymous_args = 0
+ 116 0000 80B5     		push	{r7, lr}
+ 117              	.LCFI6:
+ 118              		.cfi_def_cfa_offset 8
+ 119              		.cfi_offset 7, -8
+ 120              		.cfi_offset 14, -4
+ 121 0002 82B0     		sub	sp, sp, #8
+ 122              	.LCFI7:
+ 123              		.cfi_def_cfa_offset 16
+ 124 0004 00AF     		add	r7, sp, #0
+ 125              	.LCFI8:
+ 126              		.cfi_def_cfa_register 7
+ 127 0006 7860     		str	r0, [r7, #4]
 1998:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****   if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk)
- 129              		.loc 1 1998 14
- 130 0008 7B68     		ldr	r3, [r7, #4]
- 131 000a 013B     		subs	r3, r3, #1
- 132              		.loc 1 1998 6
- 133 000c B3F1807F 		cmp	r3, #16777216
- 134 0010 01D3     		bcc	.L8
+ 128              		.loc 1 1998 14
+ 129 0008 7B68     		ldr	r3, [r7, #4]
+ 130 000a 013B     		subs	r3, r3, #1
+ 131              		.loc 1 1998 6
+ 132 000c B3F1807F 		cmp	r3, #16777216
+ 133 0010 01D3     		bcc	.L8
 1999:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****   {
 2000:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****     return (1UL);                                                   /* Reload value impossible */
- 135              		.loc 1 2000 12
- 136 0012 0123     		movs	r3, #1
- 137 0014 0FE0     		b	.L9
- 138              	.L8:
+ 134              		.loc 1 2000 12
+ 135 0012 0123     		movs	r3, #1
+ 136 0014 0FE0     		b	.L9
+ 137              	.L8:
 2001:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****   }
 2002:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h **** 
 2003:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****   SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
- 139              		.loc 1 2003 10
- 140 0016 0A4A     		ldr	r2, .L10
- 141              		.loc 1 2003 20
- 142 0018 7B68     		ldr	r3, [r7, #4]
- 143 001a 013B     		subs	r3, r3, #1
- 144              		.loc 1 2003 18
- 145 001c 5360     		str	r3, [r2, #4]
+ 138              		.loc 1 2003 10
+ 139 0016 0A4A     		ldr	r2, .L10
+ 140              		.loc 1 2003 20
+ 141 0018 7B68     		ldr	r3, [r7, #4]
+ 142 001a 013B     		subs	r3, r3, #1
+ 143              		.loc 1 2003 18
+ 144 001c 5360     		str	r3, [r2, #4]
 2004:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****   NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Int
- 146              		.loc 1 2004 3
- 147 001e 3F21     		movs	r1, #63
- 148 0020 4FF0FF30 		mov	r0, #-1
- 149 0024 FFF7FEFF 		bl	__NVIC_SetPriority
+ 145              		.loc 1 2004 3
+ 146 001e 3F21     		movs	r1, #63
+ 147 0020 4FF0FF30 		mov	r0, #-1
+ 148 0024 FFF7FEFF 		bl	__NVIC_SetPriority
 2005:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****   SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Val
- 150              		.loc 1 2005 10
- 151 0028 054B     		ldr	r3, .L10
- 152              		.loc 1 2005 18
- 153 002a 0022     		movs	r2, #0
- 154 002c 9A60     		str	r2, [r3, #8]
+ 149              		.loc 1 2005 10
+ 150 0028 054B     		ldr	r3, .L10
+ 151              		.loc 1 2005 18
+ 152 002a 0022     		movs	r2, #0
+ 153 002c 9A60     		str	r2, [r3, #8]
 2006:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
- 155              		.loc 1 2006 10
- 156 002e 044B     		ldr	r3, .L10
- 157              		.loc 1 2006 18
- 158 0030 0722     		movs	r2, #7
- 159 0032 1A60     		str	r2, [r3]
+ 154              		.loc 1 2006 10
+ 155 002e 044B     		ldr	r3, .L10
+ 156              		.loc 1 2006 18
+ 157 0030 0722     		movs	r2, #7
+ 158 0032 1A60     		str	r2, [r3]
 2007:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****                    SysTick_CTRL_TICKINT_Msk   |
 2008:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****                    SysTick_CTRL_ENABLE_Msk;                         /* Enable SysTick IRQ and SysTi
 2009:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h ****   return (0UL);                                                     /* Function successful */
- 160              		.loc 1 2009 10
- 161 0034 0023     		movs	r3, #0
- 162              	.L9:
+ 159              		.loc 1 2009 10
+ 160 0034 0023     		movs	r3, #0
+ 161              	.L9:
 2010:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Include/core_cm4.h **** }
- 163              		.loc 1 2010 1
- 164 0036 1846     		mov	r0, r3
- 165 0038 0837     		adds	r7, r7, #8
- 166              	.LCFI9:
- 167              		.cfi_def_cfa_offset 8
- 168 003a BD46     		mov	sp, r7
- 169              	.LCFI10:
- 170              		.cfi_def_cfa_register 13
- 171              		@ sp needed
- 172 003c 80BD     		pop	{r7, pc}
- 173              	.L11:
- 174 003e 00BF     		.align	2
- 175              	.L10:
- 176 0040 10E000E0 		.word	-536813552
- 177              		.cfi_endproc
- 178              	.LFE119:
- 180              		.section	.text.XMC_GPIO_SetOutputHigh,"ax",%progbits
- 181              		.align	1
- 182              		.syntax unified
- 183              		.thumb
- 184              		.thumb_func
- 185              		.fpu fpv4-sp-d16
- 187              	XMC_GPIO_SetOutputHigh:
- 188              	.LFB130:
- 189              		.file 2 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h"
+ 162              		.loc 1 2010 1
+ 163 0036 1846     		mov	r0, r3
+ 164 0038 0837     		adds	r7, r7, #8
+ 165              	.LCFI9:
+ 166              		.cfi_def_cfa_offset 8
+ 167 003a BD46     		mov	sp, r7
+ 168              	.LCFI10:
+ 169              		.cfi_def_cfa_register 13
+ 170              		@ sp needed
+ 171 003c 80BD     		pop	{r7, pc}
+ 172              	.L11:
+ 173 003e 00BF     		.align	2
+ 174              	.L10:
+ 175 0040 10E000E0 		.word	-536813552
+ 176              		.cfi_endproc
+ 177              	.LFE119:
+ 179              		.section	.text.XMC_GPIO_SetOutputHigh,"ax",%progbits
+ 180              		.align	1
+ 181              		.syntax unified
+ 182              		.thumb
+ 183              		.thumb_func
+ 185              	XMC_GPIO_SetOutputHigh:
+ 186              	.LFB130:
+ 187              		.file 2 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h"
    1:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** /**
    2:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h ****  * @file xmc_gpio.h
    3:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h ****  * @date 2015-06-20
@@ -2455,59 +2453,58 @@
  255:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** 
  256:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** __STATIC_INLINE void XMC_GPIO_SetOutputHigh(XMC_GPIO_PORT_t *const port, const uint8_t pin)
  257:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** {
- 190              		.loc 2 257 1
- 191              		.cfi_startproc
- 192              		@ args = 0, pretend = 0, frame = 8
- 193              		@ frame_needed = 1, uses_anonymous_args = 0
- 194              		@ link register save eliminated.
- 195 0000 80B4     		push	{r7}
- 196              	.LCFI11:
- 197              		.cfi_def_cfa_offset 4
- 198              		.cfi_offset 7, -4
- 199 0002 83B0     		sub	sp, sp, #12
- 200              	.LCFI12:
- 201              		.cfi_def_cfa_offset 16
- 202 0004 00AF     		add	r7, sp, #0
- 203              	.LCFI13:
- 204              		.cfi_def_cfa_register 7
- 205 0006 7860     		str	r0, [r7, #4]
- 206 0008 0B46     		mov	r3, r1
- 207 000a FB70     		strb	r3, [r7, #3]
+ 188              		.loc 2 257 1
+ 189              		.cfi_startproc
+ 190              		@ args = 0, pretend = 0, frame = 8
+ 191              		@ frame_needed = 1, uses_anonymous_args = 0
+ 192              		@ link register save eliminated.
+ 193 0000 80B4     		push	{r7}
+ 194              	.LCFI11:
+ 195              		.cfi_def_cfa_offset 4
+ 196              		.cfi_offset 7, -4
+ 197 0002 83B0     		sub	sp, sp, #12
+ 198              	.LCFI12:
+ 199              		.cfi_def_cfa_offset 16
+ 200 0004 00AF     		add	r7, sp, #0
+ 201              	.LCFI13:
+ 202              		.cfi_def_cfa_register 7
+ 203 0006 7860     		str	r0, [r7, #4]
+ 204 0008 0B46     		mov	r3, r1
+ 205 000a FB70     		strb	r3, [r7, #3]
  258:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h ****   XMC_ASSERT("XMC_GPIO_SetOutputHigh: Invalid port", XMC_GPIO_CHECK_OUTPUT_PORT(port));
  259:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** 
  260:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h ****   port->OMR = (uint32_t)0x1U << pin;
- 208              		.loc 2 260 30
- 209 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 210 000e 0122     		movs	r2, #1
- 211 0010 9A40     		lsls	r2, r2, r3
- 212              		.loc 2 260 13
- 213 0012 7B68     		ldr	r3, [r7, #4]
- 214 0014 5A60     		str	r2, [r3, #4]
+ 206              		.loc 2 260 30
+ 207 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 208 000e 0122     		movs	r2, #1
+ 209 0010 9A40     		lsls	r2, r2, r3
+ 210              		.loc 2 260 13
+ 211 0012 7B68     		ldr	r3, [r7, #4]
+ 212 0014 5A60     		str	r2, [r3, #4]
  261:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** }
- 215              		.loc 2 261 1
- 216 0016 00BF     		nop
- 217 0018 0C37     		adds	r7, r7, #12
- 218              	.LCFI14:
- 219              		.cfi_def_cfa_offset 4
- 220 001a BD46     		mov	sp, r7
- 221              	.LCFI15:
- 222              		.cfi_def_cfa_register 13
- 223              		@ sp needed
- 224 001c 5DF8047B 		ldr	r7, [sp], #4
- 225              	.LCFI16:
- 226              		.cfi_restore 7
- 227              		.cfi_def_cfa_offset 0
- 228 0020 7047     		bx	lr
- 229              		.cfi_endproc
- 230              	.LFE130:
- 232              		.section	.text.XMC_GPIO_SetOutputLow,"ax",%progbits
- 233              		.align	1
- 234              		.syntax unified
- 235              		.thumb
- 236              		.thumb_func
- 237              		.fpu fpv4-sp-d16
- 239              	XMC_GPIO_SetOutputLow:
- 240              	.LFB131:
+ 213              		.loc 2 261 1
+ 214 0016 00BF     		nop
+ 215 0018 0C37     		adds	r7, r7, #12
+ 216              	.LCFI14:
+ 217              		.cfi_def_cfa_offset 4
+ 218 001a BD46     		mov	sp, r7
+ 219              	.LCFI15:
+ 220              		.cfi_def_cfa_register 13
+ 221              		@ sp needed
+ 222 001c 5DF8047B 		ldr	r7, [sp], #4
+ 223              	.LCFI16:
+ 224              		.cfi_restore 7
+ 225              		.cfi_def_cfa_offset 0
+ 226 0020 7047     		bx	lr
+ 227              		.cfi_endproc
+ 228              	.LFE130:
+ 230              		.section	.text.XMC_GPIO_SetOutputLow,"ax",%progbits
+ 231              		.align	1
+ 232              		.syntax unified
+ 233              		.thumb
+ 234              		.thumb_func
+ 236              	XMC_GPIO_SetOutputLow:
+ 237              	.LFB131:
  262:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** 
  263:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** /**
  264:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h ****  *
@@ -2530,71 +2527,70 @@
  281:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** 
  282:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** __STATIC_INLINE void XMC_GPIO_SetOutputLow(XMC_GPIO_PORT_t *const port, const uint8_t pin)
  283:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** {
- 241              		.loc 2 283 1
- 242              		.cfi_startproc
- 243              		@ args = 0, pretend = 0, frame = 8
- 244              		@ frame_needed = 1, uses_anonymous_args = 0
- 245              		@ link register save eliminated.
- 246 0000 80B4     		push	{r7}
- 247              	.LCFI17:
- 248              		.cfi_def_cfa_offset 4
- 249              		.cfi_offset 7, -4
- 250 0002 83B0     		sub	sp, sp, #12
- 251              	.LCFI18:
- 252              		.cfi_def_cfa_offset 16
- 253 0004 00AF     		add	r7, sp, #0
- 254              	.LCFI19:
- 255              		.cfi_def_cfa_register 7
- 256 0006 7860     		str	r0, [r7, #4]
- 257 0008 0B46     		mov	r3, r1
- 258 000a FB70     		strb	r3, [r7, #3]
+ 238              		.loc 2 283 1
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 8
+ 241              		@ frame_needed = 1, uses_anonymous_args = 0
+ 242              		@ link register save eliminated.
+ 243 0000 80B4     		push	{r7}
+ 244              	.LCFI17:
+ 245              		.cfi_def_cfa_offset 4
+ 246              		.cfi_offset 7, -4
+ 247 0002 83B0     		sub	sp, sp, #12
+ 248              	.LCFI18:
+ 249              		.cfi_def_cfa_offset 16
+ 250 0004 00AF     		add	r7, sp, #0
+ 251              	.LCFI19:
+ 252              		.cfi_def_cfa_register 7
+ 253 0006 7860     		str	r0, [r7, #4]
+ 254 0008 0B46     		mov	r3, r1
+ 255 000a FB70     		strb	r3, [r7, #3]
  284:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h ****   XMC_ASSERT("XMC_GPIO_SetOutputLow: Invalid port", XMC_GPIO_CHECK_OUTPUT_PORT(port));
  285:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** 
  286:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h ****   port->OMR = 0x10000U << pin;
- 259              		.loc 2 286 24
- 260 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
- 261 000e 4FF48032 		mov	r2, #65536
- 262 0012 9A40     		lsls	r2, r2, r3
- 263              		.loc 2 286 13
- 264 0014 7B68     		ldr	r3, [r7, #4]
- 265 0016 5A60     		str	r2, [r3, #4]
+ 256              		.loc 2 286 24
+ 257 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 258 000e 4FF48032 		mov	r2, #65536
+ 259 0012 9A40     		lsls	r2, r2, r3
+ 260              		.loc 2 286 13
+ 261 0014 7B68     		ldr	r3, [r7, #4]
+ 262 0016 5A60     		str	r2, [r3, #4]
  287:/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc_gpio.h **** }
- 266              		.loc 2 287 1
- 267 0018 00BF     		nop
- 268 001a 0C37     		adds	r7, r7, #12
- 269              	.LCFI20:
- 270              		.cfi_def_cfa_offset 4
- 271 001c BD46     		mov	sp, r7
- 272              	.LCFI21:
- 273              		.cfi_def_cfa_register 13
- 274              		@ sp needed
- 275 001e 5DF8047B 		ldr	r7, [sp], #4
- 276              	.LCFI22:
- 277              		.cfi_restore 7
- 278              		.cfi_def_cfa_offset 0
- 279 0022 7047     		bx	lr
- 280              		.cfi_endproc
- 281              	.LFE131:
- 283              		.global	counterTMS
- 284              		.data
- 285              		.align	2
- 288              	counterTMS:
- 289 0000 28000000 		.word	40
- 290              		.global	letterCounter
- 291              		.bss
- 292              		.align	2
- 295              	letterCounter:
- 296 0000 00000000 		.space	4
- 297              		.section	.text.SysTick_Handler,"ax",%progbits
- 298              		.align	1
- 299              		.global	SysTick_Handler
- 300              		.syntax unified
- 301              		.thumb
- 302              		.thumb_func
- 303              		.fpu fpv4-sp-d16
- 305              	SysTick_Handler:
- 306              	.LFB138:
- 307              		.file 3 "example_project.c"
+ 263              		.loc 2 287 1
+ 264 0018 00BF     		nop
+ 265 001a 0C37     		adds	r7, r7, #12
+ 266              	.LCFI20:
+ 267              		.cfi_def_cfa_offset 4
+ 268 001c BD46     		mov	sp, r7
+ 269              	.LCFI21:
+ 270              		.cfi_def_cfa_register 13
+ 271              		@ sp needed
+ 272 001e 5DF8047B 		ldr	r7, [sp], #4
+ 273              	.LCFI22:
+ 274              		.cfi_restore 7
+ 275              		.cfi_def_cfa_offset 0
+ 276 0022 7047     		bx	lr
+ 277              		.cfi_endproc
+ 278              	.LFE131:
+ 280              		.global	counterTMS
+ 281              		.data
+ 282              		.align	2
+ 285              	counterTMS:
+ 286 0000 28000000 		.word	40
+ 287              		.global	letterCounter
+ 288              		.bss
+ 289              		.align	2
+ 292              	letterCounter:
+ 293 0000 00000000 		.space	4
+ 294              		.section	.text.SysTick_Handler,"ax",%progbits
+ 295              		.align	1
+ 296              		.global	SysTick_Handler
+ 297              		.syntax unified
+ 298              		.thumb
+ 299              		.thumb_func
+ 301              	SysTick_Handler:
+ 302              	.LFB138:
+ 303              		.file 3 "example_project.c"
    1:example_project.c **** #include <xmc_gpio.h>
    2:example_project.c **** #define TICKS_WAIT 1
    3:example_project.c **** 
@@ -2611,338 +2607,320 @@
   14:example_project.c **** //Interrupt handler
   15:example_project.c **** 
   16:example_project.c **** void SysTick_Handler(void)  {     
- 308              		.loc 3 16 29
- 309              		.cfi_startproc
- 310              		@ args = 0, pretend = 0, frame = 0
- 311              		@ frame_needed = 1, uses_anonymous_args = 0
- 312              		@ link register save eliminated.
- 313 0000 80B4     		push	{r7}
- 314              	.LCFI23:
- 315              		.cfi_def_cfa_offset 4
- 316              		.cfi_offset 7, -4
- 317 0002 00AF     		add	r7, sp, #0
- 318              	.LCFI24:
- 319              		.cfi_def_cfa_register 7
+ 304              		.loc 3 16 29
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 0
+ 307              		@ frame_needed = 1, uses_anonymous_args = 0
+ 308              		@ link register save eliminated.
+ 309 0000 80B4     		push	{r7}
+ 310              	.LCFI23:
+ 311              		.cfi_def_cfa_offset 4
+ 312              		.cfi_offset 7, -4
+ 313 0002 00AF     		add	r7, sp, #0
+ 314              	.LCFI24:
+ 315              		.cfi_def_cfa_register 7
   17:example_project.c ****   //XMC_GPIO_ToggleOutput(LED1);                           
   18:example_project.c ****   counterTMS++;                       
- 320              		.loc 3 18 13
- 321 0004 0D4B     		ldr	r3, .L18
- 322 0006 1B68     		ldr	r3, [r3]
- 323 0008 0133     		adds	r3, r3, #1
- 324 000a 0C4A     		ldr	r2, .L18
- 325 000c 1360     		str	r3, [r2]
-  19:example_project.c ****   if (counterTMS>50){
- 326              		.loc 3 19 17
- 327 000e 0B4B     		ldr	r3, .L18
- 328 0010 1B68     		ldr	r3, [r3]
- 329              		.loc 3 19 6
- 330 0012 322B     		cmp	r3, #50
- 331 0014 0CD9     		bls	.L17
-  20:example_project.c ****     if (letterCounter==0){
- 332              		.loc 3 20 22
- 333 0016 0A4B     		ldr	r3, .L18+4
- 334 0018 1B68     		ldr	r3, [r3]
- 335              		.loc 3 20 8
- 336 001a 002B     		cmp	r3, #0
- 337 001c 03D1     		bne	.L16
-  21:example_project.c ****         letterCounter=1;}
- 338              		.loc 3 21 22
- 339 001e 084B     		ldr	r3, .L18+4
- 340 0020 0122     		movs	r2, #1
- 341 0022 1A60     		str	r2, [r3]
-  22:example_project.c ****     else {    
-  23:example_project.c ****     letterCounter++;}
-  24:example_project.c ****   }                         
-  25:example_project.c **** }
- 342              		.loc 3 25 1
- 343 0024 04E0     		b	.L17
- 344              	.L16:
-  23:example_project.c ****   }                         
- 345              		.loc 3 23 18
- 346 0026 064B     		ldr	r3, .L18+4
- 347 0028 1B68     		ldr	r3, [r3]
- 348 002a 0133     		adds	r3, r3, #1
- 349 002c 044A     		ldr	r2, .L18+4
- 350 002e 1360     		str	r3, [r2]
- 351              	.L17:
- 352              		.loc 3 25 1
- 353 0030 00BF     		nop
- 354 0032 BD46     		mov	sp, r7
- 355              	.LCFI25:
- 356              		.cfi_def_cfa_register 13
- 357              		@ sp needed
- 358 0034 5DF8047B 		ldr	r7, [sp], #4
- 359              	.LCFI26:
- 360              		.cfi_restore 7
- 361              		.cfi_def_cfa_offset 0
- 362 0038 7047     		bx	lr
- 363              	.L19:
- 364 003a 00BF     		.align	2
- 365              	.L18:
- 366 003c 00000000 		.word	counterTMS
- 367 0040 00000000 		.word	letterCounter
- 368              		.cfi_endproc
- 369              	.LFE138:
- 371              		.section	.rodata
- 372              		.align	2
- 373              	.LC0:
- 374 0000 00010001 		.ascii	"\000\001\000\001\000\000\000\000\000\000\000\001\001"
- 374      00000000 
- 374      00000001 
- 374      01
- 375 000d 01000100 		.ascii	"\001\000\001\000\001\001\001\000\001\000\000\000\001"
- 375      01010100 
- 375      01000000 
- 375      01
- 376 001a 00010101 		.ascii	"\000\001\001\001\000\000\000\001\001\001\000\001\000"
- 376      00000001 
- 376      01010001 
- 376      00
- 377 0027 00000000 		.ascii	"\000\000\000\000\000\000\001\001\001\000\001\001\001"
- 377      00000101 
- 377      01000101 
- 377      01
- 378 0034 00000001 		.ascii	"\000\000\000\001\001\001\000\001\001\001\000\001\001"
- 378      01010001 
- 378      01010001 
- 378      01
- 379 0041 01000000 		.ascii	"\001\000\000\000\001\000\001\001\001\000\001\000\000"
- 379      01000101 
- 379      01000100 
- 379      00
- 380 004e 00010001 		.ascii	"\000\001\000\001\000\001\000\000\000\001\003\000"
- 380      00010000 
- 380      00010300 
- 381 005a 00000000 		.space	5
- 381      00
- 382              		.section	.text.main,"ax",%progbits
- 383              		.align	1
- 384              		.global	main
- 385              		.syntax unified
- 386              		.thumb
- 387              		.thumb_func
- 388              		.fpu fpv4-sp-d16
- 390              	main:
- 391              	.LFB139:
-  26:example_project.c ****   
-  27:example_project.c **** int main (void)  {
- 392              		.loc 3 27 18
- 393              		.cfi_startproc
- 394              		@ args = 0, pretend = 0, frame = 112
- 395              		@ frame_needed = 1, uses_anonymous_args = 0
- 396 0000 80B5     		push	{r7, lr}
- 397              	.LCFI27:
- 398              		.cfi_def_cfa_offset 8
- 399              		.cfi_offset 7, -8
- 400              		.cfi_offset 14, -4
- 401 0002 9CB0     		sub	sp, sp, #112
- 402              	.LCFI28:
- 403              		.cfi_def_cfa_offset 120
- 404 0004 00AF     		add	r7, sp, #0
- 405              	.LCFI29:
- 406              		.cfi_def_cfa_register 7
-  28:example_project.c ****   uint32_t returnCode;
-  29:example_project.c ****   //7 0,0,0,0,0,0,0,
-  30:example_project.c ****   //3 0,0,0,
-  31:example_project.c ****   uint8_t signalArray[95]={ 0, //INITIAL CONDITION
- 407              		.loc 3 31 11
- 408 0006 264A     		ldr	r2, .L25
- 409 0008 07F10C03 		add	r3, r7, #12
- 410 000c 1146     		mov	r1, r2
- 411 000e 5A22     		movs	r2, #90
- 412 0010 1846     		mov	r0, r3
- 413 0012 FFF7FEFF 		bl	memcpy
- 414 0016 07F16603 		add	r3, r7, #102
- 415 001a 0022     		movs	r2, #0
- 416 001c 1A60     		str	r2, [r3]	@ unaligned
- 417 001e 1A71     		strb	r2, [r3, #4]
-  32:example_project.c ****                             1,0,1, // I
-  33:example_project.c ****                             0,0,0,0,0,0,0,
-  34:example_project.c ****                             1,1,1,0,1,0,1,1,1,0,1,
+ 316              		.loc 3 18 13
+ 317 0004 094B     		ldr	r3, .L17
+ 318 0006 1B68     		ldr	r3, [r3]
+ 319 0008 0133     		adds	r3, r3, #1
+ 320 000a 084A     		ldr	r2, .L17
+ 321 000c 1360     		str	r3, [r2]
+  19:example_project.c ****   if (counterTMS>=50){
+ 322              		.loc 3 19 17
+ 323 000e 074B     		ldr	r3, .L17
+ 324 0010 1B68     		ldr	r3, [r3]
+ 325              		.loc 3 19 6
+ 326 0012 312B     		cmp	r3, #49
+ 327 0014 04D9     		bls	.L16
+  20:example_project.c ****     
+  21:example_project.c ****     letterCounter++;
+ 328              		.loc 3 21 18
+ 329 0016 064B     		ldr	r3, .L17+4
+ 330 0018 1B68     		ldr	r3, [r3]
+ 331 001a 0133     		adds	r3, r3, #1
+ 332 001c 044A     		ldr	r2, .L17+4
+ 333 001e 1360     		str	r3, [r2]
+ 334              	.L16:
+  22:example_project.c ****   }                         
+  23:example_project.c **** }
+ 335              		.loc 3 23 1
+ 336 0020 00BF     		nop
+ 337 0022 BD46     		mov	sp, r7
+ 338              	.LCFI25:
+ 339              		.cfi_def_cfa_register 13
+ 340              		@ sp needed
+ 341 0024 5DF8047B 		ldr	r7, [sp], #4
+ 342              	.LCFI26:
+ 343              		.cfi_restore 7
+ 344              		.cfi_def_cfa_offset 0
+ 345 0028 7047     		bx	lr
+ 346              	.L18:
+ 347 002a 00BF     		.align	2
+ 348              	.L17:
+ 349 002c 00000000 		.word	counterTMS
+ 350 0030 00000000 		.word	letterCounter
+ 351              		.cfi_endproc
+ 352              	.LFE138:
+ 354              		.section	.rodata
+ 355              		.align	2
+ 356              	.LC0:
+ 357 0000 00010001 		.ascii	"\000\001\000\001\000\000\000\000\000\000\000\001\001"
+ 357      00000000 
+ 357      00000001 
+ 357      01
+ 358 000d 01000100 		.ascii	"\001\000\001\000\001\001\001\000\001\000\000\000\001"
+ 358      01010100 
+ 358      01000000 
+ 358      01
+ 359 001a 00010101 		.ascii	"\000\001\001\001\000\000\000\001\001\001\000\001\000"
+ 359      00000001 
+ 359      01010001 
+ 359      00
+ 360 0027 00000000 		.ascii	"\000\000\000\000\000\000\001\001\001\000\001\001\001"
+ 360      00000101 
+ 360      01000101 
+ 360      01
+ 361 0034 00000001 		.ascii	"\000\000\000\001\001\001\000\001\001\001\000\001\001"
+ 361      01010001 
+ 361      01010001 
+ 361      01
+ 362 0041 01000000 		.ascii	"\001\000\000\000\001\000\001\001\001\000\001\000\000"
+ 362      01000101 
+ 362      01000100 
+ 362      00
+ 363 004e 00010001 		.ascii	"\000\001\000\001\000\001\000\000\000\001\003\000"
+ 363      00010000 
+ 363      00010300 
+ 364 005a 00000000 		.space	5
+ 364      00
+ 365              		.section	.text.main,"ax",%progbits
+ 366              		.align	1
+ 367              		.global	main
+ 368              		.syntax unified
+ 369              		.thumb
+ 370              		.thumb_func
+ 372              	main:
+ 373              	.LFB139:
+  24:example_project.c ****   
+  25:example_project.c **** int main (void)  {
+ 374              		.loc 3 25 18
+ 375              		.cfi_startproc
+ 376              		@ args = 0, pretend = 0, frame = 112
+ 377              		@ frame_needed = 1, uses_anonymous_args = 0
+ 378 0000 80B5     		push	{r7, lr}
+ 379              	.LCFI27:
+ 380              		.cfi_def_cfa_offset 8
+ 381              		.cfi_offset 7, -8
+ 382              		.cfi_offset 14, -4
+ 383 0002 9CB0     		sub	sp, sp, #112
+ 384              	.LCFI28:
+ 385              		.cfi_def_cfa_offset 120
+ 386 0004 00AF     		add	r7, sp, #0
+ 387              	.LCFI29:
+ 388              		.cfi_def_cfa_register 7
+  26:example_project.c ****   uint32_t returnCode;
+  27:example_project.c ****   //7 0,0,0,0,0,0,0,
+  28:example_project.c ****   //3 0,0,0,
+  29:example_project.c ****   uint8_t signalArray[95]={ 0,
+ 389              		.loc 3 29 11
+ 390 0006 264A     		ldr	r2, .L24
+ 391 0008 07F10C03 		add	r3, r7, #12
+ 392 000c 1146     		mov	r1, r2
+ 393 000e 5A22     		movs	r2, #90
+ 394 0010 1846     		mov	r0, r3
+ 395 0012 FFF7FEFF 		bl	memcpy
+ 396 0016 07F16603 		add	r3, r7, #102
+ 397 001a 0022     		movs	r2, #0
+ 398 001c 1A60     		str	r2, [r3]	@ unaligned
+ 399 001e 1A71     		strb	r2, [r3, #4]
+  30:example_project.c ****                             1,0,1, // I
+  31:example_project.c ****                             0,0,0,0,0,0,0,
+  32:example_project.c ****                             1,1,1,0,1,0,1,1,1,0,1,
+  33:example_project.c ****                             0,0,0,
+  34:example_project.c ****                             1,0,1,1,1,
   35:example_project.c ****                             0,0,0,
-  36:example_project.c ****                             1,0,1,1,1,
-  37:example_project.c ****                             0,0,0,
-  38:example_project.c ****                             1,1,1,0,1,
-  39:example_project.c ****                             0,0,0,0,0,0,0,
-  40:example_project.c ****                             1,1,1,0,1,1,1,
+  36:example_project.c ****                             1,1,1,0,1,
+  37:example_project.c ****                             0,0,0,0,0,0,0,
+  38:example_project.c ****                             1,1,1,0,1,1,1,
+  39:example_project.c ****                             0,0,0,
+  40:example_project.c ****                             1,1,1,0,1,1,1,0,1,1,1,
   41:example_project.c ****                             0,0,0,
-  42:example_project.c ****                             1,1,1,0,1,1,1,0,1,1,1,
+  42:example_project.c ****                             1,0,1,1,1,0,1,
   43:example_project.c ****                             0,0,0,
-  44:example_project.c ****                             1,0,1,1,1,0,1,
+  44:example_project.c ****                             1,0,1,0,1,
   45:example_project.c ****                             0,0,0,
-  46:example_project.c ****                             1,0,1,0,1,
-  47:example_project.c ****                             0,0,0,
-  48:example_project.c ****                             1,
-  49:example_project.c ****                             3};
-  50:example_project.c **** // GPIO CONFIG
-  51:example_project.c ****   XMC_GPIO_CONFIG_t config;
-  52:example_project.c ****   config.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
- 418              		.loc 3 52 15
- 419 0020 8023     		movs	r3, #128
- 420 0022 3B70     		strb	r3, [r7]
-  53:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH;
- 421              		.loc 3 53 23
- 422 0024 0123     		movs	r3, #1
- 423 0026 7B60     		str	r3, [r7, #4]
-  54:example_project.c ****   config.output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM;
- 424              		.loc 3 54 26
- 425 0028 0423     		movs	r3, #4
- 426 002a 3B72     		strb	r3, [r7, #8]
-  55:example_project.c ****   XMC_GPIO_Init(LED1, &config);
- 427              		.loc 3 55 3
- 428 002c 3B46     		mov	r3, r7
- 429 002e 1A46     		mov	r2, r3
- 430 0030 0121     		movs	r1, #1
- 431 0032 1C48     		ldr	r0, .L25+4
- 432 0034 FFF7FEFF 		bl	XMC_GPIO_Init
-  56:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_LOW;
- 433              		.loc 3 56 23
- 434 0038 4FF48033 		mov	r3, #65536
- 435 003c 7B60     		str	r3, [r7, #4]
-  57:example_project.c ****   XMC_GPIO_Init(LED2, &config);
- 436              		.loc 3 57 3
- 437 003e 3B46     		mov	r3, r7
- 438 0040 1A46     		mov	r2, r3
- 439 0042 0021     		movs	r1, #0
- 440 0044 1748     		ldr	r0, .L25+4
- 441 0046 FFF7FEFF 		bl	XMC_GPIO_Init
-  58:example_project.c ****   
-  59:example_project.c **** 
-  60:example_project.c ****   returnCode = SysTick_Config(SystemCoreClock / 10);      /* Configure SysTick to generate an inter
- 442              		.loc 3 60 16
- 443 004a 174B     		ldr	r3, .L25+8
- 444 004c 1B68     		ldr	r3, [r3]
- 445 004e 174A     		ldr	r2, .L25+12
- 446 0050 A2FB0323 		umull	r2, r3, r2, r3
- 447 0054 DB08     		lsrs	r3, r3, #3
- 448 0056 1846     		mov	r0, r3
- 449 0058 FFF7FEFF 		bl	SysTick_Config
- 450 005c F866     		str	r0, [r7, #108]
- 451              	.L24:
-  61:example_project.c ****   
-  62:example_project.c ****   if (returnCode != 0)  {                                   /* Check return code for errors */
-  63:example_project.c ****     // Error Handling 
-  64:example_project.c ****   }
-  65:example_project.c ****   
-  66:example_project.c ****   for(;;){
-  67:example_project.c ****     switch (signalArray[letterCounter])
- 452              		.loc 3 67 24
- 453 005e 144B     		ldr	r3, .L25+16
- 454 0060 1B68     		ldr	r3, [r3]
- 455 0062 07F17002 		add	r2, r7, #112
- 456 0066 1344     		add	r3, r3, r2
- 457 0068 13F8643C 		ldrb	r3, [r3, #-100]	@ zero_extendqisi2
- 458              		.loc 3 67 5
- 459 006c 032B     		cmp	r3, #3
- 460 006e 0FD0     		beq	.L21
- 461 0070 032B     		cmp	r3, #3
- 462 0072 F4DC     		bgt	.L24
- 463 0074 002B     		cmp	r3, #0
- 464 0076 06D0     		beq	.L23
- 465 0078 012B     		cmp	r3, #1
- 466 007a F0D1     		bne	.L24
-  68:example_project.c ****     {
-  69:example_project.c ****     case 1:
-  70:example_project.c ****       XMC_GPIO_SetOutputHigh(LED1);
- 467              		.loc 3 70 7
- 468 007c 0121     		movs	r1, #1
- 469 007e 0948     		ldr	r0, .L25+4
- 470 0080 FFF7FEFF 		bl	XMC_GPIO_SetOutputHigh
-  71:example_project.c ****       break;
- 471              		.loc 3 71 7
- 472 0084 0BE0     		b	.L22
- 473              	.L23:
-  72:example_project.c ****     case 0:
-  73:example_project.c ****       XMC_GPIO_SetOutputLow(LED1);
- 474              		.loc 3 73 7
- 475 0086 0121     		movs	r1, #1
- 476 0088 0648     		ldr	r0, .L25+4
- 477 008a FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
-  74:example_project.c ****       break;
- 478              		.loc 3 74 7
- 479 008e 06E0     		b	.L22
- 480              	.L21:
-  75:example_project.c ****     case 3:
-  76:example_project.c **** //         
-  77:example_project.c ****       letterCounter=0;
- 481              		.loc 3 77 20
- 482 0090 074B     		ldr	r3, .L25+16
- 483 0092 0022     		movs	r2, #0
- 484 0094 1A60     		str	r2, [r3]
-  78:example_project.c ****       counterTMS=0;
- 485              		.loc 3 78 17
- 486 0096 074B     		ldr	r3, .L25+20
- 487 0098 0022     		movs	r2, #0
- 488 009a 1A60     		str	r2, [r3]
-  79:example_project.c ****       break;
- 489              		.loc 3 79 7
- 490 009c 00BF     		nop
- 491              	.L22:
-  67:example_project.c ****     {
- 492              		.loc 3 67 5
- 493 009e DEE7     		b	.L24
- 494              	.L26:
- 495              		.align	2
- 496              	.L25:
- 497 00a0 00000000 		.word	.LC0
- 498 00a4 00810248 		.word	1208123648
- 499 00a8 00000000 		.word	SystemCoreClock
- 500 00ac CDCCCCCC 		.word	-858993459
- 501 00b0 00000000 		.word	letterCounter
- 502 00b4 00000000 		.word	counterTMS
- 503              		.cfi_endproc
- 504              	.LFE139:
- 506              		.text
- 507              	.Letext0:
- 508              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 509              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 510              		.file 6 "/usr/include/newlib/sys/_types.h"
- 511              		.file 7 "/usr/include/newlib/sys/reent.h"
- 512              		.file 8 "/usr/include/newlib/sys/lock.h"
- 513              		.file 9 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500.
- 514              		.file 10 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_
- 515              		.file 11 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
+  46:example_project.c ****                             1,
+  47:example_project.c ****                             3};
+  48:example_project.c **** // GPIO CONFIG
+  49:example_project.c ****   XMC_GPIO_CONFIG_t config;
+  50:example_project.c ****   config.mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL;
+ 400              		.loc 3 50 15
+ 401 0020 8023     		movs	r3, #128
+ 402 0022 3B70     		strb	r3, [r7]
+  51:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH;
+ 403              		.loc 3 51 23
+ 404 0024 0123     		movs	r3, #1
+ 405 0026 7B60     		str	r3, [r7, #4]
+  52:example_project.c ****   config.output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM;
+ 406              		.loc 3 52 26
+ 407 0028 0423     		movs	r3, #4
+ 408 002a 3B72     		strb	r3, [r7, #8]
+  53:example_project.c ****   XMC_GPIO_Init(LED1, &config);
+ 409              		.loc 3 53 3
+ 410 002c 3B46     		mov	r3, r7
+ 411 002e 1A46     		mov	r2, r3
+ 412 0030 0121     		movs	r1, #1
+ 413 0032 1C48     		ldr	r0, .L24+4
+ 414 0034 FFF7FEFF 		bl	XMC_GPIO_Init
+  54:example_project.c ****   config.output_level = XMC_GPIO_OUTPUT_LEVEL_LOW;
+ 415              		.loc 3 54 23
+ 416 0038 4FF48033 		mov	r3, #65536
+ 417 003c 7B60     		str	r3, [r7, #4]
+  55:example_project.c ****   XMC_GPIO_Init(LED2, &config);
+ 418              		.loc 3 55 3
+ 419 003e 3B46     		mov	r3, r7
+ 420 0040 1A46     		mov	r2, r3
+ 421 0042 0021     		movs	r1, #0
+ 422 0044 1748     		ldr	r0, .L24+4
+ 423 0046 FFF7FEFF 		bl	XMC_GPIO_Init
+  56:example_project.c ****   
+  57:example_project.c **** 
+  58:example_project.c ****   returnCode = SysTick_Config(SystemCoreClock / 10);      /* Configure SysTick to generate an inter
+ 424              		.loc 3 58 16
+ 425 004a 174B     		ldr	r3, .L24+8
+ 426 004c 1B68     		ldr	r3, [r3]
+ 427 004e 174A     		ldr	r2, .L24+12
+ 428 0050 A2FB0323 		umull	r2, r3, r2, r3
+ 429 0054 DB08     		lsrs	r3, r3, #3
+ 430 0056 1846     		mov	r0, r3
+ 431 0058 FFF7FEFF 		bl	SysTick_Config
+ 432 005c F866     		str	r0, [r7, #108]
+ 433              	.L23:
+  59:example_project.c ****   
+  60:example_project.c ****   if (returnCode != 0)  {                                   /* Check return code for errors */
+  61:example_project.c ****     // Error Handling 
+  62:example_project.c ****   }
+  63:example_project.c ****   
+  64:example_project.c ****   for(;;){
+  65:example_project.c ****     switch (signalArray[letterCounter])
+ 434              		.loc 3 65 24
+ 435 005e 144B     		ldr	r3, .L24+16
+ 436 0060 1B68     		ldr	r3, [r3]
+ 437 0062 7033     		adds	r3, r3, #112
+ 438 0064 3B44     		add	r3, r3, r7
+ 439 0066 13F8643C 		ldrb	r3, [r3, #-100]	@ zero_extendqisi2
+ 440              		.loc 3 65 5
+ 441 006a 032B     		cmp	r3, #3
+ 442 006c 0FD0     		beq	.L20
+ 443 006e 032B     		cmp	r3, #3
+ 444 0070 F5DC     		bgt	.L23
+ 445 0072 002B     		cmp	r3, #0
+ 446 0074 06D0     		beq	.L22
+ 447 0076 012B     		cmp	r3, #1
+ 448 0078 F1D1     		bne	.L23
+  66:example_project.c ****     {
+  67:example_project.c ****     case 1:
+  68:example_project.c ****       XMC_GPIO_SetOutputHigh(LED1);
+ 449              		.loc 3 68 7
+ 450 007a 0121     		movs	r1, #1
+ 451 007c 0948     		ldr	r0, .L24+4
+ 452 007e FFF7FEFF 		bl	XMC_GPIO_SetOutputHigh
+  69:example_project.c ****       break;
+ 453              		.loc 3 69 7
+ 454 0082 0BE0     		b	.L21
+ 455              	.L22:
+  70:example_project.c ****     case 0:
+  71:example_project.c ****       XMC_GPIO_SetOutputLow(LED1);
+ 456              		.loc 3 71 7
+ 457 0084 0121     		movs	r1, #1
+ 458 0086 0748     		ldr	r0, .L24+4
+ 459 0088 FFF7FEFF 		bl	XMC_GPIO_SetOutputLow
+  72:example_project.c ****       break;
+ 460              		.loc 3 72 7
+ 461 008c 06E0     		b	.L21
+ 462              	.L20:
+  73:example_project.c ****     case 3:
+  74:example_project.c **** //         
+  75:example_project.c ****       letterCounter=0;
+ 463              		.loc 3 75 20
+ 464 008e 084B     		ldr	r3, .L24+16
+ 465 0090 0022     		movs	r2, #0
+ 466 0092 1A60     		str	r2, [r3]
+  76:example_project.c ****       counterTMS=0;
+ 467              		.loc 3 76 17
+ 468 0094 074B     		ldr	r3, .L24+20
+ 469 0096 0022     		movs	r2, #0
+ 470 0098 1A60     		str	r2, [r3]
+  77:example_project.c ****       break;
+ 471              		.loc 3 77 7
+ 472 009a 00BF     		nop
+ 473              	.L21:
+  65:example_project.c ****     {
+ 474              		.loc 3 65 5
+ 475 009c DFE7     		b	.L23
+ 476              	.L25:
+ 477 009e 00BF     		.align	2
+ 478              	.L24:
+ 479 00a0 00000000 		.word	.LC0
+ 480 00a4 00810248 		.word	1208123648
+ 481 00a8 00000000 		.word	SystemCoreClock
+ 482 00ac CDCCCCCC 		.word	-858993459
+ 483 00b0 00000000 		.word	letterCounter
+ 484 00b4 00000000 		.word	counterTMS
+ 485              		.cfi_endproc
+ 486              	.LFE139:
+ 488              		.text
+ 489              	.Letext0:
+ 490              		.file 4 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/mach
+ 491              		.file 5 "/nas/ei/share/tools/gcc/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/
+ 492              		.file 6 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/XMC4500.
+ 493              		.file 7 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/XMCLib/inc/xmc4_gpio.h"
+ 494              		.file 8 "/opt/XMClib/XMC_Peripheral_Library_v2.1.16/CMSIS/Infineon/XMC4500_series/Include/system_X
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 example_project.c
-     /tmp/ccF1tzjY.s:17     .text.__NVIC_SetPriority:0000000000000000 $t
-     /tmp/ccF1tzjY.s:24     .text.__NVIC_SetPriority:0000000000000000 __NVIC_SetPriority
-     /tmp/ccF1tzjY.s:99     .text.__NVIC_SetPriority:000000000000004c $d
-     /tmp/ccF1tzjY.s:105    .text.SysTick_Config:0000000000000000 $t
-     /tmp/ccF1tzjY.s:111    .text.SysTick_Config:0000000000000000 SysTick_Config
-     /tmp/ccF1tzjY.s:176    .text.SysTick_Config:0000000000000040 $d
-     /tmp/ccF1tzjY.s:181    .text.XMC_GPIO_SetOutputHigh:0000000000000000 $t
-     /tmp/ccF1tzjY.s:187    .text.XMC_GPIO_SetOutputHigh:0000000000000000 XMC_GPIO_SetOutputHigh
-     /tmp/ccF1tzjY.s:233    .text.XMC_GPIO_SetOutputLow:0000000000000000 $t
-     /tmp/ccF1tzjY.s:239    .text.XMC_GPIO_SetOutputLow:0000000000000000 XMC_GPIO_SetOutputLow
-     /tmp/ccF1tzjY.s:288    .data:0000000000000000 counterTMS
-     /tmp/ccF1tzjY.s:285    .data:0000000000000000 $d
-     /tmp/ccF1tzjY.s:295    .bss:0000000000000000 letterCounter
-     /tmp/ccF1tzjY.s:292    .bss:0000000000000000 $d
-     /tmp/ccF1tzjY.s:298    .text.SysTick_Handler:0000000000000000 $t
-     /tmp/ccF1tzjY.s:305    .text.SysTick_Handler:0000000000000000 SysTick_Handler
-     /tmp/ccF1tzjY.s:366    .text.SysTick_Handler:000000000000003c $d
-     /tmp/ccF1tzjY.s:372    .rodata:0000000000000000 $d
-     /tmp/ccF1tzjY.s:383    .text.main:0000000000000000 $t
-     /tmp/ccF1tzjY.s:390    .text.main:0000000000000000 main
-     /tmp/ccF1tzjY.s:497    .text.main:00000000000000a0 $d
-                           .group:0000000000000000 wm4.0.1ef749480d5223b912d851bdb3b2139f
+     /tmp/ccl69Em0.s:19     .text.__NVIC_SetPriority:0000000000000000 $t
+     /tmp/ccl69Em0.s:24     .text.__NVIC_SetPriority:0000000000000000 __NVIC_SetPriority
+     /tmp/ccl69Em0.s:99     .text.__NVIC_SetPriority:000000000000004c $d
+     /tmp/ccl69Em0.s:105    .text.SysTick_Config:0000000000000000 $t
+     /tmp/ccl69Em0.s:110    .text.SysTick_Config:0000000000000000 SysTick_Config
+     /tmp/ccl69Em0.s:175    .text.SysTick_Config:0000000000000040 $d
+     /tmp/ccl69Em0.s:180    .text.XMC_GPIO_SetOutputHigh:0000000000000000 $t
+     /tmp/ccl69Em0.s:185    .text.XMC_GPIO_SetOutputHigh:0000000000000000 XMC_GPIO_SetOutputHigh
+     /tmp/ccl69Em0.s:231    .text.XMC_GPIO_SetOutputLow:0000000000000000 $t
+     /tmp/ccl69Em0.s:236    .text.XMC_GPIO_SetOutputLow:0000000000000000 XMC_GPIO_SetOutputLow
+     /tmp/ccl69Em0.s:285    .data:0000000000000000 counterTMS
+     /tmp/ccl69Em0.s:282    .data:0000000000000000 $d
+     /tmp/ccl69Em0.s:292    .bss:0000000000000000 letterCounter
+     /tmp/ccl69Em0.s:289    .bss:0000000000000000 $d
+     /tmp/ccl69Em0.s:295    .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccl69Em0.s:301    .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccl69Em0.s:349    .text.SysTick_Handler:000000000000002c $d
+     /tmp/ccl69Em0.s:355    .rodata:0000000000000000 $d
+     /tmp/ccl69Em0.s:366    .text.main:0000000000000000 $t
+     /tmp/ccl69Em0.s:372    .text.main:0000000000000000 main
+     /tmp/ccl69Em0.s:479    .text.main:00000000000000a0 $d
+                           .group:0000000000000000 wm4.0.467689a90594456bf46c01d2d8793c7f
                            .group:0000000000000000 wm4.stddef.h.39.27677723d43e5b5a7afdf8d798429f1d
-                           .group:0000000000000000 wm4.stdint.h.29.6d480f4ba0f60596e88234283d42444f
+                           .group:0000000000000000 wm4._newlib_version.h.4.bfdf54b0af045d4a71376ae00f63a22c
+                           .group:0000000000000000 wm4.features.h.33.5bd1eea2d80518b50f7af0b5ce6750e0
+                           .group:0000000000000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:0000000000000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
                            .group:0000000000000000 wm4.stdbool.h.29.07dce69c3b78884144b7f7bd19483461
-                           .group:0000000000000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
-                           .group:0000000000000000 wm4.newlib.h.21.1ae2897bc09bbe4bc80ffb801fb02432
-                           .group:0000000000000000 wm4.ieeefp.h.77.f33a4dce62116f6f5175ff8bae57a54c
-                           .group:0000000000000000 wm4.features.h.22.026edb2397769f4ae13f35900dbdb560
+                           .group:0000000000000000 wm4.newlib.h.8.7cb3972cd43265932d4782d5eb589854
+                           .group:0000000000000000 wm4.ieeefp.h.77.c88535c35f465c05b101960cf0179075
                            .group:0000000000000000 wm4.config.h.224.c701144a7b0518c6ee9b9b5465b79f81
                            .group:0000000000000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
                            .group:0000000000000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2
                            .group:0000000000000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
-                           .group:0000000000000000 wm4._default_types.h.6.959254cf5f09734ea7516c89e8bb21bd
                            .group:0000000000000000 wm4._types.h.127.34941de1b2539d59d5cac00e0dd27a45
                            .group:0000000000000000 wm4.reent.h.17.e292bf8b0bec6c96e131a54347145a30
-                           .group:0000000000000000 wm4.lock.h.2.c0958401bd0ce484d507ee19aacab817
+                           .group:0000000000000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
                            .group:0000000000000000 wm4.reent.h.77.dcd6129ff07fe81bd5636db29abe53b2
-                           .group:0000000000000000 wm4.cdefs.h.49.2bf373aedffd8b393ccd11dc057e8547
+                           .group:0000000000000000 wm4.cdefs.h.49.a54b2d5c07711bc7320a3fea9f12cb56
                            .group:0000000000000000 wm4.string.h.15.dab3980bf35408a4c507182805e2de3a
                            .group:0000000000000000 wm4.stddef.h.155.ba788add86a0e365f264484f110c3c29
                            .group:0000000000000000 wm4.xmc_device.h.61.ba2d082e12f51240746cffdd60d42b81
