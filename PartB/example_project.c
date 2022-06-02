@@ -32,12 +32,12 @@ void DecimalToArrayFunction(int recordedTimeArray[], uint32_t timeBuffer)
             n /= 10;
             c++;
         }
-        
+       
         int numberArray[c];
-        
+       
         c = 0;    
         n = timeBuffer;
-        
+       
         /* extract each digit */
         while (n != 0)
         {
@@ -59,7 +59,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
     int counterIndex=0;
     int outputCounterIndex=0;
     while (!encodingFlag){
-        
+       
         switch (ArrayInput[counterIndex])
         {
             case 0:
@@ -209,7 +209,7 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  
                  counterIndex++;
                 break;
-            case 3: 
+            case 3:
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  
@@ -357,10 +357,10 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
-                
+               
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
-                
+               
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  ArrayOutput[outputCounterIndex]=1;
@@ -396,10 +396,10 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
-                
+               
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
-                
+               
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  ArrayOutput[outputCounterIndex]=1;
@@ -440,10 +440,10 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
-                
+               
                  ArrayOutput[outputCounterIndex]=0;
                  outputCounterIndex++;
-                
+               
                  ArrayOutput[outputCounterIndex]=1;
                  outputCounterIndex++;
                  ArrayOutput[outputCounterIndex]=1;
@@ -480,28 +480,28 @@ void ArrayToMorse(int ArrayInput[], uint8_t ArrayOutput[]){
                  outputCounterIndex++;
                 counterIndex++;
                 break;
-                
+               
             case 999:
                 ArrayOutput[outputCounterIndex]=3;
-                ArrayInput[1,2,3,4,5,6,7,8,9,10]=999,999,999,999,999,999,999,999,999,999;
+                //ArrayInput[1,2,3,4,5,6,7,8,9,10]=999,999,999,999,999,999,999,999,999,999;
                 encodingFlag=true;
                 break;
         }
-        
-        
+       
+       
     }
-    
+   
 }
-void SysTick_Handler(void)  {     
-  //XMC_GPIO_ToggleOutput(LED1);                           
-  counterTMS++;       
+void SysTick_Handler(void)  {    
+  //XMC_GPIO_ToggleOutput(LED1);                          
+  counterTMS++;      
     if(counterTMS%100==0){
         if (btnOPressedFlag || btnTPressedFlag){
             if (letterCounter==0){
                 letterCounter=1;}
             else {    
             letterCounter++;}
-        } 
+        }
     }
 }
 
@@ -524,8 +524,8 @@ void SysTick_Handler(void)  {
                             0,0,0,
                             1,
                             3};
-                            
-                            
+                           
+                           
 int main (void)  {
   uint32_t returnCode;
   //7 0,0,0,0,0,0,0,
@@ -539,7 +539,7 @@ int main (void)  {
   XMC_GPIO_Init(LED1, &config);
   config.output_level = XMC_GPIO_OUTPUT_LEVEL_LOW;
   XMC_GPIO_Init(LED2, &config);
-  
+ 
     const XMC_GPIO_CONFIG_t in_config = \
       {.mode=XMC_GPIO_MODE_INPUT_TRISTATE,\
        .output_level=XMC_GPIO_OUTPUT_LEVEL_LOW,\
@@ -549,22 +549,22 @@ int main (void)  {
 
 
   returnCode = SysTick_Config(SystemCoreClock / 1000);      /* Configure SysTick to generate an interrupt every 100 milliseconds */
-  
+ 
   if (returnCode != 0)  {                                   /* Check return code for errors */
-    // Error Handling 
+    // Error Handling
   }
   XMC_GPIO_SetOutputLow(LED1);
-  
+ 
   for(;;){
-      
-   // The mechanism for the button locking is utilized through the flags btnTPressedFlag and btnOPressedFlag   
-      
-    if(XMC_GPIO_GetInput(GPIO_BUTTON1) == 0) { 
+     
+   // The mechanism for the button locking is utilized through the flags btnTPressedFlag and btnOPressedFlag  
+     
+    if(XMC_GPIO_GetInput(GPIO_BUTTON1) == 0) {
             if (!btnTPressedFlag){
                     btnOPressedFlag=true;
                                 }
                                                 }
-    if(XMC_GPIO_GetInput(GPIO_BUTTON2) == 0) { 
+    if(XMC_GPIO_GetInput(GPIO_BUTTON2) == 0) {
                                              if(!btnOPressedFlag){
                                                  btnTPressedFlag=true;
                                                  DecimalToArrayFunction(recordedTimeArray,timeBuffer);
@@ -589,6 +589,8 @@ int main (void)  {
             counterTMS=0;
             btnTPressedFlag=false;
             timeBufferFlag=true;
+            for (int i=0;i<=9;i++){
+            recordedTimeArray[i]=999;}
             XMC_GPIO_SetOutputLow(LED1);
             break;
         }
@@ -609,7 +611,7 @@ int main (void)  {
             XMC_GPIO_SetOutputLow(LED1);
             break;
             case 3:
-        //         
+        //        
             letterCounter=0;            
             counterTMS=0;
             btnOPressedFlag=false;
